@@ -2536,7 +2536,7 @@ paths:
 
         Steps to upload and attach single file to entity:
         1. Call, for example: GET /uploadserver?entityId=&fileType=SYSTEM_PRIMARY_IMAGE&fileName=<this is just name of the file including extension, NOT the path to file on ur local drive>
-        2. Above call will return you a URL found in `uploadUrl` of resonse.
+        2. Above call will return you a URL found in `uploadUrl` of respd onse.
         3. You then use uploadUrl value and make a PUT call and send the actual bytes of the file (NOT the file path).
         4. At the end of this call your entity will have file associated with it.
         
