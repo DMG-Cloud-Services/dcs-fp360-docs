@@ -3,10 +3,12 @@ info:
   version: 1.0.0
   title: Fusion360 Production
   description: |
-    This is version 1 of Forge Production API's. The API serves the following goals
+    
+    [@overview]: (title)
+    
+     This is version 1 of Forge Production API's. The API serves the following goals
 
     1. To provide Production related APIs for Forge platform.
-
 
     # Standards
     1. This API follows the `JSON API` specs 1.0 documented at [JSON API Spec](http://jsonapi.org/format/)
@@ -75,6 +77,147 @@ info:
     * Workstation: Entity describing machine/workstation that will be used to execute a given task.
 
     * Component: Entity describing component needed to execute a component or component consumed during execution of task.
+    
+    [@overview/components-fusion-360-production]: <>
+    # Components of Fusion 360 Production
+    
+    [@overview/apis]: <>
+    # APIs
+    
+    ##<a name="entities">Entities
+    
+    ### Component
+    
+    ### Work Station
+    
+    ### Work Cell
+    
+    ### Work Queue
+    
+    ### Task Instructions
+    
+    ### Job Instructions
+    
+    ### Job Sheet
+    
+    ### Task Execution
+    
+    ### Tag
+    
+    ### File
+    
+    ### Report
+    
+    [@overview/app-framework]: <>
+    # App Framework
+    
+    ## Benefits of App Framework
+    
+    ## App Creating Workflow
+    
+    ## Supported software
+    
+    ## Package Structure
+    
+    ## App Deployment
+    
+    ## Sample Configuration
+    
+    [@overview/reports]: <>
+    #Reports
+    
+    ## Supported Reports
+ 
+    [@tutorials]: <>
+    #Step-by-Step Tutorials
+    
+    ## API Tutorials
+    This section provides the tutorials that explains how you can use the APIs that Fusion 360 Production provides.
+    
+    ## API Framework Tutorials
+    This section provides the tutorials that explains how you can use the API Framework that Fusion 360 Production provides.
+
+    ## Reports Tutorials
+    This section provides the tutorials that explains how you can view the reports that Fusion 360 Production provides.
+
+    [@tutorials/setup-factory-entities]: <>
+    # Setup Factory Entities
+    
+    This tutorial explains how you can setup the entities in the factory so that you can start using Fusion 360 production for your daily manufacturing process. For more information about entities, see.[Entities](#entities)
+    
+    Perform the steps in the given sequence to successfully setup the entities in your factory.
+    
+    ## Step 1: Invite Members
+    
+    In this step, the Fusion 360 Production administrator invites the users who want to access Fusion 360 Production. The invitation email is sent to the specified email address
+    For more information, see Entities.
+    
+    The Fusion 360 Production API provides the POST invites endpoint that allows you to send an invite to members. In the POST request, you can include multiple members that you want to invite.
+    
+    **Note**:
+    * In the POST payload, you must specify the **tenent ID** and **group ID**.
+    * The contractOwner flag can be used by super admin only
+
+    Following are the groups/roles and their corresponding IDs.
+    
+    |Group/Role name|Group/Role Id|
+    |---------|-------|
+    |Administrator|1|
+    |Supervisor|2|
+    |Operator|3|
+    
+    
+    ### Example
+    
+    ```shell
+    
+    ```
+    
+
+    
+    ## Step 3: Assign Roles to Members
+    
+    ## Step 4: Create Components
+    
+    ## Step 5: Create Workstations
+    
+    ## Step 6: Create Work Cells
+    
+    ## Step 7: Create Job Sheets
+    
+    ## Step 8: View the Reports 
+    
+    [@tutorials/create-job-sheet]: <>
+    # Create a Job Sheet
+    
+    [@tutorials/schedule-work-queues]: <>
+    # Schedule Work Queues
+    
+    [@tutorials/perform-task-track-task-execution]: <>
+    # Perform the Task and Track the Task Execution
+    
+    [@tutorials/search-entities]: <>
+    # Search Entities
+    
+    [@tutorials/create-app]: <>
+    # Create an App
+    
+    [@tutorials/publish-app]: <>
+    # Publish an App
+    
+    [@tutorials/search-apps]: <>
+    # Search an App
+    
+    [@tutorials/view-reports]
+    # View the Reports
+    
+    
+    
+    
+    
+    
+    
+    
 
   termsOfService: http://swagger.io/terms/
   contact:
