@@ -59,24 +59,15 @@ info:
     * Beta URL: https://developer-stg.api.autodesk.com
 
     #Required Headers
-    Include the following header for all requests:
-
-    **X-DMG-FP-TENANT**: Unique identifier assigned to your application. It is very important to use the X-DMG-FP-TENANT assigned to your application and not re-use X-DMG-FP-TENANT's across tenants as this creates issues in debugging and analytics. `Note:` This header is used only for Factory-Production APIs requests.
-
-    **Content-Type**: application/vnd.api+json
-
-    #Factory Production Entities
-    * Job Instructions: This is a template for all tasks that needs to be executed for making a given component.
-
-    * Task Instruction: This is a single unit of task to be executed as a component of job instruction. It has information such as a unique number assigned to the task, operation to be executed, components to be consumed, workstation to be used and estimated time required to complete this component.
-
-    * Job Sheet: An instance of Job Instructions template which goes on Factory floor as instructions are executed in the process of making a component. Job sheet refers to the instruction template and contains any relevant notes added during execution of instructions.
-
-    * Task Execution: Contains relevant data to capture all the information about task that is executed on a given workstation.
-
-    * Workstation: Entity describing machine/workstation that will be used to execute a given task.
-
-    * Component: Entity describing component needed to execute a component or component consumed during execution of task.
+    
+    For all Fusion 360 Production API requests, you must set the following headers:
+    
+    |Header               | Value
+    | ------              | -----------------------------------------------------------------------------------
+    | **Content-Type**    | application/vnd.api+json
+    | **Accept**          | application/vnd.api+json
+    | **Authorization**   | Bearer <3-leggedToken>
+    | **X-DMG-FP-TENANT** | A unique identifier assigned to your factory. The identifier indicates the tenant. You must use the tenent of your factory. Do not use the tenent of different factory as it may creates problems in debugging.
     
     [@overview/components-fusion-360-production]: <>
     # Components of Fusion 360 Production
@@ -84,23 +75,37 @@ info:
     [@overview/apis]: <>
     # APIs
     
-    ##<a name="entities">Entities
+    ##<a name="entities">Factory Production Entities
     
     ### Component
     
+    Entity describing component needed to execute a component or component consumed during execution of task.
+    
     ### Work Station
     
+    Entity describing machine/workstation that will be used to execute a given task.
+    
     ### Work Cell
+    
+    Work cell is a group of different work stations. You can create different work cells for different types of work stations.
     
     ### Work Queue
     
     ### Task Instructions
     
+    This is a single unit of task to be executed as a component of job instruction. It has information such as a unique number assigned to the task, operation to be executed, components to be consumed, workstation to be used and estimated time required to complete this component.
+    
     ### Job Instructions
+    
+    Job Instruction is a template that includes the tasks that opertors perform for making a particular component.
     
     ### Job Sheet
     
+    An instance of Job Instructions template which goes on Factory floor as instructions are executed in the process of making a component. Job sheet refers to the instruction template and contains any relevant notes added during execution of instructions.
+    
     ### Task Execution
+    
+    Contains relevant data to capture all the information about task that is executed on a given workstation.
     
     ### Tag
     
@@ -149,46 +154,768 @@ info:
     
     ## Step 1: Invite Members
     
-    In this step, the Fusion 360 Production administrator invites the users who want to access Fusion 360 Production. The invitation email is sent to the specified email address
-    For more information, see Entities.
+    **Important**: Before inviting members, ensure that the tenent for the factory exists. For more information, contact administrator.
+
+    In this step, you invite the users who will be working in the factory and wants to access Fusion 360 Production to manage their work. The invitation email is sent to the email address specified in the request.
+    For more information, see [Entities](#entities).
     
-    The Fusion 360 Production API provides the POST invites endpoint that allows you to send an invite to members. In the POST request, you can include multiple members that you want to invite.
+    The Fusion 360 Production API provides the `POST invites` endpoint that allows you to send an invite to the required members. In the `POST` request, you can include multiple members.
     
-    **Note**:
-    * In the POST payload, you must specify the **tenent ID** and **group ID**.
-    * The contractOwner flag can be used by super admin only
+    **Note**: In the API request, you must specify the **tenent ID** and **group ID**. The group ID indicates the role that you want to assign to the member.
 
     Following are the groups/roles and their corresponding IDs.
     
     |Group/Role name|Group/Role Id|
     |---------|-------|
     |Administrator|1|
-    |Supervisor|2|
+    |Manager/ Supervisor|2|
     |Operator|3|
+    
+    ### Example
+    
+    ```shell
+    curl -X POST 
+      -H 'accept: application/vnd.api+json'
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'cache-control: no-cache'
+      -H 'content-type: application/vnd.api+json'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: job360-test'
+      -d '{
+      "data": [
+        {
+          "type": "invites",
+          "attributes": {
+            "email": "james.walker@autodesk.com",
+            "tenantId": "job360-test",
+            "firstName": "Rohit",
+            "lastName": "Sharma",
+            "groupId": "3"
+          }
+        }
+      ]
+    }' "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/invites"
+    ```
+    On successful invitation, the resource provides a 204 response without any content.
+
+    ## Step 2: Create a Component
+    
+    In this step, you can create a component entity. For more information about component, see [Entities](#entities).
+    
+    The Fusion 360 Production API provides the `POST components` endpoint that allows you to create a component. 
+    
+    In the `POST` request, you can specify the component name, description, tags, and also the links that you want to add in the description. Additionally, you can attach a thumbnail and documents to the component. For more information about attaching documents, see [Attach Thumbnail and Documents to the Entity](/en/docs/fusion360production/v1/tutorials/attach-files-documents-to-entity) 
+    
+    ### Example
+     
+    ```shell
+    curl -X POST 
+      -H 'accept: application/vnd.api+json'
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'cache-control: no-cache'
+      -H 'content-type: application/vnd.api+json'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: job360-test'
+      -d '
+      {
+        "data": {
+          "type": "components",
+          "attributes": {
+            "name": "Screw",
+            "description": "A screw is a type of fastener.",
+            "tenantId": "job360-test",
+            "tags": [
+              "screw",
+              "fastener"
+            ],
+            "references": [
+              {
+                "description": "Screw",
+                "url": "https://en.wikipedia.org/wiki/Screw"
+              },
+              {
+                "description": "Machine Screw",
+                "url": "https://www.boltdepot.com/Machine_screws_Phillips_flat_head.aspx"
+              }
+            ]
+          }
+        } 
+      }' "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/components"
+    ```
+    The resource creates the component and provides the following response:
+
+    ```
+    {
+      "data": {
+          "type": "components",
+          "id": "410526",
+          "attributes": {
+              "creator": {
+                  "id": "665",
+                  "firstName": "First Name",
+                  "lastName": "Last Name",
+                  "email": "Email"
+              },
+              "createdDate": "2017-09-27T12:51:55Z",
+              "references": [
+                  {
+                      "description": "Screw",
+                      "url": "https://en.wikipedia.org/wiki/Screw"
+                  },
+                  {
+                      "description": "Machine Screw",
+                      "url": "https://www.boltdepot.com/Machine_screws_Phillips_flat_head.aspx"
+                  }
+              ],
+              "lastModifiedDate": "2017-09-27T12:51:55Z",
+              "tenantId": "job360-test",
+              "name": "Screw",
+              "lastModifier": {
+                  "id": "665",
+                  "firstName": "First Name",
+                  "lastName": "Last Name",
+                  "email": "Email"
+              },
+              "description": "A screw is a type of fastener.",
+              "applicationInfo": [],
+              "tags": [
+                  "screw",
+                  "fastener"
+              ]
+          },
+          "relationships": {
+              "documents": {
+                  "links": {
+                      "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/components/410526/relationships/documents",
+                      "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/components/410526/documents"
+                  },
+                  "data": []
+              },
+              "primaryImage": {
+                  "links": {
+                      "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/components/410526/relationships/primaryImage",
+                      "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/components/410526/primaryImage"
+                  },
+                  "data": null
+              }
+          },
+          "links": {
+              "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/components/410526"
+          }
+      },
+      "included": [],
+      "meta": {}
+    }
+    ```
+    
+    ## Step 3: Create a Work Cell
+    
+    In this step, you can create a work cell. Work cell is a group of work stations. So, you can use work cell to categorize your work stations. For more information about work cell, see [Entities](#entities).
+    
+    The Fusion 360 Production API provides the `POST workcells` endpoint that allows you to create a workcell. 
+    
+    In the `POST` request, you can specify the work cell name, description, and tags. 
     
     
     ### Example
     
     ```shell
+    curl -X POST 
+      -H 'accept: application/vnd.api+json'
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'cache-control: no-cache'
+      -H 'content-type: application/vnd.api+json'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: job360-test'
+      -d '
+      {
+        "data": {
+          "type": "workcells",
+          "attributes": {
+            "name": "drilling workstations",
+            "description": "drillers",
+            "tenantId": "job360-test",
+            "tags": [
+              "milling",
+              "5-axis"
+            ]
+          }
+        }
+      }' "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells"
+    ```
+    The resource creates the work cell and provides the following response:
+    
+    ```json
+    {
+      "data": {
+          "type": "workcells",
+          "id": "410543",
+          "attributes": {
+              "creator": {
+                  "id": "665",
+                  "firstName": "First Name",
+                  "lastName": "Last Name",
+                  "email": "Email"
+              },
+              "createdDate": "2017-09-27T13:54:08Z",
+              "factoryDefault": false,
+              "references": [],
+              "lastModifiedDate": "2017-09-27T13:54:08Z",
+              "workstationList": [],
+              "tenantId": "job360-test",
+              "name": "drilling workstations",
+              "lastModifier": {
+                  "id": "665",
+                  "firstName": "First Name",
+                  "lastName": "Last Name",
+                  "email": "Email"
+              },
+              "description": "drillers",
+              "applicationInfo": [],
+              "tags": [
+                  "milling",
+                  "5-axis"
+              ]
+          },
+          "relationships": {
+              "primaryImage": {
+                  "links": {
+                      "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/410543/relationships/primaryImage",
+                      "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/410543/primaryImage"
+                  },
+                  "data": null
+              },
+              "workstations": {
+                  "links": {
+                      "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/410543/relationships/workstations",
+                      "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/410543/workstations"
+                  },
+                  "data": []
+              },
+              "documents": {
+                  "links": {
+                      "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/410543/relationships/documents",
+                      "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/410543/documents"
+                  },
+                  "data": []
+              }
+          },
+          "links": {
+              "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/410543"
+          }
+      },
+      "included": [],
+      "meta": {}
+    }
+    ```
+    
+    ## Step 4: Create a Workstation
+    
+    In this step, you create a work stations. Work station an entity that indicates any machine where the opertor performs the tasks. For more information about work station, see [Entities](#entities). 
+    
+    The Fusion 360 Production API provides the `POST workstations` endpoint that allows you to create a work station. 
+    
+    In the `POST` request, you can specify the work cell name, description, and tags. Additionally, you can create the relationship of the work station with a work cell. You can specify the work cell ID in which you want to include the work station.
+    
+    ### Example
+    
+    ```shell
+    curl -X POST 
+      -H 'accept: application/vnd.api+json'
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'cache-control: no-cache'
+      -H 'content-type: application/vnd.api+json'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: job360-test'
+      -d '
+      {
+        "data": {
+          "type": "workstations",
+          "attributes": {
+            "name": "DMG DMU 175P",
+            "description": "<p><span>Practical 5-axis machining for maximal productivity in all industries and workpieces up to 4.5t</span></p>\n",
+            "tenantId": "job360-test",
+            "tags": [
+              "milling",
+              "5-axis"
+            ]
+          },
+          "relationships": {
+            "workcell": {
+              "data": {
+                "type": "workcells",
+                "id": "154000"
+              }
+            }
+          }
+        }
+      }' "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations"
+    ```
+    The resource creates the work station and provides the following response:
+    
+    ```json
+    {
+      "data": {
+          "type": "workstations",
+          "id": "410553",
+          "attributes": {
+            "creator": {
+              "id": "665",
+              "firstName": "First Name",
+              "lastName": "Last Name",
+              "email": "Email"
+            },
+            "createdDate": "2017-09-27T14:16:48Z",
+            "references": [],
+            "lastModifiedDate": "2017-09-27T14:16:48Z",
+            "tenantId": "job360-test",
+            "name": "DMG DMU 175P",
+            "lastModifier": {
+              "id": "665",
+              "firstName": "First Name",
+              "lastName": "Last Name",
+              "email": "Email"
+            },
+            "description": "<p><span>Practical 5-axis machining for maximal productivity in all industries and workpieces up to 4.5t</span></p>\n",
+            "applicationInfo": [],
+            "tags": [
+                "milling",
+                "5-axis"
+            ],
+            "status": "Idle"
+          },
+          "relationships": {
+            "documents": {
+                "links": {
+                  "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/410553/relationships/documents",
+                  "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/410553/documents"
+                },
+                "data": []
+            },
+            "workcell": {
+                "links": {
+                  "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/410553/relationships/workcell",
+                  "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/410553/workcell"
+                },
+                "data": {
+                  "type": "workcells",
+                  "id": "154000"
+                }
+            },
+            "primaryImage": {
+                "links": {
+                  "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/410553/relationships/primaryImage",
+                  "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/410553/primaryImage"
+                },
+                "data": null
+            }
+          },
+          "links": {
+              "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/410553"
+          }
+      },
+      "included": [
+          {
+            "type": "workcells",
+            "id": "154000",
+            "attributes": {
+                "creator": {
+                    "id": "7",
+                    "firstName": "Tom",
+                    "lastName": "McCollough",
+                    "email": "tom.mccollough@autodesk.com"
+                },
+                "createdDate": "2016-09-22T02:52:36Z",
+                "factoryDefault": true,
+                "references": [],
+                "lastModifiedDate": "2016-09-22T02:52:36Z",
+                "tenantId": "job360-test",
+                "name": "Factory",
+                "lastModifier": {
+                  "id": "7",
+                  "firstName": "Tom",
+                  "lastName": "McCollough",
+                  "email": "tom.mccollough@autodesk.com"
+                },
+                "description": "default factory workcell",
+                "applicationInfo": [],
+                "tags": []
+              },
+              "relationships": {
+                "documents": {
+                    "links": {
+                      "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/154000/relationships/documents",
+                      "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/154000/documents"
+                    },
+                    "data": []
+                },
+                "workstations": {
+                    "links": {
+                      "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/154000/relationships/workstations",
+                      "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/154000/workstations"
+                    },
+                    "data": []
+                },
+                "primaryImage": {
+                    "links": {
+                      "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/154000/relationships/primaryImage",
+                      "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/154000/primaryImage"
+                    },
+                    "data": null
+                }
+              },
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/154000"
+              }
+          }
+      ],
+      "meta": {}
+    }
+    ```
+    
+    ## Step 5: Create a Job Sheet
+    
+    Job sheet actually contains the list of task instructions that the operator needs to perform. For more information about Job Sheet, see [#Entities](#entities).
+    
+    For the tutorial on creating a complete job sheet, see [Create a Job Sheet](/en/docs/fusion360production/v1/tutorials/create-job-sheet).
+    
+    
+    [@tutorials/attach-files-documents-to-entity]
+    # Attach Thumbnail and Documents to the Entity
+    
+    This tutorial explains how to attach documents and a thumbnail with an entity. The documents can be image files, PDFs, or any other documents, Whereas thumbnail is a unique image that represents the entity that you have created. 
+    
+    You can attach multiple documents to an entity, like component, work cell, and work station. However, you can attach only one thumbnail to each entity. 
+    
+    The following values in the `fileType` attribute indicates whether the file is a normal document or a thumbnail.
+    
+    * DOCUMENT: Indicates that the file is attached as a normal document.
+    * SYSTEM_PRIMARY_IMAGE: Indicates that the file is attached as a thumbnail of the entity.
+    
+    Perform the steps in the given sequence to successfully attach files to an entity.
+    
+    ## Step 1: Get the Upload Server URL
+    
+    In this step, you will get the URL of the server to which you will upload the files.
+    
+    The Fusion 360 Production API provides the `GET uploadserver` endpoint to get the URL.
+    
+    ### Example
+    
+    ```shell
+    curl -X GET 
+      -H 'accept: application/vnd.api+json'
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'cache-control: no-cache'
+      -H 'content-type: application/vnd.api+json'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: job360-test'
+      -d 'https://developer-stg.api.autodesk.com/factoryproduction/v1/uploadserver'
+    ```
+    
+    The resource provides the following response:
+    
+    ```json
+    {
+      "attributes": {
+        "uploadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/v1/uploadFile?service=ffp&bucketKey=dcs-nonprod-forge-fp&salt=q17n0g1x918I2bvikw7QbQ%3D%3D&timestamp=rWmtCcOgxPy2d6AR6XsL0yRiHg44bpy88jAZqr0Eelk%3D"
+      },
+      "id": "0ddba016-be66-49a4-a26d-7a05966c270b",
+      "type": "uploadServer"
+    }
+    ```
+    From the response, note the value of the **uploadUrl** attibute.
+    
+    # Step 2: Upload the files to the server
+    
+    In this step, you actually upload the file to the URL that you received in the Step 1.
+    
+    The Fusion 360 Production API provides the `Put uploadUrl` endpoint to upload the file. In the PUT request, along with the upload URL, you need to specify the parameter named `objectKey' and the value as the file name. This file name can be different from the actual file name. In the request, you also need to specify the actual file that you want to upload.
+    
+    Note: You must perform this step for each file that you want to attach with the entity.
+    
+    ### Example
+    
+    ```shell
+    curl -X PUT
+      -H 'content-type: application/x-www-form-urlencoded'
+      -d '{uploadUrl Received in the Step 1}&objectKey={filename}'
+      -F file=@TestFile.docx
+    ```
+    The resource provides the following response:
+    
+    ```json
+    {
+      "bucketKey": null,
+      "objectKey": "d5c5cf61-e8f7-432e-89bb-77688db047eb.abc.doc",
+      "size": 79161,
+      "checksum": "Nd4UAOxMF9EAdC4NwAsZeg==",
+      "contentType": "application/x-www-form-urlencoded",
+      "storageType": null
+    }
+    ```
+    After sending the request, the API uploads the file at the given URL location and provide a response with the following attributes.
+    
+    * objectKey
+    * checksum
+    * size
+    
+    For each file that you upload, you get these attributes with respective values. You must appropriately store these values as you will need to use these attributes and values in the Step 3 for attaching files with the entities.
+    
+    # Step 3: Attach Files with an Entity
+    
+    In this step, you actually attach the uploaded files with the entities.
+    
+    The Fusion 360 Production API provides the 'POST / PATCH files' endpoint that allows you to attach the files with the entity. If the entity already contains any files, the API deletes all the existing files and then add the new files. However, if you want to retain the existing files and add new files to it, then you must use the PATCH request instead of POST.
+    
+    In the POST or PATCH request, you need to specify the Id of the entity with which you want to attach the file.
+    
+    ### Example
+    
+    ```shell
+    curl -X POST 
+      -H 'accept: application/vnd.api+json'
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'cache-control: no-cache'
+      -H 'content-type: application/vnd.api+json'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: job360-test'
+      -d '
+      {
+        "data": [
+          {
+            "type": "files",
+            "attributes": {
+              "objectKey": "d5c5cf61-e8f7-432e-89bb-77688db047eb.abc.doc",
+              "originalFileName": "TestFile.docx",
+              "description": "Test File",
+              "storageType": "S3",
+              "fileType": "DOCUMENT",
+              "size": 79161,
+              "checksum": "Nd4UAOxMF9EAdC4NwAsZeg==",
+              "contentType": "image/jpeg"
+            }
+          },
+          {
+            "type": "files",
+            "attributes": {
+              "objectKey": "d5c5bf61-f8f7-342f-89bb-77688db047eb.test.png",
+              "originalFileName": "TestFile.png",
+              "description": "TEST",
+              "storageType": "S3",
+              "fileType": "DOCUMENT",
+              "size": 49300,
+              "checksum": "T/+cdgCeTTlPjdrXqXMMAw==",
+              "contentType": "image/jpeg"
+            }
+          },
+          {
+            "type": "files",
+            "attributes": {
+              "objectKey": "e4c5bf71-f9f7-342f-89cc-77699db047eb.entityImage.png",
+              "originalFileName": "Image.png",
+              "description": "Entity Image",
+              "storageType": "S3",
+              "fileType": "SYSTEM_PRIMARY_IMAGE",
+              "size": 13564,
+              "checksum": "T/+cdgCeTTlPjdrXqXMMAw==",
+              "contentType": "image/jpeg"
+            }
+          }
+        ]
+      }' "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/entities/{entityId}/files"
+    ```
+    The resource provides the following response:
+    
+    ```json
+    {
+      "data": [
+        {
+          "type": "files",
+          "attributes": {
+            "tenantId": "job360-test",
+            "id": "16102",
+            "entityId": "93857",
+            "fileType": "DOCUMENT",
+            "objectKey": "ea7bfc3b-66b1-48fd-846c-c43f9b4a4a1f.file1.jpg",
+            "size": "34567",
+            "checksum": "T/+cdgCeTTlPjdrXqXMMAw==",
+            "contentType": "image/jpeg",
+            "creator": {
+              "id": "17",
+              "firstName": "First Name",
+              "lastName": "Last Name",
+              "email": "Email"
+            },
+            "createdDate": "2017-05-01T19:22:34Z",
+            "lastModifier": {
+              "id": "17",
+              "firstName": "First Name",
+              "lastName": "Last Name",
+              "email": "Email"
+            },
+            "lastModifiedDate": "2017-05-01T19:22:34Z",
+            "originalFileName": "jpg",
+            "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/file1.jpg?nonce=_B0Zkj1PIdSHbGHKIsZBRcjBU5luK6DLVUjJXLqE7wOcAgtDXkJxrkWXDZdzdhOeYXauHkqOAzOQH07yEXsZgtKal9cu-YjKO8OR5eQnf-WTfkFyMRZiDAUcyvitVJdgN3mhucg_bV65MMqmULNtWmK34dVsQYxlYlQwxwVes28&seed=QfgA5qoNrERVV4BuYUlzBg",
+            "generatedThumbnails": [
+              "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/images/output/file1_small.jpg?nonce=eATXharx0DDHIUvP0jH14BMtLpGUwAXFbXJWZQpKaiYG22JfrQcW51dX0KZILyGAg0Ca5Px3OoODwwVERfHoxi41gJ2X_L2uKpZt3NVKoCp4ZXmr514tiY9VitO4q-KkVtexYFBX-9XU3mRdZI_9u8Z3W4vFyp2ZlqKnV4vHMCTCKHltsl8RkqQ6UIdoNs5ASHtIxjo-z60uvqn0jj0HJA&seed=mfz0EpXUSbznyYA3e1vAdg",
+              "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/images/output/file1_medium.jpg?nonce=rFZTIBpedWgAOAbP_9q8ciJ1XfRh2Hgkl_q6O-ATvAwlvN4Iq1-jvgQS_Zc8nM7s6m30xaQxeBZy3_4Nv0C8t8bkDz5v3k9oQbQQa-DB5-us0x1t8edhaWBQTYaEw_65UJElndo42bBbnztEmf6mGAaEEgXy67HTzRRyxvygwiQ0lWmz4ZemtnySeBv-gImcKadE8tXKzbuANrg9rLGsuw&seed=tJyQbQYbwX_HzuS8ou6aww",
+              "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/images/output/file1_large.jpg?nonce=xi25PRH8SkqJj99vdmHxikX1EDwzkSB5xXefRhE1QkJ-5bY5NVubR2BpnauePJyM0Z3EmAHq8wQUWGowXygGIXez9ku2YveTShZVOt5HPeEWQTzFtXiY0xYx0esNuMIPYYwgZSbiUTt9jD4PS4Twm3H5MLmVopXAypbW7EZTVl8LUnZ2p9zuqtFRJ4qtcAl4MahDr-yvqbVc1Y8rti83zg&seed=lEXZemwwPG1cJYhYjNhXIA"
+            ],
+            "description": "TEST",
+            "storageType": "S3",
+            "entityVersion": "1.0.0"
+          },
+          "id": "16102"
+        },
+        {
+          "type": "files",
+          "attributes": {
+            "tenantId": "job360-test",
+            "id": "16103",
+            "entityId": "93857",
+            "fileType": "DOCUMENT",
+            "objectKey": "ea7bfc3b-66b1-48fd-846c-c43f9b4a4a1f.file2.jpg",
+            "size": "34567",
+            "checksum": "T/+cdgCeTTlPjdrXqXMMAw==",
+            "contentType": "image/jpeg",
+            "creator": {
+              "id": "17",
+              "firstName": "First Name",
+              "lastName": "Last Name",
+              "email": "Email"
+            },
+            "createdDate": "2017-05-01T19:22:34Z",
+            "lastModifier": {
+              "id": "17",
+              "firstName": "First Name",
+              "lastName": "Last Name",
+              "email": "Email"
+            },
+            "lastModifiedDate": "2017-05-01T19:22:34Z",
+            "originalFileName": "jpg",
+            "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/file2.jpg?nonce=83nV7k0qF3IL_7MbRTa9XRAb8N9p84Kbo97AhN0bReOH855nBUVktK-ClxeVy7RrB5-pQElcygDSVaioZyNKIVcsoJHd_pkaRA0juuGvrUEyIMOgR6xpCKS6DN2B74riWmykCTn9XE_HPdPIF6vWwkfXG4eo1iKZtYA8HANFQXo&seed=m3OQz9P6DhkRjUYIFCct6g",
+            "generatedThumbnails": [
+              "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/images/output/file2_small.jpg?nonce=z9uUVv0QezkUZSZx-H_YPzn1Aayarw29jLSHiW65lK-l6Ls0qjmCIEw-obW7b68ClbHshjJC9JjNCVCQuv6g-FK2fbY38eQ3m0LbALXG8o6-1fJ5Uj7D-aegGv0J6j-FPlQ1Q7KTznAtd4RPjDaeL6KzZ28HPUWefywBeMgqrp5gMO4smJRx2AIm_l06gZ_FT6VJxbdds-JqbPjXbagPAg&seed=cfTtp0rP5DxIOWqB6fUdgg",
+              "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/images/output/file2_medium.jpg?nonce=UfXsZsnK48bXDyQCr5tTL3k0LiPmggiGXnXnXbGsJo7sgaXQiD64p1mTahE19rV7PbYip55DldbW-quK1e7QIlFbwf1NyVfhxIoLiNz3YIBColcEhKyFMEGQovqLhvFIheASfFLIyl3eDF67dDDz8r29ejEQWX37isG1nqIt84eXsBZThpWJRlGzQVBhNN2Hf_Yz4Sb__QmAxn-dgNRllQ&seed=Riu21wOjesnVtfqB2--dgQ",
+              "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/images/output/file2_large.jpg?nonce=u05DsxpbxAIBXQ5GCxxeSO_EzTjOGuzSustPyF2mZglAOlAEgaimLXXmoztPG2ZnocBtxtU7rIbpSSsBV398qT9erlqwyMCY5Hl6BbKU6U0OjQM4tbIDPU4y1vCky7H0nGkTQzXKXq57hH2RvGOSqZ_fkDBwcAfTa05IXv_JHEZbWz6l07gHxxJm16O79ntNmlUX0enrE6suxRwtAAnhjg&seed=zur2X2iv34LAEXOWPnqoqg"
+            ],
+            "description": "TEST",
+            "storageType": "S3",
+            "entityVersion": "1.0.0"
+          },
+          "id": "16103"
+        },
+        {
+          "type": "files",
+          "attributes": {
+            "tenantId": "job360-test",
+            "id": "16104",
+            "entityId": "93857",
+            "fileType": "DOCUMENT",
+            "objectKey": "ea7bfc3b-66b1-48fd-846c-c43f9b4a4a1f.file3.jpg",
+            "size": "34567",
+            "checksum": "T/+cdgCeTTlPjdrXqXMMAw==",
+            "contentType": "image/jpeg",
+            "creator": {
+              "id": "17",
+              "firstName": "First Name",
+              "lastName": "Last Name",
+              "email": "Email"
+            },
+            "createdDate": "2017-05-01T19:22:34Z",
+            "lastModifier": {
+              "id": "17",
+              "firstName": "First Name",
+              "lastName": "Last Name",
+              "email": "Email"
+            },
+            "lastModifiedDate": "2017-05-01T19:22:34Z",
+            "originalFileName": "jpg",
+            "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/file3.jpg?nonce=61NBGPF_sEC9LsokhOw8ap3nXGWBot8oo8WVgFhHhUcopTBZdyHUX7beo3lbYPKY4li_V-1xBEpAcTzDeLT3QIg3hw7g2PlnaVFjk6fD3vKrZqp361K-pGCRRpzbVbO9psxfKOdK0Kbsk_a_RxBUhHZEJcly6uJygm7BoOf5oYg&seed=VXvtCVZ0ys1ZUsK6ME8BtQ",
+            "generatedThumbnails": [
+              "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/images/output/file3_small.jpg?nonce=yroW54gZvCYTg3IMLCPiJMGhV7gRE-Wpukp6u6XTpKJDbbsPTjMkFALUuXM2a3EJbCwBqwag9SAorGpAIHRNiWqYEoFuO2Hh6jTJ04zx2hRT4cU7xV5GFetK4C_QUCqWclbiSZyfZjvItWqqWvjFsGng91041mjGPOoCrAp6VbjGJHp20RaWqFuMoFziUGKh-o9-lLJVGXjlpYD4wMSaiQ&seed=itaNtbCJdIsC-QE7DFeZ4A",
+              "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/images/output/file3_medium.jpg?nonce=ObLYZ7vHuakAA3GFXkPzANSNmPrDVxKJtzggYJ1eW5QjjOxogbBxqofpM8WB5g9XDH5yz1Vv3DpEF0GOVucMLefhU7vSi02SARTad82lqtfZgZGMdP87iWKhBDh2tTJSgiGg_EleBaz5UXNezNwQi_GnG7E0uLLLnNiP8Yc-fZRKc8s3AQG-alZjUjwUZkmNbcSQxidzRJuedUtWRO8jBg&seed=-ZOIw2q1OgmZQ-9iPmreeQ",
+              "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/images/output/file3_large.jpg?nonce=ZJvJooBsX5PUgWsaaFsLkQXhAQzdI0vvhPdsTrdVvMqRs4IIP2gxwKlU71jODp1zItxKscfLrPj3OentekhIuULBWYz3L4FNUuHzAMNiSZnjbI1w__OMWAlywAT3vaNzsj6joVC9Bsr5oiMYpyoH5mkCS2EnQtzpRJH1Y6Ro_1mMybRMaojJaBiBj0PH4v3-tkgiZzQFm-dw7cPKfXMLuQ&seed=48tYnQC12wGHukrn0eU5vw"
+            ],
+            "description": "TEST",
+            "storageType": "S3",
+            "entityVersion": "1.0.0"
+          },
+          "id": "16104"
+        }
+      ]
+    }
+    ```
+  
+    [@tutorials/create-job-sheet]: <>
+    # Create a Job Sheet
+    
+    This tutorial explains how to create a job sheet for the operator to perform the job work. 
+    
+    Creating a job sheet involves creating job instructions and the tasks that the operator needs to perform for a particular job. The job sheet is then dispatched to the shop floor.
+    
+    Perform the following steps in a given sequence to create a job sheet and dispatch it.
+    
+    ## Step 1: Create a Job Instruction
+    
+    In this step, you create a job instruction for a job sheet. The job instruction contains the name, description, tags, the quantity of the parts required, image, and reference documents. Along with this information, the job instructions can contain one or more tasks that the operator needs to perform to complete a particular job instruction.
+    
+    The Fusion 360 Production API provides the `POST jobinstructions` endpoint to create a job instruction.
+    
+    ### Example
+    
+    ```shell
+    curl -X POST 
+      -H 'accept: application/vnd.api+json'
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'cache-control: no-cache'
+      -H 'content-type: application/vnd.api+json'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: job360-test'
+      -d '
+      {
+        "data": {
+          "type": "jobinstructions",
+          "attributes": {
+            "tenantId": "job360-test",
+            "name": "Name",
+            "description": "JOB Instruction1",
+            "endProductName": "CAR",
+            "defaultQuantity": 2,
+            "tags": [
+              "doors",
+              "engine",
+              "body"
+            ],
+            "references": [
+              {
+                "description": "ref1 description",
+                "url": "http://www.ref1.com"
+              },
+              {
+                "description": "ref2 description",
+                "url": "http://www.ref2.com"
+              }
+            ]
+          }
+        }
+      }' "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/jobinstructions"
+    ```
+    
+    The resource provides the following response:
+    
+    ```json
     
     ```
     
+    ## Step 2: Add Task Instructions
+    
+    ## Step 3: Create a Job Sheet
+    
+    ## Step 4: Dispatch the Job Sheet
 
-    
-    ## Step 3: Assign Roles to Members
-    
-    ## Step 4: Create Components
-    
-    ## Step 5: Create Workstations
-    
-    ## Step 6: Create Work Cells
-    
-    ## Step 7: Create Job Sheets
-    
-    ## Step 8: View the Reports 
-    
-    [@tutorials/create-job-sheet]: <>
-    # Create a Job Sheet
+
     
     [@tutorials/schedule-work-queues]: <>
     # Schedule Work Queues
