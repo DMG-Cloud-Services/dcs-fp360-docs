@@ -967,9 +967,9 @@ info:
     
     ## Step 2: Create a Task Instruction
     
-    In this step, you create a task instruction. The task instructions are later added in the job instrcution. The status of all these task instrcutions collectively indicate whether the job is completed successfully or not.
+    In this step, you create a task instruction. The task instruction is later added in the job instrcution. The status of all task instrcutions collectively indicate whether the job is completed successfully or not.
     
-    The task instruction contains the name, description, tags, setup time, the quantity of the components requried. Along with this information, the task instruction can also contain the references to the job instruction and the recommended work station to execute this task.
+    The task instruction contains the name, description, tags, setup time, the quantity of the components requried. Along with this information, the task instruction can also contains the references to the job instruction that requires the operator to perform this task and the recommended work station where the operator executes that task.
     
     The Fusion 360 Production API provides the `POST taskinstructions` endpoint to create a task instruction.
     
