@@ -77,41 +77,97 @@ info:
     
     ##<a name="entities">Factory Production Entities
     
-    ### Component
+    In a factory, there are many physical and virtual entities. These entities are categorized into resources and functions. 
+    The resources include the tools, components, raw material, operator, and work station. The functions include job, job sheet, job instruction, and task instruction.
     
-    Entity describing component needed to execute a component or component consumed during execution of task.
+    ## **Core Functions**
     
-    ### Work Station
+    ### Job
     
-    Entity describing machine/workstation that will be used to execute a given task.
+    A specific unit of work to be produced. A specific quantity of products. The central entity of Rowe.
     
-    ### Work Cell
+    ### Job Sheet
     
-    Work cell is a group of different work stations. You can create different work cells for different types of work stations.
-    
-    ### Work Queue
-    
-    ### Task Instructions
-    
-    This is a single unit of task to be executed as a component of job instruction. It has information such as a unique number assigned to the task, operation to be executed, components to be consumed, workstation to be used and estimated time required to complete this component.
+    Job Sheet is basically a mechanism to track jobs from defining to production. The Job Sheet records the number of resources used, the processes completed, and the time when these events occured. 
+    The data from a Job Sheet refers to specific notes and data, like photos and videos associated with the execution of the Job.
     
     ### Job Instructions
     
     Job Instruction is a template that includes the tasks that opertors perform for making a particular component.
     
-    ### Job Sheet
+    ### Task Instructions
     
-    An instance of Job Instructions template which goes on Factory floor as instructions are executed in the process of making a component. Job sheet refers to the instruction template and contains any relevant notes added during execution of instructions.
+    The task instruction is a single unit of a task that the operator performs from the given job instruction. Each task instruction contains information, such as a unique task identifer, operation that the operator needs to perform, the components that the operator will be using, the work station on which the operator will be performing the task, and the estimated time required to complete this component.
     
     ### Task Execution
     
     Contains relevant data to capture all the information about task that is executed on a given workstation.
+    
+    ### Work Station
+    
+    An entity that describes a machine in the factory. The operator uses the work station to perform the tasks given in the job instructions.
+    
+    ### Work Cell
+    
+    Work cell is a group of different work stations. You can create different work cells for different types of work stations.
+    
+    ## **Resources**
+    
+    
+    
+    ### Tool
+    
+    An entity that the operator requires to perform a task.
+    
+    ### Raw Material
+    
+    The material that the operator uses while performing a task. The material can be the raw material, such as alimunium plate or steel bar or an intermediate product produced by the previous task.
+    
+    ### Component
+    
+    An entity that describes the standard items that the operator consumes during the operation of a particular task. These items are not the bulk raw material used for operation, but the associated material, such as o-rings, washers, screws or other needed accessories.
+    
+    As the components are always stocked in the facotry as these are the standard items used in the production.
+    
+    ### Operator
+    
+    A skilled person in the factory who gets the job sheet for performing the jobs. The operator then performs the tasks mentioned in the job instructions in the job seet.
+    
+    ### Workstation Type
+    
+    ### Tool Type
+    
+    ### Operator Type
+    
+    ### Raw Material Type
+    
+    ### Component Type
+    
+    
+    
+    
+    
+    ### Work Queue
+    
+   
+    
+    
+    
+    
+   
     
     ### Tag
     
     ### File
     
     ### Report
+    
+    
+    
+    
+    
+    
+    
     
     [@overview/app-framework]: <>
     # App Framework
@@ -853,9 +909,9 @@ info:
     
     This tutorial explains how to create a job sheet for the operator to perform the job work. 
     
-    Creating a job sheet involves creating job instructions and the tasks that the operator needs to perform for a particular job. The job sheet is then dispatched to the shop floor.
+    Creating a job sheet involves creating job instructions, associating the required job instructions to the job sheet, and then releasing the job sheet so that the job instructions are automatically added in the operators task queue. The job sheet includes the job sheet name, tags, the rquired material quantity, and the associated job instructions.
     
-    Perform the following steps in a given sequence to create a job sheet and dispatch it.
+    Perform the following steps in a given sequence to create a job sheet.
     
     ## Step 1: Create a Job Instruction
     
@@ -909,19 +965,81 @@ info:
     
     ```
     
-    ## Step 2: Add Task Instructions
+    ## Step 2: Create a Task Instruction
+    
+    In this step, you create a task instruction. The task instructions are later added in the job instrcution. The status of all these task instrcutions collectively indicate whether the job is completed successfully or not.
+    
+    The task instruction contains the name, description, tags, setup time, the quantity of the components requried. Along with this information, the task instruction can also contain the references to the job instruction and the recommended work station to execute this task.
+    
+    The Fusion 360 Production API provides the `POST taskinstructions` endpoint to create a task instruction.
+    
+    ### Example
+    
+    ```shell
+    
+    ```
+    
+    The resource provides the following response:
+    
+    ```json
+    
+    ```
     
     ## Step 3: Create a Job Sheet
     
-    ## Step 4: Dispatch the Job Sheet
-
-
+    In this step, you create the actual job sheet. The job sheet is the collection of job instructions for the operators to perform the given job. The job instructions further contains the list of tasks instructions that the operator needs to perform to successfully complete a particular job in the job sheet.
     
-    [@tutorials/schedule-work-queues]: <>
-    # Schedule Work Queues
+    The job sheet contains the notes, delivery date, tags, and the quantity of the components. Along with this information, the job sheet can also contain the references to the job instruction. After receiving the job sheet, the operator performs the tasks instructions given in the job instruction.
+    
+    The Fusion 360 Production API provides the `POST jobsheets` endpoint to create a job sheet.
+    
+    Following are the status for a job sheet:
+    
+    * Staged
+    * InProgress
+    * Paused
+    * Completed
+    * NeedsApproval
+    * Cancelled
+    * Waiting
+
+    ### Example
+    
+    ```shell
+    
+    ```
+    
+    The resource provides the following response:
+    
+    ```json
+    
+    ```
+    
+    [@tutorials/update-work-queues]: <>
+    # Update the Work Queue
+    
+    In this step, you update the work queue that contains the list of task executions. Updating the work queue involves updating this order of the task execution for a particular work station and work cell. Only a supervisor can update the work queue.
+  
+    When the supervisor moves the task execution from one workcell or workstation task queue to another workstation or workcell, the task execution is reassigned to that new workcell or workstation.
+    
+    The Fusion 360 Production API provides the `PATCH workqueues` endpoint to update the work queue.
+    
+    ### Example
+    
+    ```shell
+    
+    ```
+    
+    The resource provides the following response:
+    
+    ```json
+    
+    ```
     
     [@tutorials/perform-task-track-task-execution]: <>
     # Perform the Task and Track the Task Execution
+    
+    
     
     [@tutorials/search-entities]: <>
     # Search Entities
