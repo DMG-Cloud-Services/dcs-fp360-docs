@@ -113,15 +113,15 @@ info:
     
     ## **Resources**
     
-    
-    
-    ### Tool
-    
-    An entity that the operator requires to perform a task.
+    This section lists the resources that the operator requires for performing different tasks. The resources can be the actual material on which the operator needs to perform the taks or the tools that operator needs to use for performing the task.
     
     ### Raw Material
     
     The material that the operator uses while performing a task. The material can be the raw material, such as alimunium plate or steel bar or an intermediate product produced by the previous task.
+    
+    ### Tool
+    
+    An entity that the operator requires to perform a task.
     
     ### Component
     
@@ -143,18 +143,7 @@ info:
     
     ### Component Type
     
-    
-    
-    
-    
     ### Work Queue
-    
-   
-    
-    
-    
-    
-   
     
     ### Tag
     
