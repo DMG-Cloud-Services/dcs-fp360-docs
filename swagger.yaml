@@ -82,26 +82,28 @@ info:
     
     ## **Core Functions**
     
+    This section lists the core functions that various operators perform in the manufacturing unit to successfully complete the assigned jobs.
+
     ### Job
     
-    A specific unit of work to be produced. A specific quantity of products. The central entity of Rowe.
+    A specific unit of the work to be produced. A specific quantity of products.
     
     ### Job Sheet
     
-    Job Sheet is basically a mechanism to track jobs from defining to production. The Job Sheet records the number of resources used, the processes completed, and the time when these events occured. 
+    A Job Sheet is basically a mechanism to track jobs from defining to production. The Job Sheet records the number of resources used, the processes completed, and the time when these events occured. 
     The data from a Job Sheet refers to specific notes and data, like photos and videos associated with the execution of the Job.
     
     ### Job Instructions
     
-    Job Instruction is a template that includes the tasks that opertors perform for making a particular component.
+    A Job Instruction is a template that includes the tasks that opertors perform for making a particular component.
     
     ### Task Instructions
     
-    The task instruction is a single unit of a task that the operator performs from the given job instruction. Each task instruction contains information, such as a unique task identifer, operation that the operator needs to perform, the components that the operator will be using, the work station on which the operator will be performing the task, and the estimated time required to complete this component.
+    A task instruction is a single unit of a task that the operator performs from the given job instruction. Each task instruction contains information, such as a unique task identifer, operation that the operator needs to perform, the components that the operator will be using, the work station on which the operator will be performing the task, and the estimated time required to complete this component.
     
     ### Task Execution
     
-    Contains relevant data to capture all the information about task that is executed on a given workstation.
+    A task execution contains the relevant data to capture all the information about task that is executed at a given workstation.
     
     ### Work Station
     
@@ -109,7 +111,7 @@ info:
     
     ### Work Cell
     
-    Work cell is a group of different work stations. You can create different work cells for different types of work stations.
+    A Work cell is a group of different work stations. You can create different work cells for different types of work stations.
     
     ## **Resources**
     
@@ -133,23 +135,14 @@ info:
     
     A skilled person in the factory who gets the job sheet for performing the jobs. The operator then performs the tasks mentioned in the job instructions in the job seet.
     
-    ### Workstation Type
-    
-    ### Tool Type
-    
-    ### Operator Type
-    
-    ### Raw Material Type
-    
-    ### Component Type
-    
     ### Work Queue
+    
+    A queue where the tasks from the job instructions are queued. Each work station has its own queue. When the job sheet is dispatched, the task instructions from the job sheet are automatically added to work queue of the respective work station.
     
     ### Tag
     
-    ### File
+    A label given to an entity to classify and identify when searching. An entity can have one or more tags.
     
-    ### Report
     
     
     
@@ -976,22 +969,26 @@ info:
     
     ## Step 3: Create a Job Sheet
     
-    In this step, you create the actual job sheet. The job sheet is the collection of job instructions for the operators to perform the given job. The job instructions further contains the list of tasks instructions that the operator needs to perform to successfully complete a particular job in the job sheet.
+    In this step, you create the actual job sheet. The job sheet is the collection of job instructions for the operators to perform the given job. The job instructions further contains the list of actual tasks instructions to successfully complete a particular job in the job sheet.
     
-    The job sheet contains the notes, delivery date, tags, and the quantity of the components. Along with this information, the job sheet can also contain the references to the job instruction. After receiving the job sheet, the operator performs the tasks instructions given in the job instruction.
-    
-    The Fusion 360 Production API provides the `POST jobsheets` endpoint to create a job sheet.
+    The job sheet contains the notes, delivery date, tags, and the quantity of the components. After receiving the job sheet, the operator performs the tasks instructions given in the job instruction.
     
     Following are the status for a job sheet:
     
-    * Staged
-    * InProgress
-    * Paused
-    * Completed
-    * NeedsApproval
-    * Cancelled
-    * Waiting
+    | Status            | Description
+    | ------            | -------------------------------------------------------------------------------
+    | **Staged**        | The job sheet is ready for production but no any operator is executing any task associated in the job sheet. When the machine and the operator becomes available, they can pick up this job sheet and start the work.
+    |                   | The workstation on which the job sheet is currently queued is in the **idle** and **operating** state.
+    | **InProgress**    | An operator is currently executing a task from the job sheet.
+    | **Paused**        | 
+    | **Completed**     | The operators have completed all tasks mentioned in the job sheet, all the products quantities are accounted either as finished product or scrap, and the supervisor has inspected and approved the finished products.
+    | **NeedsApproval** | The operators have completed all tasks in the job sheet, but the supervisor still needs to review and approve the completed work.	
+    | **Canceled**      | The job sheet is canceled because there is no any business need to continue performing the specified tasks. Canceled job sheets leave the partially completed tasks orphaned.
+    | **Waiting**       | 
 
+    The Fusion 360 Production API provides the `POST jobsheets` endpoint to create a job sheet.
+
+    
     ### Example
     
     ```shell
@@ -1007,7 +1004,7 @@ info:
     [@tutorials/update-work-queues]: <>
     # Update the Work Queue
     
-    In this step, you update the work queue that contains the list of task executions. Updating the work queue involves updating this order of the task execution for a particular work station and work cell. Only a supervisor can update the work queue.
+    In this step, you update the work queue that contains the list of task executions. Updating the work queue involves updating this order of the task execution for a particular work station and work cell. Only the supervisor can update the work queue.
   
     When the supervisor moves the task execution from one workcell or workstation task queue to another workstation or workcell, the task execution is reassigned to that new workcell or workstation.
     
@@ -1032,6 +1029,33 @@ info:
     
     [@tutorials/search-entities]: <>
     # Search Entities
+    
+    In this step you search for any type of entities in Fusion 360 Production. In the search request, you can use different filters to easily get the specific entity that you are looking for.
+    
+    The Fusion 360 Production API provides the `GET entities` endpoint to search for an entity. In the GET request, you need to specify the filter conditions based on which you want to search the entities. You can specify multiple filter conditions together.
+    
+    ### Filters
+    
+    | Attribute                               | Description
+    | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------
+    | **version**                             | Displays a list of entites in a specific format. Use **v2** to displays the entities in JSON API compliant format.
+    | **filter[entities][searchTerm]**        | Displays the list of entities that matches with the specified search term. The search term can be the entity ID.
+    | **filter[entities][tags]**              | Displays the list of entities that matches with the specified tags.
+    | **filter[entities][type]**              | Displays the list of entities for the specified type. For example, Components, Jobsheets, Workstations, and so on.
+    | **sort[entities][targetFieldName]**     | Display the list of entities sorted in ascending (ASC) or descending (DESC) based on the specified field name. The fields available for sorting are id, lastModifiedDate. For example filter[entities][lastModifiedDate]=ASC
+    | **page[size]**                          | The total number of pages that you want to display for the list of entities.
+    | **page[number]**                        | The page number of the entities list that you want to display.
+    
+    ### Example
+    
+    ```shell
+    
+    ```
+    The resource provides the following response
+    
+    ```json
+    
+    ```
     
     [@tutorials/create-app]: <>
     # Create an App
