@@ -1049,7 +1049,14 @@ info:
     ### Example
     
     ```shell
-    
+    curl -X GET 
+      -H 'accept: application/vnd.api+json'
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'cache-control: no-cache'
+      -H 'content-type: application/vnd.api+json'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: job360-test'
+      -d 'https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/entities'
     ```
     The resource provides the following response
     
