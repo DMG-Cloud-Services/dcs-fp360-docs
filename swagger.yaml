@@ -177,24 +177,67 @@ info:
     | Set workstation statuses to offline for broken or maintenance     | YES               | YES                   | NO
     | Start, pause, resume, and complete tasks                          | YES               | YES                   | YES
     
+    ## Status Workflows
     
+    This section provides the workflows diagrams of how the status change impacts the following entities.
+    
+    ### Task
+    
+    
+    ### Job Sheet
+    
+    
+    ### Workstation
     
     
     
     [@overview/app-framework]: <>
     # App Framework
     
+    Fusion Production provides "Completely paperless factory monitoring system in cloud" for our customers. Moving to cloud and having the ability to analyze historical data to make process improvement iteratively is a good value add to existing shop floors. But there is a big potential, if we can provide a "marketplace" for third party systems to integrate with our system, so end users can get relevant and enriched data on top of what we provide out-of-the-box. There are 2 ways to do this, either create these integrations on a one-off basis for every third party system that we want to integrate with or let third party system integrate with our system. In both the cases our customers can choose which third party integrations they would like to use but with the latter approach we create an extensible system that anyone can hook into without us being the bottlenecks. In this approach, we will follow a similar approach as popular customer support system, Zendesk.
+    Following document outlines how and what of that integration framework.
+    
     ## Benefits of App Framework
     
     ## App Creating Workflow
     
+    App Authoring Workflow
+    Application Author will submit a package containing application code, all assets used to render app and all required and optional configuration for app.
+    Contents of application package
+    Main Application code in Javascript
+    assets folder containing : css/images
+    HTML templates for app view
+    Language resource folder
+    Configuration.js : JSON file containing app information
+    Author Info
+    App Info
+    Location(s) to surface this app
+    Extra domain specific parameters required by app
+    Domain whitelist specifying which locations can be called from this app
+    
+    
+    
+    app_config 
+    app config will specify any additional information required by the application such as keys etc. If "secure" is true - the config value will be stored in encrypted format. The description will show up as tool tip against the field in the Tenant Admin App configuration view. 
+    
+    app_params
+    app_params will define parameters that are needed by given app for a given entity. App has to define schema for these parameters and which parameters are required and which are optional. UI will have to then add these additional parameters to these entities. Please note that required fields will only be enforced in the Rowe UX. Any calls made to API's by other products i.e. through Forge FP API's will not enforce field requirements for app fields. 
+    
+    domain_whitelist
+    List of domains which can be safely called from this application. See JWT sections below for more details. 
+    
     ## Supported software
+    
+    
     
     ## Package Structure
     
+    
     ## App Deployment
     
+    
     ## Sample Configuration
+    
     
     [@overview/reports]: <>
     #Reports
@@ -234,7 +277,7 @@ info:
     Following are the groups/roles and their corresponding IDs.
     
     |Group/Role name    |Group/Role Id|
-    |---------          |-------      |
+    |-----------------  |-----------  |
     |Administrator      |1            |
     |Manager/ Supervisor|2            |
     |Operator           |3            |
@@ -935,7 +978,7 @@ info:
     
     In this step, you create a job instruction for a job sheet. The job instruction contains the name, description, tags, the quantity of the parts required, image, and reference documents. Along with this information, the job instructions can contain one or more tasks that the operator needs to perform to complete a particular job instruction.
     
-    The Fusion 360 Production API provides the `POST jobinstructions` endpoint to create a job instruction.
+    The Fusion 360 Production API provides the `POST jobinstructions` endpoint to create a job instruction. 
     
     ### Example
     
@@ -1058,11 +1101,13 @@ info:
     
     ## Step 2: Create a Task Instruction
     
-    In this step, you create a task instruction. The task instruction is later added in the job instrcution. The status of all task instrcutions collectively indicate whether the job is completed successfully or not.
+    In this step, you create a task instruction. While creating the task instruction, you can add the reference of the job instruction to which you want to include the task. Later, you can also update the job instruction and add or modify the task instrcutions in that job instruction.
+    
+    The status of all task instrcutions collectively indicate whether the job is completed successfully or not.
     
     The task instruction contains the name, description, tags, setup time, the quantity of the components requried. Along with this information, the task instruction can also contains the references to the job instruction that requires the operator to perform this task and the recommended work station where the operator executes that task.
     
-    The Fusion 360 Production API provides the `POST taskinstructions` endpoint to create a task instruction.
+    The Fusion 360 Production API provides the `POST taskinstructions` endpoint to create a task instruction. 
     
     ### Example
     
@@ -1376,7 +1421,82 @@ info:
     }
     ```
     
-    ## Step 3: Create a Job Sheet
+    ## Step 3: Modify the Job Instruction
+    
+    **Note**: You can perform this step only if you want to add new task instructions, remove any task instructions, or rearrange the existing task executions.
+    
+    In this step, you modify the job instruction for a job sheet. While modifying the job instruction, you either rearrange the existing task instructions, add the new task instructions, or delete any unwanted task instrcutions. 
+    
+    The Fusion 360 Production API provides the `PATCH taskinstructions` endpoint to modify the job instruction.
+    
+    ### Example
+    
+    ```shell
+    curl -X PATCH 
+      -H 'accept: application/vnd.api+json'
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'cache-control: no-cache'
+      -H 'content-type: application/vnd.api+json'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: job360-test'
+      -d '
+      {
+        "data": {
+          "type": "jobInstructions",
+          "id": "jobId",
+          "attributes": {
+            "name": "JobName1",
+            "description": "Updated description",
+            "endProductName": "updated end product name",
+            "defaultQuantity": 2,
+            "archived": "true",
+            "status": "Blocked",
+            "tags": "custom_alloy",
+            "references": [
+              {
+                "description": "ABC link",
+                "url": "http://abc.com"
+              },
+              {
+                "description": "DEF link",
+                "url": "http://def.com"
+              }
+            ]
+          },
+          "relationships": {
+            "taskInstructions": {
+              "data": [
+                {
+                  "type": "taskinstructions",
+                  "id": "126013"
+                },
+                {
+                  "type": "taskinstructions",
+                  "id": "126010"
+                },
+                {
+                  "type": "taskinstructions",
+                  "id": "126012"
+                },
+                {
+                  "type": "taskinstructions",
+                  "id": "126011"
+                }
+              ]
+            }
+          }
+        }
+      }' "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions"
+    ```
+    
+    The resource provides the following response:
+    
+    ```JSON
+    
+    ```
+    
+    
+    ## Step 4: Create a Job Sheet
     
     In this step, you create the actual job sheet. The job sheet contains a specific job instruction for the operators to perform the given job. The job instructions further contains the list of actual tasks instructions to successfully complete a particular job in the job sheet.
     
@@ -1944,11 +2064,11 @@ info:
     [@tutorials/update-work-queues]: <>
     # Update the Work Queue
     
-    In this step, you update the work queue that contains the list of task executions. Updating the work queue involves updating this order of the task execution for a particular work station and work cell. 
+    This tutorial explains how you can design and update your work queue. For more information about work queue, see [Entities](#entities).
     
     **Note**: Only the supervisor can update the work queue.
-  
-    The supervisor can move the task execution from one workcell or workstation task queue to another workstation or workcell. In this case, the task execution is reassigned to that new workcell or workstation.
+    
+    Designing a work queue for workstations and workcells involves arranging task executions in a particular order and specifying the time for execution of the task. You can update the work queue either by rearranging the task executions in the same workstation or work cell, or by moving the task execution from one workcell or workstation queue to another workstation or workcell. In this case, the task execution is reassigned to that new workcell or workstation.
     
     The Fusion 360 Production API provides the `PATCH workqueues` endpoint to update the work queue.
     
@@ -2861,6 +2981,10 @@ info:
     
     [@tutorials/create-app]: <>
     # Create an App
+    
+    In this tutorial, we explain how you can create an APP.
+    
+    The Fusion 360 Production API provides the `POST endpoint to create a new App.
     
     [@tutorials/publish-app]: <>
     # Publish an App
