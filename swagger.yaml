@@ -1,23 +1,44 @@
 swagger: "2.0"
 info:
   version: 1.0.0
-  title: Fusion360 Production
+  title: Fusion 360 Production
   description: |
     
     [@overview]: (title)
     
+    Fusion 360 Prodcution, a service on Forge platform to efficiently manage the factory production.
     
+    With Fusion 360 Production, companies can empower their operators on the shop floor to efficiently manage their jobs from the job sheets. The supervisors can get the detailed information and reports about the daily tasks that are performed in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
     
-     This is version 1 of Forge Production API's. The API serves the following goals
+    Fusion 360 Production provides APIs to create and capture the shop floor production information, API Framework to create a mobile based APP to manage the factory production, and reports to view the complete analytics of the factory production.
+    
+    Fusion 360 Production APIs follows the JSON API specification 1.0. For more information, see [JSON API specification](http://jsonapi.org/format/).
 
-    1. To provide Production related APIs for Forge platform.
+    For all Fusion 360 Production API requests, you must set the following headers:
+    
+    |Header               | Value
+    | ------              | -----------------------------------------------------------------------------------
+    | **Content-Type**    | application/vnd.api+json
+    | **Accept**          | application/vnd.api+json
+    | **Authorization**   | Bearer <3-leggedToken>
+    | **X-DMG-FP-TENANT** | A unique identifier assigned to your factory. The identifier indicates the tenant. You must use the tenent of your factory. Do not use the tenent of different factory as it may creates problems in debugging.
+    
+    ## Getting Started
 
-    # Standards
+    The [API Basics](/en/docs/fp360/v1/overview/basics) section guides you through the process of getting started with the API and explains the main concepts and functionality.
+    
+    [@overview/basics]: <>
+    # API Basics
+    
+    Fusion 360 Production provides a set of APIs that allows customers to efficiently manage their factory production jobs. Additionally, customers can also use the App Framework to develop their own mobile application on top of Fusion 360 Production and use Reports to view the detailed insights of the factory production from raw material to finish product.
+
+    ## Standards
+    
     1. This API follows the `JSON API` specs 1.0 documented at [JSON API Spec](http://jsonapi.org/format/)
     2. Entity names are always plural e.g. `Hubs`, `Projects`, `Folders`
     3. Element names are camelCase e.g. `rootFolder`
 
-    # Http Verbs
+    ## Http Verbs
 
     |Verb         | Description
     | ------      | -------------------------------------------------------------------------------------------------------
@@ -26,8 +47,9 @@ info:
     | `PATCH`     |  Used to update an item. Success returns `200` status code with updated json item in body.
     | `DELETE`    |  Used to hard delete an item. Success returns `204` status code with no body.
 
-    # Status Codes
-    We'll respond with one of the following status codes.
+    ## Status Codes
+    
+    Fusion 360 Production API endpoints responds with any one of the following status codes.
     
     |Code         | Description
     | ------      |---------
@@ -41,8 +63,9 @@ info:
     |`404`        | Not Found - resource doesn't exist.
     |`500`        | Server error. There is nothing the app or user can do to recover from this. Correct response is to contact factory backend team for 500 errors.
     
-    # Errors
-      Any 4xx and 5xx response is an error. In addition to the http code we will return additional information in the response payload as follows.
+    ## Errors
+    
+    Any 4xx and 5xx response is an error. In addition to the http code, the endpoints also returns additional information in the response payload as follows.
       
           {
              "errors":[
@@ -56,20 +79,11 @@ info:
                 }
              ]
           }
-      
-    * Production URL: https://developer.api.autodesk.com
+    
+    ## Fusion 360 Production Access URLs 
+    
     * Beta URL: https://developer-stg.api.autodesk.com
-
-    #Required Headers
-    
-    For all Fusion 360 Production API requests, you must set the following headers:
-    
-    |Header               | Value
-    | ------              | -----------------------------------------------------------------------------------
-    | **Content-Type**    | application/vnd.api+json
-    | **Accept**          | application/vnd.api+json
-    | **Authorization**   | Bearer <3-leggedToken>
-    | **X-DMG-FP-TENANT** | A unique identifier assigned to your factory. The identifier indicates the tenant. You must use the tenent of your factory. Do not use the tenent of different factory as it may creates problems in debugging.
+    * Production URL: https://developer.api.autodesk.com
     
     [@overview/components-fusion-360-production]: <>
     # Components of Fusion 360 Production
