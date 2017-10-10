@@ -91,6 +91,8 @@ info:
     [@overview/apis]: <>
     # APIs
     
+    Fusion 360 Production provides a set of APIS to create and manage all the entities related to factory production.
+    
     ##<a name="entities">Factory Production Entities
     
     In a factory, there are many physical and virtual entities. These entities are categorized into resources and functions. 
@@ -171,7 +173,7 @@ info:
     
     ## Roles and Permissions
     
-    Fusion 360 Production supports the following roles and the respective permissions:
+    Fusion 360 Production supports the following roles and permissions:
     
     * Administrator: A user with Administrator role can do everything, including add, edit, remove people, and assign different roles.
     * Manager: A user with Manager role can do everything, except add, update, and remove people or assign different roles. 
@@ -2848,12 +2850,32 @@ info:
     }
     ```
     
-    [@tutorials/import-workstation-details]: <>
-    # Import Workstation Details
+    [@tutorials/import-entities-in-batch]: <>
+    # Import Entities in Batch
     
-    This tutorial explains how you can bulk import the work station details into Fusion 360 Production. You can import work station details stored in the **CSV** format.
+    This tutorial explains how you can import the details of multiples entities in a batch. Fusion 360 Production allows batch import for components, workstations, and job instructions.
     
-    The Fusion 360 Production API provides the `POST batchimport/workstations` endpoint to bulk import the work station details. In the API request, you need to specify the CSV file that contains the work station details that you want to import.
+    You can import the entities details stored in the **CSV** format. For more information about CSV file format, see [APIs](/en/docs/fp360/v1/overview/apis)
+    
+    ## Components
+  
+    The Fusion 360 Production API provides the `POST batchimport/components` endpoint to batch import the components. In the API request, you need to specify the CSV file that contains the components details that you want to import.
+   
+    ### Example
+    
+    ```shell
+    curl -X POST 
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'cache-control: no-cache'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: job360-test'
+      -f @file=@sample_workstations.csv
+      -d 'https://developer-stg.api.autodesk.com/factoryproduction/v1/batchimport/components'
+    ```
+    
+    ## Workstations
+
+    The Fusion 360 Production API provides the `POST batchimport/workstations` endpoint to batch import the workstations. In the API request, you need to specify the CSV file that contains the work stations details that you want to import.
     
     ### Example
     
@@ -2867,7 +2889,23 @@ info:
       -d 'https://developer-stg.api.autodesk.com/factoryproduction/v1/batchimport/workstations'
     ```
     
-    The resource file provides the following response. The response includes the number of work stations successfully imported, and the name and number of the work stations failed in import.
+    ## Job instructions
+    
+    The Fusion 360 Production API provides the `POST batchimport/jobinstructions` endpoint to batch import the job instructions. In the API request, you need to specify the CSV file that contains the job instructions details that you want to import.
+    
+    ### Example
+    
+    ```shell
+    curl -X POST 
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'cache-control: no-cache'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: job360-test'
+      -f @file=@sample_workstations.csv
+      -d 'https://developer-stg.api.autodesk.com/factoryproduction/v1/batchimport/jobinstructions'
+    ```
+
+    All endpoint resources provide the following response. The response includes the number of entities successfully imported, and the name and number of the entities failed in import.
     
     ```json
     {
