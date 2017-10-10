@@ -6,7 +6,7 @@ info:
     
     [@overview]: (title)
     
-    Fusion 360 Prodcution, a service on a Forge platform to build a fully paperless factory production monitoring system in cloud.
+    Fusion 360 Production, a service on a Forge platform to build a fully paperless factory production monitoring system in cloud.
     
     With Fusion 360 Production, companies can empower their operators on the shop floor to efficiently manage their jobs from the job sheets without any paper work. The supervisors can also get the detailed information and reports about the daily tasks that are performed in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
     
@@ -96,7 +96,30 @@ info:
     ##<a name="entities">Factory Production Entities
     
     In a factory, there are many physical and virtual entities. These entities are categorized into resources and functions. 
+    
     The resources include the tools, components, raw material, operator, and work station. The functions include job, job sheet, job instruction, and task instruction.
+    
+    ## **Resources**
+    
+    This section lists the resources that the operator requires for performing different tasks. The resources can be the actual material on which the operator needs to perform the taks or the tools that operator needs to use for performing the task.
+    
+    ### Raw Material
+    
+    The material that the operator uses while performing a task. The material can be the raw material, such as alimunium plate or steel bar or an intermediate product produced by the previous task.
+    
+    ### Tool
+    
+    An entity that the operator requires to perform a task.
+    
+    ### Component
+    
+    An entity that describes the standard items that the operator consumes during the operation of a particular task. These items are not the bulk raw material used for operation, but the associated material, such as o-rings, washers, screws or other needed accessories.
+    
+    As the components are always stocked in the facotry as these are the standard items used in the production.
+    
+    ### Operator
+    
+    A skilled person in the factory who gets the job sheet for performing the jobs. The operator then performs the tasks mentioned in the job instructions in the job seet.
     
     ## **Core Functions**
     
@@ -131,36 +154,13 @@ info:
     
     A Work cell is a group of different work stations. You can create different work cells for different types of work stations.
     
-    ## **Resources**
+    ### Tag
     
-    This section lists the resources that the operator requires for performing different tasks. The resources can be the actual material on which the operator needs to perform the taks or the tools that operator needs to use for performing the task.
-    
-    ### Raw Material
-    
-    The material that the operator uses while performing a task. The material can be the raw material, such as alimunium plate or steel bar or an intermediate product produced by the previous task.
-    
-    ### Tool
-    
-    An entity that the operator requires to perform a task.
-    
-    ### Component
-    
-    An entity that describes the standard items that the operator consumes during the operation of a particular task. These items are not the bulk raw material used for operation, but the associated material, such as o-rings, washers, screws or other needed accessories.
-    
-    As the components are always stocked in the facotry as these are the standard items used in the production.
-    
-    
-    ### Operator
-    
-    A skilled person in the factory who gets the job sheet for performing the jobs. The operator then performs the tasks mentioned in the job instructions in the job seet.
+    A label given to an entity to classify and identify when searching. An entity can have one or more tags.
     
     ### Work Queue
     
     A queue where the tasks from the job instructions are queued. Each work station has its own queue. When the job sheet is dispatched, the task instructions from the job sheet are automatically added to work queue of the respective work station.
-    
-    ### Tag
-    
-    A label given to an entity to classify and identify when searching. An entity can have one or more tags.
     
     ## Roles and Permissions
     
@@ -203,29 +203,25 @@ info:
     
     Fusion 360 Production provides the App Framework for customers to build their own android mobile based application.
     
-    ## Benefits of App Framework
-    
     ## App Deployment Workflow
     
-    Application Author submits a package containing application code, all assets used to render the app, and all required and optional configuration for the app.
+    Following are the steps for deploying the App
     
-    1. Client calls the app-management service to get a URL to upload their App package. 
-      This URL contains: 
+    * Client calls the app-management service to get a URL to upload their App package. This URL contains:
       * **UUID** that the app-management service generates for the App. This UUID is generated for the first time when the client request for the Upload URL. In subsequent requests for updating the App or creating new versions, the client has to use the same UUID.
       * **Version Number** of the App. The version number 1.0.0 when the App is created and the new version when the App is updated.
-    2. Client upload the zip file of the App package to this upload URL.
+    * Client upload the zip file of the App package to this upload URL.
       At the upload URL, the zip packages for all Apps are stored under the `dmg-factory-production-app-packages` folder. The App package is stored at the location: `dmg-factory-production-app-packages/apps/uuid/version/package.zip`
-    3. Clients calls the app-management service with objectKey received from the upload service.
-    4. The app-management service performs the following:
+    * Clients calls the app-management service with objectKey received from the upload service.
+    * The app-management service performs the following:
       * Downloads and unzips the App package.
       * Validates the content of the App package.
       * Generates a new PKI pair and stores it in the database for this App. The same PKI pair later used to sign the JWT token.
       * Updates the App config in the database
       * Pre compile all html templates
       * Upload pre-compiled templates and assets to Amazon S3, using **TransferManager** from AWS SDK. The validated and compiled files are uploaded to the `dmg-factory-production-app/apps/uuid/version` folder.
-    5. The Autodesk support team delivers the `dmg-factory-production-app` bucket to the `apps.fusionproduction.com`. They uses the Amazon CloudFront web service for this. After this, the App becomes live to be accessed with fusionproduction clients using `https://apps.fusionproduction.com/{app_id}/{version}`.
-    6. On the client side we just need to set the correct context in javascript to render pre-compiled html template.
-    
+    * The Autodesk support team delivers the `dmg-factory-production-app` bucket to the `apps.fusionproduction.com`. They uses the Amazon CloudFront web service for this. After delivering the App, the App becomes live to be accessed with fusionproduction clients using `https://apps.fusionproduction.com/{app_id}/{version}`.
+    * Now, the client needs to set to set the correct context in their javascript to render the pre-compiled html template.
     
     ### app_config 
     
@@ -338,7 +334,7 @@ info:
         {
           "type": "invites",
           "attributes": {
-            "email": "james.walker@autodesk.com",
+            "email": "Email",
             "tenantId": "job360-test",
             "firstName": "Rohit",
             "lastName": "Sharma",
@@ -682,9 +678,9 @@ info:
             "attributes": {
                 "creator": {
                     "id": "7",
-                    "firstName": "Tom",
-                    "lastName": "McCollough",
-                    "email": "tom.mccollough@autodesk.com"
+                    "firstName": "First Name",
+                    "lastName": "Last Name",
+                    "email": "Email"
                 },
                 "createdDate": "2016-09-22T02:52:36Z",
                 "factoryDefault": true,
@@ -694,9 +690,9 @@ info:
                 "name": "Factory",
                 "lastModifier": {
                   "id": "7",
-                  "firstName": "Tom",
-                  "lastName": "McCollough",
-                  "email": "tom.mccollough@autodesk.com"
+                  "firstName": "First Name",
+                  "lastName": "Last Name",
+                  "email": "Email"
                 },
                 "description": "default factory workcell",
                 "applicationInfo": [],
@@ -2426,9 +2422,9 @@ info:
               "jobSheetHotJob": false,
               "lastModifier": {
                   "id": "665",
-                  "firstName": "Charudatta",
-                  "lastName": "Mundale",
-                  "email": "charudatta.mundale@autodesk.com"
+                  "firstName": "First Name",
+                  "lastName": "Last Name",
+                  "email": "Email"
               },
               "description": "<p>Task 1 desc goes here</p>\n",
               "jobSheetStatus": "InProgress",
@@ -2463,16 +2459,16 @@ info:
                           "tags": [],
                           "creator": {
                               "id": "16",
-                              "firstName": "Sominath",
-                              "lastName": "Pathare",
-                              "email": "sominath.pathare@autodesk.com"
+                              "firstName": "First Name",
+                              "lastName": "Last Name",
+                              "email": "Email"
                           },
                           "createdDate": "2016-09-02T09:47:53Z",
                           "lastModifier": {
                               "id": "16",
-                              "firstName": "Sominath",
-                              "lastName": "Pathare",
-                              "email": "sominath.pathare@autodesk.com"
+                              "firstName": "First Name",
+                              "lastName": "Last Name",
+                              "email": "Email"
                           },
                           "lastModifiedDate": "2016-09-02T09:47:53Z",
                           "applicationInfo": [],
@@ -2495,16 +2491,16 @@ info:
                           ],
                           "creator": {
                               "id": "438",
-                              "firstName": "Shripad",
-                              "lastName": "Gaikwad",
-                              "email": "shripad.gaikwad@autodesk.com"
+                              "firstName": "First Name",
+                              "lastName": "Last Name",
+                              "email": "Email"
                           },
                           "createdDate": "2017-09-21T10:45:35Z",
                           "lastModifier": {
                               "id": "18",
-                              "firstName": "Viresh",
-                              "lastName": "Shah",
-                              "email": "viresh.shah@autodesk.com"
+                              "firstName": "First Name",
+                              "lastName": "Last Name",
+                              "email": "Email"
                           },
                           "lastModifiedDate": "2017-09-25T08:17:17Z",
                           "applicationInfo": [],
@@ -2519,16 +2515,16 @@ info:
                               "contentType": "image/jpeg",
                               "creator": {
                                   "id": "18",
-                                  "firstName": "Viresh",
-                                  "lastName": "Shah",
-                                  "email": "viresh.shah@autodesk.com"
+                                  "firstName": "First Name",
+                                  "lastName": "Last Name",
+                                  "email": "Email"
                               },
                               "createdDate": "2017-09-22T00:59:51Z",
                               "lastModifier": {
                                   "id": "18",
-                                  "firstName": "Viresh",
-                                  "lastName": "Shah",
-                                  "email": "viresh.shah@autodesk.com"
+                                  "firstName": "First Name",
+                                  "lastName": "Last Name",
+                                  "email": "Email"
                               },
                               "lastModifiedDate": "2017-09-22T00:59:51Z",
                               "generatedThumbnails": [
@@ -2554,16 +2550,16 @@ info:
                                   "contentType": "application/msword",
                                   "creator": {
                                       "id": "18",
-                                      "firstName": "Viresh",
-                                      "lastName": "Shah",
-                                      "email": "viresh.shah@autodesk.com"
+                                      "firstName": "First Name",
+                                      "lastName": "Last Name",
+                                      "email": "Email"
                                   },
                                   "createdDate": "2017-09-25T08:17:15Z",
                                   "lastModifier": {
                                       "id": "18",
-                                      "firstName": "Viresh",
-                                      "lastName": "Shah",
-                                      "email": "viresh.shah@autodesk.com"
+                                      "firstName": "First Name",
+                                      "lastName": "Last Name",
+                                      "email": "Email"
                                   },
                                   "lastModifiedDate": "2017-09-25T08:17:15Z",
                                   "description": "sample.doc",
@@ -2583,16 +2579,16 @@ info:
                                   "contentType": "image/jpeg",
                                   "creator": {
                                       "id": "438",
-                                      "firstName": "Shripad",
-                                      "lastName": "Gaikwad",
-                                      "email": "shripad.gaikwad@autodesk.com"
+                                      "firstName": "First Name",
+                                      "lastName": "Last Name",
+                                      "email": "Email"  
                                   },
                                   "createdDate": "2017-09-21T11:59:29Z",
                                   "lastModifier": {
                                       "id": "438",
-                                      "firstName": "Shripad",
-                                      "lastName": "Gaikwad",
-                                      "email": "shripad.gaikwad@autodesk.com"
+                                      "firstName": "First Name",
+                                      "lastName": "Last Name",
+                                      "email": "Email"
                                   },
                                   "lastModifiedDate": "2017-09-21T11:59:29Z",
                                   "generatedThumbnails": [
@@ -2627,16 +2623,16 @@ info:
               "defectQuantity": 42,
               "creator": {
                   "id": "18",
-                  "firstName": "Viresh",
-                  "lastName": "Shah",
-                  "email": "viresh.shah@autodesk.com"
+                  "firstName": "First Name",
+                  "lastName": "Last Name",
+                  "email": "Email"
               },
               "setupTimeInMins": 2,
               "starter": {
                   "id": "665",
-                  "firstName": "Charudatta",
-                  "lastName": "Mundale",
-                  "email": "charudatta.mundale@autodesk.com"
+                  "firstName": "First Name",
+                  "lastName": "Last Name",
+                  "email": "Email"
               },
               "lastModifiedDate": "2017-10-09T11:48:59Z",
               "jobSheetDefaultQuantity": 10,
@@ -2726,9 +2722,9 @@ info:
               "attributes": {
                   "creator": {
                       "id": "18",
-                      "firstName": "Viresh",
-                      "lastName": "Shah",
-                      "email": "viresh.shah@autodesk.com"
+                      "firstName": "First Name",
+                      "lastName": "Last Name",
+                      "email": "Email"
                   },
                   "createdDate": "2016-09-30T18:14:13Z",
                   "references": [],
@@ -2737,9 +2733,9 @@ info:
                   "name": "ws3",
                   "lastModifier": {
                       "id": "18",
-                      "firstName": "Viresh",
-                      "lastName": "Shah",
-                      "email": "viresh.shah@autodesk.com"
+                      "firstName": "First Name",
+                      "lastName": "Last Name",
+                      "email": "Email"
                   },
                   "description": "<p>ws3</p>\n",
                   "applicationInfo": [],
@@ -2783,17 +2779,17 @@ info:
                   "originalFileName": "Original_Grace-Design-Associates-Front-Yard-Courtyard_s4x3.jpg.rend.hgtvcom.966.725.jpeg",
                   "creator": {
                       "id": "18",
-                      "firstName": "Viresh",
-                      "lastName": "Shah",
-                      "email": "viresh.shah@autodesk.com"
+                      "firstName": "First Name",
+                      "lastName": "Last Name",
+                      "email": "Email"
                   },
                   "lastModifiedDate": "2017-10-03T11:12:13Z",
                   "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/images/input/a43c4845-50ad-4ad8-94a3-8ae1c48c654e.Original_Grace-Design-Associates-Front-Yard-Courtyard_s4x3.jpg.rend.hgtvcom.966.725.jpeg?nonce=7Op-npkcI57WfUNHdJyI8UPRWZ6bEqG7kbM5-xgXt3WJFMCa6scshrkeYS2Kq6GxC0uqy7kVn3togzejfJMTO5NE4kE9_6nIOI8JpWkR6NMjvAivZKzc0-PVv49SHGODyx4ljtCr-MqUiL7R_BkIg6daW8OhceGjd7A75sgf0G2ippcC6u5aVsYqmopAdhuorqbn5iU7gkj3ayQVxHkGhoLWou47o7PYXJ5jM6Q6LxbyK_hem-Uw7mkOCKVVWIpGOIbLy5YaTTHl5OOrTDts8aH4CjJO8TsKDeWx7YM0n9YhoFJwcbHXzzQt6LX0X5uQnUochRBgkI5G1y94qr940g&seed=AAABXwEBjgAAAAFfAMqfgA",
                   "lastModifier": {
                       "id": "18",
-                      "firstName": "Viresh",
-                      "lastName": "Shah",
-                      "email": "viresh.shah@autodesk.com"
+                      "firstName": "First Name",
+                      "lastName": "Last Name",
+                      "email": "Email"
                   },
                   "description": "",
                   "entityId": "420895",
@@ -2823,9 +2819,9 @@ info:
               "attributes": {
                   "creator": {
                       "id": "7",
-                      "firstName": "Tom",
-                      "lastName": "McCollough",
-                      "email": "tom.mccollough@autodesk.com"
+                      "firstName": "First Name",
+                      "lastName": "Last Name",
+                      "email": "Email"
                   },
                   "createdDate": "2016-09-22T02:52:36Z",
                   "factoryDefault": true,
@@ -2835,9 +2831,9 @@ info:
                   "name": "Factory",
                   "lastModifier": {
                       "id": "7",
-                      "firstName": "Tom",
-                      "lastName": "McCollough",
-                      "email": "tom.mccollough@autodesk.com"
+                      "firstName": "First Name",
+                      "lastName": "Last Name",
+                      "email": "Email"
                   },
                   "description": "default factory workcell",
                   "applicationInfo": [],
@@ -3000,16 +2996,16 @@ info:
                 ],
                 "creator": {
                     "id": "665",
-                    "firstName": "Charudatta",
-                    "lastName": "Mundale",
-                    "email": "charudatta.mundale@autodesk.com"
+                    "firstName": "First Name",
+                    "lastName": "Last Name",
+                    "email": "Email"
                 },
                 "createdDate": "2017-09-27T12:51:55Z",
                 "lastModifier": {
                     "id": "665",
-                    "firstName": "Charudatta",
-                    "lastName": "Mundale",
-                    "email": "charudatta.mundale@autodesk.com"
+                    "firstName": "First Name",
+                    "lastName": "Last Name",
+                    "email": "Email"
                 },
                 "lastModifiedDate": "2017-10-06T12:20:39Z",
                 "name": "Screw",
@@ -6303,7 +6299,7 @@ paths:
                           {
                             "type": "invites",
                             "attributes": {
-                              "email": "dave.anderson@autodesk.com",
+                              "email": "Email",
                               "tenantId": "job360-test",
                               "firstName": "Dave",
                               "lastName": "Anderson",
@@ -6314,7 +6310,7 @@ paths:
                           {
                             "type": "invites",
                             "attributes": {
-                              "email": "jeff.pek@autodesk.com",
+                              "email": "Email",
                               "tenantId": "job360-test",
                               "firstName": "jeff",
                               "lastName": "pek",
@@ -7187,9 +7183,9 @@ responses:
                                     "attributes": {
                                         "creator": {
                                             "id": "5",
-                                            "firstName": "Factory",
-                                            "lastName": "Admin",
-                                            "email": "factory.production.beta.admin@autodesk.com"
+                                            "firstName": "First Name",
+                                            "lastName": "Last Name",
+                                            "email": "Email"
                                         },
                                         "createdDate": "2017-01-06T17:08:34Z",
                                         "references": [],
@@ -7199,9 +7195,9 @@ responses:
                                         "name": "tejinderTI 5",
                                         "lastModifier": {
                                             "id": "5",
-                                            "firstName": "Factory",
-                                            "lastName": "Admin",
-                                            "email": "factory.production.beta.admin@autodesk.com"
+                                            "firstName": "First Name",
+                                            "lastName": "Last Name",
+                                            "email": "Email"
                                         },
                                         "setupTimeInMins": 32,
                                         "executionTimePerQuantityInMins": 12,
@@ -7253,9 +7249,9 @@ responses:
                                     "attributes": {
                                         "creator": {
                                             "id": "5",
-                                            "firstName": "Factory",
-                                            "lastName": "Admin",
-                                            "email": "factory.production.beta.admin@autodesk.com"
+                                            "firstName": "First Name",
+                                            "lastName": "Last Name",
+                                            "email": "Email"
                                         },
                                         "createdDate": "2017-01-06T17:08:34Z",
                                         "references": [],
@@ -7265,9 +7261,9 @@ responses:
                                         "name": "tejinderTI 6",
                                         "lastModifier": {
                                             "id": "5",
-                                            "firstName": "Factory",
-                                            "lastName": "Admin",
-                                            "email": "factory.production.beta.admin@autodesk.com"
+                                            "firstName": "First Name",
+                                            "lastName": "Last Name",
+                                            "email": "Email"
                                         },
                                         "description": "task instruction5",
                                         "setupTimeInMins": 32,
@@ -7323,17 +7319,17 @@ responses:
                                         "originalFileName": "desktop_computer_512.png",
                                         "creator": {
                                             "id": "30",
-                                            "firstName": "Christopher",
-                                            "lastName": "Abraham",
-                                            "email": "christopher.abraham@autodesk.com"
+                                            "firstName": "First Name",
+                                            "lastName": "Last Name",
+                                            "email": "Email"
                                         },
                                         "lastModifiedDate": "2016-10-21T16:45:35Z",
                                         "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/v1/files/45a0fca1-c42c-4368-aa5f-8dc36fda7b15.desktop_computer_512.png",
                                         "lastModifier": {
                                             "id": "30",
-                                            "firstName": "Christopher",
-                                            "lastName": "Abraham",
-                                            "email": "christopher.abraham@autodesk.com"
+                                            "firstName": "First Name",
+                                            "lastName": "Last Name",
+                                            "email": "Email"
                                         },
                                         "description": "",
                                         "entityId": "6411",
@@ -7357,9 +7353,9 @@ responses:
                                     "attributes": {
                                         "creator": {
                                             "id": "30",
-                                            "firstName": "Christopher",
-                                            "lastName": "Abraham",
-                                            "email": "christopher.abraham@autodesk.com"
+                                            "firstName": "First Name",
+                                            "lastName": "Last Name",
+                                            "email": "Email"
                                         },
                                         "createdDate": "2016-10-21T16:45:34Z",
                                         "references": [],
@@ -7368,9 +7364,9 @@ responses:
                                         "name": "Pier 9 - Computer Station 1",
                                         "lastModifier": {
                                             "id": "30",
-                                            "firstName": "Christopher",
-                                            "lastName": "Abraham",
-                                            "email": "christopher.abraham@autodesk.com"
+                                            "firstName": "First Name",
+                                            "lastName": "Last Name",
+                                            "email": "Email"
                                         },
                                         "description": "<p>Computer for CAD/CAM software. Used to create models and CNC programs.</p>\n",
                                         "tags": [],
@@ -7441,9 +7437,9 @@ responses:
                         "attributes": {
                             "creator": {
                                 "id": "5",
-                                "firstName": "Factory",
-                                "lastName": "Admin",
-                                "email": "factory.production.beta.admin@autodesk.com"
+                                "firstName": "First Name",
+                                "lastName": "Last Name",
+                                "email": "Email"
                             },
                             "createdDate": "2017-01-06T17:08:34Z",
                             "references": [],
@@ -7453,9 +7449,9 @@ responses:
                             "name": "tejinderTI 5",
                             "lastModifier": {
                                 "id": "5",
-                                "firstName": "Factory",
-                                "lastName": "Admin",
-                                "email": "factory.production.beta.admin@autodesk.com"
+                                "firstName": "First Name",
+                                "lastName": "Last Name",
+                                "email": "Email"
                             },
                             "setupTimeInMins": 32,
                             "executionTimePerQuantityInMins": 12,
@@ -7509,17 +7505,17 @@ responses:
                                 "originalFileName": "desktop_computer_512.png",
                                 "creator": {
                                     "id": "30",
-                                    "firstName": "Christopher",
-                                    "lastName": "Abraham",
-                                    "email": "christopher.abraham@autodesk.com"
+                                    "firstName": "First Name",
+                                    "lastName": "Last Name",
+                                    "email": "Email"
                                 },
                                 "lastModifiedDate": "2016-10-21T16:45:35Z",
                                 "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/v1/files/45a0fca1-c42c-4368-aa5f-8dc36fda7b15.desktop_computer_512.png",
                                 "lastModifier": {
                                     "id": "30",
-                                    "firstName": "Christopher",
-                                    "lastName": "Abraham",
-                                    "email": "christopher.abraham@autodesk.com"
+                                    "firstName": "First Name",
+                                    "lastName": "Last Name",
+                                    "email": "Email"
                                 },
                                 "description": "",
                                 "entityId": "6411",
@@ -7543,9 +7539,9 @@ responses:
                             "attributes": {
                                 "creator": {
                                     "id": "30",
-                                    "firstName": "Christopher",
-                                    "lastName": "Abraham",
-                                    "email": "christopher.abraham@autodesk.com"
+                                    "firstName": "First Name",
+                                    "lastName": "Last Name",
+                                    "email": "Email"
                                 },
                                 "createdDate": "2016-10-21T16:45:34Z",
                                 "references": [],
@@ -7554,9 +7550,9 @@ responses:
                                 "name": "Pier 9 - Computer Station 1",
                                 "lastModifier": {
                                     "id": "30",
-                                    "firstName": "Christopher",
-                                    "lastName": "Abraham",
-                                    "email": "christopher.abraham@autodesk.com"
+                                    "firstName": "First Name",
+                                    "lastName": "Last Name",
+                                    "email": "Email"
                                 },
                                 "description": "<p>Computer for CAD/CAM software. Used to create models and CNC programs.</p>\n",
                                 "tags": [],
@@ -7614,9 +7610,9 @@ responses:
                                   "attributes": {
                                       "creator": {
                                           "id": "4",
-                                          "firstName": "Viresh",
-                                          "lastName": "Shah",
-                                          "email": "viresh.shah@autodesk.com"
+                                          "firstName": "First Name",
+                                          "lastName": "Last Name",
+                                          "email": "Email"
                                       },
                                       "scrapQuantity": 0,
                                       "createdDate": "2017-02-09T12:55:41Z",
@@ -7627,9 +7623,9 @@ responses:
                                       "tenantId": "job360-test",
                                       "lastModifier": {
                                           "id": "4",
-                                          "firstName": "Viresh",
-                                          "lastName": "Shah",
-                                          "email": "viresh.shah@autodesk.com"
+                                          "firstName": "First Name",
+                                          "lastName": "Last Name",
+                                          "email": "Email"
                                       },
                                       "reworkQuantity": 0,
                                       "deliveryDate": "2017-02-24T18:30:00Z",
@@ -7709,9 +7705,9 @@ responses:
                                           "scrapQuantity": 0,
                                           "creator": {
                                               "id": "4",
-                                              "firstName": "Viresh",
-                                              "lastName": "Shah",
-                                              "email": "viresh.shah@autodesk.com"
+                                              "firstName": "First Name",
+                                              "lastName": "Last Name",
+                                              "email": "Email"
                                           },
                                           "createdDate": "2017-02-09T12:55:42Z",
                                           "references": [],
@@ -7719,9 +7715,9 @@ responses:
                                           "tenantId": "job360-test",
                                           "lastModifier": {
                                               "id": "4",
-                                              "firstName": "Viresh",
-                                              "lastName": "Shah",
-                                              "email": "viresh.shah@autodesk.com"
+                                              "firstName": "First Name",
+                                              "lastName": "Last Name",
+                                              "email": "Email"
                                           },
                                           "defectQuantity": 0,
                                           "tags": [],
@@ -7773,9 +7769,9 @@ responses:
                                       "attributes": {
                                           "creator": {
                                               "id": "4",
-                                              "firstName": "Viresh",
-                                              "lastName": "Shah",
-                                              "email": "viresh.shah@autodesk.com"
+                                              "firstName": "First Name",
+                                              "lastName": "Last Name",
+                                              "email": "Email"
                                           },
                                           "createdDate": "2017-02-09T12:54:50Z",
                                           "references": [],
@@ -7790,16 +7786,16 @@ responses:
                                                       "references": [],
                                                       "creator": {
                                                           "id": "25",
-                                                          "firstName": "job360",
-                                                          "lastName": "factory admin",
-                                                          "email": "job360_beta_adm_nikki@yahoo.com"
+                                                          "firstName": "First Name",
+                                                          "lastName": "Last Name",
+                                                          "email": "Email"
                                                       },
                                                       "createdDate": "2016-10-27T12:19:58Z",
                                                       "lastModifier": {
                                                           "id": "25",
-                                                          "firstName": "job360",
-                                                          "lastName": "factory admin",
-                                                          "email": "job360_beta_adm_nikki@yahoo.com"
+                                                          "firstName": "First Name",
+                                                          "lastName": "Last Name",
+                                                          "email": "Email"
                                                       },
                                                       "lastModifiedDate": "2016-10-27T12:19:58Z",
                                                       "primaryImage": {
@@ -7813,16 +7809,16 @@ responses:
                                                           "contentType": "image/jpeg",
                                                           "creator": {
                                                               "id": "25",
-                                                              "firstName": "job360",
-                                                              "lastName": "factory admin",
-                                                              "email": "job360_beta_adm_nikki@yahoo.com"
+                                                              "firstName": "First Name",
+                                                              "lastName": "Last Name",
+                                                              "email": "Email"
                                                           },
                                                           "createdDate": "2016-10-27T12:20:02Z",
                                                           "lastModifier": {
                                                               "id": "25",
-                                                              "firstName": "job360",
-                                                              "lastName": "factory admin",
-                                                              "email": "job360_beta_adm_nikki@yahoo.com"
+                                                              "firstName": "First Name",
+                                                              "lastName": "Last Name",
+                                                              "email": "Email"
                                                           },
                                                           "lastModifiedDate": "2016-10-27T12:20:02Z",
                                                           "originalFileName": "3.jpg",
@@ -7841,9 +7837,9 @@ responses:
                                           "name": "Task 1",
                                           "lastModifier": {
                                               "id": "4",
-                                              "firstName": "Viresh",
-                                              "lastName": "Shah",
-                                              "email": "viresh.shah@autodesk.com"
+                                              "firstName": "First Name",
+                                              "lastName": "Last Name",
+                                              "email": "Email"
                                           },
                                           "description": "<p>Task 1 desc</p>\n",
                                           "setupTimeInMins": 32,
@@ -7901,9 +7897,9 @@ responses:
                                       "attributes": {
                                           "creator": {
                                               "id": "4",
-                                              "firstName": "Viresh",
-                                              "lastName": "Shah",
-                                              "email": "viresh.shah@autodesk.com"
+                                              "firstName": "First Name",
+                                              "lastName": "Last Name",
+                                              "email": "Email"
                                           },
                                           "createdDate": "2017-02-09T12:54:50Z",
                                           "references": [],
@@ -7918,16 +7914,16 @@ responses:
                                                       "references": [],
                                                       "creator": {
                                                           "id": "4",
-                                                          "firstName": "Viresh",
-                                                          "lastName": "Shah",
-                                                          "email": "viresh.shah@autodesk.com"
+                                                          "firstName": "First Name",
+                                                          "lastName": "Last Name",
+                                                          "email": "Email"
                                                       },
                                                       "createdDate": "2017-01-10T11:38:47Z",
                                                       "lastModifier": {
                                                           "id": "4",
-                                                          "firstName": "Viresh",
-                                                          "lastName": "Shah",
-                                                          "email": "viresh.shah@autodesk.com"
+                                                          "firstName": "First Name",
+                                                          "lastName": "Last Name",
+                                                          "email": "Email"
                                                       },
                                                       "lastModifiedDate": "2017-01-23T12:32:44Z",
                                                       "primaryImage": {
@@ -7941,16 +7937,16 @@ responses:
                                                           "contentType": "image/jpeg",
                                                           "creator": {
                                                               "id": "4",
-                                                              "firstName": "Viresh",
-                                                              "lastName": "Shah",
-                                                              "email": "viresh.shah@autodesk.com"
+                                                              "firstName": "First Name",
+                                                              "lastName": "Last Name",
+                                                              "email": "Email"
                                                           },
                                                           "createdDate": "2017-01-23T12:32:48Z",
                                                           "lastModifier": {
                                                               "id": "4",
-                                                              "firstName": "Viresh",
-                                                              "lastName": "Shah",
-                                                              "email": "viresh.shah@autodesk.com"
+                                                              "firstName": "First Name",
+                                                              "lastName": "Last Name",
+                                                              "email": "Email"
                                                           },
                                                           "lastModifiedDate": "2017-01-23T12:32:48Z",
                                                           "originalFileName": "images (2).jpeg",
@@ -7969,9 +7965,9 @@ responses:
                                           "name": "Task 2",
                                           "lastModifier": {
                                               "id": "4",
-                                              "firstName": "Viresh",
-                                              "lastName": "Shah",
-                                              "email": "viresh.shah@autodesk.com"
+                                              "firstName": "First Name",
+                                              "lastName": "Last Name",
+                                              "email": "Email"
                                           },
                                           "description": "<p>Task 2 desc</p>\n",
                                           "setupTimeInMins": 32,
@@ -8030,9 +8026,9 @@ responses:
                                           "originalFileName": "task2.pdf",
                                           "creator": {
                                               "id": "4",
-                                              "firstName": "Viresh",
-                                              "lastName": "Shah",
-                                              "email": "viresh.shah@autodesk.com"
+                                              "firstName": "First Name",
+                                              "lastName": "Last Name",
+                                              "email": "Email"
                                           },
                                           "lastModifiedDate": "2017-02-09T12:54:55Z",
                                           "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/v1/files/86b7f1af-f6e5-41b5-98ba-c1bd940399a4.task2.pdf",
@@ -8065,17 +8061,17 @@ responses:
                                           "originalFileName": "2016-10-21 09.01.53.png",
                                           "creator": {
                                               "id": "30",
-                                              "firstName": "Christopher",
-                                              "lastName": "Abraham",
-                                              "email": "christopher.abraham@autodesk.com"
+                                              "firstName": "First Name",
+                                              "lastName": "Last Name",
+                                              "email": "Email"
                                           },
                                           "lastModifiedDate": "2016-10-21T16:31:02Z",
                                           "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/v1/files/4adbecb1-754d-49c3-80f2-a3517937b282.2016-10-21 09.01.53.png",
                                           "lastModifier": {
                                               "id": "30",
-                                              "firstName": "Christopher",
-                                              "lastName": "Abraham",
-                                              "email": "christopher.abraham@autodesk.com"
+                                              "firstName": "First Name",
+                                              "lastName": "Last Name",
+                                              "email": "Email"
                                           },
                                           "description": "",
                                           "entityId": "6409",
@@ -8099,9 +8095,9 @@ responses:
                                       "attributes": {
                                           "creator": {
                                               "id": "4",
-                                              "firstName": "Viresh",
-                                              "lastName": "Shah",
-                                              "email": "viresh.shah@autodesk.com"
+                                              "firstName": "First Name",
+                                              "lastName": "Last Name",
+                                              "email": "Email"
                                           },
                                           "createdDate": "2017-02-09T12:54:50Z",
                                           "references": [],
@@ -8116,9 +8112,9 @@ responses:
                                                       "references": [],
                                                       "creator": {
                                                           "id": "4",
-                                                          "firstName": "Viresh",
-                                                          "lastName": "Shah",
-                                                          "email": "viresh.shah@autodesk.com"
+                                                          "firstName": "First Name",
+                                                          "lastName": "Last Name",
+                                                          "email": "Email"
                                                       },
                                                       "createdDate": "2017-01-10T11:38:47Z",
                                                       "lastModifier": {
@@ -20836,9 +20832,9 @@ responses:
                           "name": "regression workstations",
                           "lastModifier": {
                               "id": "20",
-                              "firstName": "factory",
-                              "lastName": "production",
-                              "email": "john.smith@autodesk.com"
+                              "firstName": "First Name",
+                              "lastName": "Last Name",
+                              "email": "Email"
                           },
                           "description": "regression workstations",
                           "tags": [
