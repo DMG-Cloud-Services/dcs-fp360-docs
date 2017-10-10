@@ -203,48 +203,80 @@ info:
     
     Fusion 360 Production provides the App Framework for customers to build their own android mobile based application.
     
-    Fusion Production provides "Completely paperless factory monitoring system in cloud" for our customers. Moving to cloud and having the ability to analyze historical data to make process improvement iteratively is a good value add to existing shop floors. But there is a big potential, if we can provide a "marketplace" for third party systems to integrate with our system, so end users can get relevant and enriched data on top of what we provide out-of-the-box. There are 2 ways to do this, either create these integrations on a one-off basis for every third party system that we want to integrate with or let third party system integrate with our system. In both the cases our customers can choose which third party integrations they would like to use but with the latter approach we create an extensible system that anyone can hook into without us being the bottlenecks. In this approach, we will follow a similar approach as popular customer support system, Zendesk.
-    Following document outlines how and what of that integration framework.
-    
     ## Benefits of App Framework
     
-    ## App Creating Workflow
+    ## App Deployment Workflow
     
-    App Authoring Workflow
-    Application Author will submit a package containing application code, all assets used to render app and all required and optional configuration for app.
-    Contents of application package
-    Main Application code in Javascript
-    assets folder containing : css/images
-    HTML templates for app view
-    Language resource folder
-    Configuration.js : JSON file containing app information
-    Author Info
-    App Info
-    Location(s) to surface this app
-    Extra domain specific parameters required by app
-    Domain whitelist specifying which locations can be called from this app
+    Application Author submits a package containing application code, all assets used to render the app, and all required and optional configuration for the app.
+    
+    1. Client calls the app-management service to get a URL to upload their App package. 
+      This URL contains: 
+      * **UUID** that the app-management service generates for the App. This UUID is generated for the first time when the client request for the Upload URL. In subsequent requests for updating the App or creating new versions, the client has to use the same UUID.
+      * **Version Number** of the App. The version number 1.0.0 when the App is created and the new version when the App is updated.
+    2. Client upload the zip file of the App package to this upload URL.
+      At the upload URL, the zip packages for all Apps are stored under the `dmg-factory-production-app-packages` folder. The App package is stored at the location: `dmg-factory-production-app-packages/apps/uuid/version/package.zip`
+    3. Clients calls the app-management service with objectKey received from the upload service.
+    4. The app-management service performs the following:
+      * Downloads and unzips the App package.
+      * Validates the content of the App package.
+      * Generates a new PKI pair and stores it in the database for this App. The same PKI pair later used to sign the JWT token.
+      * Updates the App config in the database
+      * Pre compile all html templates
+      * Upload pre-compiled templates and assets to Amazon S3, using **TransferManager** from AWS SDK. The validated and compiled files are uploaded to the `dmg-factory-production-app/apps/uuid/version` folder.
+    5. The Autodesk support team delivers the `dmg-factory-production-app` bucket to the `apps.fusionproduction.com`. They uses the Amazon CloudFront web service for this. After this, the App becomes live to be accessed with fusionproduction clients using `https://apps.fusionproduction.com/{app_id}/{version}`.
+    6. On the client side we just need to set the correct context in javascript to render pre-compiled html template.
     
     
+    ### app_config 
     
-    app_config 
-    app config will specify any additional information required by the application such as keys etc. If "secure" is true - the config value will be stored in encrypted format. The description will show up as tool tip against the field in the Tenant Admin App configuration view. 
+    The **app config** file specifies any additional information required by the application, such as keys. If "secure" is true - the config value will be stored in encrypted format. 
+    The description will show up as tool tip against the field in the Tenant Admin App configuration view. 
     
-    app_params
-    app_params will define parameters that are needed by given app for a given entity. App has to define schema for these parameters and which parameters are required and which are optional. UI will have to then add these additional parameters to these entities. Please note that required fields will only be enforced in the Rowe UX. Any calls made to API's by other products i.e. through Forge FP API's will not enforce field requirements for app fields. 
+    ### app_params
     
-    domain_whitelist
-    List of domains which can be safely called from this application. See JWT sections below for more details. 
+    The **app_params** defines the parameters that the app requires for the given entity. The Application authore has to define the schema for these parameters and also define which parameters are required and which are optional. Based on this configuration, the interface then adds these additional parameters to the entities. 
+    
+    **Note**: Any calls that other prodcuts make through Forge Fusion 360 Production APIs will not enforce the field requirements for the App fields. 
+    
+    ### domain_whitelist
+    
+    A list of domains that the App can safely calls.
+    
+    ## Contents of application package
+    
+    * Main Application code in Javascript
+    * assets folder containing : css/images
+    * HTML templates for app view
+    * Language resource folder
+    * Configuration.js : JSON file containing app information
+      * Author Info
+      * App Info
+      * Location(s) to surface this app
+      * Extra domain specific parameters required by app
+      * Domain whitelist specifying which locations can be called from this app
+    
+    ## Sample Package Structure
+    
+    ```
+    app.js
+    assets
+      css
+        app.css
+      images
+        logo.png
+    config.js
+    resources
+      en_us
+        resources.js
+      fr_ca
+        resources.js
+    templates
+      app.template
+    ```
     
     ## Supported software
     
-    
-    
-    ## Package Structure
-    
-    
-    ## App Deployment
-    
-    
+  
     ## Sample Configuration
     
     
