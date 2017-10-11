@@ -3229,6 +3229,189 @@ info:
     [@tutorials/publish-app]: <>
     # Publish an App
     
+    This tutorial explains how to publish the App. Publishing the App requires that you change the **active** attribute value to **true**". After publishing the App, you can install it to the tenent of Fusion 360.
+    
+    Fusion 360 Production provides the `PATCH applications/{applicationId}` endpoint to update the Application including the status for publishing the App. In the API request, you need to specify the App Id that you want to publish.
+    
+    ### Example
+    
+    ```shell
+    curl -X GET 
+      -H 'accept: application/vnd.api+json'
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'content-type: application/vnd.api+json'
+      -d 
+      '
+      {
+        "data": {
+            "type": "applications",
+            "attributes": {
+                "objectKey": "8c3dd3f3-0be6-4aeb-b92b-523af1b68af2.vimana-app",
+                "active": true
+            }
+        }
+      }' "https://developer-stg.api.autodesk.com/appframework/v1/applications/{applicationId}"
+    ```
+    
+    The resource provides the following response:
+    
+    ```json
+    {
+      "data": {
+          "type": "applications",
+          "id": "8f78cd4c-2557-11e7-93ae-92361f002672",
+          "attributes": {
+              "creator": {
+                  "id": "15",
+                  "firstName": "John",
+                  "lastName": "Smith",
+                  "email": "john.smith@autodesk.com",
+                  "createdDate": "2017-01-27T09:51:44Z",
+                  "oxygenId": "XHFXK886DUYG",
+                  "acceptedInvite": true,
+                  "acceptedInviteDate": "2017-04-04T07:17:08Z",
+                  "active": true,
+                  "lastModifier": {
+                      "id": "15",
+                      "firstName": "John",
+                      "lastName": "Smith",
+                      "email": "john.smith@autodesk.com",
+                      "createdDate": "2017-01-27T09:51:44Z"
+                  },
+                  "lastModifiedDate": "2017-05-03T19:36:02Z",
+                  "tenants": [],
+                  "groups": []
+              },
+              "objectKey": "8c3dd3f3-0be6-4aeb-b92b-523af1b68af2.vimana-app",
+              "name": "Invoice Service",
+              "description": "Order Cost Invoice System",
+              "config": {
+                  "name": "Invoice Service",
+                  "description": "Order Cost Invoice System",
+                  "locations": [
+                      {
+                        "id": "jobsheet_detail",
+                        "autoHide": false
+                      },
+                      {
+                        "id": "jobsheet_list",
+                        "autoHide": true
+                      }
+                  ],
+                  "author": {
+                    "fullName": "John Smith",
+                    "avatarUrl": "http://s3.amazonaws.com/profile/johns.png",
+                    "bio": "This is the bio"
+                  },
+                  "entitySchemas": {
+                      "jobsheets": {
+                          "type": "object",
+                          "properties": {
+                              "order_id": {
+                                "type": "string",
+                                "description": "order id in the shopify system"
+                              },
+                              "invoice_cost": {
+                                "type": "number"
+                              }
+                          },
+                          "required": [
+                            "order_id"
+                          ]
+                      }
+                  },
+                  "domainWhitelist": [
+                    "abc.com",
+                    "apps.abc.com"
+                  ]
+              },
+              "version": "1.1.0",
+              "status": "Unpublished"
+          },
+          "relationships": {},
+          "links": {
+              "self": "http://developer-stg.api.autodesk.com/appframework/v1/applications/8f78cd4c-2557-11e7-93ae-92361f002672"
+          }
+      },
+      "included": []
+    }
+    ```
+    
+    [@tutorials/install-app]: <>
+    # Install an App
+    
+    This tutorial explains how you can install your App to the Fusion 360 Production tenent.
+    
+    Fusion 360 Production provides the `POST /tenants/{tenantId}/applications` endpoint to install the App for the given tenent. In the API request, you need to specify the tenent Id, application Id, and the application version that you want to install.
+    
+    ### Example
+    
+    ```shell
+    curl -X GET 
+      -H 'accept: application/vnd.api+json'
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: {tenentId}'
+      -H 'content-type: application/vnd.api+json'
+      -d 
+      '
+      {
+        "data": {
+            "type": "tenantapplications",
+            "attributes": {
+                "applicationId": "8f78cd4c-2557-11e7-93ae-92361f002672",
+                "version": "1.0.0"
+            }
+        }
+    }' "https://developer-stg.api.autodesk.com/factoryproduction/v1/tenants/{tenentId}/applications"
+    ```
+    
+    The resource provides the following response:
+    
+    ```json
+    {
+      "data": {
+          "type": "tenantapplications",
+          "id": "8f78cd4c-2557-11e7-93ae-92361f002672_1.0.0_job360-test",
+          "attributes": {
+              "applicationId": "8f78cd4c-2557-11e7-93ae-92361f002672",
+              "application": {
+                  "id": "8f78cd4c-2557-11e7-93ae-92361f002672",
+                  "status": "Published",
+                  "creator": {
+                    "id": "15",
+                    "firstName": "First Name",
+                    "lastName": "Last Name",
+                    "email": "Email",
+                    "createdDate": "2017-01-27T09:51:44Z"
+                  },
+                  "objectKey": "0c6df641-90c0-41ae-91a6-2d794872c3c0",
+                  "name": "Invoice Service",
+                  "description": "Order Cost Invoice System",
+                  "version": "1.0.0"
+              },
+              "applicationVersion": "1.0.0",
+              "tenantId": "job360-test",
+              "status": "Installed",
+              "admin": {
+                "id": "15",
+                "firstName": "First Name",
+                "lastName": "Last Name",
+                "email": "Email",
+              },
+              "installer": {
+                "id": "15",
+                "firstName": "First Name",
+                "lastName": "Last Name",
+                "email": "Email",
+              },
+              "installDate": "2017-05-17T22:45:25Z",
+              "id": "8f78cd4c-2557-11e7-93ae-92361f002672_1.0.0_job360-test"
+          }
+      }
+    }
+    ```
+    
     [@tutorials/search-apps]: <>
     # Search an App
     
