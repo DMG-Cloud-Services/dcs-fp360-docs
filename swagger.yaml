@@ -5855,30 +5855,45 @@ paths:
     x-summary: GET Entity events
     x-description: |
         Search for any type of entity events.  
+        
+        Date range parameters:
+        |Verb         | Description
+        | ------      | -------------------------------------------------------------------------------------------------------
+        | `lt`        |  'Less Than': Include dates less than (but not equal to) this date.
+        | `lte`        |  'Less Equal': Include dates less than or equal to this date.
+        | `gt`        |  'Greater Than': Include dates greater than (but not equal to) this date.
+        | `gte`        |  'Greater Equal': Include dates greater than or equal to this date.
+
+        Date Range Example:
+        To view Entity events from 10-15-2016 to 10-26-2016, not inlcluding 10-15-16 but including 10-26-16, add the following:
+
+        .../entityevents?filter[entityevents][eventDate][gt]=2016-10-15&filter[entityevents][eventDate][lte]=2016-10-26
+
     get:
       tags: [ "Entity Events" ]
       description: |
         Search for any type of entity events.
       operationId: getEntities
       parameters:
-        - name: filter[entitiesevents][entityType]
+        - name: filter[entityevents][entityType]
           in: query
-          description: Search Query, which may include entity id
+          description: Entity type to search against. Example:jobsheets, workstations, task_executions etc.
           required: false
           type: string
-        - name: filter[entitiesevents][event]
+        - name: filter[entityevents][event]
           in: query
-          description: Tags to search against
+          description: Events to filter by. 
+                       Available entity events:```Staged, InProgress, Blocked, Completed, NeedsApproval, Waiting, OfflineScheduleMaintenance, OfflineBroken```
           required: false
           type: string
-        - name: filter[entitiesevents][eventDate]
+        - name: filter[entityevents][eventDate][lt/lte/gt/gte]
           in: query
-          description: Entity type to search against. Example:components,jobsheets etc.
+          description: To specify date or date range endpoint.  Available date operators:```lt, lte, gt, gte``` Example:2016-10-16
           required: false
           type: string
-        - name: sort[entitiesevents][targetFieldName]
+        - name: sort[entityevents][targetFieldName]
           in: query
-          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:id,lastModifiedDate Example:ASC
+          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:eventDate Example:ASC
           required: false
           type: string
         - $ref: '#/parameters/pageSize'
