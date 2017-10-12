@@ -6,11 +6,11 @@ info:
     
     [@overview]: (title)
     
-    Fusion 360 Production is a Job Management service that customers can use in the factory to manage the Job Sheets.  The job sheets can be for any part that goes through the manufacturing process on a factory floor. 
+    Fusion 360 Production is a job management service that customers can use in the factory to efficiently manage the job sheets. The job sheets can be for any part that goes through the manufacturing process on a factory floor. 
     
-    With Fusion 360 Production companies can build a fully paperless factory production monitoring system in cloud. Also, companies can empower their operators on the shop floor to efficiently manage their jobs from the job sheets without any paper work. The supervisors can get the detailed information and reports about the daily tasks that are performed in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
+    With Fusion 360 Production companies can build a fully paperless factory production monitoring system in cloud. Also, companies can empower their operators on the shop floor to manage their jobs from the job sheets without any paper work. The supervisors can get the detailed information and reports about the daily tasks that are performed in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
     
-    Fusion 360 Production provides APIs to create and capture the shop floor production information, API Framework to create a android mobile based APP to manage the factory production, and reports to view the complete analytics of the factory production.
+    Fusion 360 Production provides APIs to create and capture the shop floor production information, an App Framework to create a android based mobile application to manage the factory production, and reports to view the complete analytics of the factory production.
     
     Fusion 360 Production APIs follows the JSON API specification 1.0. For more information, see [JSON API specification](http://jsonapi.org/format/).
 
@@ -203,6 +203,15 @@ info:
     
     Fusion 360 Production provides the App Framework for customers to build their own android mobile based application.
     
+    With the App framework, you can add the following functionality to Fusion 360 Production. 
+    
+    * IoT data integration for workstations
+    * Customer Order View from Commerce backend
+    * Messaging/Chat System for shop floor communication
+    * Issue Tracking System
+    * Workstation camera feed
+    * Simulation or 3D viewing of models
+    
     ## App Deployment Workflow
     
     Following are the steps for deploying the App
@@ -256,6 +265,8 @@ info:
     ```
     app.js
     assets
+      .DS_Store
+      fonts
       css
         app.css
       images
@@ -3344,6 +3355,8 @@ info:
     
     Fusion 360 Production provides the `POST /tenants/{tenantId}/applications` endpoint to install the App for the given tenent. In the API request, you need to specify the tenent Id, application Id, and the application version that you want to install.
     
+    **Note**: If you do not specify the application version, the endpoint installs the current version of the application.
+    
     ### Example
     
     ```shell
@@ -3414,6 +3427,107 @@ info:
     
     [@tutorials/search-apps]: <>
     # Search an App
+    
+    This tutorial expalins how to search the App. You can either get the list of all applications or you can specify the Id of the application that you want to search.
+    
+    Fusion 360 Production provides the `GET applications` and `GET application/id` endpoints to search for the required app. In the request, you can also specify the version of the application that you want to search.
+    
+    ### Example
+    
+    ```shell
+    curl -X GET 
+      -H 'accept: application/vnd.api+json'
+      -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
+      -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
+      -H 'x-dmg-fp-tenant: {tenentId}'
+      -H 'content-type: application/vnd.api+json'
+      -d 'https://developer-stg.api.autodesk.com/factoryproduction/v1/applications?version=1.0.0'
+    ```
+    
+    The resource provides the following response:
+    
+    ```json
+    {
+      "data": {
+          "type": "applications",
+          "id": "8f78cd4c-2557-11e7-93ae-92361f002672",
+          "attributes": {
+              "creator": {
+                  "id": "15",
+                  "firstName": "First Name",
+                  "lastName": "Last Name",
+                  "email": "Email",
+                  "createdDate": "2017-01-27T09:51:44Z",
+                  "oxygenId": "XHFXK886DUYG",
+                  "acceptedInvite": true,
+                  "acceptedInviteDate": "2017-04-04T07:17:08Z",
+                  "active": true,
+                  "lastModifier": {
+                        "id": "15",
+                        "firstName": "First Name",
+                        "lastName": "Last Name",
+                        "email": "Email",
+                      "createdDate": "2017-01-27T09:51:44Z"
+                  },
+                  "lastModifiedDate": "2017-05-03T19:36:02Z",
+                  "tenants": [],
+                  "groups": []
+              },
+              "objectKey": "0c6df641-90c0-41ae-91a6-2d794872c3c0",
+              "name": "Invoice Service",
+              "description": "Order Cost Invoice System",
+              "config": {
+                  "name": "Invoice Service",
+                  "description": "Order Cost Invoice System",
+                  "locations": [
+                      {
+                          "id": "jobsheet_detail",
+                          "autoHide": false
+                      },
+                      {
+                          "id": "jobsheet_list",
+                          "autoHide": true
+                      }
+                  ],
+                  "author": {
+                      "fullName": "John Smith",
+                      "avatarUrl": "http://s3.amazonaws.com/profile/johns.png",
+                      "bio": "This is the bio"
+                  },
+                  "entitySchemas": {
+                      "jobsheets": {
+                          "type": "object",
+                          "properties": {
+                              "order_id": {
+                                  "type": "string",
+                                  "description": "order id in the shopify system"
+                              },
+                              "invoice_cost": {
+                                  "type": "number"
+                              }
+                          },
+                          "required": [
+                              "order_id"
+                          ]
+                      }
+                  },
+                  "domainWhitelist": [
+                      "abc.com",
+                      "apps.abc.com"
+                  ]
+              },
+              "version": "1.0.0",
+              "status": "Unpublished"
+          },
+          "relationships": {},
+          "links": {
+              "self": "http://developer-stg.api.autodesk.com/appframework/v1/applications/8f78cd4c-2557-11e7-93ae-92361f002672"
+          }
+      },
+      "included": []
+    }
+    ```
+    
     
     [@tutorials/view-reports]
     # View the Reports
