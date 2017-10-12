@@ -5854,34 +5854,29 @@ paths:
   /entityevents:
     x-summary: GET Entity events
     x-description: |
-        Search for any type of entity.  By default, wildcards are added on both sides of a `searchTerm`, allowing for matches using partial words or phrases.  Searching with `tags` do not use wildcards.
+        Search for any type of entity events.  
     get:
       tags: [ "Entity Events" ]
       description: |
-        Search for any type of entity.
+        Search for any type of entity events.
       operationId: getEntities
       parameters:
-        - name: version
-          in: query
-          description: Response version. Use `v2` for JSON API compliant response.
-          required: false
-          type: string
-        - name: filter[entities][searchTerm]
+        - name: filter[entitiesevents][entityType]
           in: query
           description: Search Query, which may include entity id
           required: false
           type: string
-        - name: filter[entities][tags]
+        - name: filter[entitiesevents][event]
           in: query
           description: Tags to search against
           required: false
           type: string
-        - name: filter[entities][type]
+        - name: filter[entitiesevents][eventDate]
           in: query
           description: Entity type to search against. Example:components,jobsheets etc.
           required: false
           type: string
-        - name: sort[entities][targetFieldName]
+        - name: sort[entitiesevents][targetFieldName]
           in: query
           description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:id,lastModifiedDate Example:ASC
           required: false
