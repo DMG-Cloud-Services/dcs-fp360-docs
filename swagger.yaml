@@ -5851,6 +5851,48 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
+  /entityevents:
+    x-summary: GET Entity events
+    x-description: |
+        Search for any type of entity.  By default, wildcards are added on both sides of a `searchTerm`, allowing for matches using partial words or phrases.  Searching with `tags` do not use wildcards.
+    get:
+      tags: [ "Entity Events" ]
+      description: |
+        Search for any type of entity.
+      operationId: getEntities
+      parameters:
+        - name: version
+          in: query
+          description: Response version. Use `v2` for JSON API compliant response.
+          required: false
+          type: string
+        - name: filter[entities][searchTerm]
+          in: query
+          description: Search Query, which may include entity id
+          required: false
+          type: string
+        - name: filter[entities][tags]
+          in: query
+          description: Tags to search against
+          required: false
+          type: string
+        - name: filter[entities][type]
+          in: query
+          description: Entity type to search against. Example:components,jobsheets etc.
+          required: false
+          type: string
+        - name: sort[entities][targetFieldName]
+          in: query
+          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:id,lastModifiedDate Example:ASC
+          required: false
+          type: string
+        - $ref: '#/parameters/pageSize'
+        - $ref: '#/parameters/pageNumber'
+      responses:
+        '200': {$ref: '#/responses/entities'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
   /tags:
     x-summary: GET tags
     x-description: |
