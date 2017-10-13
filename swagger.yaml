@@ -424,14 +424,47 @@ info:
     ## API Tutorials
     This section provides the tutorials that explains how you can use the APIs that Fusion 360 Production provides.
     
+    ### Setup Factory
+      This tutorial explains how to setup the factory.
+      
+    ### Attach Thumbnail and Documents to the Entity
+      This tutorial explains how to attach the thumbnail and documents to the entities.
+    
+    ### Create a Job Sheet
+      This tutorial explains how to create a job sheet for the operators.
+      
+    ### Update the Work Queue
+      This tutorial explains how to schedule and update the work queue for the workstations and workcells.
+    
+    ### Start the Task and Track the Task Execution
+      This tutorial explains how an operator can start the task and supervisor can track the task execution.
+      
+    ### Import Entities in Batch
+      This tutorial explains how you can import various Fusion 360 Production entities in a batch.
+    
+    ### Search Entities
+      This tutorial explains how to search for various entities of Fusion 360 Production.
+      
     ## API Framework Tutorials
-    This section provides the tutorials that explains how you can use the API Framework that Fusion 360 Production provides.
+      This section provides the tutorials that explains how you can use the API Framework that Fusion 360 Production provides.
+    
+    ### Create an App
+      This tutorial explains how to create an App using Fusion 360 Production App framework.
+    
+    ### Publish an App
+      This tutorial explains how to publish an App.
+    
+    ### Install an App
+      This tutorial explains how to install an App for a tenant of Fusion 360 Production.
+    
+    ### Search an App
+      This tutorial explains how to search a particular App.
 
     ## Reports Tutorials
     This section provides the tutorials that explains how you can view the reports that Fusion 360 Production provides.
 
-    [@tutorials/setup-factory-entities]: <>
-    # Setup Factory Entities
+    [@tutorials/setup-factory]: <>
+    # Setup Factory
     
     This tutorial explains how you can setup the entities in the factory so that you can start using Fusion 360 production for your daily manufacturing process. For more information about entities, see.[Entities](#entities)
     
@@ -1668,7 +1701,6 @@ info:
     ```JSON
     
     ```
-    
     
     ## Step 4: Create a Job Sheet
     
@@ -3653,7 +3685,6 @@ info:
       "included": []
     }
     ```
-    
     
     [@tutorials/view-reports]
     # View the Reports
