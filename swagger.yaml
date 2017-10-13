@@ -6013,7 +6013,7 @@ paths:
         - $ref: '#/parameters/pageSize'
         - $ref: '#/parameters/pageNumber'
       responses:
-        '200': {$ref: '#/responses/entities'}
+        '200': {$ref: '#/responses/events'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
@@ -20742,6 +20742,151 @@ responses:
                                           "last": "https://developer-stg.api.autodesk.com/factoryproduction/v1/entities?page[number]=129&page[size]=2"
                                       }
                                   }
+  events:
+    description: Successful response
+    schema:
+      title: schema versions
+      type: object
+      allOf:
+      - type: object
+    headers:
+        etag:
+          description: |
+            `etag` for the resource which can be used for cache optimization
+            and must be used for mutating operations on this resource
+          type: string
+        authorization:
+          description: Bearer Token
+          type: integer
+    examples:
+      application/vnd.api+json:
+                              {
+                                  "data": [
+                                      {
+                                          "type": "entityevents",
+                                          "id": "162778",
+                                          "attributes": {
+                                              "actor": {
+                                                  "id": "13",
+                                                  "firstName": "Robert",
+                                                  "lastName": "Melly",
+                                                  "email": "robert.melly@autodesk.com"
+                                              },
+                                              "entityType": "jobsheets",
+                                              "name": "Assemble car",
+                                              "entityId": "114829",
+                                              "event": "Staged",
+                                              "eventDate": "2017-10-12T15:57:20Z"
+                                          },
+                                          "relationships": {},
+                                          "links": {
+                                              "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/entityevents/162778"
+                                          }
+                                      },
+                                      {
+                                          "type": "entityevents",
+                                          "id": "162775",
+                                          "attributes": {
+                                              "actor": {
+                                                  "id": "13",
+                                                  "firstName": "Robert",
+                                                  "lastName": "Melly",
+                                                  "email": "robert.melly@autodesk.com"
+                                              },
+                                              "entityType": "task_executions",
+                                              "entityParentId": "114829",
+                                              "name": "Assemble wheels",
+                                              "entityId": "114830",
+                                              "event": "Staged",
+                                              "eventDate": "2017-10-12T15:57:20Z"
+                                          },
+                                          "relationships": {},
+                                          "links": {
+                                              "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/entityevents/162775"
+                                          }
+                                      },
+                                      {
+                                          "type": "entityevents",
+                                          "id": "162776",
+                                          "attributes": {
+                                              "actor": {
+                                                  "id": "13",
+                                                  "firstName": "Robert",
+                                                  "lastName": "Melly",
+                                                  "email": "robert.melly@autodesk.com"
+                                              },
+                                              "entityType": "task_executions",
+                                              "entityParentId": "114829",
+                                              "name": "Assemble steering",
+                                              "entityId": "114831",
+                                              "event": "Staged",
+                                              "eventDate": "2017-10-12T15:57:20Z"
+                                          },
+                                          "relationships": {},
+                                          "links": {
+                                              "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/entityevents/162776"
+                                          }
+                                      },
+                                      {
+                                          "type": "entityevents",
+                                          "id": "162777",
+                                          "attributes": {
+                                              "actor": {
+                                                  "id": "13",
+                                                  "firstName": "Robert",
+                                                  "lastName": "Melly",
+                                                  "email": "robert.melly@autodesk.com"
+                                              },
+                                              "entityType": "task_executions",
+                                              "entityParentId": "114829",
+                                              "name": "Assemble car body",
+                                              "entityId": "114832",
+                                              "event": "Staged",
+                                              "eventDate": "2017-10-12T15:57:20Z"
+                                          },
+                                          "relationships": {},
+                                          "links": {
+                                              "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/entityevents/162777"
+                                          }
+                                      },
+                                      {
+                                          "type": "entityevents",
+                                          "id": "162782",
+                                          "attributes": {
+                                              "actor": {
+                                                  "id": "13",
+                                                  "firstName": "Robert",
+                                                  "lastName": "Melly",
+                                                  "email": "robert.melly@autodesk.com"
+                                              },
+                                              "entityType": "jobsheets",
+                                              "name": "Assemble car",
+                                              "entityId": "114833",
+                                              "event": "Staged",
+                                              "eventDate": "2017-10-12T15:57:20Z"
+                                          },
+                                          "relationships": {},
+                                          "links": {
+                                              "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/entityevents/162782"
+                                          }
+                                      }
+                                  ],
+                                  "included": [],
+                                  "meta": {
+                                      "paginationInfo": {
+                                          "totalResults": 14897,
+                                          "pageNumber": 1,
+                                          "totalPages": 2980,
+                                          "pageSize": 5
+                                      }
+                                  },
+                                  "links": {
+                                      "prev": "",
+                                      "next": "https://developer-stg.api.autodesk.com/factoryproduction/v1/entityevents?page[number]=2&page[size]=5",
+                                      "first": "https://developer-stg.api.autodesk.com/factoryproduction/v1/entityevents?page[number]=1&page[size]=5",
+                                      "last": "https://developer-stg.api.autodesk.com/factoryproduction/v1/entityevents?page[number]=2980&page[size]=5"
+                                  }
+                              }
 
   tagcloud:
     description: Successful response
