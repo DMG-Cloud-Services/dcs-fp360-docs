@@ -86,7 +86,13 @@ info:
     * Production URL: https://developer.api.autodesk.com
     
     [@overview/components-fusion-360-production]: <>
-    # Components of Fusion 360 Production
+    # Modules of Fusion 360 Production
+    
+    Fusion 360 Production comprises of the following modules:
+    
+    * [APIs](/en/docs/fp360/overview/apis)
+    * [App Framework](/en/docs/fp360/overview/app-framework)
+    * [Reports](/en/docs/fp360/overview/reports)
     
     [@overview/apis]: <>
     # APIs
@@ -136,7 +142,7 @@ info:
     
     ### Job Instructions
     
-    A Job Instruction is a template that includes the tasks that opertors perform for making a particular component.
+    A Job Instruction is a template that includes the tasks that opertors need to perform for manufacturing a particular component. The factory supervisor can use the same job instruction and create multiple job sheets with different quantity of output to be produced.
     
     ### Task Instructions
     
@@ -188,15 +194,17 @@ info:
     
     This section provides the workflows diagrams of how the status change impacts the following entities.
     
-    ### Task
+    ### Task Status Workflow
     
+    ![Task Status Workflow](https://git.autodesk.com/ACG-Cloud-Services/dmg-documentation/blob/master/task_status_workflow.png?raw=true "Task Status Workflow")
     
-    ### Job Sheet
+    ### Job Sheet Status Workflow
     
+    ![Job Sheet Status Workflow](https://git.autodesk.com/ACG-Cloud-Services/dmg-documentation/blob/master/jobsheet_status_workflow.png?raw=true "Job Sheet Status Workflow")  
+      
+    ### Workstation Status Workflow
     
-    ### Workstation
-    
-    
+    ![Workstation Status Workflow](https://git.autodesk.com/ACG-Cloud-Services/dmg-documentation/blob/master/workstation_status_workflow.png?raw=true "Workstation Status Workflow")  
     
     [@overview/app-framework]: <>
     # App Framework
@@ -206,11 +214,184 @@ info:
     With the App framework, you can add the following functionality to Fusion 360 Production. 
     
     * IoT data integration for workstations
-    * Customer Order View from Commerce backend
+    * Customers Order View from Commerce backend
     * Messaging/Chat System for shop floor communication
     * Issue Tracking System
     * Workstation camera feed
     * Simulation or 3D viewing of models
+    
+    ## Contents of an application package
+    
+    ```
+    assets
+      .DS_Store
+      fonts
+      images
+        logo-small.png
+        logo.png
+      styles
+        app-84fbe905a7.css
+        vendor-127b108f40.css
+      favicon.ico
+      fpaf_config.json
+      index.html
+      maps
+        .DS_Store
+        scripts
+          app-80d30a129d.map
+          vendor-2631dc429c.js.map
+      resources
+        de.json
+        en.json
+      scripts
+        app-80d30a129d.js
+        vendor-2631dc429c.js
+    ```
+    
+    ### Files Description
+    
+    The following table provides the description of the files in the App package. 
+    
+    | Files                 | Description
+    | ------                | -----------------------------------------------------------------------------------
+    | **fpaf_config.json**  | The information about an App. The information includes the App author and the App location on the Fusion Production website.
+    | **index.html**        | This home or landing page of the App.
+    | **scripts/*.js**      | The files containing the actual business logic of the App, which also interacts to different events from Fusion Production website.
+    | **resources/*.json**  | The files containing the localized strings to deploy the App in the languages other than English.
+    | **assets/images/*.png | The images used in the App.
+    | **assets/fonts/***    | The fonts used in the App.
+    | **assets/css/*.css**  | The style sheets for the templates.
+    
+    
+    ## Sample App Config File
+    
+    The application configuration file is a JSON file included with the App source code. The file contians specific details about an app.
+    
+    ```json
+    {
+      "name": "Workstation Details using Vimana",
+      "description": "Display workstation utilization for today using Vimana APIs",
+      "author": {
+        "fullName": "Full Name",
+        "avatarUrl": "https://www.drupal.org/files/user-pictures/picture-2910721-1454416690.jpg",
+        "bio": "Tech Geek"
+      },
+      "defaultLocale": "en",
+      "locations": [
+        {
+          "id": "workstation_detail",
+          "autoHide": false
+        }
+      ],
+      "entitySchemas": {
+        "workstations": {
+          "type": "object",
+          "properties": {
+            "deviceUuid": {
+              "type": "string",
+              "description": "WorkstationId in Vimana"
+            }
+          },
+          "required": [
+            "deviceUuid"
+          ]
+        }
+      },
+      "domainWhitelist": [
+        "abc.com",
+        "apps.abc.com"
+      ]
+    }
+    ```
+    In the App config file, you specify the following information:
+    
+    ### Author
+    
+    Use the **author** attribute to specify the name of the App author. In the **author** attribute, you need to specify the fullname, avatarURL, and bio of the author. The name can be an individual or a company name and the URL can point to a page about the author or the App. For example, "http://www.company.com" or "http://www.company.com/app-page".
+    
+    For example, 
+    
+    ```json
+    "author": {
+      "fullName": "Viresh Shah",
+      "avatarUrl": "https://www.drupal.org/files/user-pictures/picture-2910721-1454416690.jpg",
+      "bio": "Tech Geek"
+    }
+    ```
+    
+    ### App Settings
+    
+    You define the settings that you want the users to set for the App. Use the **entitySchemas** attribute to specify the settings. The **entitySchemas** attribute cotains the a list of JSON objects.
+    
+    The fields that you specify in the **entitySchemas** attribute are rendered on the entity form on the Fusion Production website. Also, the data that users enter will be available to the App when the App is rendered at the specified location.
+    
+    For example,
+    
+    ```json
+    "entitySchemas": {
+      "workstations": {
+        "type": "object",
+        "properties": {
+          "deviceUuid": {
+            "type": "string",
+            "description": "WorkstationId in Vimana"
+          }
+        },
+        "required": [
+          "deviceUuid"
+        ]
+      }
+    }
+    ```
+    In above example, it is madatory for a user to enter the **deviceUuid** field on the **workstation** form on the Fusion Production website. 
+    
+    When the App is rendered at a specified location, the **deviceUuid** value is passed from the Fusion Production website to App.
+    
+    ### Location¶
+
+    Use the **locations** attribute to specify where you want the App to appear on the Fustion 360 Production website. You can specify multiple locations. 
+    
+    Some App framework APIs are available only for the apps appearing at certain locations on the Fustion 360 Production website. For example, the Apps appearing on the workstation detail page requires the workstation properties. 
+    
+    For example,
+    
+    ```json
+    "locations": [
+      {
+        "id": "workstation_detail"
+      }
+    ]
+    ```
+    Following are the available locations for the App on the Fusion 360 Production website:
+    
+    * workstation_detail: The workstation detail page.
+    * workstation_list: The workstations listing page.
+    * jobsheet_detail: The Jobsheet detail page.
+    * jobsheet_list: The Jobsheets listing page.
+    * task_detail: The task detail page.
+    
+    ### Default Locale¶
+
+    Use the **defaultLocale** property to specify the default locale of the App. The App can support multiple languages. If an agent selects a language the App does not support, the language of the default locale is used.
+    
+    **Note**: The value of the property must be a two letter ISO 639 language code.
+    
+    For example,
+    
+    "defaultLocale": "en"
+    
+    ### Domain Whitelist¶
+    
+    Use the **domainWhiteList** attribute to specify the allowed domains as whitelist. 
+    
+    The domain whitelist is another layer of security that you can use if you are making secure requests. This setting prevents external users to use the secure settings to reroute them to another domain and steal the token and password.
+    
+    For example,
+    
+    "domainWhitelist": [
+      "abc.com",
+      "apps.abc.com"
+    ]
     
     ## App Deployment Workflow
     
@@ -231,61 +412,6 @@ info:
       * Upload pre-compiled templates and assets to Amazon S3, using **TransferManager** from AWS SDK. The validated and compiled files are uploaded to the `dmg-factory-production-app/apps/uuid/version` folder.
     * The Autodesk support team delivers the `dmg-factory-production-app` bucket to the `apps.fusionproduction.com`. They uses the Amazon CloudFront web service for this. After delivering the App, the App becomes live to be accessed with fusionproduction clients using `https://apps.fusionproduction.com/{app_id}/{version}`.
     * Now, the client needs to set to set the correct context in their javascript to render the pre-compiled html template.
-    
-    ### app_config 
-    
-    The **app config** file specifies any additional information required by the application, such as keys. If "secure" is true - the config value will be stored in encrypted format. 
-    The description will show up as tool tip against the field in the Tenant Admin App configuration view. 
-    
-    ### app_params
-    
-    The **app_params** defines the parameters that the app requires for the given entity. The Application authore has to define the schema for these parameters and also define which parameters are required and which are optional. Based on this configuration, the interface then adds these additional parameters to the entities. 
-    
-    **Note**: Any calls that other prodcuts make through Forge Fusion 360 Production APIs will not enforce the field requirements for the App fields. 
-    
-    ### domain_whitelist
-    
-    A list of domains that the App can safely calls.
-    
-    ## Contents of application package
-    
-    * Main Application code in Javascript
-    * assets folder containing : css/images
-    * HTML templates for app view
-    * Language resource folder
-    * Configuration.js : JSON file containing app information
-      * Author Info
-      * App Info
-      * Location(s) to surface this app
-      * Extra domain specific parameters required by app
-      * Domain whitelist specifying which locations can be called from this app
-    
-    ## Sample Package Structure
-    
-    ```
-    app.js
-    assets
-      .DS_Store
-      fonts
-      css
-        app.css
-      images
-        logo.png
-    config.js
-    resources
-      en_us
-        resources.js
-      fr_ca
-        resources.js
-    templates
-      app.template
-    ```
-    
-    ## Supported software
-    
-  
-    ## Sample Configuration
-    
     
     [@overview/reports]: <>
     #Reports
