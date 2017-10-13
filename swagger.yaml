@@ -6986,7 +6986,7 @@ paths:
                         ]
                       }
       responses:
-          '204': { $ref: '' }
+          '204': { "description": "No Content" }
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
@@ -7026,7 +7026,7 @@ paths:
                        }]
                      }
       responses:
-          '204': { $ref: '' }
+          '204': { "description": "No Content" }
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
@@ -7066,7 +7066,7 @@ paths:
                        }]
                      }
       responses:
-          '204': { $ref: '' }
+          '204': { "description": "No Content" }
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
 
@@ -7103,7 +7103,7 @@ paths:
                   ]
               }
       responses:
-          '204': { $ref: '' }
+          '204': { "description": "No Content" }
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
@@ -7140,7 +7140,7 @@ paths:
                   ]
               }
       responses:
-          '204': { $ref: '' }
+          '204': { "description": "No Content" }
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
 
