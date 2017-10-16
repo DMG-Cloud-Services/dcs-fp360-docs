@@ -10,7 +10,7 @@ info:
     
     With Fusion 360 Production companies can build a fully paperless factory production monitoring system in cloud. Also, companies can empower their operators on the shop floor to manage their jobs from the job sheets without any paper work. The supervisors can get the detailed information and reports about the daily tasks that are performed in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
     
-    Fusion 360 Production provides APIs to create and capture the shop floor production information, an App Framework to create a android based mobile application to manage the factory production, and reports to view the complete analytics of the factory production.
+    Fusion 360 Production provides APIs to create and capture the shop floor production information, an App Framework to create an android based mobile application to manage the factory production, and reports to view the complete analytics of the factory production.
     
     Fusion 360 Production APIs follows the JSON API specification 1.0. For more information, see [JSON API specification](http://jsonapi.org/format/).
 
@@ -21,7 +21,7 @@ info:
     | **Content-Type**    | application/vnd.api+json
     | **Accept**          | application/vnd.api+json
     | **Authorization**   | Bearer <3-leggedToken>
-    | **X-DMG-FP-TENANT** | A unique identifier assigned to your factory. The identifier indicates the tenant. You must use the tenent of your factory. Do not use the tenent of different factory as it may creates problems in debugging.
+    | **X-DMG-FP-TENANT** | A unique identifier assigned to your factory. The identifier indicates the tenant. You must use the tenant of your factory. Do not use the tenant of different factory as it may create problems in debugging.
     
     ## Getting Started
 
@@ -56,7 +56,7 @@ info:
     |`200`        | Success
     |`201`        | Success - new resource created.
     |`204`        | Success - no content to return.
-    |`302`        | Redirect  to another resource
+    |`302`        | Redirect to another resource
     |`400`        | Bad Request - i.e. your request couldn't be parsed.
     |`401`        | Unauthorized - user is not logged in, cannot access resource.
     |`403`        | Forbidden - Request is not allowed for this member's role, please login using a valid role.
@@ -65,7 +65,7 @@ info:
     
     ## Errors
     
-    Any 4xx and 5xx response is an error. In addition to the http code, the endpoints also returns additional information in the response payload as follows.
+    Any 4xx and 5xx response is an error. In addition to the http code, the endpoints also return additional information in the response payload as follows.
       
           {
              "errors":[
@@ -107,11 +107,11 @@ info:
     
     ## **Resources**
     
-    This section lists the resources that the operator requires for performing different tasks. The resources can be the actual material on which the operator needs to perform the taks or the tools that operator needs to use for performing the task.
+    This section lists the resources that the operator requires for performing different tasks. The resources can be the actual material on which the operator needs to perform the tasks or the tools that operator needs to use for performing the tasks.
     
     ### Raw Material
     
-    The material that the operator uses while performing a task. The material can be the raw material, such as alimunium plate or steel bar or an intermediate product produced by the previous task.
+    The material that the operator uses while performing a task. The material can be the raw material, such as aluminium plate or steel bar or an intermediate product produced by the previous task.
     
     ### Tool
     
@@ -119,13 +119,13 @@ info:
     
     ### Component
     
-    An entity that describes the standard items that the operator consumes during the operation of a particular task. These items are not the bulk raw material used for operation, but the associated material, such as o-rings, washers, screws or other needed accessories.
+    An entity that describes the standard items that the operator consumes during the operation of a particular task. These items are not the bulk raw material used for operation, but the associated material, such as O-rings, washers, screws or other needed accessories.
     
-    As the components are always stocked in the facotry as these are the standard items used in the production.
+    As the components are always stocked in the factory as these are the standard items used in the production.
     
     ### Operator
     
-    A skilled person in the factory who gets the job sheet for performing the jobs. The operator then performs the tasks mentioned in the job instructions in the job seet.
+    A skilled person in the factory who gets the job sheet for performing the jobs. The operator then performs the tasks mentioned in the job instructions in the job sheet.
     
     ## **Core Functions**
     
@@ -137,16 +137,16 @@ info:
     
     ### Job Sheet
     
-    A Job Sheet is basically a mechanism to track jobs from defining to production. The Job Sheet records the number of resources used, the processes completed, and the time when these events occured. 
+    A Job Sheet is basically a mechanism to track jobs from defining to production. The Job Sheet records the number of resources used, the processes completed, and the time when these events occurred. 
     The data from a Job Sheet refers to specific notes and data, like photos and videos associated with the execution of the Job.
     
     ### Job Instructions
     
-    A Job Instruction is a template that includes the tasks that opertors need to perform for manufacturing a particular component. The factory supervisor can use the same job instruction and create multiple job sheets with different quantity of output to be produced.
+    A Job Instruction is a template that includes the tasks that operators need to perform for manufacturing a particular component. The factory supervisor can use the same job instruction and create multiple job sheets with different quantity of output to be produced.
     
     ### Task Instructions
     
-    A task instruction is a single unit of a task that the operator performs from the given job instruction. Each task instruction contains information, such as a unique task identifer, operation that the operator needs to perform, the components that the operator will be using, the work station on which the operator will be performing the task, and the estimated time required to complete this component.
+    A task instruction is a single unit of a task that the operator performs from the given job instruction. Each task instruction contains information, such as a unique task identifier, operation that the operator needs to perform, the components that the operator will be using, the work station on which the operator will be performing the task, and the estimated time required to complete this component.
     
     ### Task Execution
     
@@ -265,7 +265,7 @@ info:
     
     ## Sample App Config File
     
-    The application configuration file is a JSON file included with the App source code. The file contians specific details about an app.
+    The application configuration file is a JSON file included with the App source code. The file contains specific details about an app.
     
     ```json
     {
@@ -307,7 +307,7 @@ info:
     
     ### Author
     
-    Use the **author** attribute to specify the name of the App author. In the **author** attribute, you need to specify the fullname, avatarURL, and bio of the author. The name can be an individual or a company name and the URL can point to a page about the author or the App. For example, "http://www.company.com" or "http://www.company.com/app-page".
+    Use the **author** attribute to specify the name of the App author. In the **author** attribute, you need to specify the full name, avatarURL, and other information of the author. The name can be an individual or a company name and the URL can point to a page about the author or the App. For example, "http://www.company.com" or "http://www.company.com/app-page".
     
     For example, 
     
@@ -321,7 +321,7 @@ info:
     
     ### App Settings
     
-    You define the settings that you want the users to set for the App. Use the **entitySchemas** attribute to specify the settings. The **entitySchemas** attribute cotains the a list of JSON objects.
+    You define the settings that you want the users to set for the App. Use the **entitySchemas** attribute to specify the settings. The **entitySchemas** attribute contains a list of JSON objects.
     
     The fields that you specify in the **entitySchemas** attribute are rendered on the entity form on the Fusion Production website. Also, the data that users enter will be available to the App when the App is rendered at the specified location.
     
@@ -410,7 +410,7 @@ info:
       * Updates the App config in the database
       * Pre compile all html templates
       * Upload pre-compiled templates and assets to Amazon S3, using **TransferManager** from AWS SDK. The validated and compiled files are uploaded to the `dmg-factory-production-app/apps/uuid/version` folder.
-    * The Autodesk support team delivers the `dmg-factory-production-app` bucket to the `apps.fusionproduction.com`. They uses the Amazon CloudFront web service for this. After delivering the App, the App becomes live to be accessed with fusionproduction clients using `https://apps.fusionproduction.com/{app_id}/{version}`.
+    * The Autodesk support team delivers the `dmg-factory-production-app` bucket to the `apps.fusionproduction.com`. They use the Amazon CloudFront web service for this. After delivering the App, the App becomes live to be accessed with fusionproduction clients using `https://apps.fusionproduction.com/{app_id}/{version}`.
     * Now, the client needs to set to set the correct context in their javascript to render the pre-compiled html template.
     
     [@overview/reports]: <>
@@ -472,14 +472,14 @@ info:
     
     ## Step 1: Invite Members
     
-    **Important**: Before inviting members, ensure that the tenent for the factory exists. For more information, contact administrator.
+    **Important**: Before inviting members, ensure that the tenant for the factory exists. For more information, contact administrator.
 
     In this step, you invite the users who will be working in the factory and wants to access Fusion 360 Production to manage their work. The invitation email is sent to the email address specified in the request.
     For more information, see [Entities](#entities).
     
     The Fusion 360 Production API provides the `POST invites` endpoint that allows you to send an invite to the required members. In the `POST` request, you can include multiple members.
     
-    **Note**: In the API request, you must specify the **tenent ID** and **group ID**. The group ID indicates the role that you want to assign to the member.
+    **Note**: In the API request, you must specify the **tenant ID** and **group ID**. The group ID indicates the role that you want to assign to the member.
 
     Following are the groups/roles and their corresponding IDs.
     
@@ -630,7 +630,7 @@ info:
     
     In this step, you can create a work cell. Work cell is a group of work stations. So, you can use work cell to categorize your work stations. For more information about work cell, see [Entities](#entities).
     
-    The Fusion 360 Production API provides the `POST workcells` endpoint that allows you to create a workcell. 
+    The Fusion 360 Production API provides the `POST workcells` endpoint that allows you to create a work cell. 
     
     In the `POST` request, you can specify the work cell name, description, and tags. 
     
@@ -729,7 +729,7 @@ info:
     
     ## Step 4: Create a Workstation
     
-    In this step, you create a work stations. Work station an entity that indicates any machine where the opertor performs the tasks. For more information about work station, see [Entities](#entities). 
+    In this step, you create a work stations. Work station an entity that indicates any machine where the operator performs the tasks. For more information about work station, see [Entities](#entities). 
     
     The Fusion 360 Production API provides the `POST workstations` endpoint that allows you to create a work station. 
     
@@ -907,7 +907,7 @@ info:
     [@tutorials/attach-files-documents-to-entity]
     # Attach Thumbnail and Documents to the Entity
     
-    This tutorial explains how to attach documents and a thumbnail with an entity. The documents can be image files, PDFs, or any other documents, Whereas thumbnail is a unique image that represents the entity that you have created. 
+    This tutorial explains how to attach documents and a thumbnail with an entity. The documents can be image files, PDFs, or any other documents, whereas the thumbnail is a unique image that represents the entity that you have created. 
     
     You can attach multiple documents to an entity, like component, work cell, and work station. However, you can attach only one thumbnail to each entity. 
     
@@ -1177,7 +1177,7 @@ info:
     
     This tutorial explains how to create a job sheet for the operator to perform the job work. 
     
-    Creating a job sheet involves creating job instructions, associating the required job instructions to the job sheet, and then releasing the job sheet so that the job instructions are automatically added in the operators task queue. The job sheet includes the job sheet name, tags, the rquired material quantity, and the associated job instructions.
+    Creating a job sheet involves creating job instructions, associating the required job instructions to the job sheet, and then releasing the job sheet so that the job instructions are automatically added in the operator's task queue. The job sheet includes the job sheet name, tags, the required material quantity, and the associated job instructions.
     
     Perform the following steps in a given sequence to create a job sheet.
     
@@ -1308,11 +1308,11 @@ info:
     
     ## Step 2: Create a Task Instruction
     
-    In this step, you create a task instruction. While creating the task instruction, you can add the reference of the job instruction to which you want to include the task. Later, you can also update the job instruction and add or modify the task instrcutions in that job instruction.
+    In this step, you create a task instruction. While creating the task instruction, you can add the reference of the job instruction to which you want to include the task. Later, you can also update the job instruction and add or modify the task instructions in that job instruction.
     
-    The status of all task instrcutions collectively indicate whether the job is completed successfully or not.
+    The status of all task instructions collectively indicates whether the job is completed successfully or not.
     
-    The task instruction contains the name, description, tags, setup time, the quantity of the components requried. Along with this information, the task instruction can also contains the references to the job instruction that requires the operator to perform this task and the recommended work station where the operator executes that task.
+    The task instruction contains the name, description, tags, setup time, the quantity of the components required. Along with this information, the task instruction can also contain the references to the job instruction that requires the operator to perform this task and the recommended work station where the operator executes that task.
     
     The Fusion 360 Production API provides the `POST taskinstructions` endpoint to create a task instruction. 
     
@@ -1632,7 +1632,7 @@ info:
     
     **Note**: You can perform this step only if you want to add new task instructions, remove any task instructions, or rearrange the existing task executions.
     
-    In this step, you modify the job instruction for a job sheet. While modifying the job instruction, you either rearrange the existing task instructions, add the new task instructions, or delete any unwanted task instrcutions. 
+    In this step, you modify the job instruction for a job sheet. While modifying the job instruction, you either rearrange the existing task instructions, add the new task instructions, or delete any unwanted task instructions. 
     
     The Fusion 360 Production API provides the `PATCH taskinstructions` endpoint to modify the job instruction.
     
@@ -1704,7 +1704,7 @@ info:
     
     ## Step 4: Create a Job Sheet
     
-    In this step, you create the actual job sheet. The job sheet contains a specific job instruction for the operators to perform the given job. The job instructions further contains the list of actual tasks instructions to successfully complete a particular job in the job sheet.
+    In this step, you create the actual job sheet. The job sheet contains a specific job instruction for the operators to perform the given job. The job instructions further contain the list of actual tasks instructions to successfully complete a particular job in the job sheet.
     
     The job sheet contains the notes, delivery date, tags, and the quantity of the components. After receiving the job sheet, the operator performs the tasks instructions given in the job sheet.
     
@@ -1718,7 +1718,7 @@ info:
     | **Paused**        | 
     | **Completed**     | The operators have completed all tasks mentioned in the job sheet, all the products quantities are accounted either as finished product or scrap, and the supervisor has inspected and approved the finished products.
     | **NeedsApproval** | The operators have completed all tasks in the job sheet, but the supervisor still needs to review and approve the completed work.	
-    | **Canceled**      | The job sheet is canceled because there is no any business need to continue performing the specified tasks. Canceled job sheets leave the partially completed tasks orphaned.
+    | **Canceled**      | The job sheet is cancelled because there is no any business need to continue performing the specified tasks. Cancelled job sheets leave the partially completed tasks orphaned.
     | **Waiting**       | 
 
     The Fusion 360 Production API provides the `POST jobsheets` endpoint to create a job sheet. In the request, you need to specify the job sheet details along with the job instruction that you want to include in the job sheet.
@@ -2274,7 +2274,7 @@ info:
     
     **Note**: Only the supervisor can update the work queue.
     
-    Designing a work queue for workstations and workcells involves arranging task executions in a particular order and specifying the time for execution of the task. You can update the work queue either by rearranging the task executions in the same workstation or work cell, or by moving the task execution from one workcell or workstation queue to another workstation or workcell. In this case, the task execution is reassigned to that new workcell or workstation.
+    Designing a work queue for workstations and work cells involves arranging task executions in a particular order and specifying the time for execution of the task. You can update the work queue either by rearranging the task executions in the same workstation or work cell, or by moving the task execution from one work cell or workstation queue to another workstation or work cell. In this case, the task execution is reassigned to that new work cell or workstation.
     
     The Fusion 360 Production API provides the `PATCH workqueues` endpoint to update the work queue.
     
@@ -2533,9 +2533,9 @@ info:
     [@tutorials/perform-task-track-task-execution]: <>
     # Start the Task and Track the Task Execution
     
-    This tutorial explains how an operator can start and execute the task on a work status. During the task execution, the task can undergo different stages. An operator can assign a valid status to the task throught the task execution.
+    This tutorial explains how an operator can start and execute the task on a work status. During the task execution, the task can undergo different stages. An operator can assign a valid status to the task throughout the task execution.
     
-    The Fusion 360 Production API provides the `PATCH taskexecutions` endpoint to manage the status for the tasks execution. In the requiest, you need to specify the ID of the task that you want to start and execute and the status attribute with appropriate status value. 
+    The Fusion 360 Production API provides the `PATCH taskexecutions` endpoint to manage the status for the tasks execution. In the request, you need to specify the ID of the task that you want to start and execute and the status attribute with appropriate status value. 
     
     Following are the status for a task:
     
@@ -2543,7 +2543,7 @@ info:
     | ------            | -------------------------------------------------------------------------------
     | **Staged**        | The task is ready to be performed but an operator has not yet started the task.
     | **InProgress**    | An operator is currently executing a task from the job sheet.
-    | **Paused**        | An operator has pause the task. Operator can puse the task for different reasons, like checking the components, tools, work station, or taking a break to talk to another operator or supervisor.
+    | **Paused**        | An operator has pause the task. Operator can pause the task for different reasons, like checking the components, tools, work station, or taking a break to talk to another operator or supervisor.
     | **Completed**     | An operator has successfully completed the current task.
     
     ### Example
@@ -3051,7 +3051,7 @@ info:
     | ------------  | ------------------------------------------------------------------------
     | NAME          | The name of the entity.
     | DESCRIPTION   | The description of the entity.
-    | IMAGEURL      | The image that you want to use as a thumbnanil or avatar of the entity.
+    | IMAGEURL      | The image that you want to use as a thumbnail or avatar of the entity.
     | TAGS          | The tags that you want to specify for the entity.
     | REFERENCES    | The additional references that you want to include for the entity.
     
@@ -3126,11 +3126,11 @@ info:
     
     | Attribute                               | Description
     | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------
-    | **version**                             | Displays a list of entites in a specific format. Use **v2** to displays the entities in JSON API compliant format.
+    | **version**                             | Displays a list of entities in a specific format. Use **v2** to displays the entities in JSON API compliant format.
     | **filter[entities][searchTerm]**        | Displays the list of entities that matches with the specified search term. The search term can be entity name, entity ID, entity description, and entity tags. For example, ...entities?filter[entities][searchTerm]=fastener
     | **filter[entities][tags]**              | Displays the list of entities that matches with the tags specified for the entity. For example, ...entities?filter[entities][tags]=fastener
     | **filter[entities][type]**              | Displays the list of entities for the specified type. The entity type can be components, jobsheets, workstations, and so on. For example, ...entities?filter[entities][type]=components
-    | **sort[entities][targetFieldName]**     | Display the list of entities sorted in ascending (ASC) or descending (DESC) based on the specified field name. The fields available for sorting are id, lastModifiedDate. For example filter[entities][lastModifiedDate]=ASC
+    | **sort[entities][targetFieldName]**     | Display the list of entities sorted in ascending (ASC) or descending (DESC) based on the specified field name. The fields available for sorting are id, lastModifiedDate. For example, filter[entities][lastModifiedDate]=ASC
     | **page[size]**                          | The total number of pages that you want to display for the list of entities.
     | **page[number]**                        | The page number of the entities list that you want to display.
     
@@ -3398,7 +3398,7 @@ info:
     [@tutorials/publish-app]: <>
     # Publish an App
     
-    This tutorial explains how to publish the App. Publishing the App requires that you change the **active** attribute value to **true**". After publishing the App, you can install it to the tenent of Fusion 360.
+    This tutorial explains how to publish the App. Publishing the App requires that you change the **active** attribute value to **true**". After publishing the App, you can install it to the tenant of Fusion 360.
     
     Fusion 360 Production provides the `PATCH applications/{applicationId}` endpoint to update the Application including the status for publishing the App. In the API request, you need to specify the App Id that you want to publish.
     
@@ -3509,9 +3509,9 @@ info:
     [@tutorials/install-app]: <>
     # Install an App
     
-    This tutorial explains how you can install your App to the Fusion 360 Production tenent.
+    This tutorial explains how you can install your App to the Fusion 360 Production tenant.
     
-    Fusion 360 Production provides the `POST /tenants/{tenantId}/applications` endpoint to install the App for the given tenent. In the API request, you need to specify the tenent Id, application Id, and the application version that you want to install.
+    Fusion 360 Production provides the `POST /tenants/{tenantId}/applications` endpoint to install the App for the given tenant. In the API request, you need to specify the tenant Id, application Id, and the application version that you want to install.
     
     **Note**: If you do not specify the application version, the endpoint installs the current version of the application.
     
@@ -3522,7 +3522,7 @@ info:
       -H 'accept: application/vnd.api+json'
       -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
       -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
-      -H 'x-dmg-fp-tenant: {tenentId}'
+      -H 'x-dmg-fp-tenant: {tenantId}'
       -H 'content-type: application/vnd.api+json'
       -d 
       '
@@ -3534,7 +3534,7 @@ info:
                 "version": "1.0.0"
             }
         }
-    }' "https://developer-stg.api.autodesk.com/factoryproduction/v1/tenants/{tenentId}/applications"
+    }' "https://developer-stg.api.autodesk.com/factoryproduction/v1/tenants/{tenantId}/applications"
     ```
     
     The resource provides the following response:
@@ -3586,7 +3586,7 @@ info:
     [@tutorials/search-apps]: <>
     # Search an App
     
-    This tutorial expalins how to search the App. You can either get the list of all applications or you can specify the Id of the application that you want to search.
+    This tutorial explains how to search the App. You can either get the list of all applications or you can specify the Id of the application that you want to search.
     
     Fusion 360 Production provides the `GET applications` and `GET application/id` endpoints to search for the required app. In the request, you can also specify the version of the application that you want to search.
     
@@ -3597,7 +3597,7 @@ info:
       -H 'accept: application/vnd.api+json'
       -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
       -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
-      -H 'x-dmg-fp-tenant: {tenentId}'
+      -H 'x-dmg-fp-tenant: {tenantId}'
       -H 'content-type: application/vnd.api+json'
       -d 'https://developer-stg.api.autodesk.com/factoryproduction/v1/applications?version=1.0.0'
     ```
