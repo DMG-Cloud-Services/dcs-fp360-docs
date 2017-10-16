@@ -424,40 +424,40 @@ info:
     ## API Tutorials
     This section provides the tutorials that explains how you can use the APIs that Fusion 360 Production provides.
     
-    ### Setup Factory
+    ### [Setup Factory](/en/docs/fp360/v1/tutorials/setup-factory)
       This tutorial explains how to setup the factory.
       
-    ### Attach Thumbnail and Documents to the Entity
+    ### [Attach Thumbnail and Documents to an Entity](/en/docs/fp360/v1/tutorials/attach-files-documents-to-entity)
       This tutorial explains how to attach the thumbnail and documents to the entities.
     
-    ### Create a Job Sheet
+    ### [Create a Job Sheet](/en/docs/fp360/v1/tutorials/create-job-sheet)
       This tutorial explains how to create a job sheet for the operators.
       
-    ### Update the Work Queue
+    ### [Update the Work Queue](/en/docs/fp360/v1/turorials/update-work-queues)
       This tutorial explains how to schedule and update the work queue for the workstations and workcells.
     
-    ### Start the Task and Track the Task Execution
+    ### [Perform the Task and Track the Execution](/en/docs/fp360/v1/turorials/perform-task-track-execution)
       This tutorial explains how an operator can start the task and supervisor can track the task execution.
       
-    ### Import Entities in Batch
+    ### [Import Entities in Batch](/en/docs/fp360/v1/turorials/import-entities-in-batch)
       This tutorial explains how you can import various Fusion 360 Production entities in a batch.
     
-    ### Search Entities
+    ### [Search Entities](/en/docs/fp360/v1/turorials/search-entities)
       This tutorial explains how to search for various entities of Fusion 360 Production.
       
     ## API Framework Tutorials
       This section provides the tutorials that explains how you can use the API Framework that Fusion 360 Production provides.
     
-    ### Create an App
+    ### [Create an App](/en/docs/fp360/v1/turorials/create-app)
       This tutorial explains how to create an App using Fusion 360 Production App framework.
     
-    ### Publish an App
+    ### [Publish an App](/en/docs/fp360/v1/turorials/publish-app)
       This tutorial explains how to publish an App.
     
-    ### Install an App
+    ### [Install an App](/en/docs/fp360/v1/turorials/install-app)
       This tutorial explains how to install an App for a tenant of Fusion 360 Production.
     
-    ### Search an App
+    ### [Search an App](/en/docs/fp360/v1/turorials/search-app)
       This tutorial explains how to search a particular App.
 
     ## Reports Tutorials
@@ -2530,8 +2530,8 @@ info:
       }
     ```
     
-    [@tutorials/perform-task-track-task-execution]: <>
-    # Start the Task and Track the Task Execution
+    [@tutorials/perform-task-track-execution]: <>
+    # Perform the Task and Track the Execution
     
     This tutorial explains how an operator can start and execute the task on a work status. During the task execution, the task can undergo different stages. An operator can assign a valid status to the task throughout the task execution.
     
@@ -3689,14 +3689,7 @@ info:
     [@tutorials/view-reports]
     # View the Reports
     
-    
-    
-    
-    
-    
-    
-    
-
+  
   termsOfService: http://swagger.io/terms/
   contact:
     name: Swagger API Team
