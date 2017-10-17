@@ -433,19 +433,19 @@ info:
     ### [Setup Factory](/en/docs/fp360/v1/tutorials/setup-factory)
       This tutorial explains how to setup the factory.
       
-    ### [Attach Thumbnail and Documents to an Entity](/en/docs/fp360/v1/tutorials/attach-files-documents-to-entity)
+    ### [Attach Thumbnail and Documents to an Entity](/en/docs/fp360/v1/tutorials/attach-thumbnail-and-documents-to-an-entity)
       This tutorial explains how to attach the thumbnail and documents to the entities.
     
-    ### [Create a Job Sheet](/en/docs/fp360/v1/tutorials/create-job-sheet)
+    ### [Create a Job Sheet](/en/docs/fp360/v1/tutorials/create-a-job-sheet)
       This tutorial explains how to create a job sheet for the operators.
       
-    ### [Update the Work Queue](/en/docs/fp360/v1/turorials/update-work-queues)
+    ### [Update a Work Queue](/en/docs/fp360/v1/turorials/update-a-work-queue)
       This tutorial explains how to schedule and update the work queue for the workstations and workcells.
     
-    ### [Perform the Task and Track the Execution](/en/docs/fp360/v1/turorials/perform-task-track-execution)
+    ### [Perform the Task and Track the Execution](/en/docs/fp360/v1/turorials/perform-the-task-and-track-the-execution)
       This tutorial explains how an operator can start the task and supervisor can track the task execution.
       
-    ### [Import Entities in Batch](/en/docs/fp360/v1/turorials/import-entities-in-batch)
+    ### [Import Entities in a Batch](/en/docs/fp360/v1/turorials/import-entities-in-a-batch)
       This tutorial explains how you can import various Fusion 360 Production entities in a batch.
     
     ### [Search Entities](/en/docs/fp360/v1/turorials/search-entities)
@@ -541,7 +541,7 @@ info:
     
     The Fusion 360 Production API provides the `POST components` endpoint that allows you to create a component. 
     
-    In the `POST` request, you can specify the component name, description, tags, and also the links that you want to add in the description. Additionally, you can attach a thumbnail and documents to the component. For more information about attaching documents, see [Attach Thumbnail and Documents to the Entity](/en/docs/fusion360production/v1/tutorials/attach-files-documents-to-entity) 
+    In the `POST` request, you can specify the component name, description, tags, and also the links that you want to add in the description. Additionally, you can attach a thumbnail and documents to the component. For more information about attaching documents, see [Attach Thumbnail and Documents to an Entity](/en/docs/fusion360production/v1/tutorials/attach-thumbnail-and-documents-to-an-entity) 
     
     ### Example
      
@@ -921,10 +921,10 @@ info:
     
     ## Step 5: Create a Job Sheet
     
-    Job sheet actually contains one job instruction, which further contains the list of task instructions that the operator needs to perform. For more information about Job Sheet, see [#Entities](#entities). For the tutorial on creating a complete job sheet, see [Create a Job Sheet](/en/docs/fusion360production/v1/tutorials/create-job-sheet).
+    Job sheet actually contains one job instruction, which further contains the list of task instructions that the operator needs to perform. For more information about Job Sheet, see [Entities](#entities). For the tutorial on creating a complete job sheet, see [Create a Job Sheet](/en/docs/fusion360production/v1/tutorials/create-a-job-sheet).
     
-    [@tutorials/attach-files-documents-to-entity]
-    # Attach Thumbnail and Documents to the Entity
+    [@tutorials/attach-thumbnail-and-documents-to-an-entity]
+    # Attach Thumbnail and Documents to an Entity
     
     This tutorial explains how to attach documents and a thumbnail with an entity. The documents can be image files, PDFs, or any other documents, whereas the thumbnail is a unique image that represents the entity that you have created. 
     
@@ -1191,7 +1191,7 @@ info:
     }
     ```
   
-    [@tutorials/create-job-sheet]: <>
+    [@tutorials/create-a-job-sheet]: <>
     # Create a Job Sheet
     
     This tutorial explains how to create a job sheet for the operator to perform the job work. 
@@ -2286,8 +2286,8 @@ info:
     }
     ```
     
-    [@tutorials/update-work-queues]: <>
-    # Update the Work Queue
+    [@tutorials/update-a-work-queue]: <>
+    # Update a Work Queue
     
     This tutorial explains how you can design and update your work queue. For more information about work queue, see [Entities](#entities).
     
@@ -2549,7 +2549,7 @@ info:
       }
     ```
     
-    [@tutorials/perform-task-track-execution]: <>
+    [@tutorials/perform-the-task-and-track-the-execution]: <>
     # Perform the Task and Track the Execution
     
     This tutorial explains how an operator can start and execute the task on a work status. During the task execution, the task can undergo different stages. An operator can assign a valid status to the task throughout the task execution.
@@ -3059,8 +3059,8 @@ info:
     }
     ```
     
-    [@tutorials/import-entities-in-batch]: <>
-    # Import Entities in Batch
+    [@tutorials/import-entities-in-a-batch]: <>
+    # Import Entities in a Batch
     
     This tutorial explains how you can import the details of multiples entities in a batch. Fusion 360 Production allows batch import for entities, like components, workstations, and job instructions.
     
