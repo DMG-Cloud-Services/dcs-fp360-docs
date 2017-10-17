@@ -422,10 +422,26 @@ info:
     [@overview/reports]: <>
     #Reports
     
+    Fusion 360 Production provides various reports to view the detailed insights of the factory entities and machine data.
+    
     ## Supported Reports
- 
+    
+    Fusion 360 Production supports the Jasper reports. You can get the following reports:
+    
+    | Reports                         | Description
+    |-------------------------------- | ---------------------------------------------------------------
+    | Completed/ Cancelled Job Sheets | The information of all job sheets that are completed or cancelled.
+    | Archived Job Instructions       | The information of all job instructions that are archived.
+    | Quality                         | The informaiton about the quality, which is a comparison of good parts to the total number of parts produced. The report calculates the quality for job sheets, job instructions, and workstations.
+    | Workstation Utilization         | The information about the amount of time a workstation spends on productive work versus the time not applied to a job.
+    | Workstation Avalibility         | The information about the amount of time a machine is online and available for work.
+    
+    
     [@tutorials]: <>
     #Step-by-Step Tutorials
+    
+    ## [Before You Begin](/en/docs/fp360/v1/tutorials/before-you-begin)
+      This section provides the information that you need to verify before you start using the APIs and App Framework.
     
     ## API Tutorials
     This section provides the tutorials that explains how you can use the APIs that Fusion 360 Production provides.
@@ -454,16 +470,16 @@ info:
     ## API Framework Tutorials
       This section provides the tutorials that explains how you can use the API Framework that Fusion 360 Production provides.
     
-    ### [Create an App](/en/docs/fp360/v1/turorials/create-app)
+    ### [Create an App](/en/docs/fp360/v1/turorials/create-an-app)
       This tutorial explains how to create an App using Fusion 360 Production App framework.
     
-    ### [Publish an App](/en/docs/fp360/v1/turorials/publish-app)
+    ### [Publish an App](/en/docs/fp360/v1/turorials/publish-an-app)
       This tutorial explains how to publish an App.
     
-    ### [Install an App](/en/docs/fp360/v1/turorials/install-app)
+    ### [Install an App](/en/docs/fp360/v1/turorials/install-an-app)
       This tutorial explains how to install an App for a tenant of Fusion 360 Production.
     
-    ### [Search an App](/en/docs/fp360/v1/turorials/search-app)
+    ### [Search an App](/en/docs/fp360/v1/turorials/search-an-app)
       This tutorial explains how to search a particular App.
 
     ## Reports Tutorials
@@ -472,7 +488,7 @@ info:
     [@tutorials/before-you-begin]: <>
     # Before you begin
     
-      Before you start using Fusion 360 Production APIs, ensure that you have [registered an app](https://developer.autodesk.com/en/docs/oauth/v2/tutorials/create-app) and successfully [acquired an OAuth token](https://developer.autodesk.com/en/docs/oauth/v2/tutorials).
+      Before you start using Fusion 360 Production APIs, ensure that you have [registered an app](https://developer.autodesk.com/en/docs/oauth/v2/tutorials/create-an-app) and successfully [acquired an OAuth token](https://developer.autodesk.com/en/docs/oauth/v2/tutorials).
         
       See the Authentication and Scopes section in the [API Basics](/en/docs/fp360/v1/overview/basics) for the appropriate token based on the data you are accessing.
       
@@ -3248,7 +3264,7 @@ info:
     }
     ```
     
-    [@tutorials/create-app]: <>
+    [@tutorials/create-an-app]: <>
     # Create an App
     
     In this tutorial, we explain how you can create an APP.
@@ -3414,7 +3430,7 @@ info:
     }
     ```
     
-    [@tutorials/publish-app]: <>
+    [@tutorials/publish-an-app]: <>
     # Publish an App
     
     This tutorial explains how to publish the App. Publishing the App requires that you change the **active** attribute value to **true**". After publishing the App, you can install it to the tenant of Fusion 360.
@@ -3525,7 +3541,7 @@ info:
     }
     ```
     
-    [@tutorials/install-app]: <>
+    [@tutorials/install-an-app]: <>
     # Install an App
     
     This tutorial explains how you can install your App to the Fusion 360 Production tenant.
@@ -3602,7 +3618,7 @@ info:
     }
     ```
     
-    [@tutorials/search-apps]: <>
+    [@tutorials/search-an-app]: <>
     # Search an App
     
     This tutorial explains how to search the App. You can either get the list of all applications or you can specify the Id of the application that you want to search.
