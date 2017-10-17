@@ -6238,7 +6238,7 @@ paths:
     get:
       tags: [ "Files" ]
       description: |
-        Use this call to obtain the upload server url for a document or image file.
+        Use this call to obtain the upload server url for a document or image file for an entity, or a task completion document.
 
         Steps to upload and attach single file to entity:
         1. Call, for example: GET /uploadserver?entityId=&fileType=SYSTEM_PRIMARY_IMAGE&fileName=<this is just name of the file including extension, NOT the path to file on ur local drive>
@@ -6252,11 +6252,19 @@ paths:
         3. You then use uploadUrl value and make a PUT call and send the actual bytes of the file (NOT the file path). You can call this URL multiple time for differnt files(one file at a time), just add new param to URL '&objectKey=filename.ext'.
         4. At the end of this call you will get the filestorage details. Use POST/PATCH entityfile API's to attach files to entities. 
         
+        Document File Types:
+        |File Type|Description
+        |----|----
+        |DOCUMENT|A document to attach to an entity|
+        |SYSTEM_PRIMARY_IMAGE|An entity's primary image|
+        |TASK_COMPLETION_DOCUMENT|Task Execution Completion Document|
+
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
         |Invalid parameter|400 Bad Request|122|
         |Resource not found in the factory production database|400 Bad Request|30018|
+       
         
       operationId: getUploadServer
       responses:
