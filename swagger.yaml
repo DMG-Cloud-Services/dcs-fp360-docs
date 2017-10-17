@@ -97,7 +97,7 @@ info:
     [@overview/apis]: <>
     # APIs
     
-    Fusion 360 Production provides a set of APIS to create and manage all entities related to factory production.
+    Fusion 360 Production provides a set of APIs to create and manage all entities related to factory production.
     
     ##<a name="entities">Factory Production Entities
     
@@ -111,7 +111,7 @@ info:
     
     ### Raw Material
     
-    The material that the operator uses while performing a task. The material can be the raw material, such as aluminium plate or steel bar or an intermediate product produced by the previous task.
+    The material on which the operator performs a task. The material can be the raw material, such as aluminium plate or steel bar or an intermediate product produced by the previous task.
     
     ### Tool
     
@@ -209,15 +209,17 @@ info:
     [@overview/app-framework]: <>
     # Fusion 360 Production App Framework
     
-    Fusion 360 Production provides an App Framework to build custom applications as per the requirements. With App Framework, customers and third party companies can develop custom applications, and integrate these applications with their Fusion 360 Production to get addional functionality on top of Fusion 360 Production features.
+    Fusion 360 Production provides an App Framework to build custom applications as per the requirements. 
+    
+    With App Framework, customers and third party companies can develop custom applications, and integrate these applications with their Fusion 360 Production tenant to get addional functionality on top of Fusion 360 Production features.
     
     Autodesk also provides a marketplace for publishing the custom applications developed by various people. Customers can develop their own applications and ask the Autodesk support team to publish these applications on the marketplace.
     
     From the marketplace, end users can directly use the published applications that meets their requirements and integrate them with their Fusion 360 Prodcution application.
     
-    **Note**: The applications developed using Fusion 360 Production App Framework are not the Mobile App.
+    **Note**: The applications developed using Fusion 360 Production App Framework are not the Mobile Apps.
     
-    With the App framework, you can develop an App to add the following types of functionality in to Fusion 360 Production: 
+    With the App framework, you can develop an App to add the following functionalities in Fusion 360 Production: 
     
     * IoT data integration for workstations
     * Customers Order View from Commerce backend
@@ -227,6 +229,10 @@ info:
     * Simulation or 3D viewing of models
     
     ## Contents of an application package
+    
+    Fusion 360 Production App Framework requires that the application package contains the files and folders in a specific format and structure. 
+    
+    While developing the applications, you must build your application as per the structure given below:
     
     ```
     assets
@@ -256,7 +262,7 @@ info:
     
     ### Files Description
     
-    The following table provides the description of the files in the App package. 
+    The following table provides the description of the files and folders in the application package. 
     
     | Files                 | Description
     | ------                | -----------------------------------------------------------------------------------
@@ -268,10 +274,9 @@ info:
     | **assets/fonts/***    | The fonts used in the App.
     | **assets/css/*.css**  | The style sheets for the templates.
     
-    
     ## Sample App Config File
     
-    The application configuration file is a JSON file included with the App source code. The file contains specific details about an app.
+    The application configuration file is a JSON file included with the App source code. The file contains specific details about the application.
     
     ```json
     {
@@ -401,7 +406,7 @@ info:
     
     ## App Deployment Workflow
     
-    Following are the steps for deploying the App
+    This section provide the steps that you need to follow to successfully deploy you application in your Fusion 360 Production:
     
     * Client calls the app-management service to get a URL to upload their App package. This URL contains:
       * **UUID** that the app-management service generates for the App. This UUID is generated for the first time when the client request for the Upload URL. In subsequent requests for updating the App or creating new versions, the client has to use the same UUID.
