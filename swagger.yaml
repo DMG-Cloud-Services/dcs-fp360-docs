@@ -10,7 +10,7 @@ info:
     
     With Fusion 360 Production companies can build a fully paperless factory production monitoring system in cloud. Also, companies can empower their operators on the shop floor to manage their jobs from the job sheets without any paper work. The supervisors can get the detailed information and reports about the daily tasks that are performed in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
     
-    Fusion 360 Production provides APIs to create and capture the shop floor production information, an App Framework to create an android based mobile application to manage the factory production, and reports to view the complete analytics of the factory production.
+    Fusion 360 Production provides APIs to create and capture the shop floor production information, an App Framework to create an APP to integrate with Fusion 360 Production, and reports to view the complete analytics of the factory production.
     
     Fusion 360 Production APIs follows the JSON API specification 1.0. For more information, see [JSON API specification](http://jsonapi.org/format/).
 
@@ -207,11 +207,17 @@ info:
     ![Workstation Status Workflow](https://git.autodesk.com/ACG-Cloud-Services/dmg-documentation/blob/master/workstation_status_workflow.png?raw=true "Workstation Status Workflow")  
     
     [@overview/app-framework]: <>
-    # App Framework
+    # Fusion 360 Production App Framework
     
-    Fusion 360 Production provides the App Framework for customers to build their own android mobile based application.
+    Fusion 360 Production provides an App Framework to build custom applications as per the requirements. With App Framework, customers and third party companies can develop the custom applications, and integrate these applications with their Fusion 360 Production.
     
-    With the App framework, you can add the following functionality to Fusion 360 Production. 
+    Autodesk also provides a marketplace for publishing the custom applications developed by various people. Customers can develop their own applications and ask the Autodesk support team to publish these applications on the marketplace.
+    
+    From the marketplace, end users can directly use the published applications that meets their requirements and integrate them with their Fusion 360 Prodcution application.
+    
+    **Note**: The App, which is developed using App Framework is not a mobile app.
+    
+    With the App framework, you can develop an App to add the following types of functionality in to Fusion 360 Production: 
     
     * IoT data integration for workstations
     * Customers Order View from Commerce backend
@@ -463,6 +469,19 @@ info:
     ## Reports Tutorials
     This section provides the tutorials that explains how you can view the reports that Fusion 360 Production provides.
 
+    [@tutorials/before-you-begin]: <>
+    # Before you begin
+    
+      Before you start using Fusion 360 Production APIs, ensure that you have [registered an app](https://developer.autodesk.com/en/docs/oauth/v2/tutorials/create-app) and successfully [acquired an OAuth token](https://developer.autodesk.com/en/docs/oauth/v2/tutorials).
+        
+      See the Authentication and Scopes section in the [API Basics](/en/docs/fp360/v1/overview/basics) for the appropriate token based on the data you are accessing.
+      
+      In general, access to BIM 360 Team, BIM 360 Docs, Fusion Team, and A360 Personal data requires the use of a [3-legged OAuth2 token](https://developer.autodesk.com/en/docs/oauth/v2/tutorials/get-3-legged-token).
+        
+      HTTP `GET` requests to the Forge Schema services require the `data:read` scope.
+        
+      HTTP `POST` requests to the Forge Schema require the `data:create` scope, but can also be called with the `data:write` scope.
+    
     [@tutorials/setup-factory]: <>
     # Setup Factory
     
