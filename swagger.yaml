@@ -30,7 +30,7 @@ info:
     [@overview/basics]: <>
     # API Basics
     
-    Fusion 360 Production provides a set of APIs that allows customers to efficiently manage their factory production jobs. Additionally, customers can also use the App Framework to develop their own mobile application on top of Fusion 360 Production and use Reports to view the detailed insights of the factory production from raw material to finish product.
+    Fusion 360 Production provides a set of APIs that allows customers to efficiently manage their factory production job sheets. Additionally, customers can also use the App Framework to develop custom applications on top of Fusion 360 Production and use Reports to view the detailed insights of the factory production from raw material to finish product.
 
     ## Standards
     
@@ -85,7 +85,7 @@ info:
     * Beta URL: https://developer-stg.api.autodesk.com
     * Production URL: https://developer.api.autodesk.com
     
-    [@overview/components-fusion-360-production]: <>
+    [@overview/modules-fusion-360-production]: <>
     # Modules of Fusion 360 Production
     
     Fusion 360 Production comprises of the following modules:
@@ -97,7 +97,7 @@ info:
     [@overview/apis]: <>
     # APIs
     
-    Fusion 360 Production provides a set of APIS to create and manage all the entities related to factory production.
+    Fusion 360 Production provides a set of APIS to create and manage all entities related to factory production.
     
     ##<a name="entities">Factory Production Entities
     
@@ -209,13 +209,13 @@ info:
     [@overview/app-framework]: <>
     # Fusion 360 Production App Framework
     
-    Fusion 360 Production provides an App Framework to build custom applications as per the requirements. With App Framework, customers and third party companies can develop the custom applications, and integrate these applications with their Fusion 360 Production.
+    Fusion 360 Production provides an App Framework to build custom applications as per the requirements. With App Framework, customers and third party companies can develop custom applications, and integrate these applications with their Fusion 360 Production to get addional functionality on top of Fusion 360 Production features.
     
     Autodesk also provides a marketplace for publishing the custom applications developed by various people. Customers can develop their own applications and ask the Autodesk support team to publish these applications on the marketplace.
     
     From the marketplace, end users can directly use the published applications that meets their requirements and integrate them with their Fusion 360 Prodcution application.
     
-    **Note**: The App, which is developed using App Framework is not a mobile app.
+    **Note**: The applications developed using Fusion 360 Production App Framework are not the Mobile App.
     
     With the App framework, you can develop an App to add the following types of functionality in to Fusion 360 Production: 
     
