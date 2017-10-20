@@ -6,7 +6,7 @@ info:
     
     [@overview]: (title)
     
-    Fusion 360 Production is a job management service that customers can use in the factory to efficiently manage the job sheets. The job sheets can be for any part that goes through the manufacturing process on a factory floor. 
+    Fusion 360 Production is a job sheet management service for the factory operators to efficiently perform the assigned jobs with focus on the work and minimal paper work. The job sheets can be for any part that goes through the manufacturing process on a factory floor. 
     
     With Fusion 360 Production companies can build a fully paperless factory production monitoring system in cloud. Also, companies can empower their operators on the shop floor to manage their jobs from the job sheets without any paper work. The supervisors can get the detailed information and reports about the daily tasks that are performed in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
     
@@ -147,6 +147,10 @@ info:
     ### Task Instructions
     
     A task instruction is a single unit of a task that the operator performs from the given job instruction. Each task instruction contains information, such as a unique task identifier, operation that the operator needs to perform, the components that the operator will be using, the work station on which the operator will be performing the task, and the estimated time required to complete this component.
+    
+    ### Sub Task Instructions
+    
+    A sub task instruction are checklists that need to be performed under a taskinstrcution.
     
     ### Task Execution
     
@@ -5236,6 +5240,33 @@ paths:
           description: Task Instruction deleted
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+
+  '/subtaskinstructions/{id}':
+    x-summary: GET SubTaskInstruction
+    x-description: |
+        checklist of a taskinstruction.
+    get:
+      tags: [ "Sub Task Instruction" ]
+      description: |
+        Get Sub Task Instruction
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Invalid parameter|400 Bad Request|122|
+        
+      operationId: getSubTaskInstruction
+      parameters:
+        - name: id
+          in: path
+          description: ID of sub task instruction
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200': {$ref: '#/responses/subTaskInstructions'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
 
   /jobinstructions:
@@ -21906,6 +21937,86 @@ responses:
             "meta": null,
             "links": null
         }
+        
+  subTaskInstructions:
+    description: Successful response
+    schema:
+      title: schema versions
+      type: object
+      allOf:
+      - type: object
+    headers:
+        etag:
+          description: |
+            `etag` for the resource which can be used for cache optimization
+            and must be used for mutating operations on this resource
+          type: string
+        authorization:
+          description: Bearer Token
+          type: integer
+    examples:
+      application/vnd.api+json:
+        {
+    "data": {
+        "type": "subtaskinstructions",
+        "id": "460301",
+        "attributes": {
+            "subTaskOrder": 0,
+            "creator": {
+                "id": "17",
+                "firstName": "Teji",
+                "lastName": "Masute",
+                "email": "tejinder.masute@autodesk.com"
+            },
+            "createdDate": "2017-10-18T12:02:17Z",
+            "references": [],
+            "lastModifiedDate": "2017-10-18T12:02:17Z",
+            "tenantId": "job360-test",
+            "name": "drilling subtask",
+            "lastModifier": {
+                "id": "17",
+                "firstName": "Teji",
+                "lastName": "Masute",
+                "email": "tejinder.masute@autodesk.com"
+            },
+            "description": "drillers",
+            "tags": [
+                "milling",
+                "5-axis"
+            ]
+        },
+        "relationships": {
+            "documents": {
+                "links": {
+                    "self": "http://localhost:8080/api/v1/subtaskinstructions/460301/relationships/documents",
+                    "related": "http://localhost:8080/api/v1/subtaskinstructions/460301/documents"
+                },
+                "data": []
+            },
+            "primaryImage": {
+                "links": {
+                    "self": "http://localhost:8080/api/v1/subtaskinstructions/460301/relationships/primaryImage",
+                    "related": "http://localhost:8080/api/v1/subtaskinstructions/460301/primaryImage"
+                },
+                "data": null
+            },
+            "taskInstruction": {
+                "links": {
+                    "self": "http://localhost:8080/api/v1/subtaskinstructions/460301/relationships/taskInstruction",
+                    "related": "http://localhost:8080/api/v1/subtaskinstructions/460301/taskInstruction"
+                },
+                "data": {
+                    "type": "taskinstructions",
+                    "id": "410396"
+                }
+            }
+        },
+        "links": {
+            "self": "http://localhost:8080/api/v1/subtaskinstructions/460301"
+        }
+    },
+    "included": []
+}      
 
   tenants:
     description: Successful response
