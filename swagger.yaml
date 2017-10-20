@@ -5554,7 +5554,7 @@ paths:
             example:
               {
                   "data": {
-                      "type": "jobInstructions",
+                      "type": "jobinstructions",
                       "id": "jobId",
                       "attributes": {
                           "name": "JobName1",
