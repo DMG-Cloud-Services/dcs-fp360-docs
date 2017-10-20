@@ -218,7 +218,7 @@ info:
     
     Fusion 360 Production provides an App Framework to build custom applications that can add more functionality to Fusion 360 Production. 
     
-    With an App Framework, customers and third-party companies can build custom application as per the requirements and integrate these applications with Fusion 360 Production.
+    Using the App Framework, customers and third-party companies can build different custom applications as per their requirements and integrate these applications with Fusion 360 Production.
     
     In addition to the App framework, Autodesk also provides a marketplace for customers to publish their custom applications. So, after developing the applications, customers can contact the Autodesk support team and ask them to publish their applications to the marketplace. 
     
@@ -235,11 +235,11 @@ info:
     * Workstation camera feed
     * Simulation or 3D viewing of models
     
-    ## Contents of an application package
+    ## Custom App Package Structure
     
-    Fusion 360 Production App Framework requires that the application package contains the files and folders in a specific format and structure. 
+    Fusion 360 Production App Framework requires that the package for the custom application contains the files and folders in a specific format and structure. 
     
-    While developing the applications, you must build your application as per the structure given below:
+    You must build your application as per the following structure:
     
     ```
     assets
