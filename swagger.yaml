@@ -6,11 +6,11 @@ info:
     
     [@overview]: (title)
     
-    Fusion 360 Production is a job sheet management service for the factory operators to efficiently perform the assigned jobs with focus on the work and minimal paper work. The job sheets can be for any part that goes through the manufacturing process on a factory floor. 
+    Fusion 360 Production is a job sheet management service for the factory operators to efficiently perform the assigned jobs. The job sheets can be for any part that goes through the manufacturing process on a factory shop floor.
+
+    With Fusion 360 Production, customers can build a fully paperless factory production monitoring system in a cloud. Also, customers can empower their operators on the shop floor to manage their jobs from the job sheets without any paper work. The supervisors can get the detailed reports about the daily tasks that various operators perform in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
     
-    With Fusion 360 Production companies can build a fully paperless factory production monitoring system in cloud. Also, companies can empower their operators on the shop floor to manage their jobs from the job sheets without any paper work. The supervisors can get the detailed information and reports about the daily tasks that are performed in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
-    
-    Fusion 360 Production provides APIs to create and capture the shop floor production information, an App Framework to create an APP to integrate with Fusion 360 Production, and reports to view the complete analytics of the factory production.
+    Fusion 360 Production provides APIs to develop a fully functional monitoring system for factory production, an App Framework to create applications that integrates with Fusion 360 Production to provide additional functionality, and reports to view the detailed analytics of the factory production.
     
     Fusion 360 Production APIs follows the JSON API specification 1.0. For more information, see [JSON API specification](http://jsonapi.org/format/).
 
@@ -24,13 +24,16 @@ info:
     | **X-DMG-FP-TENANT** | A unique identifier assigned to your factory. The identifier indicates the tenant. You must use the tenant of your factory. Do not use the tenant of different factory as it may create problems in debugging.
     
     ## Getting Started
-
-    The [API Basics](/en/docs/fp360/v1/overview/basics) section guides you through the process of getting started with the API and explains the main concepts and functionality.
+    
+    Go through the following sections to understand the process of getting started with and know the concepts and functionality:
+    
+    * [API Basics](/en/docs/fp360/v1/overview/basics)
+    * [Fusion 360 Production App Framework](/en/docs/fp360/v1/overview/app-framework)
     
     [@overview/basics]: <>
     # API Basics
     
-    Fusion 360 Production provides a set of APIs that allows customers to efficiently manage their factory production job sheets. Additionally, customers can also use the App Framework to develop custom applications on top of Fusion 360 Production and use Reports to view the detailed insights of the factory production from raw material to finish product.
+    Fusion 360 Production provides a set of APIs that allows to automate the process of creating, and managing the job sheets, and real-time tracking of the jobs by various operators on the factory shop floor. The APIs provides various endpoints to create, edit, and delete the entities for various components involved in factory production.
 
     ## Standards
     
@@ -42,10 +45,10 @@ info:
 
     |Verb         | Description
     | ------      | -------------------------------------------------------------------------------------------------------
-    | `GET`       |  Used to select one or more items. Success returns `200` status code with json result item(s) in body.
-    | `POST`      |  Used to create a new item. Success returns `201` status code with newly created json item in body.
-    | `PATCH`     |  Used to update an item. Success returns `200` status code with updated json item in body.
-    | `DELETE`    |  Used to hard delete an item. Success returns `204` status code with no body.
+    | `GET`       | Used to select one or more items. Success returns `200` status code with json result item(s) in body.
+    | `POST`      | Used to create a new item. Success returns `201` status code with newly created json item in body.
+    | `PATCH`     | Used to update an item. Success returns `200` status code with updated json item in body.
+    | `DELETE`    | Used to hard delete an item. Success returns `204` status code with no body.
 
     ## Status Codes
     
@@ -150,7 +153,7 @@ info:
     
     ### Sub Task Instructions
     
-    A sub task instruction are checklists that need to be performed under a taskinstrcution.
+    A sub task instruction are checklists that need to be performed under a task instruction.
     
     ### Task Execution
     
@@ -215,11 +218,11 @@ info:
     
     Fusion 360 Production provides an App Framework to build custom applications as per the requirements. 
     
-    With App Framework, customers and third party companies can develop custom applications, and integrate these applications with their Fusion 360 Production tenant to get addional functionality on top of Fusion 360 Production features.
+    With App Framework, customers and third-party companies can develop custom applications, and integrate these applications with their Fusion 360 Production tenant to get additional functionality on top of Fusion 360 Production features.
     
     Autodesk also provides a marketplace for publishing the custom applications developed by various people. Customers can develop their own applications and ask the Autodesk support team to publish these applications on the marketplace.
     
-    From the marketplace, end users can directly use the published applications that meets their requirements and integrate them with their Fusion 360 Prodcution application.
+    From the marketplace, end users can directly use the published applications that meets their requirements and integrate them with their Fusion 360 Production application.
     
     **Note**: The applications developed using Fusion 360 Production App Framework are not the Mobile Apps.
     
@@ -358,15 +361,15 @@ info:
       }
     }
     ```
-    In above example, it is madatory for a user to enter the **deviceUuid** field on the **workstation** form on the Fusion Production website. 
+    In above example, it is mandatory for a user to specify the **deviceUuid** field for the **workstation**.
     
-    When the App is rendered at a specified location, the **deviceUuid** value is passed from the Fusion Production website to App.
+    When the App is rendered at a specified location, the **deviceUuid** value is passed from Fusion 360 Production to the App.
     
     ### Location¶
 
-    Use the **locations** attribute to specify where you want the App to appear on the Fustion 360 Production website. You can specify multiple locations. 
+    Use the **locations** attribute to specify where you want the App to appear on the Fusion 360 Production website. You can specify multiple locations. 
     
-    Some App framework APIs are available only for the apps appearing at certain locations on the Fustion 360 Production website. For example, the Apps appearing on the workstation detail page requires the workstation properties. 
+    Some App framework APIs are available only for the apps appearing at certain locations on the Fusion 360 Production website. For example, the Apps appearing on the workstation detail page requires the workstation properties. 
     
     For example,
     
@@ -410,7 +413,7 @@ info:
     
     ## App Deployment Workflow
     
-    This section provide the steps that you need to follow to successfully deploy you application in your Fusion 360 Production:
+    This section provides the steps that you need to follow to successfully deploy the application to the tenant of Fusion 360 Production:
     
     * Client calls the app-management service to get a URL to upload their App package. This URL contains:
       * **UUID** that the app-management service generates for the App. This UUID is generated for the first time when the client request for the Upload URL. In subsequent requests for updating the App or creating new versions, the client has to use the same UUID.
@@ -423,9 +426,9 @@ info:
       * Validates the content of the App package.
       * Generates a new PKI pair and stores it in the database for this App. The same PKI pair later used to sign the JWT token.
       * Updates the App config in the database
-      * Pre compile all html templates
+      * Pre-compile all html templates
       * Upload pre-compiled templates and assets to Amazon S3, using **TransferManager** from AWS SDK. The validated and compiled files are uploaded to the `dmg-factory-production-app/apps/uuid/version` folder.
-    * The Autodesk support team delivers the `dmg-factory-production-app` bucket to the `apps.fusionproduction.com`. They use the Amazon CloudFront web service for this. After delivering the App, the App becomes live to be accessed with fusionproduction clients using `https://apps.fusionproduction.com/{app_id}/{version}`.
+    * The Autodesk support team delivers the `dmg-factory-production-app` bucket to the `apps.fusionproduction.com`. They use the Amazon CloudFront web service for this. After delivering the App, the App becomes live to be accessed with fusion production clients using `https://apps.fusionproduction.com/{app_id}/{version}`.
     * Now, the client needs to set to set the correct context in their javascript to render the pre-compiled html template.
     
     [@overview/reports]: <>
@@ -439,73 +442,76 @@ info:
     
     | Reports                         | Description
     |-------------------------------- | ---------------------------------------------------------------
-    | Completed/ Cancelled Job Sheets | The information of all job sheets that are completed or cancelled.
-    | Archived Job Instructions       | The information of all job instructions that are archived.
-    | Quality                         | The informaiton about the quality, which is a comparison of good parts to the total number of parts produced. The report calculates the quality for job sheets, job instructions, and workstations.
-    | Workstation Utilization         | The information about the amount of time a workstation spends on productive work versus the time not applied to a job.
-    | Workstation Avalibility         | The information about the amount of time a machine is online and available for work.
-    
+    | Completed/ Cancelled Job Sheets | The job sheets that are completed or cancelled.
+    | Archived Job Instructions       | The job instructions that are archived.
+    | Quality                         | The quality, which is a comparison of good parts to the total number of parts produced. The report calculates the quality for job sheets, job instructions, and workstations.
+    | Workstation Utilization         | The amount of time a workstation spends on productive work versus the time not applied to a job.
+    | Workstation Availability        | The amount of time a machine is online and available for work.
     
     [@tutorials]: <>
     #Step-by-Step Tutorials
     
+    The Fusion 360 Production service provides a set of APIs, an App Framework, and reports for developers to create, access, and manage the factory production data. 
+    
+    In this section, we provide some step-by-step tutorials demonstrating how the Fusion 360 Production service APIs work, how to use the App Framework, and how to access the reports. 
+    
     ## [Before You Begin](/en/docs/fp360/v1/tutorials/before-you-begin)
-      This section provides the information that you need to verify before you start using the APIs and App Framework.
+    This section provides the information that you need to verify before you start using the APIs and App Framework.
     
     ## API Tutorials
     This section provides the tutorials that explains how you can use the APIs that Fusion 360 Production provides.
     
     ### [Setup Factory](/en/docs/fp360/v1/tutorials/setup-factory)
-      This tutorial explains how to setup the factory.
+    This tutorial explains how to setup the factory.
       
     ### [Attach Thumbnail and Documents to an Entity](/en/docs/fp360/v1/tutorials/attach-thumbnail-and-documents-to-an-entity)
-      This tutorial explains how to attach the thumbnail and documents to the entities.
+    This tutorial explains how to attach the thumbnail and documents to the entities.
     
     ### [Create a Job Sheet](/en/docs/fp360/v1/tutorials/create-a-job-sheet)
-      This tutorial explains how to create a job sheet for the operators.
+    This tutorial explains how to create a job sheet for the operators.
       
-    ### [Update a Work Queue](/en/docs/fp360/v1/turorials/update-a-work-queue)
-      This tutorial explains how to schedule and update the work queue for the workstations and workcells.
+    ### [Update a Work Queue](/en/docs/fp360/v1/tutorials/update-a-work-queue)
+    This tutorial explains how to schedule and update the work queue for the workstations and workcells.
     
-    ### [Perform the Task and Track the Execution](/en/docs/fp360/v1/turorials/perform-the-task-and-track-the-execution)
-      This tutorial explains how an operator can start the task and supervisor can track the task execution.
+    ### [Perform the Task and Track the Execution](/en/docs/fp360/v1/tutorials/perform-the-task-and-track-the-execution)
+    This tutorial explains how an operator can start the task and supervisor can track the task execution.
       
-    ### [Import Entities in a Batch](/en/docs/fp360/v1/turorials/import-entities-in-a-batch)
-      This tutorial explains how you can import various Fusion 360 Production entities in a batch.
+    ### [Import Entities in a Batch](/en/docs/fp360/v1/tutorials/import-entities-in-a-batch)
+    This tutorial explains how you can import various Fusion 360 Production entities in a batch.
     
-    ### [Search Entities](/en/docs/fp360/v1/turorials/search-entities)
-      This tutorial explains how to search for various entities of Fusion 360 Production.
+    ### [Search Entities](/en/docs/fp360/v1/tutorials/search-entities)
+    This tutorial explains how to search for various entities of Fusion 360 Production.
       
-    ## API Framework Tutorials
-      This section provides the tutorials that explains how you can use the API Framework that Fusion 360 Production provides.
+    ## App Framework Tutorials
+    This section provides the tutorials that explains how to use the Fusion 360 Production App Framework.
     
-    ### [Create an App](/en/docs/fp360/v1/turorials/create-an-app)
-      This tutorial explains how to create an App using Fusion 360 Production App framework.
+    ### [Create an App](/en/docs/fp360/v1/tutorials/create-an-app)
+    This tutorial explains how to create an App using Fusion 360 Production App framework.
     
-    ### [Publish an App](/en/docs/fp360/v1/turorials/publish-an-app)
-      This tutorial explains how to publish an App.
+    ### [Publish an App](/en/docs/fp360/v1/tutorials/publish-an-app)
+    This tutorial explains how to publish an App.
     
-    ### [Install an App](/en/docs/fp360/v1/turorials/install-an-app)
-      This tutorial explains how to install an App for a tenant of Fusion 360 Production.
+    ### [Install an App](/en/docs/fp360/v1/tutorials/install-an-app)
+    This tutorial explains how to install an App for a tenant of Fusion 360 Production.
     
-    ### [Search an App](/en/docs/fp360/v1/turorials/search-an-app)
-      This tutorial explains how to search a particular App.
+    ### [Search an App](/en/docs/fp360/v1/tutorials/search-an-app)
+    This tutorial explains how to search a particular App.
 
     ## Reports Tutorials
-    This section provides the tutorials that explains how you can view the reports that Fusion 360 Production provides.
+    This section provides the tutorials that explains how to use the Fusion 360 Production reports.
 
     [@tutorials/before-you-begin]: <>
     # Before you begin
     
-      Before you start using Fusion 360 Production APIs, ensure that you have [registered an app](https://developer.autodesk.com/en/docs/oauth/v2/tutorials/create-an-app) and successfully [acquired an OAuth token](https://developer.autodesk.com/en/docs/oauth/v2/tutorials).
+    Before you start using Fusion 360 Production APIs, ensure that you have [registered an app](https://developer.autodesk.com/en/docs/oauth/v2/tutorials/create-an-app) and successfully [acquired an OAuth token](https://developer.autodesk.com/en/docs/oauth/v2/tutorials).
         
-      See the Authentication and Scopes section in the [API Basics](/en/docs/fp360/v1/overview/basics) for the appropriate token based on the data you are accessing.
+    See the Authentication and Scopes section in the [API Basics](/en/docs/fp360/v1/overview/basics) for the appropriate token based on the data you are accessing.
+    
+    In general, access to BIM 360 Team, BIM 360 Docs, Fusion Team, and A360 Personal data requires the use of a [3-legged OAuth2 token](https://developer.autodesk.com/en/docs/oauth/v2/tutorials/get-3-legged-token).
       
-      In general, access to BIM 360 Team, BIM 360 Docs, Fusion Team, and A360 Personal data requires the use of a [3-legged OAuth2 token](https://developer.autodesk.com/en/docs/oauth/v2/tutorials/get-3-legged-token).
-        
-      HTTP `GET` requests to the Forge Schema services require the `data:read` scope.
-        
-      HTTP `POST` requests to the Forge Schema require the `data:create` scope, but can also be called with the `data:write` scope.
+    HTTP `GET` requests to the Forge Schema services require the `data:read` scope.
+      
+    HTTP `POST` requests to the Forge Schema require the `data:create` scope, but can also be called with the `data:write` scope.
     
     [@tutorials/setup-factory]: <>
     # Setup Factory
