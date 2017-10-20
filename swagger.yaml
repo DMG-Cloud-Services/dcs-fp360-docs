@@ -216,17 +216,17 @@ info:
     [@overview/app-framework]: <>
     # Fusion 360 Production App Framework
     
-    Fusion 360 Production provides an App Framework to build custom applications as per the requirements. 
+    Fusion 360 Production provides an App Framework to build custom applications that can add more functionality to Fusion 360 Production. 
     
-    With App Framework, customers and third-party companies can develop custom applications, and integrate these applications with their Fusion 360 Production tenant to get additional functionality on top of Fusion 360 Production features.
+    With an App Framework, customers and third-party companies can build custom application as per the requirements and integrate these applications with Fusion 360 Production.
     
-    Autodesk also provides a marketplace for publishing the custom applications developed by various people. Customers can develop their own applications and ask the Autodesk support team to publish these applications on the marketplace.
+    In addition to the App framework, Autodesk also provides a marketplace for customers to publish their custom applications. So, after developing the applications, customers can contact the Autodesk support team and ask them to publish their applications to the marketplace. 
     
     From the marketplace, end users can directly use the published applications that meets their requirements and integrate them with their Fusion 360 Production application.
     
     **Note**: The applications developed using Fusion 360 Production App Framework are not the Mobile Apps.
     
-    With the App framework, you can develop an App to add the following functionalities in Fusion 360 Production: 
+    With the App framework, customers can develop applications to add the functionalities, such as: 
     
     * IoT data integration for workstations
     * Customers Order View from Commerce backend
