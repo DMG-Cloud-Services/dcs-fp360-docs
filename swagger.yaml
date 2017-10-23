@@ -153,7 +153,7 @@ info:
     
     ### Sub Task Instructions
     
-    A sub task instruction are checklists that need to be performed under a task instruction.
+    A sub task instruction is a checklist of a task instruction.
     
     ### Task Execution
     
@@ -199,7 +199,7 @@ info:
     
     ## Status Workflows
     
-    This section provides the workflows diagrams of how the status change impacts the following entities.
+    This section provides the workflow diagrams of how the status change impacts the entities.
     
     ### Task Status Workflow
     
