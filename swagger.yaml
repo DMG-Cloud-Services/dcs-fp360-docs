@@ -203,15 +203,15 @@ info:
     
     ### Task Status Workflow
     
-    ![Task Status Workflow](https://git.autodesk.com/ACG-Cloud-Services/dmg-documentation/blob/master/task_status_workflow.png?raw=true "Task Status Workflow")
+    ![Task Status Workflow](https://raw.git.autodesk.com/ACG-Cloud-Services/dmg-documentation/master/task_status_workflow.png?token=AAAf_iBkrLD7B6sZt5FbCFjbCnay0Z9iks5aAZ1PwA%3D%3D "Task Status Workflow")
     
     ### Job Sheet Status Workflow
     
-    ![Job Sheet Status Workflow](https://git.autodesk.com/ACG-Cloud-Services/dmg-documentation/blob/master/jobsheet_status_workflow.png?raw=true "Job Sheet Status Workflow")  
+    ![Job Sheet Status Workflow](https://raw.git.autodesk.com/ACG-Cloud-Services/dmg-documentation/master/jobsheet_status_workflow.png?token=AAAf_t5MRdcMhpKAHfsMBvhfcKTt1SGfks5aAZ1dwA%3D%3D "Job Sheet Status Workflow")  
       
     ### Workstation Status Workflow
     
-    ![Workstation Status Workflow](https://git.autodesk.com/ACG-Cloud-Services/dmg-documentation/blob/master/workstation_status_workflow.png?raw=true "Workstation Status Workflow")  
+    ![Workstation Status Workflow](https://raw.git.autodesk.com/ACG-Cloud-Services/dmg-documentation/master/workstation_status_workflow.png?token=AAAf_gIj45oEBTeD22bkiSQsW5gv6NZ3ks5aAZ1pwA%3D%3D "Workstation Status Workflow")  
     
     [@overview/app-framework]: <>
     # Fusion 360 Production App Framework
@@ -3738,6 +3738,105 @@ info:
     
     [@tutorials/view-reports]
     # View the Reports
+    
+    
+    # HTTP Specification
+    
+    ## Components
+    
+    The following are the supported endpoints and methods related to Components.
+    
+    .. include:: ../../_snippets/v1/reference/components.rst
+    
+    ## Entities
+    
+    The following are the supported endpoints and methods related to Entities.
+    
+    .. include:: ../../_snippets/v1/reference/entities.rst
+    
+    ## Entity Events
+    
+    The following are the supported endpoints and methods related to Entity Events.
+    
+    .. include:: ../../_snippets/v1/reference/entityevents.rst
+    
+    ## Extensions
+    
+    The following are the supported endpoints and methods related to Extensions.
+    
+    .. include:: ../../_snippets/v1/reference/extensions.rst
+    
+    ## Documents
+    
+    The following are the supported endpoints and methods related to Documents/ Files.
+    
+    .. include:: ../../_snippets/v1/reference/documents.rst
+    
+    ## Job Instructions
+    
+    The following are the supported endpoints and methods related to Job Instructions.
+    
+    .. include:: ../../_snippets/v1/reference/jobinstructions.rst
+    
+    ## Job Sheets
+    
+    The following are the supported endpoints and methods related to Job Sheets.
+    
+    .. include:: ../../_snippets/v1/reference/jobsheets.rst
+    
+    ## Members
+    
+    The following are the supported endpoints and methods related to Members.
+    
+    .. include:: ../../_snippets/v1/reference/members.rst
+    
+    ## Reports
+    
+    The following are the supported endpoints and methods related to Reports.
+    
+    .. include:: ../../_snippets/v1/reference/reports.rst
+    
+    ## Tags
+    
+    The following are the supported endpoints and methods related to tags.
+    
+    .. include:: ../../_snippets/v1/reference/tags.rst
+    
+    ## Task Executions
+    
+    The following are the supported endpoints and methods related to Task Executions.
+    
+    .. include:: ../../_snippets/v1/reference/taskexecutions.rst
+    
+    ## Task Instructions
+    
+    The following are the supported endpoints and methods related to task instructions.
+    
+    .. include:: ../../_snippets/v1/reference/taskinstructions.rst
+    
+    ## Tenants
+    
+    The following are the supported endpoints and methods related to Tenants.
+    
+    .. include:: ../../_snippets/v1/reference/tenants.rst
+    
+    ## Workcells
+    
+    The following are the supported endpoints and methods related to Workcells.
+    
+    .. include:: ../../_snippets/v1/reference/workcells.rst
+    
+    ## Workqueues
+    
+    The following are the supported endpoints and methods related to Workqueues.
+    
+    .. include:: ../../_snippets/v1/reference/workqueues.rst
+    
+    ## Workstations
+
+    The following are the supported endpoints and methods related to Workstations.
+    
+    .. include:: ../../_snippets/v1/reference/workstations.rst
     
   
   termsOfService: http://swagger.io/terms/
