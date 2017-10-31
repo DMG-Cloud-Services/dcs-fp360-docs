@@ -93,9 +93,9 @@ info:
     
     Fusion 360 Production comprises of the following modules:
     
-    * [APIs](/en/docs/fp360/overview/apis)
-    * [App Framework](/en/docs/fp360/overview/app-framework)
-    * [Reports](/en/docs/fp360/overview/reports)
+    * [APIs](/en/docs/fp360/v1/overview/apis)
+    * [App Framework](/en/docs/fp360/v1/overview/app-framework)
+    * [Reports](/en/docs/fp360/overview/v1/reports)
     
     [@overview/apis]: <>
     # APIs
