@@ -1749,7 +1749,529 @@ info:
     The resource provides the following response:
     
     ```JSON
-    
+    {
+      "data": {
+        "type": "jobinstructions",
+        "id": "9844",
+        "attributes": {
+          "creator": {
+            "id": "4",
+            "firstName": "Viresh",
+            "lastName": "Shah",
+            "email": "viresh.shah@autodesk.com"
+          },
+          "createdDate": "2017-02-09T12:54:42Z",
+          "references": [],
+          "lastModifiedDate": "2017-02-09T12:54:42Z",
+          "tenantId": "job360-test",
+          "name": "Test JI1",
+          "lastModifier": {
+            "id": "4",
+            "firstName": "Viresh",
+            "lastName": "Shah",
+            "email": "viresh.shah@autodesk.com"
+          },
+          "description": "<p>Test JI1 desc goes here</p>\n",
+          "version": "1.0.0",
+          "tags": [
+            "tag1",
+            "tag2",
+            "tag3"
+          ],
+          "endProductName": "",
+          "defaultQuantity": 2
+        },
+        "relationships": {
+          "taskInstructions": {
+            "links": {
+              "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/9844/relationships/taskInstructions",
+              "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/9844/taskInstructions"
+            },
+            "data": [
+              {
+                "type": "taskinstructions",
+                "id": "9845"
+              },
+              {
+                "type": "taskinstructions",
+                "id": "9846"
+              },
+              {
+                "type": "taskinstructions",
+                "id": "9847"
+              }
+            ]
+          },
+          "primaryImage": {
+            "links": {
+              "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/9844/relationships/primaryImage",
+              "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/9844/primaryImage"
+            },
+            "data": {
+              "type": "documents",
+              "id": "1413"
+            }
+          },
+          "documents": {
+            "links": {
+              "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/9844/relationships/documents",
+              "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/9844/documents"
+            },
+            "data": [
+              {
+                "type": "documents",
+                "id": "1412"
+              }
+            ]
+          }
+        },
+        "links": {
+          "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/9844"
+        }
+      },
+      "included": [
+        {
+          "type": "documents",
+          "id": "1413",
+          "attributes": {
+            "originalFileName": "images (2).jpeg",
+            "creator": {
+              "id": "4",
+              "firstName": "Viresh",
+              "lastName": "Shah",
+              "email": "viresh.shah@autodesk.com"
+            },
+            "lastModifiedDate": "2017-02-09T12:54:49Z",
+            "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/v1/files/662fd367-6e93-4b63-94f8-72c600d17aaf.images (2).jpeg",
+            "lastModifier": {
+              "id": "4",
+              "firstName": "Viresh",
+              "lastName": "Shah",
+              "email": "viresh.shah@autodesk.com"
+            },
+            "description": "",
+            "entityId": "9844",
+            "entityVersion": "1.0.0",
+            "createdDate": "2017-02-09T12:54:49Z",
+            "size": "10526",
+            "objectKey": "662fd367-6e93-4b63-94f8-72c600d17aaf.images (2).jpeg",
+            "tenantId": "job360-test",
+            "checksum": "ba1ce41c9ee2d05b7ffca6be677251d045cd3750",
+            "contentType": "image/jpeg",
+            "fileType": "SYSTEM_PRIMARY_IMAGE"
+          },
+          "relationships": {},
+          "links": {
+            "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/documents/1413"
+          }
+        },
+        {
+          "type": "taskinstructions",
+          "id": "9847",
+          "attributes": {
+            "creator": {
+              "id": "4",
+              "firstName": "Viresh",
+              "lastName": "Shah",
+              "email": "viresh.shah@autodesk.com"
+            },
+            "createdDate": "2017-02-09T12:54:50Z",
+            "references": [],
+            "lastModifiedDate": "2017-02-09T12:54:50Z",
+            "consumedComponents": [
+              {
+                "componentId": 7570,
+                "component": {
+                  "id": "7570",
+                  "tenantId": "job360-test",
+                  "tags": [],
+                  "references": [],
+                  "creator": {
+                    "id": "4",
+                    "firstName": "Viresh",
+                    "lastName": "Shah",
+                    "email": "viresh.shah@autodesk.com"
+                  },
+                  "createdDate": "2017-01-10T11:38:47Z",
+                  "lastModifier": {
+                    "id": "4",
+                    "firstName": "Viresh",
+                    "lastName": "Shah",
+                    "email": "viresh.shah@autodesk.com"
+                  },
+                  "lastModifiedDate": "2017-01-23T12:32:44Z",
+                  "primaryImage": {
+                    "tenantId": "job360-test",
+                    "id": "605",
+                    "entityId": "7570",
+                    "fileType": "SYSTEM_PRIMARY_IMAGE",
+                    "objectKey": "17d49801-e3ad-49f7-bab8-482e793c031e.images (2).jpeg",
+                    "size": "10526",
+                    "checksum": "ba1ce41c9ee2d05b7ffca6be677251d045cd3750",
+                    "contentType": "image/jpeg",
+                    "creator": {
+                      "id": "4",
+                      "firstName": "Viresh",
+                      "lastName": "Shah",
+                      "email": "viresh.shah@autodesk.com"
+                    },
+                    "createdDate": "2017-01-23T12:32:48Z",
+                    "lastModifier": {
+                      "id": "4",
+                      "firstName": "Viresh",
+                      "lastName": "Shah",
+                      "email": "viresh.shah@autodesk.com"
+                    },
+                    "lastModifiedDate": "2017-01-23T12:32:48Z",
+                    "originalFileName": "images (2).jpeg",
+                    "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/v1/files/17d49801-e3ad-49f7-bab8-482e793c031e.images (2).jpeg",
+                    "description": "",
+                    "entityVersion": "1.0.0"
+                  },
+                  "documents": [],
+                  "name": "viresh test part 3",
+                  "description": "<p>test part 3</p>\n"
+                },
+                "quantity": 1
+              }
+            ],
+            "tenantId": "job360-test",
+            "name": "Task 3",
+            "lastModifier": {
+              "id": "4",
+              "firstName": "Viresh",
+              "lastName": "Shah",
+              "email": "viresh.shah@autodesk.com"
+            },
+            "description": "<p>Task 3 desc</p>\n",
+            "setupTimeInMins": 32,
+            "executionTimePerQuantityInMins": 12,
+            "tags": []
+          },
+          "relationships": {
+            "recommendedWorkstation": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9847/relationships/recommendedWorkstation",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9847/recommendedWorkstation"
+              },
+              "data": {
+                "type": "workstations",
+                "id": "6409"
+              }
+            },
+            "primaryImage": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9847/relationships/primaryImage",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9847/primaryImage"
+              },
+              "data": null
+            },
+            "jobInstruction": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9847/relationships/jobInstruction",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9847/jobInstruction"
+              },
+              "data": {
+                "type": "jobinstructions",
+                "id": "9844"
+              }
+            },
+            "documents": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9847/relationships/documents",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9847/documents"
+              },
+              "data": [
+                {
+                  "type": "documents",
+                  "id": "1416"
+                }
+              ]
+            }
+          },
+          "links": {
+            "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9847"
+          }
+        },
+        {
+          "type": "taskinstructions",
+          "id": "9846",
+          "attributes": {
+            "creator": {
+              "id": "4",
+              "firstName": "Viresh",
+              "lastName": "Shah",
+              "email": "viresh.shah@autodesk.com"
+            },
+            "createdDate": "2017-02-09T12:54:50Z",
+            "references": [],
+            "lastModifiedDate": "2017-02-09T12:54:50Z",
+            "consumedComponents": [
+              {
+                "componentId": 7570,
+                "component": {
+                  "id": "7570",
+                  "tenantId": "job360-test",
+                  "tags": [],
+                  "references": [],
+                  "creator": {
+                    "id": "4",
+                    "firstName": "Viresh",
+                    "lastName": "Shah",
+                    "email": "viresh.shah@autodesk.com"
+                  },
+                  "createdDate": "2017-01-10T11:38:47Z",
+                  "lastModifier": {
+                    "id": "4",
+                    "firstName": "Viresh",
+                    "lastName": "Shah",
+                    "email": "viresh.shah@autodesk.com"
+                  },
+                  "lastModifiedDate": "2017-01-23T12:32:44Z",
+                  "primaryImage": {
+                    "tenantId": "job360-test",
+                    "id": "605",
+                    "entityId": "7570",
+                    "fileType": "SYSTEM_PRIMARY_IMAGE",
+                    "objectKey": "17d49801-e3ad-49f7-bab8-482e793c031e.images (2).jpeg",
+                    "size": "10526",
+                    "checksum": "ba1ce41c9ee2d05b7ffca6be677251d045cd3750",
+                    "contentType": "image/jpeg",
+                    "creator": {
+                      "id": "4",
+                      "firstName": "Viresh",
+                      "lastName": "Shah",
+                      "email": "viresh.shah@autodesk.com"
+                    },
+                    "createdDate": "2017-01-23T12:32:48Z",
+                    "lastModifier": {
+                      "id": "4",
+                      "firstName": "Viresh",
+                      "lastName": "Shah",
+                      "email": "viresh.shah@autodesk.com"
+                    },
+                    "lastModifiedDate": "2017-01-23T12:32:48Z",
+                    "originalFileName": "images (2).jpeg",
+                    "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/v1/files/17d49801-e3ad-49f7-bab8-482e793c031e.images (2).jpeg",
+                    "description": "",
+                    "entityVersion": "1.0.0"
+                  },
+                  "documents": [],
+                  "name": "viresh test part 3",
+                  "description": "<p>test part 3</p>\n"
+                },
+                "quantity": 1
+              }
+            ],
+            "tenantId": "job360-test",
+            "name": "Task 2",
+            "lastModifier": {
+              "id": "4",
+              "firstName": "Viresh",
+              "lastName": "Shah",
+              "email": "viresh.shah@autodesk.com"
+            },
+            "description": "<p>Task 2 desc</p>\n",
+            "setupTimeInMins": 32,
+            "executionTimePerQuantityInMins": 12,
+            "tags": []
+          },
+          "relationships": {
+            "recommendedWorkstation": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9846/relationships/recommendedWorkstation",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9846/recommendedWorkstation"
+              },
+              "data": {
+                "type": "workstations",
+                "id": "6408"
+              }
+            },
+            "primaryImage": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9846/relationships/primaryImage",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9846/primaryImage"
+              },
+              "data": null
+            },
+            "jobInstruction": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9846/relationships/jobInstruction",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9846/jobInstruction"
+              },
+              "data": {
+                "type": "jobinstructions",
+                "id": "9844"
+              }
+            },
+            "documents": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9846/relationships/documents",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9846/documents"
+              },
+              "data": [
+                {
+                  "type": "documents",
+                  "id": "1415"
+                }
+              ]
+            }
+          },
+          "links": {
+            "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskinstructions/9846"
+          }
+        },
+        {
+          "type": "workstations",
+          "id": "6408",
+          "attributes": {
+            "creator": {
+              "id": "30",
+              "firstName": "Christopher",
+              "lastName": "Abraham",
+              "email": "christopher.abraham@autodesk.com"
+            },
+            "createdDate": "2016-10-21T15:41:01Z",
+            "references": [
+              {
+                "description": "Haas VF-2SS",
+                "url": "http://www.haascnc.com/mt_spec1.asp?id=VF-2SS&webID=SUPER_SPEED_VMC#gsc.tab=0"
+              }
+            ],
+            "lastModifiedDate": "2016-10-21T15:41:01Z",
+            "tenantId": "job360-test",
+            "name": "Pier 9 - Haas VF-2SS",
+            "lastModifier": {
+              "id": "30",
+              "firstName": "Christopher",
+              "lastName": "Abraham",
+              "email": "christopher.abraham@autodesk.com"
+            },
+            "description": "<p>Haas VF-2SS located at the Autodesk Pier 9 Workshop</p>\n\n<p> </p>\n\n<p>Spindle: 12,000rpm, 30HP</p>\n\n<p> </p>\n\n<p>XYZ Travel: 30",
+            "tags": [],
+            "status": "Idle"
+          },
+          "relationships": {
+            "primaryImage": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/6408/relationships/primaryImage",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/6408/primaryImage"
+              },
+              "data": {
+                "type": "documents",
+                "id": "368"
+              }
+            },
+            "documents": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/6408/relationships/documents",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/6408/documents"
+              },
+              "data": []
+            }
+          },
+          "links": {
+            "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/6408"
+          }
+        },
+        {
+          "type": "workstations",
+          "id": "9841",
+          "attributes": {
+            "creator": {
+              "id": "7",
+              "firstName": "Sominath",
+              "lastName": "Pathare",
+              "email": "sominath.pathare@autodesk.com"
+            },
+            "createdDate": "2017-02-09T12:13:33Z",
+            "references": [],
+            "lastModifiedDate": "2017-02-09T12:13:33Z",
+            "tenantId": "job360-test",
+            "name": "DMG DMU 160PZZ",
+            "lastModifier": {
+              "id": "7",
+              "firstName": "Sominath",
+              "lastName": "Pathare",
+              "email": "sominath.pathare@autodesk.com"
+            },
+            "description": "<p><span>Practical 5-axis machining for maximal productivity in all industries and workpieces up to 4.5t</span></p>\n",
+            "tags": [
+              "milling",
+              "5-axis"
+            ],
+            "status": "Idle"
+          },
+          "relationships": {
+            "primaryImage": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/9841/relationships/primaryImage",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/9841/primaryImage"
+              },
+              "data": null
+            },
+            "documents": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/9841/relationships/documents",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/9841/documents"
+              },
+              "data": []
+            }
+          },
+          "links": {
+            "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/9841"
+          }
+        },
+        {
+          "type": "workstations",
+          "id": "6409",
+          "attributes": {
+            "creator": {
+              "id": "30",
+              "firstName": "Christopher",
+              "lastName": "Abraham",
+              "email": "christopher.abraham@autodesk.com"
+            },
+            "createdDate": "2016-10-21T16:30:56Z",
+            "references": [],
+            "lastModifiedDate": "2016-10-21T16:30:56Z",
+            "tenantId": "job360-test",
+            "name": "Pier 9 - DoAll Band Saw",
+            "lastModifier": {
+              "id": "30",
+              "firstName": "Christopher",
+              "lastName": "Abraham",
+              "email": "christopher.abraham@autodesk.com"
+            },
+            "tags": [],
+            "status": "Idle"
+          },
+          "relationships": {
+            "primaryImage": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/6409/relationships/primaryImage",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/6409/primaryImage"
+              },
+              "data": {
+                "type": "documents",
+                "id": "369"
+              }
+            },
+            "documents": {
+              "links": {
+                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/6409/relationships/documents",
+                "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/6409/documents"
+              },
+              "data": []
+            }
+          },
+          "links": {
+            "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/6409"
+          }
+        }
+      ],
+      "meta": {}
+    }
     ```
     
     ## Step 4: Create a Job Sheet
