@@ -1684,6 +1684,8 @@ info:
     
     In this step, you modify the job instruction for a job sheet. While modifying the job instruction, you either rearrange the existing task instructions, add the new task instructions, or delete any unwanted task instructions. 
     
+    When you modify the job instruction, Fusion 360 Production creates a new viersion of the job instruction. The job sheets that are containing the corresponding job instruction still refers the ealier version. You need to dispatch a new job sheet for the changed job instruction. 
+    
     The Fusion 360 Production API provides the `PATCH taskinstructions` endpoint to modify the job instruction.
     
     ### Example
