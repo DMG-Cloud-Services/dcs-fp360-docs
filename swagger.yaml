@@ -456,7 +456,7 @@ info:
     In this section, we provide some step-by-step tutorials demonstrating how the Fusion 360 Production service APIs work, how to use the App Framework, and how to access the reports. 
     
     ## [Before You Begin](/en/docs/fp360/v1/tutorials/before-you-begin)
-    This section provides the information that you need to verify before you start using the APIs and App Framework.
+    Before you start performing the steps given in the tutorials, read the information given in this topic and ensure that you have required access and scope to run the endpoint requests.
     
     ## API Tutorials
     This section provides the tutorials that explains how you can use the APIs that Fusion 360 Production provides.
