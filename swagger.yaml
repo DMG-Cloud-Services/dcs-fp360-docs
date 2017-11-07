@@ -4278,23 +4278,11 @@ info:
     
     .. include:: ../../_snippets/v1/reference/entities.rst
     
-    ## Entity Events
-    
-    The following are the supported endpoints and methods related to Entity Events.
-    
-    .. include:: ../../_snippets/v1/reference/entityevents.rst
-    
-    ## Extensions
-    
-    The following are the supported endpoints and methods related to Extensions.
-    
-    .. include:: ../../_snippets/v1/reference/extensions.rst
-    
     ## Documents
     
     The following are the supported endpoints and methods related to Documents/ Files.
     
-    .. include:: ../../_snippets/v1/reference/documents.rst
+    .. include:: ../../_snippets/v1/reference/files.rst
     
     ## Job Instructions
     
@@ -5844,7 +5832,7 @@ paths:
         '200': {$ref: '#/responses/taskInstruction'}
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
-  '/taskinstructions/{id}  ':
+  '/taskinstructions/{id}  ' :
     x-summary: DELETE TaskInstruction
     delete:
       tags: [ "Task Instructions" ]
