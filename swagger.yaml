@@ -4665,7 +4665,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
-  '/components/{id} ':
+  '/components/{id}  ':
     x-summary: PATCH Component
     patch:
       tags: [ "Components" ]
@@ -4720,7 +4720,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
 
-  '/components/{id}  ':
+  '/components/{id} ':
     x-summary: DELETE Component
     delete:
       tags: [ "Components" ]
@@ -4730,8 +4730,8 @@ paths:
           Status codes:
           |Message|HTTP Status Code|Error Code|Data
           |----|----|----|----
-          |Given member id does not exist|400 Bad Request|105|
-          |Tenant not associated for given member.|401 Unauthorized Request|30028|         
+          |Given member id does not exist|400|Bad Request|105
+          |Tenant not associated for given member.|401|Unauthorized Request|30028         
          
       operationId: deleteComponent
       parameters:
@@ -5068,11 +5068,11 @@ paths:
             Status codes:
             |Message|HTTP Status Code|Error Code|Data
             |----|----|----|----
-            |Given member id does not exist|400 Bad Request|105|
-            |Given Workstation doesn't exist|400 Bad Request|30001|
-            |Tenant not associated for given member.|401 Unauthorized Request|30028|
-            |Workstation is Operating. Cannot delete|400 Bad Request|30091|
-            |Workstation have pending tasks. Cannot delete|400 Bad Request|30092|
+            |Given member id does not exist|400 |Bad Request|105
+            |Given Workstation doesn't exist|400|Bad Request|30001
+            |Tenant not associated for given member.|401 |Unauthorized Request|30028
+            |Workstation is Operating. Cannot delete|400 |Bad Request|30091
+            |Workstation have pending tasks. Cannot delete|400| Bad Request|30092
 
       operationId: deleteWorkstation
       parameters:
