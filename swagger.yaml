@@ -4400,7 +4400,6 @@ securityDefinitions:
 
 paths:
   /components:
-    x-summary: GET Components
     x-description: |
         Entity describing component needed to execute a component or component consumed during execution of task.
     get:
@@ -4411,8 +4410,8 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
+        |Given member id does not exist|400| Bad Request|105|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
         
       operationId: getComponents
       parameters:
@@ -4437,88 +4436,6 @@ paths:
         '200': {$ref: '#/responses/components'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /components/{id}:
-    x-summary: GET Component
-    x-description: |
-        Entity describing component needed to execute a component or component consumed during execution of task.
-    get:
-      tags: [ "Components" ]
-      description: |
-        Get a Component.
-                
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----|
-        |Given component doesn't exist|400 Bad Request|30064|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
-        
-      operationId: getComponent
-      parameters:
-        - name: id
-          in: path
-          description: id of Component
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/component'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /components/{id}/documents:
-    x-summary: GET Component's Documents
-    x-description: |
-        Get all documents for given component.
-    get:
-      tags: [ "Components" ]
-      description: |
-        Get all documents for given components.
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400 Bad Request|30020|
-        
-      operationId: getComponentDocuments
-      parameters:
-        - name: id
-          in: path
-          description: id of Component
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/documents'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /components/{id}/primaryImage:
-    x-summary: GET Component's Image
-    x-description: |
-        Get image for given component.
-    get:
-      tags: [ "Components" ]
-      description: |
-        Get image for given component.
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400 Bad Request|30020|
-        
-      operationId: getComponentPrimaryImage
-      parameters:
-        - name: id
-          in: path
-          description: id of Component
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/primaryImage'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  '/components ':
-    x-summary: POST Component
     post:
       tags: [ "Components" ]
       description: |
@@ -4527,9 +4444,9 @@ paths:
             Status codes:
             |Message|HTTP Status Code|Error Code|Data
             |----|----|----|----
-            |Given member id does not exist|400 Bad Request|105|
-            |Tenant not associated for given member.|401 Unauthorized Request|30028|
-            |Missing required attribute tenantId in object|400 Bad Request|30051|
+            |Given member id does not exist|400| Bad Request|105
+            |Tenant not associated for given member.|401| Unauthorized Request|30028
+            |Missing required attribute tenantId in object|400| Bad Request|30051
                    
       operationId: createComponent
       parameters:
@@ -4562,9 +4479,157 @@ paths:
         '201': {$ref: '#/responses/component'}
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
+  /components/{id}:
+    get:
+      tags: [ "Components" ]
+      description: |
+        Get a Component.
+        Entity describing component needed to execute a component or component consumed during execution of task.
+                
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----|
+        |Given component doesn't exist|400| Bad Request|30064
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        
+      operationId: getComponent
+      parameters:
+        - name: id
+          in: path
+          description: id of Component
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/component'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+    patch:
+      tags: [ "Components" ]
+      description: |
+           Updates a Component
+           
+           Status codes:
+           |Message|HTTP Status Code|Error Code|Data
+           |----|----|----|----
+           |Given member id does not exist|400| Bad Request|105
+           |Tenant not associated for given member.|401| Unauthorized Request|30028
+
+      operationId: updateComponent
+      parameters:
+        - name: id
+          in: path
+          description: ID of Component
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Input Component attributes
+          required: true
+          schema:
+            $ref: '#/definitions/json_api_input_patch_component'
+            example:
+              {
+                  "data": {
+                      "type": "components",
+                      "attributes": {
+                          "tenantId": "job360-test",
+                          "description": "Description of this component",
+                          "name": "Metal component 1",
+                          "tags": [
+                              "metal_shop", "test"
+                          ],
+                          "references": [
+                              {
+                                  "description": "ABC link",
+                                  "url": "http://abc.com"
+                              },
+                              {
+                                  "description": "DEF link",
+                                  "url": "http://def.com"
+                              }
+                          ]
+                      }
+                  }
+              }
+      responses:
+        '200': {$ref: '#/responses/component'}
+      security:
+        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+    delete:
+      tags: [ "Components" ]
+      description: |
+          Delete a Component.
+         
+          Status codes:
+          |Message|HTTP Status Code|Error Code|Data
+          |----|----|----|----
+          |Given member id does not exist|400|Bad Request|105
+          |Tenant not associated for given member.|401|Unauthorized Request|30028         
+         
+      operationId: deleteComponent
+      parameters:
+        - name: id
+          in: path
+          description: ID of Component
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Component deleted
+      security:
+        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+  
+  /components/{id}/documents:
+    x-description: |
+        Get all documents for given component.
+    get:
+      tags: [ "Components" ]
+      description: |
+        Get all documents for given components.
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Invalid document type.|400| Bad Request|30020
+        
+      operationId: getComponentDocuments
+      parameters:
+        - name: id
+          in: path
+          description: id of Component
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/documents'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
+  /components/{id}/primaryImage:
+    x-description: |
+        Get image for given component.
+    get:
+      tags: [ "Components" ]
+      description: |
+        Get image for given component.
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Invalid document type.|400| Bad Request|30020
+        
+      operationId: getComponentPrimaryImage
+      parameters:
+        - name: id
+          in: path
+          description: id of Component
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/primaryImage'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /batch/components:
-    x-summary: POST Components batch
     post:
       tags: [ "Components" ]
       description: | 
@@ -4573,9 +4638,9 @@ paths:
             Status codes:
             |Message|HTTP Status Code|Error Code|Data
             |----|----|----|----
-            |Invalid input for batch components|400 Bad Request|30063|
-            |Invalid name for component.|400 Bad Request|30068|
-            |Invalid parameter|400 Bad Request|122|   
+            |Invalid input for batch components|400| Bad Request|30063
+            |Invalid name for component.|400| Bad Request|30068
+            |Invalid parameter|400| Bad Request|122  
             
       operationId: createComponents
       parameters:
@@ -4641,8 +4706,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
-  '/batchimport/components':
-    x-summary: POST Components Batch Import
+  /batchimport/components:
     post:
       tags: [ "Components" ]
       description: Create multiple components by batch import using file. Currenlty only CSV file format is supported. Here's the sample file
@@ -4653,89 +4717,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
-  '/components/{id}  ':
-    x-summary: PATCH Component
-    patch:
-      tags: [ "Components" ]
-      description: |
-           Updates a Component
-           
-           Status codes:
-           |Message|HTTP Status Code|Error Code|Data
-           |----|----|----|----
-           |Given member id does not exist|400 Bad Request|105|
-           |Tenant not associated for given member.|401 Unauthorized Request|30028|
-
-      operationId: updateComponent
-      parameters:
-        - name: id
-          in: path
-          description: ID of Component
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: Input Component attributes
-          required: true
-          schema:
-            $ref: '#/definitions/json_api_input_patch_component'
-            example:
-              {
-                  "data": {
-                      "type": "components",
-                      "attributes": {
-                          "tenantId": "job360-test",
-                          "description": "Description of this component",
-                          "name": "Metal component 1",
-                          "tags": [
-                              "metal_shop", "test"
-                          ],
-                          "references": [
-                              {
-                                  "description": "ABC link",
-                                  "url": "http://abc.com"
-                              },
-                              {
-                                  "description": "DEF link",
-                                  "url": "http://def.com"
-                              }
-                          ]
-                      }
-                  }
-              }
-      responses:
-        '200': {$ref: '#/responses/component'}
-      security:
-        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
-
-  '/components/{id} ':
-    x-summary: DELETE Component
-    delete:
-      tags: [ "Components" ]
-      description: |
-          Delete a Component.
-         
-          Status codes:
-          |Message|HTTP Status Code|Error Code|Data
-          |----|----|----|----
-          |Given member id does not exist|400|Bad Request|105
-          |Tenant not associated for given member.|401|Unauthorized Request|30028         
-         
-      operationId: deleteComponent
-      parameters:
-        - name: id
-          in: path
-          description: ID of Component
-          required: true
-          type: string
-      responses:
-        '204':
-          description: Component deleted
-      security:
-        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
-
   /workstations:
-    x-summary: GET Workstations
     x-description: |
         Entity describing machine/workstation that will be used to execute a given task.
     get:
@@ -4746,8 +4728,8 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
+        |Given member id does not exist|400| Bad Request|105
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
         
       operationId: getWorkstations
       parameters:
@@ -4777,93 +4759,6 @@ paths:
         '200': {$ref: '#/responses/workstations'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /workstations/{id}:
-    x-summary: GET Workstation
-    x-description: |
-        Entity describing machine/workstation that will be used to execute a given task.
-    get:
-      tags: [ "Workstations" ]
-      description: |
-        Get a Workstation.
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Given Workstation doesn't exist|400 Bad Request|30001|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
-        |Invalid parameter(s) |400 Bad Request|107|
-        |Invalid tenant id|401 Unauthorized |30032|
-        
-      operationId: getWorkstation
-      parameters:
-        - name: id
-          in: path
-          description: id of Workstation
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/workstation'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /workstations/{id}/documents:
-    x-summary: GET Workstation's Documents
-    x-description: |
-        Get all documents for given workstation.
-    get:
-      tags: [ "Workstations" ]
-      description: |
-        Get all documents for given workstation.
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400 Bad Request|30020|
-        
-      operationId: getWorkstationDocuments
-      parameters:
-        - name: id
-          in: path
-          description: id of Workstation
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/documents'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /workstations/{id}/primaryImage:
-    x-summary: GET Workstation's Image
-    x-description: |
-        Get image for given workstation.
-    get:
-      tags: [ "Workstations" ]
-      description: |
-        Get image for given workstation.
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given Workstation doesn't exist|400 Bad Request|30001|
-        |Invalid document type.|400 Bad Request|30020|
-        
-      operationId: getWorkstationPrimaryImage
-      parameters:
-        - name: id
-          in: path
-          description: id of Workstation
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/primaryImage'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-
-  '/workstations ':
-    x-summary: POST Workstation
     post:
       description: | 
             Create a new Workstation.
@@ -4871,8 +4766,8 @@ paths:
             Status codes:
             |Message|HTTP Status Code|Error Code|Data
             |----|----|----|----
-            |Given member id does not exist|400 Bad Request|105|
-            |Tenant not associated for given member.|401 Unauthorized Request|30028|  
+            |Given member id does not exist|400| Bad Request|105
+            |Tenant not associated for given member.|401| Unauthorized Request|30028
             
       operationId: createWorkstation
       parameters:
@@ -4910,8 +4805,171 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
-  '/batch/workstations':
-    x-summary: POST Workstations Batch
+  /workstations/{id}:
+    x-description: |
+        Entity describing machine/workstation that will be used to execute a given task.
+    get:
+      tags: [ "Workstations" ]
+      description: |
+        Get a Workstation.
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Given member id does not exist|400| Bad Request|105
+        |Given Workstation doesn't exist|400| Bad Request|30001
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        |Invalid parameter(s) |400| Bad Request|107
+        |Invalid tenant id|401| Unauthorized |30032
+        
+      operationId: getWorkstation
+      parameters:
+        - name: id
+          in: path
+          description: id of Workstation
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/workstation'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+    patch:
+      description: |
+        Updates a Workstation's attributes.
+
+        Workstation Statuses:
+        ```
+        Idle
+        Operating
+        OfflineScheduleMaintenance
+        OfflineBroken
+        ```
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Given member id does not exist|400| Bad Request|105
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        |Invalid workstation status|400| Bad Request|30062
+        
+      operationId: updateWorkstation
+      parameters:
+        - name: id
+          in: path
+          description: ID of Workstation
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Input Workstation attributes
+          required: true
+          schema:
+            $ref: '#/definitions/json_api_input_patch_workstation'
+            example:
+              {
+                "data": {
+                  "type": "workstations",
+                  "id":"2817",
+                  "attributes": {
+                    "name": "workstations Regression test 0002",
+                    "description": "workstations Regression test 0002",
+                    "status": "Idle",
+                    "tags": ["test","test01","test002"],
+                    "references": [{"description": "ref2 description", "url": "http://www.ref2.com"}]
+                  },
+                  "relationships": {            
+                    "workcell": {                
+                      "data": {
+                        "type": "workcells",
+                        "id": "152309"
+                      }
+                    }
+                  }
+                }
+              }
+      responses:
+        '200': {$ref: '#/responses/workstation'}
+      security:
+        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+    delete:
+      description: | 
+            Delete a Workstation.
+            
+            Status codes:
+            |Message|HTTP Status Code|Error Code|Data
+            |----|----|----|----
+            |Given member id does not exist|400 |Bad Request|105
+            |Given Workstation doesn't exist|400|Bad Request|30001
+            |Tenant not associated for given member.|401 |Unauthorized Request|30028
+            |Workstation is Operating. Cannot delete|400 |Bad Request|30091
+            |Workstation have pending tasks. Cannot delete|400| Bad Request|30092
+
+      operationId: deleteWorkstation
+      parameters:
+        - name: id
+          in: path
+          description: ID of Workstation
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: Workstation deleted
+      security:
+        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+
+  /workstations/{id}/documents:
+    x-description: |
+        Get all documents for given workstation.
+    get:
+      tags: [ "Workstations" ]
+      description: |
+        Get all documents for given workstation.
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Invalid document type.|400| Bad Request|30020
+        
+      operationId: getWorkstationDocuments
+      parameters:
+        - name: id
+          in: path
+          description: id of Workstation
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/documents'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
+  /workstations/{id}/primaryImage:
+    x-description: |
+        Get image for given workstation.
+    get:
+      tags: [ "Workstations" ]
+      description: |
+        Get image for given workstation.
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Given Workstation doesn't exist|400| Bad Request|30001
+        |Invalid document type.|400| Bad Request|30020
+        
+      operationId: getWorkstationPrimaryImage
+      parameters:
+        - name: id
+          in: path
+          description: id of Workstation
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/primaryImage'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
+  /batch/workstations:
     post:
       description: | 
             Create multiple workstations.
@@ -4919,9 +4977,9 @@ paths:
             Status codes:
             |Message|HTTP Status Code|Error Code|Data
             |----|----|----|----
-            |Invalid parameter|400 Bad Request|122|
-            |Invalid name for workstation.|400 Bad Request|30042|
-            |Invalid input for batch workstations|400 Bad Request|30061|
+            |Invalid parameter|400| Bad Request|122
+            |Invalid name for workstation.|400| Bad Request|30042
+            |Invalid input for batch workstations|400| Bad Request|30061
 
       operationId: createWorkstations
       parameters:
@@ -4965,8 +5023,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
-  '/batchimport/workstations':
-    x-summary: POST Workstation Batch Import
+  /batchimport/workstations:
     post:
       description: |
               Create multiple workstations by batch import using file. Currenlty only CSV file format is supported. Here's the sample file
@@ -4975,10 +5032,10 @@ paths:
               Status codes:
               |Message|HTTP Status Code|Error Code|Data
               |----|----|----|----
-              |Error while parsing the workstations payload/file to fetch workstations data|400 Bad Request|30038|
-              |The file format is not supported.|400 Bad Request|30039|
-              |Invalid name for workstation.|400 Bad Request|30042|
-              |The file is empty!|400 Bad Request|30043|
+              |Error while parsing the workstations payload/file to fetch workstations data|400| Bad Request|30038
+              |The file format is not supported.|400| Bad Request|30039
+              |Invalid name for workstation.|400| Bad Request|30042
+              |The file is empty!|400| Bad Request|30043
                    
       operationId: createWorkstations
       responses:
@@ -4986,99 +5043,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
-  '/workstations/{id} ':
-    x-summary: PATCH Workstation
-    patch:
-      description: |
-        Updates a Workstation's attributes.
-
-        Workstation Statuses:
-        ```
-        Idle
-        Operating
-        OfflineScheduleMaintenance
-        OfflineBroken
-        ```
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
-        |Invalid workstation status|400 Bad Request|30062|
-        
-      operationId: updateWorkstation
-      parameters:
-        - name: id
-          in: path
-          description: ID of Workstation
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: Input Workstation attributes
-          required: true
-          schema:
-            $ref: '#/definitions/json_api_input_patch_workstation'
-            example:
-              {
-                "data": {
-                  "type": "workstations",
-                  "id":"2817",
-                  "attributes": {
-                    "name": "workstations Regression test 0002",
-                    "description": "workstations Regression test 0002",
-                    "status": "Idle",
-                    "tags": ["test","test01","test002"],
-                    "references": [{"description": "ref2 description", "url": "http://www.ref2.com"}]
-                  },
-                  "relationships": {            
-                    "workcell": {                
-                      "data": {
-                        "type": "workcells",
-                        "id": "152309"
-                      }
-                    }
-                  }
-                }
-              }
-      responses:
-        '200': {$ref: '#/responses/workstation'}
-      security:
-        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
-        
-  '/workstations/{id}  ':
-    x-summary: DELETE Workstation
-    delete:
-      description: | 
-            Delete a Workstation.
-            
-            Status codes:
-            |Message|HTTP Status Code|Error Code|Data
-            |----|----|----|----
-            |Given member id does not exist|400 |Bad Request|105
-            |Given Workstation doesn't exist|400|Bad Request|30001
-            |Tenant not associated for given member.|401 |Unauthorized Request|30028
-            |Workstation is Operating. Cannot delete|400 |Bad Request|30091
-            |Workstation have pending tasks. Cannot delete|400| Bad Request|30092
-
-      operationId: deleteWorkstation
-      parameters:
-        - name: id
-          in: path
-          description: ID of Workstation
-          required: true
-          type: integer
-          format: int64
-      responses:
-        '204':
-          description: Workstation deleted
-      security:
-        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
-
-
   /workcells:
-    x-summary: GET Workcells
     x-description: |
         Entity representing collection of workstations. Every tenant will have one default Workcell named Factory.
     get:
@@ -5089,8 +5054,8 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
+        |Given member id does not exist|400| Bad Request|105
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
         
       operationId: getWorkcells
       parameters:
@@ -5120,37 +5085,6 @@ paths:
         '200': {$ref: '#/responses/workcellsList'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /workcells/{id}:
-    x-summary: GET Workcell
-    x-description: |
-        Entity describing collection of worksations.
-    get:
-      tags: [ "Workcells" ]
-      description: |
-        Get a Workcell.
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Given workcell doesn't exist|400 Bad Request|30104|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
-        
-      operationId: getWorkcell
-      parameters:
-        - name: id
-          in: path
-          description: id of Workcell
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/workcell'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  '/workcells ':
-    x-summary: POST Workcell
     post:
       description: | 
             Create a new Workcell.
@@ -5158,8 +5092,8 @@ paths:
             Status codes:
             |Message|HTTP Status Code|Error Code|Data
             |----|----|----|----
-            |Given member id does not exist|400 Bad Request|105|
-            |Tenant not associated for given member.|401 Unauthorized Request|30028|  
+            |Given member id does not exist|400| Bad Request|105
+            |Tenant not associated for given member.|401| Unauthorized Request|30028
             
       operationId: createWorkcell
       parameters:
@@ -5189,17 +5123,41 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
-  '/workcells/{id} ':
-    x-summary: PATCH Workcell
+  /workcells/{id}:
+    x-description: |
+        Entity describing collection of worksations.
+    get:
+      tags: [ "Workcells" ]
+      description: |
+        Get a Workcell.
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Given member id does not exist|400| Bad Request|105
+        |Given workcell doesn't exist|400| Bad Request|30104
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        
+      operationId: getWorkcell
+      parameters:
+        - name: id
+          in: path
+          description: id of Workcell
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/workcell'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
     patch:
       description: |
         Updates a Workcell's attributes.
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
-        |Invalid workcell status|400 Bad Request|30103|
+        |Given member id does not exist|400| Bad Request|105
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        |Invalid workcell status|400| Bad Request|30103
         
       operationId: updateWorkcell
       parameters:
@@ -5230,9 +5188,6 @@ paths:
         '200': {$ref: '#/responses/workcell'}
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
-        
-  '/workcells/{id}  ':
-    x-summary: DELETE Workcell
     delete:
       description: | 
             Delete a Workcell.
@@ -5240,10 +5195,10 @@ paths:
             Status codes:
             |Message|HTTP Status Code|Error Code|Data
             |----|----|----|----
-            |Given member id does not exist|400 Bad Request|105|
-            |Given Workstation doesn't exist|400 Bad Request|30001|
-            |Tenant not associated for given member.|401 Unauthorized Request|30028|
-            |Invalid workcell status|400 Bad Request|30103|
+            |Given member id does not exist|400| Bad Request|105
+            |Given Workstation doesn't exist|400| Bad Request|30001
+            |Tenant not associated for given member.|401| Unauthorized Request|30028
+            |Invalid workcell status|400| Bad Request|30103
             
       operationId: deleteWorkcell
       parameters:
@@ -5259,8 +5214,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
 
-  '/workcells/{id}/relationships':
-    x-summary: DELETE Workcell's Workstation(s)
+  /workcells/{id}/relationships:
     delete:
       description: | 
             Remove Workstation(s) from a workcell.  This will assign the workstation(s) back to the default "Factory" workcell.
@@ -5268,11 +5222,11 @@ paths:
             Status codes:
             |Message|HTTP Status Code|Error Code|Data
             |----|----|----|----
-            |Given member id does not exist|400 Bad Request|105|
-            |Given Workstation doesn't exist|400 Bad Request|30001|
-            |Tenant not associated for given member.|401 Unauthorized Request|30028|
-            |Workcell does not exist.|400 Bad Request|30104|
-            |Workstation does not belong to workcell.|400 Bad Request|30110|
+            |Given member id does not exist|400| Bad Request|105
+            |Given Workstation doesn't exist|400| Bad Request|30001
+            |Tenant not associated for given member.|401| Unauthorized Request|30028
+            |Workcell does not exist.|400| Bad Request|30104
+            |Workstation does not belong to workcell.|400| Bad Request|30110
             
       operationId: deleteWorkcellsWorkstations
       parameters:
@@ -5308,7 +5262,6 @@ paths:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
 
   /workqueues:
-    x-summary: GET Work Queues
     x-description: |
         A scheduling API for supervisors to view, re-order, and move TaskExecutions for given workstations or workcells, known as a work queues.
     get:
@@ -5319,26 +5272,23 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
+        |Given member id does not exist|400| Bad Request|105
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
         
       operationId: getWorkQueues
       responses:
         '200': {$ref: '#/responses/workqueueList'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  '/workqueues/ ':
-    x-summary: PATCH Work Queue
     patch:
       description: |
         A supervisor updates a Work Queue's Task Executions.  Updates the order given in the request body of Task Executions for given workstations or workcells.  As well, if a Task Execution moves from a workcell or workstation task queue to another workstation or workcell, then the Task Execution is reassigned to that new workstation/workcell.
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
-        |Invalid workcell status|400 Bad Request|30103|
+        |Given member id does not exist|400| Bad Request|105
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        |Invalid workcell status|400| Bad Request|30103
         
       operationId: updateWorkQueue
       parameters:
@@ -5413,7 +5363,6 @@ paths:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
   
   /workstationsummaries:
-    x-summary: GET Workstation Summaries
     x-description: |
         Endpoint describing machine/workstations summary that will be used to execute a given task.  This is a special GET-only endpoint designed to aggregate data related to workstations for reporting purposes.
         The response includes details of the workstation itself, as well as workstation total counts such as: 
@@ -5465,7 +5414,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /workstationsummaries/{workstationId}:
-    x-summary: GET Workstation Summary
     x-description: |
         Report describing machine/workstation summary that will be used to execute a given task.   This is a special GET-only endpoint designed to aggregate data related to workstations for reporting purposes. "workstationIoTData" will be returned ONLY for workstations that belong to a tenant that has fusion connect enabled. Please contact DCS team for enabling fusion connect.
         The response includes details of the workstation itself, as well as the `currentTaskExecution` and collections of task execution queues including:
@@ -5482,7 +5430,7 @@ paths:
           Status codes:
           |Message|HTTP Status Code|Error Code|Data
           |----|----|----|----
-          |Given Workstation doesn't exist|400 Bad Request|30001|
+          |Given Workstation doesn't exist|400| Bad Request|30001|
          
       operationId: getWorkstation
       parameters:
@@ -5501,8 +5449,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
-  '/taskinstructions':
-    x-summary: GET TaskInstructions
+  /taskinstructions:
     x-description: |
         Report describing a collection of machine/workstation summaries that will be used to execute a given task. It has information such as a unique number assigned to the task, operation to be executed, components to be consumed, workstation to be used and estimated time required to complete this component.
     get:
@@ -5513,7 +5460,7 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Invalid parameter|400 Bad Request|122|
+        |Invalid parameter|400| Bad Request|122
         
       operationId: getTaskInstruction
       parameters:
@@ -5526,88 +5473,6 @@ paths:
         '200': {$ref: '#/responses/taskInstructions'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  '/taskinstructions/{id}':
-    x-summary: GET TaskInstruction
-    x-description: |
-        This is a single unit of task to be executed as a component of job instruction. It has information such as a unique number assigned to the task, operation to be executed, components to be consumed, workstation to be used and estimated time required to complete this component.
-    get:
-      tags: [ "Task Instructions" ]
-      description: |
-        Get a Task Instruction
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Task Instruction not found.|400 Bad Request|30003|
-        
-      operationId: getTaskInstruction
-      parameters:
-        - name: id
-          in: path
-          description: ID of task instruction
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/taskInstruction'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /taskinstructions/{id}/documents:
-    x-summary: GET TaskInstruction's Documents
-    x-description: |
-        Get all documents for given task instruction.
-    get:
-      tags: [ "Task Instructions" ]
-      description: |
-        Get all documents for given task instruction.
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400 Bad Request|30020|
-
-      operationId: getTaskInstructionDocuments
-      parameters:
-        - name: id
-          in: path
-          description: id of Task Instruction
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/documents'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /taskinstructions/{id}/primaryImage:
-    x-summary: GET TaskInstruction's Image
-    x-description: |
-        Get image for given task instruction.
-    get:
-      tags: [ "Task Instructions" ]
-      description: |
-        Get image for given task instruction.
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400 Bad Request|30020|
-
-      operationId: getTaskInstructionPrimaryImage
-      parameters:
-        - name: id
-          in: path
-          description: id of Task Instruction
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/primaryImage'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-
-  '/taskinstructions ':
-    x-summary: POST TaskInstruction
     post:
       tags: [ "Task Instructions" ]
       description: |
@@ -5616,14 +5481,14 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Invalid parameter(s)|400 Bad Request|107|
-        |Missing required relationship|400 Bad Request|30004|
-        |Invalid tenant id |400 Bad Request|30016|tenantId
-        |Request is not allowed for this member's role, please login using a valid role |403 Forbidden Request|123|
-        |Tenant not associated for given member.|401 Unauthorized |30028|tenantId
-        |Both workstation and workcell assigned.  Only one is allowed. |400 Bad Request|30109|
-        |Given component doesn't exist|400 Bad Request|30064|
+        |Given member id does not exist|400| Bad Request|105
+        |Invalid parameter(s)|400| Bad Request|107
+        |Missing required relationship|400| Bad Request|30004
+        |Invalid tenant id |400| Bad Request|30016|tenantId
+        |Request is not allowed for this member's role, please login using a valid role |403| Forbidden Request|123
+        |Tenant not associated for given member.|401| Unauthorized |30028|tenantId
+        |Both workstation and workcell assigned.  Only one is allowed. |400| Bad Request|30109
+        |Given component doesn't exist|400| Bad Request|30064
         
       operationId: createTaskInstruction
       parameters:
@@ -5674,9 +5539,152 @@ paths:
         '201': {$ref: '#/responses/taskInstruction'}
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
+  /taskinstructions/{id}:
+    x-description: |
+        This is a single unit of task to be executed as a component of job instruction. It has information such as a unique number assigned to the task, operation to be executed, components to be consumed, workstation to be used and estimated time required to complete this component.
+    get:
+      tags: [ "Task Instructions" ]
+      description: |
+        Get a Task Instruction
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Task Instruction not found.|400| Bad Request|30003
+        
+      operationId: getTaskInstruction
+      parameters:
+        - name: id
+          in: path
+          description: ID of task instruction
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/taskInstruction'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+    patch:
+      tags: [ "Task Instructions" ]
+      description: |
+        Update a Task Instruction.  Either a recommendedWorkcell (of type `workcells`) or a recommendedWorkstation (of type `workstations`) may be specified under `relationships` in the request body.
+        Also note, if changing from workcell to workstation, the workstation must belong to that workcell.
 
-  '/batch/taskinstructions':
-    x-summary: POST /batch/taskinstructions
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Task Instruction not found.|400| Bad Request|30003
+        |Missing required relationship|400| Bad Request|30004
+        |Given component doesn't exist|400| Bad Request|30064
+        
+      operationId: udpateTaskInstruction
+      parameters:
+        - name: id
+          in: path
+          description: ID of task instruction
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Input schema
+          required: true
+          schema:
+            $ref: '#/definitions/json_api_input_new_task_instruction'
+            example: 
+              {
+                  "data": {
+                      "type": "taskInstructions",
+                      "id": "137486",
+                      "attributes": {
+                          "description": "Task Description",
+                          "setupTimeInMins": 32,
+                          "executionTimePerQuantityInMins": 12
+                      },
+                      "relationships": {
+                          "recommendedWorkstation": {
+                              "data": {
+                                  "type": "workstations",
+                                  "id": "176533"
+                              }
+                          }
+                      }
+                  }
+              }
+      responses:
+        '200': {$ref: '#/responses/taskInstruction'}
+      security:
+        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+    delete:
+      tags: [ "Task Instructions" ]
+      description: |
+              Delete a task instruction.
+              
+              Status codes:
+              |Message|HTTP Status Code|Error Code|Data
+              |----|----|----|----
+              |Task Instruction not found.|400| Bad Request|30003
+
+      operationId: deleteTaskInstruction
+      parameters:
+        - name: id
+          in: path
+          description: ID of task instruction
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: Task Instruction deleted
+      security:
+        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+  /taskinstructions/{id}/documents:
+    x-description: |
+        Get all documents for given task instruction.
+    get:
+      tags: [ "Task Instructions" ]
+      description: |
+        Get all documents for given task instruction.
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Invalid document type.|400| Bad Request|30020
+
+      operationId: getTaskInstructionDocuments
+      parameters:
+        - name: id
+          in: path
+          description: id of Task Instruction
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/documents'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+  /taskinstructions/{id}/primaryImage:
+    x-description: |
+        Get image for given task instruction.
+    get:
+      tags: [ "Task Instructions" ]
+      description: |
+        Get image for given task instruction.
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Invalid document type.|400| Bad Request|30020
+
+      operationId: getTaskInstructionPrimaryImage
+      parameters:
+        - name: id
+          in: path
+          description: id of Task Instruction
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/primaryImage'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+  /batch/taskinstructions:
     post:
       description: | 
                 Create multiple task instructions. Either a recommendedWorkcell (of type `workcells`) or a recommendedWorkstation (of type `workstations`) may be specified under `relationships` in the request body.
@@ -5684,14 +5692,14 @@ paths:
                 Status codes:
                 |Message|HTTP Status Code|Error Code|Data
                 |----|----|----|----
-                |Missing required attribute tenantId in object|400 Bad Request|30051|
-                |Invalid resource type|400 Bad Request|30053|
-                |Invalid input for batch Task Instructions|400 Bad Request|30056|
-                |Missing required attribute in Task Instructions|400 Bad Request|30057|
-                |valid recommended workstation is required to create taskInstruction|400 Bad Request|30058|
-                |valid job instruction is required to create taskInstruction|400 Bad Request|30059|
-                |Given component doesn't exist|400 Bad Request|30064|
-                |Invalid tenant id|400 Bad Request|30016|
+                |Missing required attribute tenantId in object|400| Bad Request|30051|
+                |Invalid resource type|400| Bad Request|30053|
+                |Invalid input for batch Task Instructions|400| Bad Request|30056|
+                |Missing required attribute in Task Instructions|400| Bad Request|30057|
+                |valid recommended workstation is required to create taskInstruction|400| Bad Request|30058|
+                |valid job instruction is required to create taskInstruction|400| Bad Request|30059|
+                |Given component doesn't exist|400| Bad Request|30064|
+                |Invalid tenant id|400| Bad Request|30016|
                 
       operationId: createTaskInstruction
       parameters:
@@ -5780,86 +5788,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
-  '/taskinstructions/{id} ':
-    x-summary: PATCH TaskInstruction
-    patch:
-      tags: [ "Task Instructions" ]
-      description: |
-        Update a Task Instruction.  Either a recommendedWorkcell (of type `workcells`) or a recommendedWorkstation (of type `workstations`) may be specified under `relationships` in the request body.
-        Also note, if changing from workcell to workstation, the workstation must belong to that workcell.
-
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Task Instruction not found.|400 Bad Request|30003|
-        |Missing required relationship|400 Bad Request|30004|
-        |Given component doesn't exist|400 Bad Request|30064|
-        
-      operationId: udpateTaskInstruction
-      parameters:
-        - name: id
-          in: path
-          description: ID of task instruction
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: Input schema
-          required: true
-          schema:
-            $ref: '#/definitions/json_api_input_new_task_instruction'
-            example: 
-              {
-                  "data": {
-                      "type": "taskInstructions",
-                      "id": "137486",
-                      "attributes": {
-                          "description": "Task Description",
-                          "setupTimeInMins": 32,
-                          "executionTimePerQuantityInMins": 12
-                      },
-                      "relationships": {
-                          "recommendedWorkstation": {
-                              "data": {
-                                  "type": "workstations",
-                                  "id": "176533"
-                              }
-                          }
-                      }
-                  }
-              }
-      responses:
-        '200': {$ref: '#/responses/taskInstruction'}
-      security:
-        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
-  '/taskinstructions/{id}  ' :
-    x-summary: DELETE TaskInstruction
-    delete:
-      tags: [ "Task Instructions" ]
-      description: |
-              Delete a task instruction.
-              
-              Status codes:
-              |Message|HTTP Status Code|Error Code|Data
-              |----|----|----|----
-              |Task Instruction not found.|400 Bad Request|30003|
-
-      operationId: deleteTaskInstruction
-      parameters:
-        - name: id
-          in: path
-          description: ID of task instruction
-          required: true
-          type: integer
-          format: int64
-      responses:
-        '204':
-          description: Task Instruction deleted
-      security:
-        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
-
   '/subtaskinstructions/{id}':
-    x-summary: GET SubTaskInstruction
     x-description: |
         checklist of a taskinstruction.
     get:
@@ -5870,7 +5799,7 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Invalid parameter|400 Bad Request|122|
+        |Invalid parameter|400| Bad Request|122
         
       operationId: getSubTaskInstruction
       parameters:
@@ -5885,9 +5814,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
-
   /jobinstructions:
-    x-summary: GET JobInstructions
     x-description: |
         This is a template for all tasks that needs to be executed for making a given component.
         
@@ -5903,7 +5830,6 @@ paths:
         To view Job Instructions from 10-15-2016 to 10-26-2016, not inlcluding 10-15-16 but including 10-26-16, add the following:
 
         .../jobinstructions?filter[jobinstructions][lastModifiedDate][gt]=2016-10-15&filter[jobinstructions][lastModifiedDate][lte]=2016-10-26
-
     get:
       tags: [ "Job Instructions" ]
       description: |
@@ -5912,7 +5838,7 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Invalid parameter|400 Bad Request|122|
+        |Invalid parameter|400| Bad Request|122
         
       operationId: getJobInstruction
       parameters:
@@ -5942,94 +5868,6 @@ paths:
         '200': {$ref: '#/responses/jobInstructions'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /jobinstructions/{id}:
-    x-summary: GET JobInstruction
-    x-description: |
-        This is a template for all tasks that needs to be executed for making a given component.
-    get:
-      tags: [ "Job Instructions" ]
-      description: |
-        Get a Job Instruction
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |JobInstruction not found.|400 Bad Request|30007|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
-        
-      operationId: getJobInstruction
-      parameters:
-        - name: id
-          in: path
-          description: id of job instruction
-          required: true
-          type: string
-        - name: filter[jobinstructions][version]
-          in: query
-          description: Entity version  Example:1.2.0
-          required: false
-          type: string
-      responses:
-        '200': {$ref: '#/responses/jobInstruction'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /jobinstructions/{id}/documents:
-    x-summary: GET JobInstruction's Documents
-    x-description: |
-        Get all documents for given Job Instruction.
-    get:
-      tags: [ "Job Instructions" ]
-      description: |
-        Get all documents for given Job Instruction.
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400 Bad Request|30020|
-        
-      operationId: getJobInstructionDocuments
-      parameters:
-        - name: id
-          in: path
-          description: id of Job Instruction
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/documents'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /jobinstructions/{id}/primaryImage:
-    x-summary: GET JobInstruction's Image
-    x-description: |
-        Get image for given Job Instruction.
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400 Bad Request|30020|
-
-    get:
-      tags: [ "Job Instructions" ]
-      description: |
-        Get image for given Job Instruction.
-      operationId: getJobInstructionPrimaryImage
-      parameters:
-        - name: id
-          in: path
-          description: id of Job Instructions
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/primaryImage'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-
-  '/jobinstructions ':
-    x-summary: POST JobInstruction
     post:
       description: |
             Create a new Job Instruction
@@ -6037,13 +5875,13 @@ paths:
             Status codes:
             |Message|HTTP Status Code|Error Code|Data
             |----|----|----|----
-            |Given member id does not exist|400 Bad Request|105|
-            |Tenant not associated for given member.|401 Unauthorized Request|30028|
-            |Invalid parameter(s)|400 Bad Request|107|tenantId
-            |Request is not allowed for this member's role, please login using a valid role |403 Forbidden Request|123|
-            |Invalid tenant id|401 Unauthorized |30032|
-            |Application not installed for this tenant|400 Bad Request|40003|
-            |Application with given version does not exist.|400 Bad Request|30099|
+            |Given member id does not exist|400| Bad Request|105
+            |Tenant not associated for given member.|401| Unauthorized Request|30028
+            |Invalid parameter(s)|400| Bad Request|107|tenantId
+            |Request is not allowed for this member's role, please login using a valid role |403| Forbidden Request|123
+            |Invalid tenant id|401| Unauthorized |30032
+            |Application not installed for this tenant|400| Bad Request|40003
+            |Application with given version does not exist.|400| Bad Request|30099
             
       operationId: createJobInstruction
       parameters:
@@ -6085,56 +5923,37 @@ paths:
         '201': {$ref: '#/responses/jobInstruction'}
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
-
-  /clone/jobinstructions/{id}:
-    x-summary: clone JobInstruction
-    post:
-      description: | 
-            clone  Job Instruction and task instructions
-            
-            Status codes:
-            |Message|HTTP Status Code|Error Code|Data
-            |----|----|----|----
-            |JobInstruction not found.|400 Bad Request|30007|
-            |Given member id does not exist|400 Bad Request|105|
-            |Tenant not associated for given member.|401 Unauthorized Request|30028|
-            
-      operationId: createJobInstruction
+  
+  /jobinstructions/{id}:
+    x-description: |
+        This is a template for all tasks that needs to be executed for making a given component.
+    get:
+      tags: [ "Job Instructions" ]
+      description: |
+        Get a Job Instruction
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |JobInstruction not found.|400| Bad Request|30007
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        
+      operationId: getJobInstruction
       parameters:
         - name: id
           in: path
           description: id of job instruction
           required: true
           type: string
+        - name: filter[jobinstructions][version]
+          in: query
+          description: Entity version  Example:1.2.0
+          required: false
+          type: string
       responses:
-        '201': {$ref: '#/responses/jobInstruction'}
+        '200': {$ref: '#/responses/jobInstruction'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  '/batchimport/jobinstructions':
-    x-summary: POST Jobinstruction Batch Import
-    post:
-      description: |
-              Create multiple jobinstructions by batch import using file. Currenlty only CSV file format is supported. Here's the sample file
-                   ([sample file](http://alpha-factoryproductionclient.dmg.autodesk.com/data/samples/jobinstructions.csv))
-              Status codes:
-              |Message|HTTP Status Code|Error Code|Data
-              |----|----|----|----
-              |Given member id does not exist|400 Bad Request|105|
-              |Tenant not associated for given member.|401 Unauthorized Request|30028|
-              |The file format is not supported.|400 Bad Request|30039|
-              |The file is empty!|400 Bad Request|30043|
-              |Invalid name for job instruction.|400 Bad Request|30044|
-              |Error while parsing the job instructions payload/file to fetch job instructions data.|400 Bad Request|30073|
-                   
-      operationId: createJobinstructions
-      responses:
-        '201': {$ref: '#/responses/bulkimport'}
-      security:
-        [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
-
-  '/jobinstructions/{id} ':
-    x-summary: PATCH JobInstruction
     patch:
       description: |
               Updates a Job Instruction's attributes.  Order of tasks can also be modified by listing the taskInstruction ids in the relationships of the request JSON.  However, removing or adding tasks must be done with /taskinstructions api.
@@ -6144,10 +5963,10 @@ paths:
               Status codes:
               |Message|HTTP Status Code|Error Code|Data
               |----|----|----|----
-              |Given member id does not exist|400 Bad Request|105|
-              |JobInstruction not found.|400 Bad Request|30007|
-              |dispatched jobsheets are pending. Cannot archive jobinstruction|400 Bad Request|30124|
-              |Cannot update archived jobinstruction.|400 Bad Request|30125|
+              |Given member id does not exist|400| Bad Request|105
+              |JobInstruction not found.|400| Bad Request|30007
+              |dispatched jobsheets are pending. Cannot archive jobinstruction|400| Bad Request|30124
+              |Cannot update archived jobinstruction.|400| Bad Request|30125
 
       operationId: updateJobInstruction
       parameters:
@@ -6213,8 +6032,6 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
 
-###  '/jobinstructions/{id}  ':
-###    x-summary: DELETE JobInstruction
 ###    delete:
 ###      description: Delete a job instruction.  If a job sheet is using this job instruction, an error is returned.
 ###        Any associated Task Instructions to this Job Instruction are also removed in this call.  Components and workstations are not deleted.
@@ -6231,10 +6048,102 @@ paths:
 ###          description: Job Instruction deleted
 ###      security:
 ###        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+  
+  /jobinstructions/{id}/documents:
+    x-description: |
+        Get all documents for given Job Instruction.
+    get:
+      tags: [ "Job Instructions" ]
+      description: |
+        Get all documents for given Job Instruction.
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Invalid document type.|400| Bad Request|30020
+        
+      operationId: getJobInstructionDocuments
+      parameters:
+        - name: id
+          in: path
+          description: id of Job Instruction
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/documents'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
+  /jobinstructions/{id}/primaryImage:
+    x-description: |
+        Get image for given Job Instruction.
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Invalid document type.|400| Bad Request|30020
+    get:
+      tags: [ "Job Instructions" ]
+      description: |
+        Get image for given Job Instruction.
+      operationId: getJobInstructionPrimaryImage
+      parameters:
+        - name: id
+          in: path
+          description: id of Job Instructions
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/primaryImage'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
-  '/jobsheets':
-    x-summary: GET JobSheets
+  /clone/jobinstructions/{id}:
+    post:
+      description: | 
+            clone  Job Instruction and task instructions
+            
+            Status codes:
+            |Message|HTTP Status Code|Error Code|Data
+            |----|----|----|----
+            |JobInstruction not found.|400| Bad Request|30007
+            |Given member id does not exist|400| Bad Request|105
+            |Tenant not associated for given member.|401| Unauthorized Request|30028
+            
+      operationId: createJobInstruction
+      parameters:
+        - name: id
+          in: path
+          description: id of job instruction
+          required: true
+          type: string
+      responses:
+        '201': {$ref: '#/responses/jobInstruction'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
+  /batchimport/jobinstructions:
+    post:
+      description: |
+              Create multiple jobinstructions by batch import using file. Currenlty only CSV file format is supported. Here's the sample file
+                   ([sample file](http://alpha-factoryproductionclient.dmg.autodesk.com/data/samples/jobinstructions.csv))
+              Status codes:
+              |Message|HTTP Status Code|Error Code|Data
+              |----|----|----|----
+              |Given member id does not exist|400| Bad Request|105
+              |Tenant not associated for given member.|401| Unauthorized Request|30028
+              |The file format is not supported.|400| Bad Request|30039
+              |The file is empty!|400| Bad Request|30043
+              |Invalid name for job instruction.|400| Bad Request|30044
+              |Error while parsing the job instructions payload/file to fetch job instructions data.|400 |Bad Request|30073
+                   
+      operationId: createJobinstructions
+      responses:
+        '201': {$ref: '#/responses/bulkimport'}
+      security:
+        [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
+
+  /jobsheets:
     x-description: |
         An instance of Job Instructions template which goes on Factory floor as instructions are executed in the process of making a component. Job sheet refers to the instruction template and contains any relevant notes added during execution of instructions.
 
@@ -6250,7 +6159,6 @@ paths:
         To view Job Sheets from 10-15-2016 to 10-26-2016, not inlcluding 10-15-16 but including 10-26-16, add the following:
 
         .../jobsheets?filter[jobsheets][lastModifiedDate][gt]=2016-10-15&filter[jobsheets][lastModifiedDate][lte]=2016-10-26
-
     get:
       tags: [ "Job Sheets" ]
       description: |
@@ -6259,7 +6167,7 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Invalid parameter|400 Bad Request|122|
+        |Invalid parameter|400| Bad Request|122|
         
       operationId: getJobSheet
       parameters:
@@ -6294,105 +6202,6 @@ paths:
         '200': {$ref: '#/responses/jobsheets'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  '/jobsheets/{id}':
-    x-summary: GET JobSheet
-    x-description: |
-        An instance of Job Instructions template which goes on Factory floor as instructions are executed in the process of making a component. Job sheet refers to the instruction template and contains any relevant notes added during execution of instructions.
-    get:
-      tags: [ "Job Sheets" ]
-      description: |
-        Get a Job Sheet
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |JobSheet not found.|400 Bad Request|30008|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
-                
-      operationId: getJobSheet
-      parameters:
-        - name: id
-          in: path
-          description: ID of job sheet
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/jobSheet'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-  /jobsheets/{ids}:
-    x-summary: GET Multiple JobSheets
-    x-description: |
-        An instance of Job Instructions template which goes on Factory floor as instructions are executed in the process of making a component. Job sheet refers to the instruction template and contains any relevant notes added during execution of instructions.
-    get:
-      tags: [ "Job Sheets" ]
-      description: |
-        Get multiple Job Sheets by ids
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Invalid parameter|400 Bad Request|122|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
-                
-      operationId: getMultipleJobSheets
-      parameters:
-        - name: ids
-          in: path
-          description: comma seperated IDs of job sheet
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/jobsheets'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-###  /jobsheets/{id}/documents:
-###    x-summary: GET JobSheet's Documents
-###    x-description: |
-###        Get all documents for given Job Sheet.
-###    get:
-###      tags: [ "Job Sheets" ]
-###      description: |
-###        Get all documents for given Job Sheet.
-###      operationId: getJobsheetDocuments
-###      parameters:
-###        - name: id
-###          in: path
-###          description: id of Job Sheet
-###          required: true
-###          type: string
-###      responses:
-###        '200': {$ref: '#/responses/documents'}
-###      security:
-###        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-###  /jobsheets/{id}/primaryImage:
-###    x-summary: GET JobSheet's Image
-###    x-description: |
-###        Get image for given Job Sheet.
-###    get:
-###      tags: [ "Job Sheets" ]
-###      description: |
-###        Get image for given Job Sheet.
-###      operationId: getJobSheetPrimaryImage
-###      parameters:
-###        - name: id
-###          in: path
-###          description: id of Jobsheet
-###          required: true
-###          type: string
-###      responses:
-###        '200': {$ref: '#/responses/primaryImage'}
-###      security:
-###        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-
-  '/jobsheets ':
-    x-summary: POST JobSheet
     post:
       tags: [ "Job Sheets" ]
       description: |
@@ -6401,13 +6210,13 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Invalid parameter|400 Bad Request|122|
-        |JobInstruction not found.|400 Bad Request|30007|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
-        |job instruction is required to create job sheet|400 Bad Request|30054|
-        |Job instruction should have at-least one task to create job sheet|400 Bad Request|30088|
-        |Invalid Input Payload. Not able to deserialize|400 Bad Request|173|
+        |Given member id does not exist|400| Bad Request|105
+        |Invalid parameter|400| Bad Request|122
+        |JobInstruction not found.|400| Bad Request|30007
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        |job instruction is required to create job sheet|400| Bad Request|30054
+        |Job instruction should have at-least one task to create job sheet|400| Bad Request|30088
+        |Invalid Input Payload. Not able to deserialize|400| Bad Request|173
         
       operationId: createJobSheet
       parameters:
@@ -6456,9 +6265,155 @@ paths:
         '201': {$ref: '#/responses/jobSheet'}
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
+  
+  /jobsheets/{id}:
+    x-description: |
+        An instance of Job Instructions template which goes on Factory floor as instructions are executed in the process of making a component. Job sheet refers to the instruction template and contains any relevant notes added during execution of instructions.
+    get:
+      tags: [ "Job Sheets" ]
+      description: |
+        Get a Job Sheet
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |JobSheet not found.|400| Bad Request|30008
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
+                
+      operationId: getJobSheet
+      parameters:
+        - name: id
+          in: path
+          description: ID of job sheet
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/jobSheet'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+    patch:
+      tags: [ "Job Sheets" ]
+      description: |
+        Update a Job Sheet
 
-  '/batch/jobsheets':
-    x-summary: POST /batch/jobsheets
+        Job Sheet Statuses:
+        ```
+        Staged
+        InProgress
+        Blocked
+        Completed
+        NeedsApproval
+        Cancelled
+        Waiting
+        ```
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Given member id does not exist|400| Bad Request|105
+        |Job sheet already in progress or completed. cannot update quantity|400| Bad Request|30071
+        |Jobsheet cannot be marked completed.|400| Bad Request|30077
+        |Invalid status update|400| Bad Request|30087
+        |Cannnot update cancelled jobsheet.|400| Bad Request|30082
+        |Cannot cancel. jobsheet in completed/needs_approval state|400| Bad Request|30083
+        
+      operationId: udpateJobSheet
+      parameters:
+        - name: id
+          in: path
+          description: ID of job sheet
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Input schema
+          required: true
+          schema:
+            $ref: '#/definitions/json_api_input_patch_job_sheet'
+            example:
+              {
+                  "data": {
+                      "type": "JobSheets",
+                      "attributes": {
+                          "status": "Blocked",
+                          "quantity": 40,
+                          "hotJob": false,
+                          "deliveryDate": "2016-08-04T06:01:04Z",
+                          "notes": "notes about job sheet"
+                      }
+                  }
+              }
+      responses:
+        '200': {$ref: '#/responses/jobSheet'}
+      security:
+        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+
+  /jobsheets/{ids}:
+    x-description: |
+        An instance of Job Instructions template which goes on Factory floor as instructions are executed in the process of making a component. Job sheet refers to the instruction template and contains any relevant notes added during execution of instructions.
+    get:
+      tags: [ "Job Sheets" ]
+      description: |
+        Get multiple Job Sheets by ids
+        
+        Status codes:
+        |Message|HTTP Status Code|Error Code|Data
+        |----|----|----|----
+        |Given member id does not exist|400| Bad Request|105
+        |Invalid parameter|400| Bad Request|122
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
+                
+      operationId: getMultipleJobSheets
+      parameters:
+        - name: ids
+          in: path
+          description: comma seperated IDs of job sheet
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/jobsheets'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
+###  /jobsheets/{id}/documents:
+###    x-description: |
+###        Get all documents for given Job Sheet.
+###    get:
+###      tags: [ "Job Sheets" ]
+###      description: |
+###        Get all documents for given Job Sheet.
+###      operationId: getJobsheetDocuments
+###      parameters:
+###        - name: id
+###          in: path
+###          description: id of Job Sheet
+###          required: true
+###          type: string
+###      responses:
+###        '200': {$ref: '#/responses/documents'}
+###      security:
+###        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
+###  /jobsheets/{id}/primaryImage:
+###    x-description: |
+###        Get image for given Job Sheet.
+###    get:
+###      tags: [ "Job Sheets" ]
+###      description: |
+###        Get image for given Job Sheet.
+###      operationId: getJobSheetPrimaryImage
+###      parameters:
+###        - name: id
+###          in: path
+###          description: id of Jobsheet
+###          required: true
+###          type: string
+###      responses:
+###        '200': {$ref: '#/responses/primaryImage'}
+###      security:
+###        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
+  /batch/jobsheets:
     post:
       description: |
           Create a multiple job sheets.
@@ -6466,14 +6421,14 @@ paths:
           Status codes:
           |Message|HTTP Status Code|Error Code|Data
           |----|----|----|----
-          |JobInstruction not found.|400 Bad Request|30007|
-          |Missing required attribute tenantId in object|400 Bad Request|30051|
-          |Missing required attribute in Job sheet object|400 Bad Request|30052|
-          |Invalid resource type|400 Bad Request|30053|
-          |job instruction is required to create job sheet|400 Bad Request|30054|
-          |Invalid input for batch job sheets|400 Bad Request|30055|
-          |Missing required attribute to create Jobsheet/quantity should be greater than 0|400 Bad Request|30070|
-          |Job instruction should have at-least one task to create job sheet|400 Bad Request|30088|
+          |JobInstruction not found.|400| Bad Request|30007
+          |Missing required attribute tenantId in object|400| Bad Request|30051
+          |Missing required attribute in Job sheet object|400| Bad Request|30052
+          |Invalid resource type|400| Bad Request|30053
+          |job instruction is required to create job sheet|400| Bad Request|30054
+          |Invalid input for batch job sheets|400| Bad Request|30055
+          |Missing required attribute to create Jobsheet/quantity should be greater than 0|400| Bad Request|30070
+          |Job instruction should have at-least one task to create job sheet|400| Bad Request|30088
           
       operationId: createJobsheets
       parameters:
@@ -6524,67 +6479,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
-  '/jobsheets/{id} ':
-    x-summary: PATCH JobSheet
-    patch:
-      tags: [ "Job Sheets" ]
-      description: |
-        Update a Job Sheet
-
-        Job Sheet Statuses:
-        ```
-        Staged
-        InProgress
-        Blocked
-        Completed
-        NeedsApproval
-        Cancelled
-        Waiting
-        ```
-        
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |Job sheet already in progress or completed. cannot update quantity|400 Bad Request|30071|
-        |Jobsheet cannot be marked completed.|400 Bad Request|30077|
-        |Invalid status update|400 Bad Request|30087|
-        |Cannnot update cancelled jobsheet.|400 Bad Request|30082|
-        |Cannot cancel. jobsheet in completed/needs_approval state|400 Bad Request|30083|
-        
-      operationId: udpateJobSheet
-      parameters:
-        - name: id
-          in: path
-          description: ID of job sheet
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: Input schema
-          required: true
-          schema:
-            $ref: '#/definitions/json_api_input_patch_job_sheet'
-            example:
-              {
-                  "data": {
-                      "type": "JobSheets",
-                      "attributes": {
-                          "status": "Blocked",
-                          "quantity": 40,
-                          "hotJob": false,
-                          "deliveryDate": "2016-08-04T06:01:04Z",
-                          "notes": "notes about job sheet"
-                      }
-                  }
-              }
-      responses:
-        '200': {$ref: '#/responses/jobSheet'}
-      security:
-        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
-
   /taskexecutions:
-    x-summary: GET TaskExecutions
     x-description: |
       Contains relevant data to capture all the information about task that is executed on a given workstation.
     get:
@@ -6595,7 +6490,7 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Invalid parameter|400 Bad Request|122|
+        |Invalid parameter|400| Bad Request|122
 
       operationId: getTaskExecution
       parameters:
@@ -6610,7 +6505,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /taskexecutions/{id}:
-    x-summary: GET TaskExecution
     x-description: |
       Contains relevant data to capture all the information about task that is executed on a given workstation.
     get:
@@ -6621,8 +6515,8 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |TaskExecution not found.|400 Bad Request|30009|
-        |Tenant not associated for given member.|401 Unauthorized Request|30028|
+        |TaskExecution not found.|400| Bad Request|30009
+        |Tenant not associated for given member.|401| Unauthorized Request|30028
         
       operationId: getTaskExecution
       parameters:
@@ -6635,50 +6529,7 @@ paths:
         '200': {$ref: '#/responses/taskExecution'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-###  /taskexecutions/{id}/documents:
-###    x-summary: GET TaskExecution's Documents
-###    x-description: |
-###        Get all documents for given task execution.
-###    get:
-###      tags: [ "Task Executions" ]
-###      description: |
-###        Get all documents for given task execution.
-###      operationId: getTaskexecutionDocuments
-###      parameters:
-###        - name: id
-###          in: path
-###          description: id of TaskExecution
-###          required: true
-###          type: string
-###      responses:
-###        '200': {$ref: '#/responses/documents'}
-###      security:
-###        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-###  /taskexecutions/{id}/primaryImage:
-###    x-summary: GET TaskExecution's Image
-###    x-description: |
-###        Get image for given task execution.
-###    get:
-###      tags: [ "Task Executions" ]
-###      description: |
-###        Get image for given task execution.
-###      operationId: getTaskExecutionPrimaryImage
-###      parameters:
-###        - name: id
-###          in: path
-###          description: id of TaskExecution
-###          required: true
-###          type: string
-###      responses:
-###        '200': {$ref: '#/responses/primaryImage'}
-###      security:
-###        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
-
-  '/taskexecutions/{id} ':
-    x-summary: PATCH TaskExecution
+    
     patch:
       tags: [ "Task Executions" ]
       description: |
@@ -6697,14 +6548,14 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |cannot update task on cancelled Jobsheet|400 Bad Request|30084|
-        |Cannot update another task's status when current task is blocked|400 Bad Request|30035|
-        |task execution not started yet|400 Bad Request|30010|
-        |task execution already in progress|400 Bad Request|30011|
-        |Task is blocked|400 Bad Request|30085|
-        |cannot reopen task|400 Bad Request|30069|
-        |task execution is complete|400 Bad Request|30012|
+        |Given member id does not exist|400| Bad Request|105|
+        |cannot update task on cancelled Jobsheet|400| Bad Request|30084
+        |Cannot update another task's status when current task is blocked|400| Bad Request|30035
+        |task execution not started yet|400| Bad Request|30010
+        |task execution already in progress|400| Bad Request|30011
+        |Task is blocked|400| Bad Request|30085
+        |cannot reopen task|400| Bad Request|30069
+        |task execution is complete|400| Bad Request|30012
 
       operationId: updateTaskExecution
       parameters:
@@ -6743,8 +6594,7 @@ paths:
         '200': {$ref: '#/responses/taskExecution'}
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
-  '/taskexecutions/{id}  ':
-    x-summary: DELETE TaskExecution
+    
     delete:
       description: Delete a Task Execution.
       operationId: deleteTaskExecution
@@ -6759,10 +6609,48 @@ paths:
         '204':
           description: Task Execution deleted
       security:
-        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]        
+        
+
+###  /taskexecutions/{id}/documents:
+###    x-description: |
+###        Get all documents for given task execution.
+###    get:
+###      tags: [ "Task Executions" ]
+###      description: |
+###        Get all documents for given task execution.
+###      operationId: getTaskexecutionDocuments
+###      parameters:
+###        - name: id
+###          in: path
+###          description: id of TaskExecution
+###          required: true
+###          type: string
+###      responses:
+###        '200': {$ref: '#/responses/documents'}
+###      security:
+###        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
+###  /taskexecutions/{id}/primaryImage:
+###    x-description: |
+###        Get image for given task execution.
+###    get:
+###      tags: [ "Task Executions" ]
+###      description: |
+###        Get image for given task execution.
+###      operationId: getTaskExecutionPrimaryImage
+###      parameters:
+###        - name: id
+###          in: path
+###          description: id of TaskExecution
+###          required: true
+###          type: string
+###      responses:
+###        '200': {$ref: '#/responses/primaryImage'}
+###      security:
+###        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /entities:
-    x-summary: GET Entities
     x-description: |
         Search for any type of entity.  By default, wildcards are added on both sides of a `searchTerm`, allowing for matches using partial words or phrases.  Searching with `tags` do not use wildcards.
     get:
@@ -6804,7 +6692,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /entityevents:
-    x-summary: GET Entity events
     x-description: |
         Search for any type of entity events.  
         
@@ -6856,7 +6743,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /tags:
-    x-summary: GET tags
     x-description: |
         Search for Tags.
     get:
@@ -6881,7 +6767,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /uploadserver:
-    x-summary: GET Upload Server
     x-description: Obtain Upload Server URL
     get:
       tags: [ "Files" ]
@@ -6910,8 +6795,8 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Invalid parameter|400 Bad Request|122|
-        |Resource not found in the factory production database|400 Bad Request|30018|
+        |Invalid parameter|400| Bad Request|122
+        |Resource not found in the factory production database|400| Bad Request|30018
        
         
       operationId: getUploadServer
@@ -6920,8 +6805,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
         
-  '/entities/{id}/files':
-    x-summary: POST/PATCH Entity files
+  /entities/{id}/files:
     post:
       description: |
         add files to entity(NOTE-  this API replace already attched files)
@@ -6929,10 +6813,9 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |cannot update task on cancelled Jobsheet|400 Bad Request|30084|
+        |Given member id does not exist|400| Bad Request|105
+        |cannot update task on cancelled Jobsheet|400| Bad Request|30084
         
-
       operationId: postEntityFiles
       parameters:
         - name: id
@@ -6995,7 +6878,6 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
         
-  
     patch:
       description: |
         add/delete files to entity.
@@ -7003,10 +6885,9 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Given member id does not exist|400 Bad Request|105|
-        |cannot update task on cancelled Jobsheet|400 Bad Request|30084|
+        |Given member id does not exist|400| Bad Request|105
+        |cannot update task on cancelled Jobsheet|400| Bad Request|30084
         
-
       operationId: patchEntityFiles
       parameters:
         - name: id
@@ -7051,7 +6932,6 @@ paths:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
 
   /documents/{documentId}:
-    x-summary: GET Document
     x-description: Manage documents.
     get:
       tags: [ "Files" ]
@@ -7061,7 +6941,7 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Document not found.|400 Bad Request|30019|
+        |Document not found.|400| Bad Request|30019
         
       operationId: getDocument
       parameters:
@@ -7080,8 +6960,6 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
-  /documents/{documentId}/:
-    x-summary: DELETE Document
     delete:
       tags: [ "Files" ]
       description: Delete a document.
@@ -7100,7 +6978,6 @@ paths:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
 
   /members:
-    x-summary: GET Members
     x-description: Get Members
     get:
       tags: [ "Members" ]
@@ -7110,7 +6987,7 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Invalid member status value |400 Bad Request|30034|
+        |Invalid member status value |400| Bad Request|30034
 
       operationId: getMembers
       parameters:
@@ -7137,7 +7014,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /member:
-    x-summary: GET Member
     x-description: Get current Member information.
     get:
       tags: [ "Members" ]
@@ -7147,9 +7023,9 @@ paths:
         Status codes:
         |Message|HTTP Status Code|Error Code|Data
         |----|----|----|----
-        |Missing authorization header |400 Bad Request|6010|
-        |Access token provided is invalid or expired |400 Bad Request|7014|
-        |Unauthorized Access. You don't sufficient privileges for given tenant |400 Bad Request|30022|
+        |Missing authorization header |400| Bad Request|6010
+        |Access token provided is invalid or expired |400| Bad Request|7014
+        |Unauthorized Access. You don't sufficient privileges for given tenant |400| Bad Request|30022
         
       operationId: getMember
       parameters:
@@ -7164,7 +7040,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /reports/jobsheets:
-    x-summary: GET Completed Job Sheets Report
     x-description: |
         Report containing all completed Job Sheets within given date range.
 
@@ -7215,7 +7090,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /reports/downloads/completedjobsheets:
-    x-summary: GET Completed Job Sheets Report Download
     x-description: |
         Downloadable Report in CSV format containing all completed Job Sheets within given date range.
 
@@ -7265,7 +7139,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /reports/utilizations:
-    x-summary: GET Utilization Report
     x-description: |
         Report containing workstation status time series for each workstation and utilization and availability statistics.
 
@@ -7311,7 +7184,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /reports/downloads/utilizations:
-    x-summary: GET Utilization Report Download
     x-description: |
         Report download in CSV format containing workstation status time series for each workstation and utilization and availability statistics.
 
@@ -7351,9 +7223,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
-
   /reports/jobinstructionqualities:
-    x-summary: GET Job Instruction Quality Report
     x-description: |
         Report Job Instructions Quality.
 
@@ -7397,7 +7267,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /reports/downloads/jobinstructionqualities:
-    x-summary: GET Job Instruction Quality Report Download
     x-description: |
         Report download in CSV format containing workstations Quality.
 
@@ -7443,7 +7312,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /reports/workstationqualities:
-    x-summary: GET Workstation Quality Report
     x-description: |
         Report workstations Quality.
 
@@ -7487,7 +7355,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /reports/downloads/workstationqualities:
-    x-summary: GET Workstation Quality Report Download
     x-description: |
         Report download in CSV format containing workstations Quality.
 
@@ -7534,7 +7401,6 @@ paths:
 
 
   /reports/jobsheetqualities:
-    x-summary: GET Job Sheets Quality Report
     x-description: |
         Job Sheets Quality Report.
 
@@ -7580,7 +7446,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /reports/downloads/jobsheetsqualities:
-    x-summary: GET Job Sheet Quality Report Download
     x-description: |
         Report download in CSV format containing job sheet quality.
 
@@ -7626,7 +7491,6 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /invites:
-    x-summary: POST Member Invite
     x-description: Member Invitation API
     post:
       tags: [ "Admin" ]
@@ -7680,7 +7544,7 @@ paths:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
 
-  '/members/{id}/relationships/groups/':
+  /members/{id}/relationships/groups/:
     x-summary: POST Member Group/Role
     x-description: Member Group/Role API
     post:
@@ -7718,11 +7582,6 @@ paths:
           '204': { "description": "No Content" }
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
-
-
-  '/members/{id}/relationships/groups':
-    x-summary: DELETE Member Group/Role
-    x-description: Member Group/Role API
     delete:
       tags: [ "Admin" ]
       operationId: deleteMemberGroup
@@ -7760,8 +7619,7 @@ paths:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
 
 
-  '/members/{id}/relationships/tenants/':
-    x-summary: POST Member Tenant
+  /members/{id}/relationships/tenants/:
     x-description: Member Tenant API
     post:
       tags: [ "Admin" ]
@@ -7796,10 +7654,6 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
-
-  '/members/{id}/relationships/tenants':
-    x-summary: DELETE Member Tenant
-    x-description: Delete Member Tenant
     delete:
       tags: [ "Admin" ]
       operationId: deleteMemberTenant
@@ -7835,7 +7689,6 @@ paths:
 
 
   /tenants:
-    x-summary: GET Tenants
     x-description: |
         Tenant using service. `Note` The only super administrator user is allowed to use this api
     get:
@@ -7861,29 +7714,6 @@ paths:
         '200': {$ref: '#/responses/tenants'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-  '/tenants/{id}':
-    x-summary: GET Tenant
-    x-description: |
-        Tenant using service. `Note` The only super administrator user is allowed to use this api
-    get:
-      tags: [ "Admin" ]
-      description: |
-        Get a Tenant.
-      operationId: getTenant
-      parameters:
-        - name: id
-          in: path
-          description: id of Tenant
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/tenant'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-  '/tenants ':
-    x-summary: POST Tenant
-    x-description: |
-        Tenant using service. `Note` The only super administrator user is allowed to use this api
     post:
       description: Create a new Tenant. We also support tenant creation by using 2 legged tokens only for whitelisted apps. `Note` please contact Fusion Production back end team to white list your apps.
       operationId: createTenant
@@ -7910,15 +7740,32 @@ paths:
         '201': {$ref: '#/responses/tenant'}
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
-  '/tenants/{Id}':
-    x-summary: PATCH Tenant
+  
+  /tenants/{id}:
     x-description: |
-         `Note` The only super administrator user is allowed to use this api
+        Tenant using service. `Note` The only super administrator user is allowed to use this api
+    get:
+      tags: [ "Admin" ]
+      description: |
+        Get a Tenant.
+      operationId: getTenant
+      parameters:
+        - name: id
+          in: path
+          description: id of Tenant
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/tenant'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+  
     patch:
+      tags: [ "Admin" ]
       description: Updates a Tenant's attributes. We also support tenant update by using 2 legged tokens only for whitelisted apps.  `Note` please contact Fusion Production back end team to white list your apps.
       operationId: updateTenant
       parameters:
-        - name: Id
+        - name: id
           in: path
           description: ID of Tenant
           required: true
@@ -7946,10 +7793,6 @@ paths:
         '200': {$ref: '#/responses/tenant'}
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
-  '/tenants/{id} ':
-    x-summary: DELETE Tenant
-    x-description: |
-         `Note` The only super administrator user is allowed to use this api
     delete:
       description: Delete a Tenant.
       operationId: deleteTenant
