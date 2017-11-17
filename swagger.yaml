@@ -132,6 +132,10 @@ info:
     
     A skilled person in the factory who gets the job sheet for performing the jobs. The operator reads the job instructions from the job sheet and accordingly performs the mentioned tasks on their workstation.
     
+    ### Workstation
+    
+    An entity that describes a machine or a working station in the factory. The operator uses the work station to perform the tasks mentioned in the job instructions.
+    
     ## **Core Functions**
     
     This section lists the core functions that various operators perform on the shop floor to successfully complete the assigned jobs.
@@ -142,16 +146,23 @@ info:
     
     ### Job Sheet
     
-    A Job Sheet is basically a mechanism to track jobs from defining to production. The Job Sheet records the number of resources used, the processes completed, and the time when these events occurred. 
+    A Job Sheet is basically a mechanism to track jobs from defining to production. 
+    
+    The Job Sheet records the number of resources used, the processes completed, and the time when these events occurred. 
+    
     The data from a Job Sheet refers to specific notes and data, like photos and videos associated with the execution of the Job.
     
     ### Job Instructions
     
-    A Job Instruction is a template that includes the tasks that operators need to perform for manufacturing a particular component. The factory supervisor can use the same job instruction and create multiple job sheets with different quantity of output to be produced.
+    A Job Instruction is a template that includes the tasks that operators need to perform for manufacturing a particular component. 
+    
+    The factory supervisor can use the same job instruction and create multiple job sheets with different quantity of output to be produced.
     
     ### Task Instructions
     
-    A task instruction is a single unit of a task that the operator performs from the given job instruction. Each task instruction contains information, such as a unique task identifier, operation that the operator needs to perform, the components that the operator will be using, the work station on which the operator will be performing the task, and the estimated time required to complete this component.
+    A task instruction is a single unit of a task that the operator performs from the given job instruction.
+    
+    Each task instruction contains information, such as a unique task identifier, operation that the operator needs to perform, the components that the operator will be using, the work station on which the operator will be performing the task, and the estimated time required to complete this component.
     
     ### Sub Task Instructions
     
@@ -161,29 +172,27 @@ info:
     
     A task execution contains the relevant data to capture all the information about task that is executed at a given workstation.
     
-    ### Workstation
-    
-    An entity that describes a machine or a work station in the factory. The operator uses the work station to perform the tasks given in the job instructions.
-    
     ### Work Cell
     
     A Work cell is a group of different work stations. You can create different work cells for different types of work stations.
     
     ### Tag
     
-    A label given to an entity to classify and identify when searching. An entity can have one or more tags.
+    A label given to an entity to classify and identify the entity when searching. An entity can have one or more tags.
     
     ### Work Queue
     
-    A queue where the tasks from the job instructions are queued. Each work station has its own queue. When the job sheet is dispatched, the task instructions from the job sheet are automatically added to work queue of the respective work station.
+    A queue where the tasks from the job instructions are queued. Each work station has its own queue. 
+    
+    When the job sheet is dispatched, the task instructions from the job sheet are automatically added to work queue of the respective work station.
     
     ## Roles and Permissions
     
     Fusion 360 Production supports the following roles and permissions:
     
-    * Administrator: A user with Administrator role can do everything, including add, edit, remove people, and assign different roles.
-    * Manager: A user with Manager role can do everything, except add, update, and remove people or assign different roles. 
-    * Operator: A user with Operator role can only work on tasks.
+    * **Administrator**: A user with Administrator role can do everything, which includes adding, editing, removing people, and also assigning different roles to users.
+    * **Manager**: A user with Manager role can do everything, except adding, updating, removing people, and assigning different roles to users. 
+    * **Operator**: A user with Operator role can only work on the tasks.
 
     The following table lists the tasks that users with different roles can perform or not. 
     
