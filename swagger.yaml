@@ -2307,7 +2307,6 @@ info:
     | **Waiting**       | 
 
     The Fusion 360 Production API provides the `POST jobsheets` endpoint to create a job sheet. In the request, you need to specify the job sheet details along with the job instruction that you want to include in the job sheet.
-
     
     ### Example
     
