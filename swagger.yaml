@@ -2859,7 +2859,9 @@ info:
     
     **Note**: Only the supervisor can update the work queue.
     
-    Designing a work queue for workstations and work cells involves arranging task executions in a particular order and specifying the time for execution of the task. You can update the work queue either by rearranging the task executions in the same workstation or work cell, or by moving the task execution from one work cell or workstation queue to another workstation or work cell. In this case, the task execution is reassigned to that new work cell or workstation.
+    Designing a work queue for workstations and work cells involves arranging task executions in a particular order and specifying the time for execution of the task.
+    
+    You can update the work queue either by rearranging the task executions in the same workstation or work cell, or by moving the task execution from one work cell or workstation queue to another workstation or work cell. In this case, the task execution is reassigned to that new work cell or workstation.
     
     The Fusion 360 Production API provides the `PATCH workqueues` endpoint to update the work queue.
     
@@ -3826,7 +3828,7 @@ info:
     ### Example
     
     ```shell
-    curl -X GET 
+    curl -X POST 
       -H 'accept: application/vnd.api+json'
       -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
       -H 'content-type: application/vnd.api+json'
@@ -3990,7 +3992,7 @@ info:
     ### Example
     
     ```shell
-    curl -X GET 
+    curl -X PATCH 
       -H 'accept: application/vnd.api+json'
       -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
       -H 'content-type: application/vnd.api+json'
@@ -4103,7 +4105,7 @@ info:
     ### Example
     
     ```shell
-    curl -X GET 
+    curl -X POST 
       -H 'accept: application/vnd.api+json'
       -H 'authorization: Bearer eyJhbGciOiJIUzI1Ni'
       -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
