@@ -8,21 +8,10 @@ info:
     
     Fusion 360 Production is a job sheet management service for the factory operators to efficiently perform the assigned jobs. The job sheets can be for any part that goes through the manufacturing process on a factory shop floor.
 
-    With Fusion 360 Production, customers can build a fully paperless factory production monitoring system in a cloud. Also, customers can empower their operators on the shop floor to manage their jobs from the job sheets without any paper work. The supervisors can get the detailed reports about the daily tasks that various operators perform in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
+    With Fusion 360 Production, customers can build a fully paperless factory production monitoring system in a cloud. Customers can empower their operators on the shop floor to manage their jobs without any paper work. The supervisors can get the detailed reports about the daily tasks that various operators perform in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
     
     Fusion 360 Production provides APIs to develop a fully functional monitoring system for factory production, an App Framework to create applications that integrates with Fusion 360 Production to provide additional functionality, and reports to view the detailed analytics of the factory production.
-    
-    Fusion 360 Production APIs follows the JSON API specification 1.0. For more information, see [JSON API specification](http://jsonapi.org/format/).
 
-    For all Fusion 360 Production API requests, you must set the following headers:
-    
-    |Header               | Value
-    | ------              | -----------------------------------------------------------------------------------
-    | **Content-Type**    | application/vnd.api+json
-    | **Accept**          | application/vnd.api+json
-    | **Authorization**   | Bearer <3-leggedToken>
-    | **X-DMG-FP-TENANT** | A unique identifier assigned to your factory. The identifier indicates the tenant. You must use the tenant of your factory. Do not use the tenant of different factory as it may create problems in debugging.
-    
     ## Getting Started
     
     Go through the following sections to understand the process of getting started with and know the concepts and functionality:
@@ -33,14 +22,27 @@ info:
     [@overview/basics]: <>
     # API Basics
     
-    Fusion 360 Production provides a set of APIs that allows to automate the process of creating, and managing the job sheets, and real-time tracking of the jobs by various operators on the factory shop floor. The APIs provides various endpoints to create, edit, and delete the entities for various components involved in factory production.
+    Fusion 360 Production provides a set of APIs that allows you to automate the process of creating and managing the job sheets, the real-time tracking of the jobs by various operators on the factory shop floor. 
+    
+    The APIs provides various endpoints to create, edit, and delete the entities of various components involved in factory production.
 
     ## Standards
     
-    1. This API follows the `JSON API` specs 1.0 documented at [JSON API Spec](http://jsonapi.org/format/)
+    1. This API follows the `JSON API` specification 1.0. For more information, see [JSON API specification](http://jsonapi.org/format/)
     2. Entity names are always plural e.g. `Hubs`, `Projects`, `Folders`
     3. Element names are camelCase e.g. `rootFolder`
 
+    ## API Headers
+    
+    For all Fusion 360 Production API requests, you must set the following headers:
+    
+    |Header               | Value
+    | ------------------  | -------------------------------------------------------
+    | **Content-Type**    | application/vnd.api+json
+    | **Accept**          | application/vnd.api+json
+    | **Authorization**   | Bearer <3-leggedToken>
+    | **X-DMG-FP-TENANT** | A unique identifier assigned to your factory. The identifier indicates the tenant. You must use the tenant of your factory. Do not use the tenant of different factory as it may create problems in debugging.
+    
     ## Http Verbs
 
     |Verb         | Description
@@ -110,7 +112,7 @@ info:
     
     ## **Resources**
     
-    This section lists the resources that the operator requires for performing different tasks. The resources can be the actual material on which the operator needs to perform the tasks or the tools that operator needs to use for performing the tasks.
+    This section lists the resources that the operator requires to perform different tasks. The resources can be the actual material on which the operator needs to perform the tasks or the tools that operator needs to use for performing the tasks.
     
     ### Raw Material
     
@@ -124,15 +126,15 @@ info:
     
     An entity that describes the standard items that the operator consumes during the operation of a particular task. These items are not the bulk raw material used for operation, but the associated material, such as O-rings, washers, screws or other needed accessories.
     
-    As the components are always stocked in the factory as these are the standard items used in the production.
+    The components are always stocked in the factory as these are the standard items used in the production.
     
     ### Operator
     
-    A skilled person in the factory who gets the job sheet for performing the jobs. The operator then performs the tasks mentioned in the job instructions in the job sheet.
+    A skilled person in the factory who gets the job sheet for performing the jobs. The operator reads the job instructions from the job sheet and accordingly performs the mentioned tasks on their workstation.
     
     ## **Core Functions**
     
-    This section lists the core functions that various operators perform in the manufacturing unit to successfully complete the assigned jobs.
+    This section lists the core functions that various operators perform on the shop floor to successfully complete the assigned jobs.
 
     ### Job
     
