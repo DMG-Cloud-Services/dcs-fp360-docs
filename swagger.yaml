@@ -567,8 +567,8 @@ info:
           "attributes": {
             "email": "Email",
             "tenantId": "job360-test",
-            "firstName": "Rohit",
-            "lastName": "Sharma",
+            "firstName": "FirstName",
+            "lastName": "LastName",
             "groupId": "3"
           }
         }
