@@ -472,7 +472,7 @@ info:
     ## API Tutorials
     This section provides the tutorials that explains how you can use the APIs that Fusion 360 Production provides.
     
-    ### [Setup Factory](/en/docs/fp360/v1/tutorials/setup-factory)
+    ### [Setup Factory](/en/docs/fp360/v1/tutorials/setup-a-factory)
     This tutorial explains how to setup the factory.
       
     ### [Attach Thumbnail and Documents to an Entity](/en/docs/fp360/v1/tutorials/attach-thumbnail-and-documents-to-an-entity)
@@ -524,10 +524,10 @@ info:
       
     HTTP `POST` requests to the Forge Schema require the `data:create` scope, but can also be called with the `data:write` scope.
     
-    [@tutorials/setup-factory]: <>
-    # Setup Factory
+    [@tutorials/setup-a-factory]: <>
+    # Setup a Factory
     
-    This tutorial explains how you can setup the entities in the factory so that you can start using Fusion 360 production for your daily manufacturing process. For more information about entities, see.[Entities](#entities)
+    This tutorial explains how you can setup the entities in the factory so that you can start using Fusion 360 production for your daily manufacturing process. For more information about entities, see.[Entities](/en/docs/fp360/v1/overview/apis#entities)
     
     Perform the steps in the given sequence to successfully setup the entities in your factory.
     
@@ -536,7 +536,7 @@ info:
     **Important**: Before inviting members, ensure that the tenant for the factory exists. For more information, contact administrator.
 
     In this step, you invite the users who will be working in the factory and wants to access Fusion 360 Production to manage their work. The invitation email is sent to the email address specified in the request.
-    For more information, see [Entities](#entities).
+    For more information, see [Entities](/en/docs/fp360/v1/overview/apis#entities).
     
     The Fusion 360 Production API provides the `POST invites` endpoint that allows you to send an invite to the required members. In the `POST` request, you can include multiple members.
     
@@ -579,7 +579,7 @@ info:
 
     ## Step 2: Create a Component
     
-    In this step, you can create a component entity. For more information about component, see [Entities](#entities).
+    In this step, you can create a component entity. For more information about component, see [Entities](/en/docs/fp360/v1/overview/apis#entities).
     
     The Fusion 360 Production API provides the `POST components` endpoint that allows you to create a component. 
     
@@ -689,7 +689,7 @@ info:
     
     ## Step 3: Create a Work Cell
     
-    In this step, you can create a work cell. Work cell is a group of work stations. So, you can use work cell to categorize your work stations. For more information about work cell, see [Entities](#entities).
+    In this step, you can create a work cell. Work cell is a group of work stations. So, you can use work cell to categorize your work stations. For more information about work cell, see [Entities](/en/docs/fp360/v1/overview/apis#entities).
     
     The Fusion 360 Production API provides the `POST workcells` endpoint that allows you to create a work cell. 
     
@@ -790,7 +790,7 @@ info:
     
     ## Step 4: Create a Workstation
     
-    In this step, you create a work stations. Work station an entity that indicates any machine where the operator performs the tasks. For more information about work station, see [Entities](#entities). 
+    In this step, you create a work stations. Work station an entity that indicates any machine where the operator performs the tasks. For more information about work station, see [Entities](/en/docs/fp360/v1/overview/apis#entities). 
     
     The Fusion 360 Production API provides the `POST workstations` endpoint that allows you to create a work station. 
     
@@ -963,7 +963,7 @@ info:
     
     ## Step 5: Create a Job Sheet
     
-    Job sheet actually contains one job instruction, which further contains the list of task instructions that the operator needs to perform. For more information about Job Sheet, see [Entities](#entities). For the tutorial on creating a complete job sheet, see [Create a Job Sheet](/en/docs/fusion360production/v1/tutorials/create-a-job-sheet).
+    Job sheet actually contains one job instruction, which further contains the list of task instructions that the operator needs to perform. For more information about Job Sheet, see [Entities](/en/docs/fp360/v1/overview/apis#entities). For the tutorial on creating a complete job sheet, see [Create a Job Sheet](/en/docs/fusion360production/v1/tutorials/create-a-job-sheet).
     
     [@tutorials/attach-thumbnail-and-documents-to-an-entity]
     # Attach Thumbnail and Documents to an Entity
@@ -2854,7 +2854,7 @@ info:
     [@tutorials/update-a-work-queue]: <>
     # Update a Work Queue
     
-    This tutorial explains how you can design and update your work queue. For more information about work queue, see [Entities](#entities).
+    This tutorial explains how you can design and update your work queue. For more information about work queue, see [Entities](/en/docs/fp360/v1/overview/apis#entities).
     
     **Note**: Only the supervisor can update the work queue.
     
@@ -4419,9 +4419,10 @@ paths:
       description: |
         Search for Components by specifying `searchTerm`, and/or multiple `tags`
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
         |Given member id does not exist|400| Bad Request|105|
         |Tenant not associated for given member.|401| Unauthorized Request|30028|
         
@@ -4453,12 +4454,13 @@ paths:
       description: |
             Create a new Component.
                    
-            Status codes:
-            |Message|HTTP Status Code|Error Code|Data
-            |----|----|----|----
-            |Given member id does not exist|400| Bad Request|105
-            |Tenant not associated for given member.|401| Unauthorized Request|30028
-            |Missing required attribute tenantId in object|400| Bad Request|30051
+            ### Status codes
+            
+            |Message|HTTP Status Code|Error Code|Data|
+            |----|----|----|----|
+            |Given member id does not exist|400| Bad Request|105|
+            |Tenant not associated for given member.|401| Unauthorized Request|30028|
+            |Missing required attribute tenantId in object|400| Bad Request|30051|
                    
       operationId: createComponent
       parameters:
@@ -4498,11 +4500,12 @@ paths:
         Get a Component.
         Entity describing component needed to execute a component or component consumed during execution of task.
                 
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
+        ### Status codes
+        
+        |Message| HTTP Status Code| Error Code| Data|
         |----|----|----|----|
-        |Given component doesn't exist|400| Bad Request|30064
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        |Given component doesn't exist|400| Bad Request|30064|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
         
       operationId: getComponent
       parameters:
@@ -4520,11 +4523,12 @@ paths:
       description: |
            Updates a Component
            
-           Status codes:
-           |Message|HTTP Status Code|Error Code|Data
-           |----|----|----|----
-           |Given member id does not exist|400| Bad Request|105
-           |Tenant not associated for given member.|401| Unauthorized Request|30028
+           ### Status codes
+           
+           |Message|HTTP Status Code|Error Code|Data|
+           |----|----|----|----|
+           |Given member id does not exist|400| Bad Request|105|
+           |Tenant not associated for given member.|401| Unauthorized Request|30028|
 
       operationId: updateComponent
       parameters:
@@ -4572,11 +4576,12 @@ paths:
       description: |
           Delete a Component.
          
-          Status codes:
-          |Message|HTTP Status Code|Error Code|Data
-          |----|----|----|----
-          |Given member id does not exist|400|Bad Request|105
-          |Tenant not associated for given member.|401|Unauthorized Request|30028         
+          ### Status codes
+          
+          |Message|HTTP Status Code|Error Code|Data|
+          |----|----|----|----|
+          |Given member id does not exist|400|Bad Request|105|
+          |Tenant not associated for given member.|401|Unauthorized Request|30028|
          
       operationId: deleteComponent
       parameters:
@@ -4599,10 +4604,10 @@ paths:
       description: |
         Get all documents for given components.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400| Bad Request|30020
+        ### Status codes
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid document type.|400| Bad Request|30020|
         
       operationId: getComponentDocuments
       parameters:
@@ -4624,10 +4629,11 @@ paths:
       description: |
         Get image for given component.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400| Bad Request|30020
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid document type.|400| Bad Request|30020|
         
       operationId: getComponentPrimaryImage
       parameters:
@@ -4647,12 +4653,13 @@ paths:
       description: | 
             Create multiple Components.
                        
-            Status codes:
-            |Message|HTTP Status Code|Error Code|Data
-            |----|----|----|----
-            |Invalid input for batch components|400| Bad Request|30063
-            |Invalid name for component.|400| Bad Request|30068
-            |Invalid parameter|400| Bad Request|122  
+            ### Status codes
+            
+            |Message|HTTP Status Code|Error Code|Data|
+            |----|----|----|----|
+            |Invalid input for batch components|400| Bad Request|30063|
+            |Invalid name for component.|400| Bad Request|30068|
+            |Invalid parameter|400| Bad Request|122|
             
       operationId: createComponents
       parameters:
@@ -4737,11 +4744,12 @@ paths:
       description: |
         Search for Workstations by specifying `searchTerm`, and/or multiple `tags`.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
         
       operationId: getWorkstations
       parameters:
@@ -4775,11 +4783,12 @@ paths:
       description: | 
             Create a new Workstation.
             
-            Status codes:
-            |Message|HTTP Status Code|Error Code|Data
-            |----|----|----|----
-            |Given member id does not exist|400| Bad Request|105
-            |Tenant not associated for given member.|401| Unauthorized Request|30028
+            ### Status codes
+            
+            |Message|HTTP Status Code|Error Code|Data|
+            |----|----|----|----|
+            |Given member id does not exist|400| Bad Request|105|
+            |Tenant not associated for given member.|401| Unauthorized Request|30028|
             
       operationId: createWorkstation
       parameters:
@@ -4825,14 +4834,15 @@ paths:
       description: |
         Get a Workstation.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |Given Workstation doesn't exist|400| Bad Request|30001
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
-        |Invalid parameter(s) |400| Bad Request|107
-        |Invalid tenant id|401| Unauthorized |30032
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Given Workstation doesn't exist|400| Bad Request|30001|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
+        |Invalid parameter(s) |400| Bad Request|107|
+        |Invalid tenant id|401| Unauthorized |30032|
         
       operationId: getWorkstation
       parameters:
@@ -4849,7 +4859,8 @@ paths:
       description: |
         Updates a Workstation's attributes.
 
-        Workstation Statuses:
+        ### Workstation Statuses
+        
         ```
         Idle
         Operating
@@ -4857,12 +4868,13 @@ paths:
         OfflineBroken
         ```
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
-        |Invalid workstation status|400| Bad Request|30062
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
+        |Invalid workstation status|400| Bad Request|30062|
         
       operationId: updateWorkstation
       parameters:
@@ -4907,14 +4919,15 @@ paths:
       description: | 
             Delete a Workstation.
             
-            Status codes:
-            |Message|HTTP Status Code|Error Code|Data
-            |----|----|----|----
-            |Given member id does not exist|400 |Bad Request|105
-            |Given Workstation doesn't exist|400|Bad Request|30001
-            |Tenant not associated for given member.|401 |Unauthorized Request|30028
-            |Workstation is Operating. Cannot delete|400 |Bad Request|30091
-            |Workstation have pending tasks. Cannot delete|400| Bad Request|30092
+            ### Status codes
+            
+            |Message|HTTP Status Code|Error Code|Data|
+            |----|----|----|----|
+            |Given member id does not exist|400 |Bad Request|105|
+            |Given Workstation doesn't exist|400|Bad Request|30001|
+            |Tenant not associated for given member.|401 |Unauthorized Request|30028|
+            |Workstation is Operating. Cannot delete|400 |Bad Request|30091|
+            |Workstation have pending tasks. Cannot delete|400| Bad Request|30092|
 
       operationId: deleteWorkstation
       parameters:
@@ -4938,10 +4951,11 @@ paths:
       description: |
         Get all documents for given workstation.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400| Bad Request|30020
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid document type.|400| Bad Request|30020|
         
       operationId: getWorkstationDocuments
       parameters:
@@ -4963,11 +4977,12 @@ paths:
       description: |
         Get image for given workstation.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given Workstation doesn't exist|400| Bad Request|30001
-        |Invalid document type.|400| Bad Request|30020
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given Workstation doesn't exist|400| Bad Request|30001|
+        |Invalid document type.|400| Bad Request|30020|
         
       operationId: getWorkstationPrimaryImage
       parameters:
@@ -4986,12 +5001,13 @@ paths:
       description: | 
             Create multiple workstations.
             
-            Status codes:
-            |Message|HTTP Status Code|Error Code|Data
-            |----|----|----|----
-            |Invalid parameter|400| Bad Request|122
-            |Invalid name for workstation.|400| Bad Request|30042
-            |Invalid input for batch workstations|400| Bad Request|30061
+            ### Status codes
+            
+            |Message|HTTP Status Code|Error Code|Data|
+            |----|----|----|----|
+            |Invalid parameter|400| Bad Request|122|
+            |Invalid name for workstation.|400| Bad Request|30042|
+            |Invalid input for batch workstations|400| Bad Request|30061|
 
       operationId: createWorkstations
       parameters:
@@ -5041,7 +5057,7 @@ paths:
               Create multiple workstations by batch import using file. Currenlty only CSV file format is supported. Here's the sample file
                    ([sample file](http://beta.fusionproduction.dmg.autodesk.com/data/samples/sample_workstations.csv))
              
-              Status codes:
+              ## Status codes
               |Message|HTTP Status Code|Error Code|Data
               |----|----|----|----
               |Error while parsing the workstations payload/file to fetch workstations data|400| Bad Request|30038
@@ -5063,11 +5079,12 @@ paths:
       description: |
         Search for Workcells by specifying `searchTerm`, and/or multiple `tags`.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
         
       operationId: getWorkcells
       parameters:
@@ -5101,11 +5118,12 @@ paths:
       description: | 
             Create a new Workcell.
             
-            Status codes:
-            |Message|HTTP Status Code|Error Code|Data
-            |----|----|----|----
-            |Given member id does not exist|400| Bad Request|105
-            |Tenant not associated for given member.|401| Unauthorized Request|30028
+            ### Status codes
+            
+            |Message|HTTP Status Code|Error Code|Data|
+            |----|----|----|----|
+            |Given member id does not exist|400| Bad Request|105|
+            |Tenant not associated for given member.|401| Unauthorized Request|30028|
             
       operationId: createWorkcell
       parameters:
@@ -5143,12 +5161,13 @@ paths:
       description: |
         Get a Workcell.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |Given workcell doesn't exist|400| Bad Request|30104
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Given workcell doesn't exist|400| Bad Request|30104|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
         
       operationId: getWorkcell
       parameters:
@@ -5164,12 +5183,14 @@ paths:
     patch:
       description: |
         Updates a Workcell's attributes.
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
-        |Invalid workcell status|400| Bad Request|30103
+        
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
+        |Invalid workcell status|400| Bad Request|30103|
         
       operationId: updateWorkcell
       parameters:
@@ -5204,13 +5225,14 @@ paths:
       description: | 
             Delete a Workcell.
             
-            Status codes:
-            |Message|HTTP Status Code|Error Code|Data
-            |----|----|----|----
-            |Given member id does not exist|400| Bad Request|105
-            |Given Workstation doesn't exist|400| Bad Request|30001
-            |Tenant not associated for given member.|401| Unauthorized Request|30028
-            |Invalid workcell status|400| Bad Request|30103
+            ### Status codes
+            
+            |Message|HTTP Status Code|Error Code|Data|
+            |----|----|----|----|
+            |Given member id does not exist|400| Bad Request|105|
+            |Given Workstation doesn't exist|400| Bad Request|30001|
+            |Tenant not associated for given member.|401| Unauthorized Request|30028|
+            |Invalid workcell status|400| Bad Request|30103|
             
       operationId: deleteWorkcell
       parameters:
@@ -5231,14 +5253,15 @@ paths:
       description: | 
             Remove Workstation(s) from a workcell.  This will assign the workstation(s) back to the default "Factory" workcell.
             
-            Status codes:
-            |Message|HTTP Status Code|Error Code|Data
-            |----|----|----|----
-            |Given member id does not exist|400| Bad Request|105
-            |Given Workstation doesn't exist|400| Bad Request|30001
-            |Tenant not associated for given member.|401| Unauthorized Request|30028
-            |Workcell does not exist.|400| Bad Request|30104
-            |Workstation does not belong to workcell.|400| Bad Request|30110
+            ### Status codes
+            
+            |Message|HTTP Status Code|Error Code|Data|
+            |----|----|----|----|
+            |Given member id does not exist|400| Bad Request|105|
+            |Given Workstation doesn't exist|400| Bad Request|30001|
+            |Tenant not associated for given member.|401| Unauthorized Request|30028|
+            |Workcell does not exist.|400| Bad Request|30104|
+            |Workstation does not belong to workcell.|400| Bad Request|30110|
             
       operationId: deleteWorkcellsWorkstations
       parameters:
@@ -5281,11 +5304,12 @@ paths:
       description: |
         Search for all Work Queues, each of which represents either a workstation or workcell and the corresponding queue of task executions.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
         
       operationId: getWorkQueues
       responses:
@@ -5295,12 +5319,14 @@ paths:
     patch:
       description: |
         A supervisor updates a Work Queue's Task Executions.  Updates the order given in the request body of Task Executions for given workstations or workcells.  As well, if a Task Execution moves from a workcell or workstation task queue to another workstation or workcell, then the Task Execution is reassigned to that new workstation/workcell.
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
-        |Invalid workcell status|400| Bad Request|30103
+        
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
+        |Invalid workcell status|400| Bad Request|30103|
         
       operationId: updateWorkQueue
       parameters:
@@ -5439,9 +5465,10 @@ paths:
       description: |
          Get a Workstation Summary
          
-          Status codes:
-          |Message|HTTP Status Code|Error Code|Data
-          |----|----|----|----
+          ### Status codes
+          
+          |Message|HTTP Status Code|Error Code|Data|
+          |----|----|----|----|
           |Given Workstation doesn't exist|400| Bad Request|30001|
          
       operationId: getWorkstation
@@ -5469,10 +5496,11 @@ paths:
       description: |
         Get Task Instructions
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid parameter|400| Bad Request|122
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid parameter|400| Bad Request|122|
         
       operationId: getTaskInstruction
       parameters:
@@ -5490,17 +5518,18 @@ paths:
       description: |
         Create a Task Instruction. Either a recommendedWorkcell (of type `workcells`) or a recommendedWorkstation (of type `workstations`) may be specified under `relationships` in the request body.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |Invalid parameter(s)|400| Bad Request|107
-        |Missing required relationship|400| Bad Request|30004
-        |Invalid tenant id |400| Bad Request|30016|tenantId
-        |Request is not allowed for this member's role, please login using a valid role |403| Forbidden Request|123
-        |Tenant not associated for given member.|401| Unauthorized |30028|tenantId
-        |Both workstation and workcell assigned.  Only one is allowed. |400| Bad Request|30109
-        |Given component doesn't exist|400| Bad Request|30064
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Invalid parameter(s)|400| Bad Request|107|
+        |Missing required relationship|400| Bad Request|30004|
+        |Invalid tenant id |400| Bad Request|30016|tenantId|
+        |Request is not allowed for this member's role, please login using a valid role |403| Forbidden Request|123|
+        |Tenant not associated for given member.|401| Unauthorized |30028|tenantId|
+        |Both workstation and workcell assigned.  Only one is allowed. |400| Bad Request|30109|
+        |Given component doesn't exist|400| Bad Request|30064|
         
       operationId: createTaskInstruction
       parameters:
@@ -5559,10 +5588,11 @@ paths:
       description: |
         Get a Task Instruction
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Task Instruction not found.|400| Bad Request|30003
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Task Instruction not found.|400| Bad Request|30003|
         
       operationId: getTaskInstruction
       parameters:
@@ -5581,12 +5611,13 @@ paths:
         Update a Task Instruction.  Either a recommendedWorkcell (of type `workcells`) or a recommendedWorkstation (of type `workstations`) may be specified under `relationships` in the request body.
         Also note, if changing from workcell to workstation, the workstation must belong to that workcell.
 
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Task Instruction not found.|400| Bad Request|30003
-        |Missing required relationship|400| Bad Request|30004
-        |Given component doesn't exist|400| Bad Request|30064
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Task Instruction not found.|400| Bad Request|30003|
+        |Missing required relationship|400| Bad Request|30004|
+        |Given component doesn't exist|400| Bad Request|30064|
         
       operationId: udpateTaskInstruction
       parameters:
@@ -5630,10 +5661,11 @@ paths:
       description: |
               Delete a task instruction.
               
-              Status codes:
-              |Message|HTTP Status Code|Error Code|Data
-              |----|----|----|----
-              |Task Instruction not found.|400| Bad Request|30003
+              ### Status codes
+              
+              |Message|HTTP Status Code|Error Code|Data|
+              |----|----|----|----|
+              |Task Instruction not found.|400| Bad Request|30003|
 
       operationId: deleteTaskInstruction
       parameters:
@@ -5656,10 +5688,11 @@ paths:
       description: |
         Get all documents for given task instruction.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400| Bad Request|30020
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid document type.|400| Bad Request|30020|
 
       operationId: getTaskInstructionDocuments
       parameters:
@@ -5680,10 +5713,11 @@ paths:
       description: |
         Get image for given task instruction.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400| Bad Request|30020
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid document type.|400| Bad Request|30020|
 
       operationId: getTaskInstructionPrimaryImage
       parameters:
@@ -5701,9 +5735,10 @@ paths:
       description: | 
                 Create multiple task instructions. Either a recommendedWorkcell (of type `workcells`) or a recommendedWorkstation (of type `workstations`) may be specified under `relationships` in the request body.
                 
-                Status codes:
-                |Message|HTTP Status Code|Error Code|Data
-                |----|----|----|----
+                ### Status codes
+                
+                |Message|HTTP Status Code|Error Code|Data|
+                |----|----|----|----|
                 |Missing required attribute tenantId in object|400| Bad Request|30051|
                 |Invalid resource type|400| Bad Request|30053|
                 |Invalid input for batch Task Instructions|400| Bad Request|30056|
@@ -5808,10 +5843,11 @@ paths:
       description: |
         Get Sub Task Instruction
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid parameter|400| Bad Request|122
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid parameter|400| Bad Request|122|
         
       operationId: getSubTaskInstruction
       parameters:
@@ -5847,10 +5883,11 @@ paths:
       description: |
         Search for Job Instructions by specifying `searchTerm`, and/or multiple `tags`.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid parameter|400| Bad Request|122
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid parameter|400| Bad Request|122|
         
       operationId: getJobInstruction
       parameters:
@@ -5884,16 +5921,17 @@ paths:
       description: |
             Create a new Job Instruction
             
-            Status codes:
-            |Message|HTTP Status Code|Error Code|Data
-            |----|----|----|----
-            |Given member id does not exist|400| Bad Request|105
-            |Tenant not associated for given member.|401| Unauthorized Request|30028
-            |Invalid parameter(s)|400| Bad Request|107|tenantId
-            |Request is not allowed for this member's role, please login using a valid role |403| Forbidden Request|123
-            |Invalid tenant id|401| Unauthorized |30032
-            |Application not installed for this tenant|400| Bad Request|40003
-            |Application with given version does not exist.|400| Bad Request|30099
+            ### Status codes
+            
+            |Message|HTTP Status Code|Error Code|Data|
+            |----|----|----|----|
+            |Given member id does not exist|400| Bad Request|105|
+            |Tenant not associated for given member.|401| Unauthorized Request|30028|
+            |Invalid parameter(s)|400| Bad Request|107|tenantId|
+            |Request is not allowed for this member's role, please login using a valid role |403| Forbidden Request|123|
+            |Invalid tenant id|401| Unauthorized |30032|
+            |Application not installed for this tenant|400| Bad Request|40003|
+            |Application with given version does not exist.|400| Bad Request|30099|
             
       operationId: createJobInstruction
       parameters:
@@ -5944,11 +5982,12 @@ paths:
       description: |
         Get a Job Instruction
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |JobInstruction not found.|400| Bad Request|30007
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |JobInstruction not found.|400| Bad Request|30007|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
         
       operationId: getJobInstruction
       parameters:
@@ -5972,13 +6011,14 @@ paths:
               
               when updating the "archived" flag of jobinstruction, all other data for update will be ignored
               
-              Status codes:
-              |Message|HTTP Status Code|Error Code|Data
-              |----|----|----|----
-              |Given member id does not exist|400| Bad Request|105
-              |JobInstruction not found.|400| Bad Request|30007
-              |dispatched jobsheets are pending. Cannot archive jobinstruction|400| Bad Request|30124
-              |Cannot update archived jobinstruction.|400| Bad Request|30125
+              ### Status codes
+              
+              |Message|HTTP Status Code|Error Code|Data|
+              |----|----|----|----|
+              |Given member id does not exist|400| Bad Request|105|
+              |JobInstruction not found.|400| Bad Request|30007|
+              |dispatched jobsheets are pending. Cannot archive jobinstruction|400| Bad Request|30124|
+              |Cannot update archived jobinstruction.|400| Bad Request|30125|
 
       operationId: updateJobInstruction
       parameters:
@@ -6069,10 +6109,11 @@ paths:
       description: |
         Get all documents for given Job Instruction.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400| Bad Request|30020
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid document type.|400| Bad Request|30020|
         
       operationId: getJobInstructionDocuments
       parameters:
@@ -6090,10 +6131,12 @@ paths:
     x-description: |
         Get image for given Job Instruction.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid document type.|400| Bad Request|30020
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid document type.|400| Bad Request|30020|
+        
     get:
       tags: [ "Job Instructions" ]
       description: |
@@ -6115,12 +6158,13 @@ paths:
       description: | 
             clone  Job Instruction and task instructions
             
-            Status codes:
-            |Message|HTTP Status Code|Error Code|Data
-            |----|----|----|----
-            |JobInstruction not found.|400| Bad Request|30007
-            |Given member id does not exist|400| Bad Request|105
-            |Tenant not associated for given member.|401| Unauthorized Request|30028
+            ### Status codes
+            
+            |Message|HTTP Status Code|Error Code|Data|
+            |----|----|----|----|
+            |JobInstruction not found.|400| Bad Request|30007|
+            |Given member id does not exist|400| Bad Request|105|
+            |Tenant not associated for given member.|401| Unauthorized Request|30028|
             
       operationId: createJobInstruction
       parameters:
@@ -6139,15 +6183,17 @@ paths:
       description: |
               Create multiple jobinstructions by batch import using file. Currenlty only CSV file format is supported. Here's the sample file
                    ([sample file](http://alpha-factoryproductionclient.dmg.autodesk.com/data/samples/jobinstructions.csv))
-              Status codes:
-              |Message|HTTP Status Code|Error Code|Data
-              |----|----|----|----
-              |Given member id does not exist|400| Bad Request|105
-              |Tenant not associated for given member.|401| Unauthorized Request|30028
-              |The file format is not supported.|400| Bad Request|30039
-              |The file is empty!|400| Bad Request|30043
-              |Invalid name for job instruction.|400| Bad Request|30044
-              |Error while parsing the job instructions payload/file to fetch job instructions data.|400 |Bad Request|30073
+              
+              ### Status codes
+              
+              |Message|HTTP Status Code|Error Code|Data|
+              |----|----|----|----|
+              |Given member id does not exist|400| Bad Request|105|
+              |Tenant not associated for given member.|401| Unauthorized Request|30028|
+              |The file format is not supported.|400| Bad Request|30039|
+              |The file is empty!|400| Bad Request|30043|
+              |Invalid name for job instruction.|400| Bad Request|30044|
+              |Error while parsing the job instructions payload/file to fetch job instructions data.|400 |Bad Request|30073|
                    
       operationId: createJobinstructions
       responses:
@@ -6176,9 +6222,10 @@ paths:
       description: |
         Search for Job Sheets by specifying `searchTerm`, and/or multiple `tags`.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
         |Invalid parameter|400| Bad Request|122|
         
       operationId: getJobSheet
@@ -6219,16 +6266,17 @@ paths:
       description: |
         Create a Job Sheet
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |Invalid parameter|400| Bad Request|122
-        |JobInstruction not found.|400| Bad Request|30007
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
-        |job instruction is required to create job sheet|400| Bad Request|30054
-        |Job instruction should have at-least one task to create job sheet|400| Bad Request|30088
-        |Invalid Input Payload. Not able to deserialize|400| Bad Request|173
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Invalid parameter|400| Bad Request|122|
+        |JobInstruction not found.|400| Bad Request|30007|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
+        |job instruction is required to create job sheet|400| Bad Request|30054|
+        |Job instruction should have at-least one task to create job sheet|400| Bad Request|30088|
+        |Invalid Input Payload. Not able to deserialize|400| Bad Request|173|
         
       operationId: createJobSheet
       parameters:
@@ -6286,11 +6334,12 @@ paths:
       description: |
         Get a Job Sheet
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |JobSheet not found.|400| Bad Request|30008
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |JobSheet not found.|400| Bad Request|30008|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
                 
       operationId: getJobSheet
       parameters:
@@ -6319,15 +6368,16 @@ paths:
         Waiting
         ```
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |Job sheet already in progress or completed. cannot update quantity|400| Bad Request|30071
-        |Jobsheet cannot be marked completed.|400| Bad Request|30077
-        |Invalid status update|400| Bad Request|30087
-        |Cannnot update cancelled jobsheet.|400| Bad Request|30082
-        |Cannot cancel. jobsheet in completed/needs_approval state|400| Bad Request|30083
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Job sheet already in progress or completed. cannot update quantity|400| Bad Request|30071|
+        |Jobsheet cannot be marked completed.|400| Bad Request|30077|
+        |Invalid status update|400| Bad Request|30087|
+        |Cannnot update cancelled jobsheet.|400| Bad Request|30082|
+        |Cannot cancel. jobsheet in completed/needs_approval state|400| Bad Request|30083|
         
       operationId: udpateJobSheet
       parameters:
@@ -6368,12 +6418,13 @@ paths:
       description: |
         Get multiple Job Sheets by ids
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |Invalid parameter|400| Bad Request|122
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Invalid parameter|400| Bad Request|122|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
                 
       operationId: getMultipleJobSheets
       parameters:
@@ -6430,17 +6481,18 @@ paths:
       description: |
           Create a multiple job sheets.
           
-          Status codes:
-          |Message|HTTP Status Code|Error Code|Data
-          |----|----|----|----
-          |JobInstruction not found.|400| Bad Request|30007
-          |Missing required attribute tenantId in object|400| Bad Request|30051
-          |Missing required attribute in Job sheet object|400| Bad Request|30052
-          |Invalid resource type|400| Bad Request|30053
-          |job instruction is required to create job sheet|400| Bad Request|30054
-          |Invalid input for batch job sheets|400| Bad Request|30055
-          |Missing required attribute to create Jobsheet/quantity should be greater than 0|400| Bad Request|30070
-          |Job instruction should have at-least one task to create job sheet|400| Bad Request|30088
+          ### Status codes
+          
+          |Message|HTTP Status Code|Error Code|Data|
+          |----|----|----|----|
+          |JobInstruction not found.|400| Bad Request|30007|
+          |Missing required attribute tenantId in object|400| Bad Request|30051|
+          |Missing required attribute in Job sheet object|400| Bad Request|30052|
+          |Invalid resource type|400| Bad Request|30053|
+          |job instruction is required to create job sheet|400| Bad Request|30054|
+          |Invalid input for batch job sheets|400| Bad Request|30055|
+          |Missing required attribute to create Jobsheet/quantity should be greater than 0|400| Bad Request|30070|
+          |Job instruction should have at-least one task to create job sheet|400| Bad Request|30088|
           
       operationId: createJobsheets
       parameters:
@@ -6499,10 +6551,11 @@ paths:
       description: |
         Get a Task Execution
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid parameter|400| Bad Request|122
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid parameter|400| Bad Request|122|
 
       operationId: getTaskExecution
       parameters:
@@ -6524,11 +6577,12 @@ paths:
       description: |
         Get a Task Execution
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |TaskExecution not found.|400| Bad Request|30009
-        |Tenant not associated for given member.|401| Unauthorized Request|30028
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |TaskExecution not found.|400| Bad Request|30009|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
         
       operationId: getTaskExecution
       parameters:
@@ -6557,17 +6611,18 @@ paths:
         Completed
         ```
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
         |Given member id does not exist|400| Bad Request|105|
-        |cannot update task on cancelled Jobsheet|400| Bad Request|30084
-        |Cannot update another task's status when current task is blocked|400| Bad Request|30035
-        |task execution not started yet|400| Bad Request|30010
-        |task execution already in progress|400| Bad Request|30011
-        |Task is blocked|400| Bad Request|30085
-        |cannot reopen task|400| Bad Request|30069
-        |task execution is complete|400| Bad Request|30012
+        |cannot update task on cancelled Jobsheet|400| Bad Request|30084|
+        |Cannot update another task's status when current task is blocked|400| Bad Request|30035|
+        |task execution not started yet|400| Bad Request|30010|
+        |task execution already in progress|400| Bad Request|30011|
+        |Task is blocked|400| Bad Request|30085|
+        |cannot reopen task|400| Bad Request|30069|
+        |task execution is complete|400| Bad Request|30012|
 
       operationId: updateTaskExecution
       parameters:
@@ -6797,18 +6852,20 @@ paths:
         3. You then use uploadUrl value and make a PUT call and send the actual bytes of the file (NOT the file path). You can call this URL multiple time for differnt files(one file at a time), just add new param to URL '&objectKey=filename.ext'.
         4. At the end of this call you will get the filestorage details. Use POST/PATCH entityfile API's to attach files to entities. 
         
-        Document File Types:
-        |File Type|Description
-        |----|----
+        ### Document File Types
+        
+        |File Type|Description|
+        |----|----|
         |DOCUMENT|A document to attach to an entity|
         |SYSTEM_PRIMARY_IMAGE|An entity's primary image|
         |TASK_COMPLETION_DOCUMENT|Task Execution Completion Document|
 
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid parameter|400| Bad Request|122
-        |Resource not found in the factory production database|400| Bad Request|30018
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid parameter|400| Bad Request|122|
+        |Resource not found in the factory production database|400| Bad Request|30018|
        
         
       operationId: getUploadServer
@@ -6822,11 +6879,12 @@ paths:
       description: |
         add files to entity(NOTE-  this API replace already attched files)
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |cannot update task on cancelled Jobsheet|400| Bad Request|30084
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |cannot update task on cancelled Jobsheet|400| Bad Request|30084|
         
       operationId: postEntityFiles
       parameters:
@@ -6894,11 +6952,12 @@ paths:
       description: |
         add/delete files to entity.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Given member id does not exist|400| Bad Request|105
-        |cannot update task on cancelled Jobsheet|400| Bad Request|30084
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |cannot update task on cancelled Jobsheet|400| Bad Request|30084|
         
       operationId: patchEntityFiles
       parameters:
@@ -6950,10 +7009,11 @@ paths:
       description: | 
         To get details about a document.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Document not found.|400| Bad Request|30019
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Document not found.|400| Bad Request|30019|
         
       operationId: getDocument
       parameters:
@@ -6996,10 +7056,11 @@ paths:
       description: |
         Search for Members.
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Invalid member status value |400| Bad Request|30034
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid member status value |400| Bad Request|30034|
 
       operationId: getMembers
       parameters:
@@ -7032,12 +7093,13 @@ paths:
       description: |
         Get details for current logged in member including tenant(s) and group(s).
         
-        Status codes:
-        |Message|HTTP Status Code|Error Code|Data
-        |----|----|----|----
-        |Missing authorization header |400| Bad Request|6010
-        |Access token provided is invalid or expired |400| Bad Request|7014
-        |Unauthorized Access. You don't sufficient privileges for given tenant |400| Bad Request|30022
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Missing authorization header |400| Bad Request|6010|
+        |Access token provided is invalid or expired |400| Bad Request|7014|
+        |Unauthorized Access. You don't sufficient privileges for given tenant |400| Bad Request|30022|
         
       operationId: getMember
       parameters:
