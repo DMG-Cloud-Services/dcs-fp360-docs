@@ -248,7 +248,7 @@ info:
     
     ## Custom App Package Structure
     
-    Fusion 360 Production App Framework requires that the package for the custom application contains the files and folders in a specific format and structure. 
+    The App framework in Fusion 360 Production requires a package of custom application files and folders created in a specific format and structure. 
     
     You must build your application as per the following structure:
     
@@ -282,15 +282,15 @@ info:
     
     The following table provides the description of the files and folders in the application package. 
     
-    | Files                 | Description
-    | ------                | -----------------------------------------------------------------------------------
-    | **fpaf_config.json**  | The information about an App. The information includes the App author and the App location on the Fusion Production website.
-    | **index.html**        | This home or landing page of the App.
-    | **scripts/*.js**      | The files containing the actual business logic of the App, which also interacts to different events from Fusion Production website.
-    | **resources/*.json**  | The files containing the localized strings to deploy the App in the languages other than English.
-    | **assets/images/*.png | The images used in the App.
-    | **assets/fonts/***    | The fonts used in the App.
-    | **assets/css/*.css**  | The style sheets for the templates.
+    | Files               | Description
+    | ------------------- | -----------------------------------------------------------------------------------
+    | fpaf_config.json    | The information about an App. The information includes the App author and the App location on the Fusion Production website.
+    | index.html          | This home or landing page of the App.
+    | scripts/*.js        | The files containing the actual business logic of the App, which also interacts to different events from Fusion Production website.
+    | resources/*.json    | The files containing the localized strings to deploy the App in the languages other than English.
+    | assets/images/*.png | The images used in the App.
+    | assets/fonts/*      | The fonts used in the App.
+    | assets/css/*.css    | The style sheets for the templates.
     
     ## Sample App Config File
     
@@ -336,9 +336,11 @@ info:
     
     ### Author
     
-    Use the **author** attribute to specify the name of the App author. In the **author** attribute, you need to specify the full name, avatarURL, and other information of the author. The name can be an individual or a company name and the URL can point to a page about the author or the App. For example, "http://www.company.com" or "http://www.company.com/app-page".
+    Use the **author** attribute to specify the name of the App author. 
     
-    For example, 
+    In the **author** attribute, you need to specify the full name, avatarURL, and other information of the author. The name can be an individual or a company name and the URL can point to a page about the author or the App. For example, "http://www.company.com" or "http://www.company.com/app-page".
+    
+    **Example**:
     
     ```json
     "author": {
@@ -350,11 +352,13 @@ info:
     
     ### App Settings
     
-    You define the settings that you want the users to set for the App. Use the **entitySchemas** attribute to specify the settings. The **entitySchemas** attribute contains a list of JSON objects.
+    In the App settings, you define the settings that you want the users to set for the App. 
     
-    The fields that you specify in the **entitySchemas** attribute are rendered on the entity form on the Fusion Production website. Also, the data that users enter will be available to the App when the App is rendered at the specified location.
+    Use the **entitySchemas** attribute to specify the settings. The **entitySchemas** attribute contains a list of JSON objects.
     
-    For example,
+    The fields that you specify in the **entitySchemas** attribute are rendered on the entity form on the Fusion 360 Production website. Also, the data that users enter will be available to the App when the App is rendered at the specified location.
+    
+    **Example**:
     
     ```json
     "entitySchemas": {
@@ -378,11 +382,11 @@ info:
     
     ### Location¶
 
-    Use the **locations** attribute to specify where you want the App to appear on the Fusion 360 Production website. You can specify multiple locations. 
+    Use the **locations** attribute to specify the location where you want the App to appear on the Fusion 360 Production website. You can specify multiple locations. 
     
     Some App framework APIs are available only for the apps appearing at certain locations on the Fusion 360 Production website. For example, the Apps appearing on the workstation detail page requires the workstation properties. 
     
-    For example,
+    **Example**:
     
     ```json
     "locations": [
@@ -391,56 +395,86 @@ info:
       }
     ]
     ```
-    Following are the available locations for the App on the Fusion 360 Production website:
+    Following are the available locations for the App to appear on the Fusion 360 Production website:
     
-    * workstation_detail: The workstation detail page.
-    * workstation_list: The workstations listing page.
-    * jobsheet_detail: The Jobsheet detail page.
-    * jobsheet_list: The Jobsheets listing page.
-    * task_detail: The task detail page.
+    * workstation_detail: The workstation details page.
+    * workstation_list: The workstations list page.
+    * jobsheet_detail: The Jobsheet details page.
+    * jobsheet_list: The Jobsheets list page.
+    * task_detail: The task details page.
     
     ### Default Locale¶
 
-    Use the **defaultLocale** property to specify the default locale of the App. The App can support multiple languages. If an agent selects a language the App does not support, the language of the default locale is used.
+    Use the **defaultLocale** property to specify the default locale of the App. The App can support multiple languages. 
     
-    **Note**: The value of the property must be a two letter ISO 639 language code.
+    If an agent selects a language the App does not support, the language of the default locale is used.
     
-    For example,
+    **Note**: The value of the `defaultLocale` property must be a two letter ISO 639 language code.
     
-    "defaultLocale": "en"
+    **Example**:
+    
+    ```json
+    "defaultLocale": "EN"
+    ```
     
     ### Domain Whitelist¶
     
-    Use the **domainWhiteList** attribute to specify the allowed domains as whitelist. 
+    Use the **domainWhiteList** attribute to specify the domains as white list domains. 
     
-    The domain whitelist is another layer of security that you can use if you are making secure requests. This setting prevents external users to use the secure settings to reroute them to another domain and steal the token and password.
+    The whitelist of domains is another layer of security that you can use if you are making secure requests. This setting prevents external users to use the secure settings to reroute them to another domain and steal the token and password.
     
-    For example,
+    **Example**:
     
+    ```json
     "domainWhitelist": [
       "abc.com",
       "apps.abc.com"
     ]
+    ```
     
     ## App Deployment Workflow
     
     This section provides the steps that you need to follow to successfully deploy the application to the tenant of Fusion 360 Production:
     
-    * Client calls the app-management service to get a URL to upload their App package. This URL contains:
+    ### Step 1
+    
+    Client calls the app-management service to get a URL to upload their App package. 
+    
+    This URL contains:
+    
       * **UUID** that the app-management service generates for the App. This UUID is generated for the first time when the client request for the Upload URL. In subsequent requests for updating the App or creating new versions, the client has to use the same UUID.
       * **Version Number** of the App. The version number 1.0.0 when the App is created and the new version when the App is updated.
-    * Client upload the zip file of the App package to this upload URL.
-      At the upload URL, the zip packages for all Apps are stored under the `dmg-factory-production-app-packages` folder. The App package is stored at the location: `dmg-factory-production-app-packages/apps/uuid/version/package.zip`
-    * Clients calls the app-management service with objectKey received from the upload service.
-    * The app-management service performs the following:
-      * Downloads and unzips the App package.
-      * Validates the content of the App package.
-      * Generates a new PKI pair and stores it in the database for this App. The same PKI pair later used to sign the JWT token.
-      * Updates the App config in the database
-      * Pre-compile all html templates
-      * Upload pre-compiled templates and assets to Amazon S3, using **TransferManager** from AWS SDK. The validated and compiled files are uploaded to the `dmg-factory-production-app/apps/uuid/version` folder.
-    * The Autodesk support team delivers the `dmg-factory-production-app` bucket to the `apps.fusionproduction.com`. They use the Amazon CloudFront web service for this. After delivering the App, the App becomes live to be accessed with fusion production clients using `https://apps.fusionproduction.com/{app_id}/{version}`.
-    * Now, the client needs to set to set the correct context in their javascript to render the pre-compiled html template.
+      
+    ### Step 2
+    
+    Client uploads the zip file of the App package to this upload URL. At the upload URL, the zip packages of all Apps are stored under the `dmg-factory-production-app-packages` folder. 
+    
+    The App package is stored at the location: `dmg-factory-production-app-packages/apps/uuid/version/package.zip`
+    
+    ### Step 3
+    
+    Clients calls the Fusion 360 Production app-management service with objectKey received from the upload service.
+    
+    ### Step 4
+    
+    The app-management service performs the following:
+    
+    * Downloads and unzips the App package.
+    * Validates the content of the App package.
+    * Generates a new PKI pair and stores it in the database for this App. The same PKI pair is used later to sign the JWT token.
+    * Updates the App config in the database
+    * Pre-compile all html templates
+    * Upload pre-compiled templates and assets to Amazon S3, using **TransferManager** from AWS SDK. The validated and compiled files are uploaded to the `dmg-factory-production-app/apps/uuid/version` folder.
+    
+    ### Step 5
+   
+    The Autodesk support team delivers the `dmg-factory-production-app` bucket to the `apps.fusionproduction.com`. They use the Amazon CloudFront web service for this. 
+    
+    After delivering the App, the App becomes live to be accessed with fusion production clients using `https://apps.fusionproduction.com/{app_id}/{version}`.
+    
+    ### Step 6
+    
+    The client needs to set the correct context in their javascript to render the pre-compiled html template.
     
     [@overview/reports]: <>
     #Reports
