@@ -246,7 +246,13 @@ info:
     * Workstation camera feed
     * Simulation or 3D viewing of models
     
-    ## Custom App Package Structure
+    This section cotains the following topics:
+    
+    * [Custom App Package Structure](#app_package_structure)
+    * [Sample App Config File](#sample_app_config_file)
+    * [App Deployment Workflow](#app_deployment_workflow)
+    
+    ##<a name="app_package_structure"></a>Custom App Package Structure
     
     The App framework in Fusion 360 Production requires a package of custom application files and folders created in a specific format and structure. 
     
@@ -292,7 +298,7 @@ info:
     | assets/fonts/*      | The fonts used in the App.
     | assets/css/*.css    | The style sheets for the templates.
     
-    ## Sample App Config File
+    ##<a name="sample_app_config_file"></a>Sample App Config File
     
     The application configuration file is a JSON file included with the App source code. The file contains specific details about the application.
     
@@ -432,7 +438,7 @@ info:
     ]
     ```
     
-    ## App Deployment Workflow
+    ##<a name="app_deployment_workflow"></a>App Deployment Workflow
     
     This section provides the steps that you need to follow to successfully deploy the application to the tenant of Fusion 360 Production:
     
