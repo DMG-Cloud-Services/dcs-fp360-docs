@@ -4452,15 +4452,15 @@ paths:
     post:
       tags: [ "Components" ]
       description: |
-            Create a new Component.
-                   
-            ### Status codes
-            
-            |Message|HTTP Status Code|Error Code|Data|
-            |----|----|----|----|
-            |Given member id does not exist|400| Bad Request|105|
-            |Tenant not associated for given member.|401| Unauthorized Request|30028|
-            |Missing required attribute tenantId in object|400| Bad Request|30051|
+        Create a new Component.
+               
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
+        |Missing required attribute tenantId in object|400| Bad Request|30051|
                    
       operationId: createComponent
       parameters:
@@ -4521,14 +4521,14 @@ paths:
     patch:
       tags: [ "Components" ]
       description: |
-           Updates a Component
-           
-           ### Status codes
-           
-           |Message|HTTP Status Code|Error Code|Data|
-           |----|----|----|----|
-           |Given member id does not exist|400| Bad Request|105|
-           |Tenant not associated for given member.|401| Unauthorized Request|30028|
+         Updates a Component
+         
+         ### Status codes
+         
+         |Message|HTTP Status Code|Error Code|Data|
+         |----|----|----|----|
+         |Given member id does not exist|400| Bad Request|105|
+         |Tenant not associated for given member.|401| Unauthorized Request|30028|
 
       operationId: updateComponent
       parameters:
@@ -4651,15 +4651,15 @@ paths:
     post:
       tags: [ "Components" ]
       description: | 
-            Create multiple Components.
-                       
-            ### Status codes
-            
-            |Message|HTTP Status Code|Error Code|Data|
-            |----|----|----|----|
-            |Invalid input for batch components|400| Bad Request|30063|
-            |Invalid name for component.|400| Bad Request|30068|
-            |Invalid parameter|400| Bad Request|122|
+        Create multiple Components.
+                   
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid input for batch components|400| Bad Request|30063|
+        |Invalid name for component.|400| Bad Request|30068|
+        |Invalid parameter|400| Bad Request|122|
             
       operationId: createComponents
       parameters:
@@ -5054,16 +5054,18 @@ paths:
   /batchimport/workstations:
     post:
       description: |
-              Create multiple workstations by batch import using file. Currenlty only CSV file format is supported. Here's the sample file
-                   ([sample file](http://beta.fusionproduction.dmg.autodesk.com/data/samples/sample_workstations.csv))
-             
-              ## Status codes
-              |Message|HTTP Status Code|Error Code|Data
-              |----|----|----|----
-              |Error while parsing the workstations payload/file to fetch workstations data|400| Bad Request|30038
-              |The file format is not supported.|400| Bad Request|30039
-              |Invalid name for workstation.|400| Bad Request|30042
-              |The file is empty!|400| Bad Request|30043
+        Create multiple workstations by batch import using file. Currenlty only CSV file format is supported. 
+        
+        Here's the sample file: ([sample file](http://beta.fusionproduction.dmg.autodesk.com/data/samples/sample_workstations.csv))
+       
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Error while parsing the workstations payload/file to fetch workstations data|400| Bad Request|30038|
+        |The file format is not supported.|400| Bad Request|30039|
+        |Invalid name for workstation.|400| Bad Request|30042|
+        |The file is empty!|400| Bad Request|30043|
                    
       operationId: createWorkstations
       responses:
@@ -5116,14 +5118,14 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
     post:
       description: | 
-            Create a new Workcell.
-            
-            ### Status codes
-            
-            |Message|HTTP Status Code|Error Code|Data|
-            |----|----|----|----|
-            |Given member id does not exist|400| Bad Request|105|
-            |Tenant not associated for given member.|401| Unauthorized Request|30028|
+        Create a new Workcell.
+        
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
             
       operationId: createWorkcell
       parameters:
@@ -5223,16 +5225,16 @@ paths:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
     delete:
       description: | 
-            Delete a Workcell.
-            
-            ### Status codes
-            
-            |Message|HTTP Status Code|Error Code|Data|
-            |----|----|----|----|
-            |Given member id does not exist|400| Bad Request|105|
-            |Given Workstation doesn't exist|400| Bad Request|30001|
-            |Tenant not associated for given member.|401| Unauthorized Request|30028|
-            |Invalid workcell status|400| Bad Request|30103|
+        Delete a Workcell.
+        
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Given Workstation doesn't exist|400| Bad Request|30001|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
+        |Invalid workcell status|400| Bad Request|30103|
             
       operationId: deleteWorkcell
       parameters:
@@ -5251,17 +5253,17 @@ paths:
   /workcells/{id}/relationships:
     delete:
       description: | 
-            Remove Workstation(s) from a workcell.  This will assign the workstation(s) back to the default "Factory" workcell.
-            
-            ### Status codes
-            
-            |Message|HTTP Status Code|Error Code|Data|
-            |----|----|----|----|
-            |Given member id does not exist|400| Bad Request|105|
-            |Given Workstation doesn't exist|400| Bad Request|30001|
-            |Tenant not associated for given member.|401| Unauthorized Request|30028|
-            |Workcell does not exist.|400| Bad Request|30104|
-            |Workstation does not belong to workcell.|400| Bad Request|30110|
+        Remove Workstation(s) from a workcell.  This will assign the workstation(s) back to the default "Factory" workcell.
+        
+        ### Status codes
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Given Workstation doesn't exist|400| Bad Request|30001|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
+        |Workcell does not exist.|400| Bad Request|30104|
+        |Workstation does not belong to workcell.|400| Bad Request|30110|
             
       operationId: deleteWorkcellsWorkstations
       parameters:
@@ -5318,7 +5320,9 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
     patch:
       description: |
-        A supervisor updates a Work Queue's Task Executions.  Updates the order given in the request body of Task Executions for given workstations or workcells.  As well, if a Task Execution moves from a workcell or workstation task queue to another workstation or workcell, then the Task Execution is reassigned to that new workstation/workcell.
+        A supervisor updates a Work Queue's Task Executions.  Updates the order given in the request body of Task Executions for given workstations or workcells.  
+        
+        Also, if a Task Execution moves from a workcell or workstation task queue to another workstation or workcell, then the Task Execution is reassigned to that new workstation/workcell.
         
         ### Status codes
         
@@ -5403,7 +5407,9 @@ paths:
   /workstationsummaries:
     x-description: |
         Endpoint describing machine/workstations summary that will be used to execute a given task.  This is a special GET-only endpoint designed to aggregate data related to workstations for reporting purposes.
+        
         The response includes details of the workstation itself, as well as workstation total counts such as: 
+        
         ```
         readyTaskQueue
         futureTaskQueue
@@ -5411,12 +5417,14 @@ paths:
         utilization*
         scrap*
         work*
+        ```
         
-        * Note: these calculatinos include Task Executions started in the last 7 days
+        * Note: these calculatinos include Task Executions started in the last 7 days.
+        
     get:
       tags: [ "Workstations Summary" ]
       description: |
-        Get Workstation Summaries
+        Get Workstation Summaries.
       operationId: getWorkstationsSummary
       parameters:
         - name: version
@@ -5454,16 +5462,20 @@ paths:
   /workstationsummaries/{workstationId}:
     x-description: |
         Report describing machine/workstation summary that will be used to execute a given task.   This is a special GET-only endpoint designed to aggregate data related to workstations for reporting purposes. "workstationIoTData" will be returned ONLY for workstations that belong to a tenant that has fusion connect enabled. Please contact DCS team for enabling fusion connect.
+        
         The response includes details of the workstation itself, as well as the `currentTaskExecution` and collections of task execution queues including:
+        
         ```
         readyWorkstationTaskExecutionsQueue
         futureWorkstationTaskExecutionsQueue
         readyWorkcellTaskExecutionsQueue
         futureWorkcellTaskExecutionsQueue
+        ```
+        
     get:
       tags: [ "Workstations Summary" ]
       description: |
-          Get a Workstation Summary
+          Get a Workstation Summary.
          
           ### Status codes
           
