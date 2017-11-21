@@ -90,14 +90,14 @@ info:
     * Beta URL: https://developer-stg.api.autodesk.com
     * Production URL: https://developer.api.autodesk.com
     
-    [@overview/modules-fusion-360-production]: <>
+    [@overview/modules-of-fusion-360-production]: <>
     # Modules of Fusion 360 Production
     
     Fusion 360 Production comprises of the following modules:
     
     * [APIs](/en/docs/fp360/v1/overview/apis)
     * [App Framework](/en/docs/fp360/v1/overview/app-framework)
-    * [Reports](/en/docs/fp360/overview/v1/reports)
+    * [Reports](/en/docs/fp360/v1/overview/v1/reports)
     
     [@overview/apis]: <>
     # APIs
@@ -1238,7 +1238,9 @@ info:
     
     This tutorial explains how to create a job sheet for the operator to perform the job work. 
     
-    Creating a job sheet involves creating job instructions, associating the required job instructions to the job sheet, and then releasing the job sheet so that the job instructions are automatically added in the operator's task queue. The job sheet includes the job sheet name, tags, the required material quantity, and the associated job instructions.
+    Creating a job sheet involves creating job instructions, associating the required job instructions to the job sheet, and then releasing the job sheet so that the job instructions are automatically added in the operator's task queue. 
+    
+    The job sheet includes the job sheet name, tags, the required material quantity, and the associated job instructions.
     
     Perform the following steps in a given sequence to create a job sheet.
     
