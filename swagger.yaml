@@ -3631,7 +3631,7 @@ info:
     
     This tutorial explains how you can import the details of multiples entities in a batch. Fusion 360 Production allows batch import for entities, like components, workstations, and job instructions.
     
-    Fusion 360 Production supports batch import through CSV file. Ensure that in the CSV file, you add the details in the following format:
+    Fusion 360 Production supports batch import through a `CSV` file. Ensure that the CSV file contains the following columns with appropriate values.
     
     | Column        | Description
     | ------------  | ------------------------------------------------------------------------
@@ -3653,9 +3653,11 @@ info:
       -H 'cache-control: no-cache'
       -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
       -H 'x-dmg-fp-tenant: job360-test'
-      -f @file=@sample_workstations.csv
+      -f @file=@sample_components.csv
       -d 'https://developer-stg.api.autodesk.com/factoryproduction/v1/batchimport/components'
     ```
+    
+    The `-f @file` attribute includes the CSV file.
     
     ## Import Workstations
 
@@ -3673,6 +3675,8 @@ info:
       -d 'https://developer-stg.api.autodesk.com/factoryproduction/v1/batchimport/workstations'
     ```
     
+    The `-f @file` attribute includes the CSV file.
+    
     ## Import Job instructions
     
     The Fusion 360 Production API provides the `POST batchimport/jobinstructions` endpoint to batch import the job instructions. In the API request, you need to specify the CSV file that contains the job instructions details that you want to import.
@@ -3685,9 +3689,11 @@ info:
       -H 'cache-control: no-cache'
       -H 'postman-token: 916b2148-798b-e761-37cc-30b133d546d0'
       -H 'x-dmg-fp-tenant: job360-test'
-      -f @file=@sample_workstations.csv
+      -f @file=@sample_jobInstructions.csv
       -d 'https://developer-stg.api.autodesk.com/factoryproduction/v1/batchimport/jobinstructions'
     ```
+    
+    The `-f @file` attribute includes the CSV file.
 
     All endpoint resources provide the following response. The response includes the number of entities successfully imported, and the name and number of the entities failed in import.
     
