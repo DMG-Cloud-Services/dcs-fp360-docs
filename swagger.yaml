@@ -1308,7 +1308,6 @@ info:
             "tenantId": "job360-test",
             "name": "Name",
             "description": "JOB Instruction1",
-            "endProductName": "CAR",
             "defaultQuantity": 2,
             "tags": [
               "doors",
@@ -1370,7 +1369,6 @@ info:
                   "engine",
                   "body"
               ],
-              "endProductName": "car",
               "archived": false,
               "createdDate": "2017-10-06T07:07:55Z",
               "tenantId": "job360-test",
@@ -1759,7 +1757,6 @@ info:
           "attributes": {
             "name": "JobName1",
             "description": "Updated description",
-            "endProductName": "updated end product name",
             "defaultQuantity": 2,
             "archived": "true",
             "status": "Blocked",
@@ -1833,7 +1830,6 @@ info:
             "tag2",
             "tag3"
           ],
-          "endProductName": "",
           "defaultQuantity": 2
         },
         "relationships": {
@@ -2437,7 +2433,6 @@ info:
                   "test",
                   "test01"
               ],
-              "endProductName": "car",
               "scrapQuantity": 0,
               "goodQuantity": 40,
               "createdDate": "2017-10-06T08:58:34Z",
@@ -5462,10 +5457,6 @@ paths:
         ```
         readyTaskQueue
         futureTaskQueue
-        cycleTime
-        utilization*
-        scrap*
-        work*
         ```
         
         * Note: these calculatinos include Task Executions started in the last 7 days.
@@ -5498,7 +5489,7 @@ paths:
           type: string
         - name: sort[workstationsummaries][targetFieldName]
           in: query
-          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```status, cycleTime, rework, scrap, lastModifiedDate``` Example:ASC
+          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```status, lastModifiedDate``` Example:ASC
           required: false
           type: string
         - $ref: '#/parameters/pageSize'
@@ -6010,7 +6001,6 @@ paths:
                           "tenantId": "job360-test",
                           "name": "tejinderJI3",
                           "description": "JOBinstruction3",
-                          "endProductName": "car",
                           "defaultQuantity": 2,
                           "tags": [
                               "doors",
@@ -6102,7 +6092,6 @@ paths:
                       "attributes": {
                           "name": "JobName1",
                           "description": "Updated description",
-                          "endProductName": "updated end product name",
                           "defaultQuantity": 2,
                           "archived": "true",
                           "status": "Blocked",
@@ -7163,12 +7152,6 @@ paths:
         |Unauthorized Access. You don't sufficient privileges for given tenant |400| Bad Request|30022|
         
       operationId: getMember
-      parameters:
-        - name: entityCount
-          in: query
-          description: Retrun entity count for associated tenant. Available entityCount values are true, false. Default false.
-          required: false
-          type: boolean
       responses:
         '200': {$ref: '#/responses/member'}
       security:
@@ -7250,54 +7233,6 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
-  /reports/downloads/completedjobsheets:
-    x-description: |
-        Downloadable Report in CSV format containing all completed Job Sheets within given date range.
-
-        Date range parameters:
-        |Verb         | Description
-        | ------      | -------------------------------------------------------------------------------------------------------
-        | `lt`        |  'Less Than': Include dates less than (but not equal to) this date.
-        | `lte`        |  'Less Equal': Include dates less than or equal to this date.
-        | `gt`        |  'Greater Than': Include dates greater than (but not equal to) this date.
-        | `gte`        |  'Greater Equal': Include dates greater than or equal to this date.
-
-        Date Range Example:
-        To view report with Job Sheets from 10-15-2016 to 10-26-2016, not inlcluding 10-15-16 but including 10-26-16, add the following:
-
-        .../reports/completedjobsheets?filter[jobsheets][lastModifiedDate][gt]=2016-10-15&filter[jobsheets][lastModifiedDate][lte]=2016-10-26
-    get:
-      tags: [ "Reports" ]
-      produces:
-        - text/csv
-      description: |
-        Get Report: Download Completed Job Sheets
-      operationId: getCompletedJobSheetsReportDownload
-      parameters:
-        - name: filter[jobsheets][lastModifiedDate][lt/lte/gt/gte]
-          in: query
-          description: To specify date or date range endpoint.  Available date operators:```lt, lte, gt, gte``` Example:2016-10-16
-          required: false
-          type: string
-        - name: filter[jobsheets][tags]
-          in: query
-          description: Tags to search against
-          required: false
-          type: string
-        - name: filter[jobsheets][hotJob]
-          in: query
-          description: Search Query, which may include true or false
-          required: false
-          type: boolean  
-        - name: filter[jobsheets][searchTerm]
-          in: query
-          description: Search Query, which may include jobsheet id
-          required: false
-          type: string
-      responses:
-        '200': {$ref: '#/responses/completedJobSheetReportDownload'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /reports/utilizations:
     x-description: |
@@ -8326,12 +8261,11 @@ definitions:
 
   json_api_input_data_attributes_jobInstruction:
     type: object
-    required: [ name, tenantId, endProductName ]
+    required: [ name, tenantId ]
     properties:
       name: { type: string, description: 'name of job instruction' }
       description: { type: string, description: 'description of job instruction' }
       tenantId: { type: string, description: 'tenant id of job instruction' }
-      endProductName: { type: string, description: 'end product name' }
       status: { type: string, description: 'job instruction status' }
       tags: { type: array, description: 'tags', items: { type: string }, uniqueItems: true }
       references: { type: array,  $ref: '#/definitions/Reference' }
@@ -8341,7 +8275,6 @@ definitions:
     properties:
       name: { type: string, description: 'name of job instruction' }
       description: { type: string, description: 'description of job instruction' }
-      endProductName: { type: string, description: 'end product name' }
       quantity: { type: number, description: 'quanity' }
       status: { type: string, description: 'job instruction status' }
       tags: { type: array, description: 'tags', items: { type: string }, uniqueItems: true }
@@ -10473,7 +10406,6 @@ responses:
                                               "tag2",
                                               "tag3"
                                           ],
-                                          "endProductName": "",
                                           "defaultQuantity": 2
                                       },
                                       "relationships": {
@@ -12001,7 +11933,6 @@ responses:
                                         "tag2",
                                         "tag3"
                                     ],
-                                    "endProductName": "",
                                     "defaultQuantity": 2
                                 },
                                 "relationships": {
@@ -12240,7 +12171,6 @@ responses:
                                         },
                                         "version": "1.0.0",
                                         "tags": [],
-                                        "endProductName": "Secondary Braking system for Bloodhound SSC",
                                         "defaultQuantity": 2
                                     },
                                     "relationships": {
@@ -12301,7 +12231,6 @@ responses:
                                         },
                                         "version": "1.0.0",
                                         "tags": [],
-                                        "endProductName": "Transmission",
                                         "defaultQuantity": 2
                                     },
                                     "relationships": {
@@ -13608,7 +13537,6 @@ responses:
                                     "tag2",
                                     "tag3"
                                 ],
-                                "endProductName": "",
                                 "defaultQuantity": 2
                             },
                             "relationships": {
@@ -17013,9 +16941,6 @@ responses:
                 "type": "workstationsummaries",
                 "id": "27789",
                 "attributes": {
-                    "cycleTime": 5,
-                    "scrap": 0,
-                    "rework": 0,
                     "workstationIoTData": {
                         "errorMessage": "No Response from fusion connect"
                     }
@@ -17733,7 +17658,6 @@ responses:
                         "references": [],
                         "name": "Test JI 101",
                         "description": "<p>Test</p>\n",
-                        "endProductName": "",
                         "defaultQuantity": 1,
                         "version": "1.5.0"
                     },
@@ -17852,7 +17776,6 @@ responses:
                         "references": [],
                         "name": "tejindr ji2",
                         "description": "<p>34665</p>\n",
-                        "endProductName": "",
                         "defaultQuantity": 56,
                         "version": "1.0.0"
                     },
@@ -17973,7 +17896,6 @@ responses:
                         "references": [],
                         "name": "Amit_Test01_Marker_Pen",
                         "description": "<p>-Build a marker pen.</p>\n\n<p>-Build it beautiful.</p>\n\n<p>-Make it Awesome.</p>\n",
-                        "endProductName": "",
                         "defaultQuantity": 1,
                         "version": "1.1.0"
                     },
@@ -18160,7 +18082,6 @@ responses:
                         "references": [],
                         "name": "What do you get when you give a design tool a digital nervous system",
                         "description": "<p><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; text-align: justify; background-color: rgb(255, 255, 255);\">In ullamcorper interdum dolor quis accumsan. Proin hendrerit nunc mauris, sagittis dapibus risus blandit et. Curabitur vitae sollicitudin ipsum. Donec id sagittis felis, et volutpat dui. Nullam luctus pellentesque risus a accumsan. Sed malesuada, metus vitae posuere facilisis, tortor elit fermentum est, quis pulvinar sapien elit ac sem. Donec interdum, dolor ac porta posuere, justo turpis imperdiet magna, ut sagittis sem lorem sit amet purus. Maecenas dapibus libero purus, ut tristique nisl molestie tincidunt. In dignissim, turpis at viverra facilisis, diam massa placerat ligula, sed lobortis mauris purus at ex. Nunc turpis tortor, faucibus vel libero nec, aliquet tempus odio. Nullam vel interdum felis.&nbsp;</span></p>\n",
-                        "endProductName": "",
                         "defaultQuantity": 1,
                         "version": "1.0.0"
                     },
@@ -18276,7 +18197,6 @@ responses:
                         "tags": [],
                         "references": [],
                         "name": "Test Video with spaces",
-                        "endProductName": "",
                         "defaultQuantity": 1,
                         "version": "1.0.0"
                     },
@@ -18690,7 +18610,6 @@ responses:
                       "tags": [],
                       "references": [],
                       "name": "3167-003 Rev C, Airbrake Bracket",
-                      "endProductName": "Secondary Braking system for Bloodhound SSC",
                       "defaultQuantity": 2,
                       "version": "1.0.0"
                   },
@@ -18996,24 +18915,6 @@ responses:
               "last": "https://developer-stg.api.autodesk.com/factoryproduction/v1/reports/jobsheets?filter[jobsheets][lastModifiedDate][gt]=2005-02-23&filter[jobsheets][lastModifiedDate][le]=2017-02-06&page[number]=20&page[size]=1"
           }
       }
-
-  completedJobSheetReportDownload:
-    description: Successful response
-    headers:
-        etag:
-          description: |
-            `etag` for the resource which can be used for cache optimization
-            and must be used for mutating operations on this resource
-          type: string
-        authorization:
-          description: Bearer Token
-          type: integer
-    examples:
-      text/csv: |
-        name,completedBy,completedDate
-        JS7847 job instruction name1,Factory Super Admin Regression User,2016-10-14 10:53:03
-        "JS7856 job instruction ""quoted text"" name2",Factory Super Admin Regression User,2016-10-14 10:57:07
-        JS7865 job instruction name3,Factory Super Admin Regression User,2016-10-14 11:03:06
 
   utilizationReport:
     description: Successful response
@@ -19492,12 +19393,8 @@ responses:
                     "type": "workstationsummaries",
                     "id": "208071",
                     "attributes": {
-                        "cycleTime": 310,
-                        "utilization": 21.19,
                         "readyTaskQueue": 3,
-                        "futureTaskQueue": 5,
-                        "scrap": 0,
-                        "rework": 0
+                        "futureTaskQueue": 5
                     },
                     "relationships": {
                         "workstation": {
@@ -20109,7 +20006,6 @@ responses:
                                       "tags": [],
                                       "references": [],
                                       "name": "shellyTest2",
-                                      "endProductName": "car",
                                       "defaultQuantity": 2,
                                       "version": "1.0.0"
                                   },
@@ -20149,7 +20045,6 @@ responses:
                                       "tags": [],
                                       "references": [],
                                       "name": "shellyTest2",
-                                      "endProductName": "car",
                                       "defaultQuantity": 2,
                                       "version": "1.0.0"
                                   },
@@ -20816,7 +20711,6 @@ responses:
                                       "references": [],
                                       "name": "Test JI1",
                                       "description": "<p>Test JI1 desc goes here</p>\n",
-                                      "endProductName": "",
                                       "defaultQuantity": 2,
                                       "version": "1.0.0"
                                   },
