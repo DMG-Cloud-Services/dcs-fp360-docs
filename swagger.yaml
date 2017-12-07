@@ -7174,7 +7174,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
-  /membertenants:
+  /member/tenants:
     x-description: Get current member tenant(s) information.
     get:
       tags: [ "Members" ]
