@@ -7172,12 +7172,6 @@ paths:
         |Access token provided is invalid or expired |400| Bad Request|7014|
 
       operationId: getMemberTenants
-      parameters:
-        - name: filter[membertenants][entityCount]
-          in: query
-          description: Retrun entity count for associated tenant. Available entityCount values are true, false. Default false.
-          required: false
-          type: boolean
       responses:
         '200': {$ref: '#/responses/membertenants'}
       security:
@@ -15969,16 +15963,10 @@ responses:
                                   "activeSeatCount": 281,
                                   "invitationSeatCount": 47,
                                   "contractId": "xxxxxxxxxxx",
-                                  "entityCount": {
-                                  "components": 1010,
-                                  "workstations": 663,
-                                  "jobSheets": 2033,
-                                  "jobInstructions": 1329
-                                },
-                                "appsCount": 2,
-                                "createdByApp": null,
-                                "lastModifiedByApp": null,
-                                "fusionConnectEnabled": false
+                                  "appsCount": 2,
+                                  "createdByApp": null,
+                                  "lastModifiedByApp": null,
+                                  "fusionConnectEnabled": false
                               },
                               "links": {
                                 "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/tenants/7"
@@ -15999,16 +15987,10 @@ responses:
                                 "activeSeatCount": 6,
                                 "invitationSeatCount": 0,
                                 "contractId": "",
-                                "entityCount": {
-                                "components": 33876,
-                                "workstations": 24843,
-                                "jobSheets": 23382,
-                                "jobInstructions": 35912
-                              },
-                              "appsCount": 2,
-                              "createdByApp": null,
-                              "lastModifiedByApp": null,
-                              "fusionConnectEnabled": false
+                                "appsCount": 2,
+                                "createdByApp": null,
+                                "lastModifiedByApp": null,
+                                "fusionConnectEnabled": false
                               },
                               "links": {
                                 "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/tenants/8"
