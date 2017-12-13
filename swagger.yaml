@@ -7796,7 +7796,12 @@ paths:
               in: query
               description: contractId to search against
               required: false
-              type: string  
+              type: string 
+            - name: filter[tenants][appId]
+              in: query
+              description: appId to search against
+              required: false
+              type: string   
             - $ref: '#/parameters/pageSize'
             - $ref: '#/parameters/pageNumber'
       
