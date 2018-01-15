@@ -5556,7 +5556,7 @@ paths:
         
       operationId: getTaskInstruction
       parameters:
-        - name: filter[taskInstructions][jobInstructionId]
+        - name: filter[taskinstructions][jobInstructionId]
           in: query
           description: id of parent job instruction
           required: true
