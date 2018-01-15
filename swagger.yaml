@@ -6791,6 +6791,11 @@ paths:
           description: Tags to search against
           required: false
           type: string
+        - name: filter[entities][appId]
+          in: query
+          description: appId to search against
+          required: false
+          type: string  
         - name: filter[entities][type]
           in: query
           description: Entity type to search against. Example:components,jobsheets etc.
