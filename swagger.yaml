@@ -7639,7 +7639,7 @@ paths:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
 
-  /members/{id}/relationships/groups/:
+  /members/{id}/relationships/groups:
     x-summary: POST Member Group/Role
     x-description: Member Group/Role API
     post:
