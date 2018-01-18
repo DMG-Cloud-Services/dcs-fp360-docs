@@ -7714,7 +7714,7 @@ paths:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
 
 
-  /members/{id}/relationships/tenants/:
+  /members/{id}/relationships/tenants:
     x-description: Member Tenant API
     post:
       tags: [ "Admin" ]
