@@ -7832,7 +7832,11 @@ paths:
                           "name": "New Tenant",
                           "description": "test",
                           "contractId": "7708de89-9ebb-471a-a24a-a0020977f79d",
-                          "seatCount": 10
+                          "seatCount": 10,
+                          "subscriptionInfo" : {
+                            	"startDate":"2018-01-01T00:00:00Z",
+                            	"endDate":"2018-12-31T00:00:00Z"
+                          }
                       }
                   }
               }
@@ -7885,7 +7889,11 @@ paths:
                           "name": "Tenant 2",
                           "description": "Updated description",
                           "contractId": "7708de89-9ebb-471a-a24a-a0020977f79d",
-                          "seatCount": 10
+                          "seatCount": 10,
+                          "subscriptionInfo" : {
+                            	"startDate":"2018-01-01T00:00:00Z",
+                            	"endDate":"2018-12-31T00:00:00Z"
+                          }
                       }
                   }
               }
@@ -21370,6 +21378,19 @@ responses:
                     "contractId": "7708de89-9ebb-471a-a24a-a0020977f79d",
                     "createdByApp": "",
                     "lastModifiedByApp": "",
+                    "subscriptionInfo": {
+                        "startDate": "2018-01-01T00:00:00Z",
+                        "endDate": "2018-12-31T00:00:00Z",
+                        "lastModifier": {
+                            "id": "7",
+                            "firstName": "Tom",
+                            "lastName": "McCollough",
+                            "email": "xxxxxxxxxxxxxxxx@autodesk.com",
+                            "oxygenId": "CCCCCCCCCCCCC",
+                            "superAdmin": false
+                        },
+                        "modifiedDate": "2016-09-22T02:52:36Z"
+                    },
                     "seatCount": 10,
                     "status": "ACTIVE"
                 },
@@ -22641,6 +22662,19 @@ responses:
                           "description": "Default Job 360 Test Tenant",
                           "createdByApp": "",
                           "lastModifiedByApp": "",
+                          "subscriptionInfo": {
+                              "startDate": "2018-01-01T00:00:00Z",
+                              "endDate": "2018-12-31T00:00:00Z",
+                              "lastModifier": {
+                                  "id": "7",
+                                  "firstName": "Tom",
+                                  "lastName": "McCollough",
+                                  "email": "xxxxxxxxxxxxxxxx@autodesk.com",
+                                  "oxygenId": "CCCCCCCCCCCCC",
+                                  "superAdmin": false
+                              },
+                              "modifiedDate": "2016-09-22T02:52:36Z"
+                          },
                           "seatCount": 0,
                           "status": "ACTIVE"
                       },
@@ -22662,6 +22696,19 @@ responses:
                           "description": "Regression Test Tenant",
                           "createdByApp": "",
                           "lastModifiedByApp": "",
+                          "subscriptionInfo": {
+                              "startDate": "2018-01-01T00:00:00Z",
+                              "endDate": "2018-12-31T00:00:00Z",
+                              "lastModifier": {
+                                  "id": "7",
+                                  "firstName": "Tom",
+                                  "lastName": "McCollough",
+                                  "email": "xxxxxxxxxxxxxxxx@autodesk.com",
+                                  "oxygenId": "CCCCCCCCCCCCC",
+                                  "superAdmin": false
+                              },
+                              "modifiedDate": "2016-09-22T02:52:36Z"
+                          },
                           "seatCount": 0,
                           "status": "ACTIVE"
                       },
@@ -22683,6 +22730,19 @@ responses:
                           "description": "Magnetic User Group Test Tenant",
                           "createdByApp": "",
                           "lastModifiedByApp": "",
+                          "subscriptionInfo": {
+                              "startDate": "2018-01-01T00:00:00Z",
+                              "endDate": "2018-12-31T00:00:00Z",
+                              "lastModifier": {
+                                  "id": "7",
+                                  "firstName": "Tom",
+                                  "lastName": "McCollough",
+                                  "email": "xxxxxxxxxxxxxxxx@autodesk.com",
+                                  "oxygenId": "CCCCCCCCCCCCC",
+                                  "superAdmin": false
+                              },
+                              "modifiedDate": "2016-09-22T02:52:36Z"
+                          },
                           "seatCount": 0,
                           "status": "ACTIVE"
                       },
@@ -22704,6 +22764,19 @@ responses:
                           "description": "trunest beta pretest",
                           "createdByApp": "",
                           "lastModifiedByApp": "",
+                          "subscriptionInfo": {
+                              "startDate": "2018-01-01T00:00:00Z",
+                              "endDate": "2018-12-31T00:00:00Z",
+                              "lastModifier": {
+                                  "id": "7",
+                                  "firstName": "Tom",
+                                  "lastName": "McCollough",
+                                  "email": "xxxxxxxxxxxxxxxx@autodesk.com",
+                                  "oxygenId": "CCCCCCCCCCCCC",
+                                  "superAdmin": false
+                              },
+                              "modifiedDate": "2016-09-22T02:52:36Z"
+                          },
                           "seatCount": 0,
                           "status": "ACTIVE"
                       },
@@ -22725,6 +22798,19 @@ responses:
                           "description": "TruNest test tenant",
                           "createdByApp": "",
                           "lastModifiedByApp": "",
+                          "subscriptionInfo": {
+                              "startDate": "2018-01-01T00:00:00Z",
+                              "endDate": "2018-12-31T00:00:00Z",
+                              "lastModifier": {
+                                  "id": "7",
+                                  "firstName": "Tom",
+                                  "lastName": "McCollough",
+                                  "email": "xxxxxxxxxxxxxxxx@autodesk.com",
+                                  "oxygenId": "CCCCCCCCCCCCC",
+                                  "superAdmin": false
+                              },
+                              "modifiedDate": "2016-09-22T02:52:36Z"
+                          },
                           "seatCount": 0,
                           "status": "ACTIVE"
                       },
