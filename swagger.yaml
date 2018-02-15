@@ -6728,6 +6728,155 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]        
         
+  '/subtaskexecutions/{id}':
+    x-description: |
+        checklist of a taskexecution.
+    get:
+      tags: [ "Sub Task Execution" ]
+      description: |
+        Get Sub Task Execution
+        
+        **Status codes**
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid parameter|400| Bad Request|122|
+        
+      operationId: getSubTaskExecution
+      parameters:
+        - name: id
+          in: path
+          description: ID of sub task Execution
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200': {$ref: '#/responses/subTaskExecution'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]      
+    
+  /batch/subtaskexecutions:
+    post:
+      tags: [ "Sub Task Execution" ]
+      description: |
+          Create a multiple taskexecution in a drafted jobsheet.
+          
+          **Status codes**
+          
+          |Message|HTTP Status Code|Error Code|Data|
+          |----|----|----|----|
+          |JobInstruction not found.|400| Bad Request|30007|
+          |Missing required attribute tenantId in object|400| Bad Request|30051|
+          |Missing required attribute in Job sheet object|400| Bad Request|30052|
+          |Invalid resource type|400| Bad Request|30053|
+          |job instruction is required to create job sheet|400| Bad Request|30054|
+          |Invalid input for batch job sheets|400| Bad Request|30055|
+          |Missing required attribute to create Jobsheet/quantity should be greater than 0|400| Bad Request|30070|
+          |Job instruction should have at-least one task to create job sheet|400| Bad Request|30088|
+          
+      operationId: createsubtaskexecutions
+      parameters:
+        - in: body
+          name: body
+          description: Input List subtaskexecution Attributes
+          required: true
+          schema:
+            $ref: '#/definitions/json_api_input_new_batch_subtaskexecution'
+            example:
+                       {  
+                         "data":[  
+                            {  
+                               "type":"subtaskexecutions",
+                               "attributes":{  
+                                  "name":"checklist",
+                                  "description":"test water 4",
+                                  "tenantId":"job360-test"
+                               },
+                               "relationships":{  
+                                  "taskExecution":{  
+                                     "data":{  
+                                        "type":"taskexecutions",
+                                        "id":"721579"
+                                     }
+                                  }
+                               }
+                            },
+                            {  
+                               "type":"subtaskexecutions",
+                               "attributes":{  
+                                  "name":"checklist",
+                                  "description":"test water 5",
+                                  "tenantId":"job360-test"
+                               },
+                               "relationships":{  
+                                  "taskExecution":{  
+                                     "data":{  
+                                        "type":"taskexecutions",
+                                        "id":"721579"
+                                     }
+                                  }
+                               }
+                            }
+                         ]
+                      }
+      responses:
+        '201': {$ref: '#/responses/subTaskExecutions'}
+      security:
+        [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ] 
+  
+    patch:
+      tags: [ "Sub Task Execution" ]
+      description: |
+          update multiple subtaskexecution in a drafted jobsheets.
+          
+          **Status codes**
+          
+          |Message|HTTP Status Code|Error Code|Data|
+          |----|----|----|----|
+          |JobInstruction not found.|400| Bad Request|30007|
+          |Missing required attribute tenantId in object|400| Bad Request|30051|
+          |Missing required attribute in Job sheet object|400| Bad Request|30052|
+          |Invalid resource type|400| Bad Request|30053|
+          |job instruction is required to create job sheet|400| Bad Request|30054|
+          |Invalid input for batch job sheets|400| Bad Request|30055|
+          |Missing required attribute to create Jobsheet/quantity should be greater than 0|400| Bad Request|30070|
+          |Job instruction should have at-least one task to create job sheet|400| Bad Request|30088|
+          
+      operationId: updatesubtaskexecutions
+      parameters:
+        - in: body
+          name: body
+          description: Input List subtaskexecution Attributes
+          required: true
+          schema:
+            $ref: '#/definitions/json_api_input_new_batch_patch_subtaskexecution'
+            example:
+                       {  
+                         "data":[  
+                            {  
+                               "type":"subtaskexecutions",
+                               "id":"721580",
+                               "attributes":{  
+                                  "name":"checklist new 1",
+                                  "description":"test water new 4",
+                                  "tenantId":"job360-test"
+                               }
+                            },
+                            {  
+                               "type":"subtaskexecutions",
+                               "id":"729030",
+                               "attributes":{  
+                                  "name":"checklist new updated 1",
+                                  "tenantId":"job360-test"
+                               }
+                            }
+                         ]
+                      }
+      responses:
+        '201': {$ref: '#/responses/subTaskExecutions'}
+      security:
+        [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]       
+        
 
 ###  /taskexecutions/{id}/documents:
 ###    x-description: |
@@ -7987,10 +8136,30 @@ definitions:
     required: [ data ]
     properties:
       data: { $ref: '#/definitions/json_api_input_new_batch_job_sheet_data' }
+      
+  json_api_input_new_batch_subtaskexecution:
+    type: object
+    required: [ data ]
+    properties:
+      data: { $ref: '#/definitions/json_api_input_new_batch_subtaskexecution_data' }
+      
+  json_api_input_new_batch_patch_subtaskexecution:
+    type: object
+    required: [ data ]
+    properties:
+      data: { $ref: '#/definitions/json_api_input_new_batch_patch_subtaskexecution_data' }    
 
   json_api_input_new_batch_job_sheet_data:
     type: array
     items: { $ref: '#/definitions/json_api_input_data_jobSheet' }
+    
+  json_api_input_new_batch_subtaskexecution_data:
+    type: array
+    items: { $ref: '#/definitions/json_api_input_data_subtaskexecution' }
+    
+  json_api_input_new_batch_patch_subtaskexecution_data:
+    type: array
+    items: { $ref: '#/definitions/json_api_input_data_patch_subtaskexecution' }  
 
   json_api_input_patch_job_sheet:
     type: object
@@ -8112,6 +8281,13 @@ definitions:
     properties:
       type: { type: string, description: 'type of object: jobinstructions', enum: [ 'jobinstructions' ] }
       id: { type: string, description: 'id of the jobinstruction' }
+      
+  json_api_input_data_relationships_subtaskexecution_taskexecution:
+    type: object
+    required: [ data ]
+    properties:
+      type: { type: string, description: 'type of object: taskexecutions', enum: [ 'taskexecutions' ] }
+      id: { type: string, description: 'id of the taskexecution' }    
 
   json_api_input_data_relationships_taskinstruction_recommendedWorkstation:
     type: object
@@ -8188,6 +8364,24 @@ definitions:
       type: { type: string, description: 'resource type', enum: [ 'jobsheets' ] }
       attributes: { $ref: '#/definitions/json_api_input_data_attributes_jobSheet' }
       relationships: { $ref: '#/definitions/json_api_input_data_relationships_jobSheet' }
+  
+  json_api_input_data_subtaskexecution:
+    type: object
+    required: [ type, attributes, relationships ]
+    description: 'json data'
+    properties:
+      type: { type: string, description: 'resource type', enum: [ 'subtaskexecutions' ] }
+      attributes: { $ref: '#/definitions/json_api_input_data_attributes_subtaskexecution' }
+      relationships: { $ref: '#/definitions/json_api_input_data_relationships_subtaskexecution' }    
+
+  json_api_input_data_patch_subtaskexecution:
+    type: object
+    required: [ type, attributes]
+    description: 'json data'
+    properties:
+      type: { type: string, description: 'resource type', enum: [ 'subtaskexecutions' ] }
+      id: { type: number, description: 'id of the subtaskexecution' }
+      attributes: { $ref: '#/definitions/json_api_input_data_attributes_subtaskexecution' }
 
   json_api_input_data_patch_jobSheet:
     type: object
@@ -8351,6 +8545,15 @@ definitions:
       notes: { type: string, description: 'notes' }
       tags: { type: array, description: 'tags', items: { type: string }, uniqueItems: true }
       references: { type: array,  $ref: '#/definitions/Reference' }
+  
+  json_api_input_data_attributes_subtaskexecution:
+    type: object
+    required: [ tenantId, name, description ]
+    properties:
+      tenantId: { type: string, description: 'tenant id of jobSheet' }
+      name: { type: string, description: 'resource  name' }
+      description: { type: string, description: 'description detailed' }
+      
 
   json_api_input_data_attributes_patch_jobSheet:
     type: object
@@ -8446,6 +8649,13 @@ definitions:
     description: 'json data'
     properties:
       jobInstruction: { $ref: '#/definitions/json_api_input_data_relationships_jobSheet_jobinstruction' }
+      
+  json_api_input_data_relationships_subtaskexecution:
+    type: object
+    required: [ taskExecution ]
+    description: 'json data'
+    properties:
+      jobInstruction: { $ref: '#/definitions/json_api_input_data_relationships_subtaskexecution_taskexecution' }    
 
   json_api_input_data_relationships_taskinstruction:
     type: object
@@ -22627,7 +22837,338 @@ responses:
         }
     },
     "included": []
-}      
+} 
+
+  subTaskExecution:
+    description: Successful response
+    schema:
+      title: schema versions
+      type: object
+      allOf:
+      - type: object
+    headers:
+        etag:
+          description: |
+            `etag` for the resource which can be used for cache optimization
+            and must be used for mutating operations on this resource
+          type: string
+        authorization:
+          description: Bearer Token
+          type: integer
+    examples:
+      application/vnd.api+json:
+        {
+            "data": {
+                "type": "subtaskexecutions",
+                "id": "729201",
+                "attributes": {
+                    "creator": {
+                        "id": "385",
+                        "firstName": "Factory",
+                        "lastName": "admin",
+                        "email": "factory.prod.admin.regression.alpha@autodesk.com",
+                        "oxygenId": "LVDYNUFVBKJB",
+                        "superAdmin": false
+                    },
+                    "createdDate": "2018-02-08T19:13:49Z",
+                    "references": [],
+                    "lastModifiedDate": "2018-02-08T19:13:49Z",
+                    "tenantId": "regression-test-tenant",
+                    "name": "regression sub task",
+                    "lastModifier": {
+                        "id": "385",
+                        "firstName": "Factory",
+                        "lastName": "admin",
+                        "email": "factory.prod.admin.regression.alpha@autodesk.com",
+                        "oxygenId": "LVDYNUFVBKJB",
+                        "superAdmin": false
+                    },
+                    "description": "Regression sub task description",
+                    "tags": [],
+                    "status": "NotStarted"
+                },
+                "relationships": {
+                    "primaryImage": {
+                        "links": {
+                            "self": "http://localhost:8080/api/v1/subtaskexecutions/729201/relationships/primaryImage",
+                            "related": "http://localhost:8080/api/v1/subtaskexecutions/729201/primaryImage"
+                        },
+                        "data": null
+                    },
+                    "documents": {
+                        "links": {
+                            "self": "http://localhost:8080/api/v1/subtaskexecutions/729201/relationships/documents",
+                            "related": "http://localhost:8080/api/v1/subtaskexecutions/729201/documents"
+                        },
+                        "data": []
+                    },
+                    "taskExecution": {
+                        "links": {
+                            "self": "http://localhost:8080/api/v1/subtaskexecutions/729201/relationships/taskExecution",
+                            "related": "http://localhost:8080/api/v1/subtaskexecutions/729201/taskExecution"
+                        },
+                        "data": {
+                            "type": "taskexecutions",
+                            "id": "729200"
+                        }
+                    }
+                },
+                "links": {
+                    "self": "http://localhost:8080/api/v1/subtaskexecutions/729201"
+                }
+            },
+            "included": []
+        }
+
+  subTaskExecutions:
+    description: Successful response
+    schema:
+      title: schema versions
+      type: object
+      allOf:
+      - type: object
+    headers:
+        etag:
+          description: |
+            `etag` for the resource which can be used for cache optimization
+            and must be used for mutating operations on this resource
+          type: string
+        authorization:
+          description: Bearer Token
+          type: integer
+    examples:
+      application/vnd.api+json:
+        {
+            "data": [
+                {
+                    "type": "subtaskexecutions",
+                    "id": "721580",
+                    "attributes": {
+                        "id": "721580",
+                        "tenantId": "job360-test",
+                        "tags": [],
+                        "creator": {
+                            "id": "643",
+                            "firstName": "TestTenant",
+                            "lastName": "Abhijeet",
+                            "email": "abhijeet.bhattacharjee@autodesk.com",
+                            "oxygenId": "RCLWJBM6YPDT",
+                            "superAdmin": false
+                        },
+                        "createdDate": "2018-02-02T05:24:25Z",
+                        "lastModifier": {
+                            "id": "643",
+                            "firstName": "TestTenant",
+                            "lastName": "Abhijeet",
+                            "email": "abhijeet.bhattacharjee@autodesk.com",
+                            "oxygenId": "RCLWJBM6YPDT",
+                            "superAdmin": false
+                        },
+                        "lastModifiedDate": "2018-02-15T16:52:39Z",
+                        "name": "checklist new 1",
+                        "status": "NotStarted",
+                        "description": "test water new 4",
+                        "references": []
+                    },
+                    "relationships": {
+                        "primaryImage": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/documents/721580/relationships/primaryImage",
+                                "related": "http://localhost:8080/api/v1/documents/primaryImage"
+                            },
+                            "data": null
+                        },
+                        "documents": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/documents/721580/relationships/documents",
+                                "related": "http://localhost:8080/api/v1/documents/documents"
+                            },
+                            "data": []
+                        },
+                        "taskExecution": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/taskexecutions/721580/relationships/taskExecution",
+                                "related": "http://localhost:8080/api/v1/taskexecutions/taskExecution"
+                            },
+                            "data": {
+                                "type": "taskexecutions",
+                                "id": "721579"
+                            }
+                        }
+                    },
+                    "links": {
+                        "self": "http://localhost:8080/api/v1/subtaskexecutions/721580"
+                    }
+                },
+                {
+                    "type": "subtaskexecutions",
+                    "id": "729030",
+                    "attributes": {
+                        "id": "729030",
+                        "tenantId": "job360-test",
+                        "tags": [],
+                        "creator": {
+                            "id": "16",
+                            "firstName": "Sominath",
+                            "lastName": "Pathare",
+                            "email": "sominath.pathare@autodesk.com",
+                            "oxygenId": "TSQBL3FLX8RD",
+                            "superAdmin": true
+                        },
+                        "createdDate": "2018-02-06T11:00:11Z",
+                        "lastModifier": {
+                            "id": "16",
+                            "firstName": "Sominath",
+                            "lastName": "Pathare",
+                            "email": "sominath.pathare@autodesk.com",
+                            "oxygenId": "TSQBL3FLX8RD",
+                            "superAdmin": true
+                        },
+                        "lastModifiedDate": "2018-02-15T16:52:39Z",
+                        "name": "checklist new updated 1",
+                        "status": "NotStarted",
+                        "description": "test water",
+                        "references": []
+                    },
+                    "relationships": {
+                        "primaryImage": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/documents/729030/relationships/primaryImage",
+                                "related": "http://localhost:8080/api/v1/documents/primaryImage"
+                            },
+                            "data": null
+                        },
+                        "documents": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/documents/729030/relationships/documents",
+                                "related": "http://localhost:8080/api/v1/documents/documents"
+                            },
+                            "data": []
+                        },
+                        "taskExecution": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/taskexecutions/729030/relationships/taskExecution",
+                                "related": "http://localhost:8080/api/v1/taskexecutions/taskExecution"
+                            },
+                            "data": {
+                                "type": "taskexecutions",
+                                "id": "721579"
+                            }
+                        }
+                    },
+                    "links": {
+                        "self": "http://localhost:8080/api/v1/subtaskexecutions/729030"
+                    }
+                }
+            ],
+            "included": [
+                {
+                    "type": "taskexecutions",
+                    "id": "721579",
+                    "attributes": {
+                        "id": "721579",
+                        "tenantId": "job360-test",
+                        "tags": [],
+                        "creator": {
+                            "id": "643",
+                            "firstName": "TestTenant",
+                            "lastName": "Abhijeet",
+                            "email": "abhijeet.bhattacharjee@autodesk.com",
+                            "oxygenId": "RCLWJBM6YPDT",
+                            "superAdmin": false
+                        },
+                        "createdDate": "2018-02-02T05:24:25Z",
+                        "lastModifier": {
+                            "id": "17",
+                            "firstName": "Teji",
+                            "lastName": "Masute",
+                            "email": "tejinder.masute@autodesk.com",
+                            "oxygenId": "N8ZCKLEF9LY8",
+                            "superAdmin": false
+                        },
+                        "lastModifiedDate": "2018-02-15T16:52:39Z",
+                        "name": "Task2",
+                        "description": "",
+                        "goodQuantity": 0,
+                        "defectQuantity": 0,
+                        "scrapQuantity": 0,
+                        "nextToExecuteInJobsheet": false,
+                        "setupTimeInMins": 0,
+                        "executionTimePerQuantityInMins": 0,
+                        "taskOrder": 2,
+                        "jobSheetId": "721575",
+                        "jobSheetHotJob": false,
+                        "jobSheetDraft": false,
+                        "jobSheetQuantity": 0,
+                        "status": "NotStarted",
+                        "subTaskCompletionRequired": false,
+                        "taskNumber": 20,
+                        "references": []
+                    },
+                    "relationships": {
+                        "subTaskExecutions": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/subtaskexecutions/721579/relationships/subTaskExecutions",
+                                "related": "http://localhost:8080/api/v1/subtaskexecutions/subTaskExecutions"
+                            },
+                            "data": []
+                        },
+                        "primaryImage": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/documents/721579/relationships/primaryImage",
+                                "related": "http://localhost:8080/api/v1/documents/primaryImage"
+                            },
+                            "data": null
+                        },
+                        "documents": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/documents/721579/relationships/documents",
+                                "related": "http://localhost:8080/api/v1/documents/documents"
+                            },
+                            "data": []
+                        },
+                        "taskCompletionDocuments": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/taskexecutions/721579/relationships/taskCompletionDocuments",
+                                "related": "http://localhost:8080/api/v1/taskexecutions/taskCompletionDocuments"
+                            },
+                            "data": []
+                        },
+                        "workstation": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/workstations/721579/relationships/workstation",
+                                "related": "http://localhost:8080/api/v1/workstations/workstation"
+                            },
+                            "data": null
+                        },
+                        "workcell": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/workcells/721579/relationships/workcell",
+                                "related": "http://localhost:8080/api/v1/workcells/workcell"
+                            },
+                            "data": null
+                        },
+                        "taskInstruction": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/taskinstructions/721579/relationships/taskInstruction",
+                                "related": "http://localhost:8080/api/v1/taskinstructions/taskInstruction"
+                            },
+                            "data": null
+                        },
+                        "jobSheet": {
+                            "links": {
+                                "self": "http://localhost:8080/api/v1/jobsheets/721579/relationships/jobSheet",
+                                "related": "http://localhost:8080/api/v1/jobsheets/jobSheet"
+                            },
+                            "data": null
+                        }
+                    },
+                    "links": {
+                        "self": "http://localhost:8080/api/v1/taskexecutions/721579"
+                    }
+                }
+            ]
+        }
 
   tenants:
     description: Successful response
