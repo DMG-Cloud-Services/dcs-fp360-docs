@@ -6765,14 +6765,14 @@ paths:
           
           |Message|HTTP Status Code|Error Code|Data|
           |----|----|----|----|
-          |JobInstruction not found.|400| Bad Request|30007|
-          |Missing required attribute tenantId in object|400| Bad Request|30051|
-          |Missing required attribute in Job sheet object|400| Bad Request|30052|
           |Invalid resource type|400| Bad Request|30053|
-          |job instruction is required to create job sheet|400| Bad Request|30054|
-          |Invalid input for batch job sheets|400| Bad Request|30055|
-          |Missing required attribute to create Jobsheet/quantity should be greater than 0|400| Bad Request|30070|
-          |Job instruction should have at-least one task to create job sheet|400| Bad Request|30088|
+          |Invalid input for batch Sub Task Executions|400| Bad Request|30160|
+          |Invalid or empty payload. A valid JSON is expected|400| Bad Request|139|
+          |Jobsheet has to be in draft mode for creating SubTaskExecution|400| Bad Request|30155|
+          |TaskExecution not found|400| Bad Request|30009|
+          |TaskExecution has to be Not Started for creating SubTaskExecution in draft mode|400| Bad Request|30154|
+          |The calling member must match the draft author|400| Bad Request|30137|
+          |Draft has expired and is therefore cancelled|400| Bad Request|30142|
           
       operationId: createsubtaskexecutions
       parameters:
@@ -6833,14 +6833,13 @@ paths:
           
           |Message|HTTP Status Code|Error Code|Data|
           |----|----|----|----|
-          |JobInstruction not found.|400| Bad Request|30007|
-          |Missing required attribute tenantId in object|400| Bad Request|30051|
-          |Missing required attribute in Job sheet object|400| Bad Request|30052|
           |Invalid resource type|400| Bad Request|30053|
-          |job instruction is required to create job sheet|400| Bad Request|30054|
-          |Invalid input for batch job sheets|400| Bad Request|30055|
-          |Missing required attribute to create Jobsheet/quantity should be greater than 0|400| Bad Request|30070|
-          |Job instruction should have at-least one task to create job sheet|400| Bad Request|30088|
+          |Invalid input for batch Sub Task Executions|400| Bad Request|30160|
+          |Invalid or empty payload. A valid JSON is expected|400| Bad Request|139|
+          |Jobsheet has to be in draft mode for creating SubTaskExecution|400| Bad Request|30155|
+          |TaskExecution has to be Not Started for creating SubTaskExecution in draft mode|400| Bad Request|30154|
+          |The calling member must match the draft author|400| Bad Request|30137|
+          |Draft has expired and is therefore cancelled|400| Bad Request|30142|
           
       operationId: updatesubtaskexecutions
       parameters:
