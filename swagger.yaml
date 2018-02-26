@@ -5450,6 +5450,8 @@ paths:
   
   /workstationsummaries:
     x-description: |
+        **Deprecated**: See GET /workstations for task queues and current workstation.
+        
         Endpoint describing machine/workstations summary that will be used to execute a given task.  This is a special GET-only endpoint designed to aggregate data related to workstations for reporting purposes.
         
         The response includes details of the workstation itself, as well as workstation total counts such as: 
