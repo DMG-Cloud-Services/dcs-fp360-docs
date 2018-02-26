@@ -5513,6 +5513,8 @@ paths:
 
   /workstationsummaries/{workstationId}:
     x-description: |
+        **Deprecated**: See GET /workstations for task queues and current workstation.
+        
         Report describing machine/workstation summary that will be used to execute a given task.   This is a special GET-only endpoint designed to aggregate data related to workstations for reporting purposes. "workstationIoTData" will be returned ONLY for workstations that belong to a tenant that has fusion connect enabled. Please contact DCS team for enabling fusion connect.
         
         The response includes details of the workstation itself, as well as the `currentTaskExecution` and collections of task execution queues including:
