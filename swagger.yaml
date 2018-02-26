@@ -22287,13 +22287,7 @@ responses:
                       "links": {
                         "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/154000/relationships/workstations",
                         "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/154000/workstations"
-                      },
-                      "data": [
-                        {
-                          "type": "workstations",
-                          "id": "4447"
-                        }
-                      ]
+                      }
                     },
                     "documents": {
                       "links": {
@@ -22315,72 +22309,7 @@ responses:
                   }
                 }
               ],
-              "included": {
-                        "type": "workstations",
-                        "id": "4447",
-                        "attributes": {
-                            "creator": {
-                                "id": "20",
-                                "firstName": "First Name",
-                                "lastName": "Last Name",
-                                "email": "Email"
-                            },
-                            "createdDate": "2016-10-04T08:53:46Z",
-                            "references": [
-                                {
-                                    "description": "ref1 description",
-                                    "url": "http://www.ref1.com"
-                                },
-                                {
-                                    "description": "ref2 description",
-                                    "url": "http://www.ref2.com"
-                                }
-                            ],
-                            "lastModifiedDate": "2016-10-04T08:53:46Z",
-                            "tenantId": "job360-test",
-                            "name": "regression workstations",
-                            "lastModifier": {
-                                "id": "20",
-                                "firstName": "First Name",
-                                "lastName": "Last Name",
-                                "email": "Email"
-                            },
-                            "description": "regression workstations",
-                            "tags": [
-                                "test",
-                                "test01"
-                            ],
-                            "status": "Idle"
-                        },
-                        "relationships": {
-                            "documents": {
-                                "links": {
-                                    "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/4447/relationships/documents",
-                                    "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/4447/documents"
-                                },
-                                "data": []
-                            },
-                            "workcells": {
-                                "links": {
-                                    "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/4447/relationships/workcells",
-                                    "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/4447/workcells"
-                                },
-                                "data": null
-                            },
-                            "primaryImage": {
-                                "links": {
-                                    "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/4447/relationships/primaryImage",
-                                    "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/4447/primaryImage"
-                                },
-                                "data": null
-                            }
-                        },
-                        "links": {
-                            "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/4447"
-                        }
-                    }
-            
-                    ,
+              "included": [],
               "meta": {
                 "paginationInfo": {
                   "totalResults": 1,
@@ -22446,13 +22375,7 @@ responses:
                           "links": {
                               "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/154000/relationships/workstations",
                               "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/154000/workstations"
-                          },
-                          "data": [
-                              {
-                                  "type": "workstations",
-                                  "id": "3068"
-                              }
-                          ]
+                          }
                       },
                       "documents": {
                           "links": {
@@ -22473,108 +22396,7 @@ responses:
                       "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workcells/154000"
                   }
               },
-              "included": [
-                  {
-                      "type": "documents",
-                      "id": "364",
-                      "attributes": {
-                          "originalFileName": "Penguins.jpg",
-                          "creator": {
-                              "id": "20",
-                              "firstName": "First Name",
-                              "lastName": "Last Name",
-                              "email": "Email"
-                          },
-                          "lastModifiedDate": "2016-10-07T08:27:23Z",
-                          "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/files/666a6950-3b4c-4278-86a0-942ae448e952.Penguins.jpg?nonce=77zLLnW6EOuxUseCHElR1abZiiiIab5grCZu1Ki1K-aFmtLuaNr10t5nBvz9rgSfGRcp1nqx7AaHvrrydUeCSuF1LnZksLiHmfq6dwa1xEWtH7uIu6mA23FL5zoSZbaIAfWmEpPk2UmfRtHfD6tctirrK4Z4OqAGRS1ku4IbAxj3CyKJzSazpqOWwxs0ZC770nH3fUHxev1nsnOKKD6PNgOgWUsZiCK0CYg3IkljlAk&seed=AAABXFUmaoAAAAFcVO98AA",
-                          "lastModifier": {
-                              "id": "20",
-                              "firstName": "First Name",
-                              "lastName": "Last Name",
-                              "email": "Email"
-                          },
-                          "description": "",
-                          "entityId": "5577",
-                          "entityVersion": "1.0.0",
-                          "createdDate": "2016-10-07T08:27:23Z",
-                          "size": "777835",
-                          "objectKey": "666a6950-3b4c-4278-86a0-942ae448e952.Penguins.jpg",
-                          "tenantId": "job360-test",
-                          "checksum": "df7be9dc4f467187783aca68c7ce98e4df2172d0",
-                          "storageType": "S3",
-                          "contentType": "image/jpeg",
-                          "fileType": "SYSTEM_PRIMARY_IMAGE"
-                      },
-                      "relationships": {},
-                      "links": {
-                          "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/documents/364"
-                      }
-                  },
-                  {
-                      "type": "workstations",
-                      "id": "3068",
-                      "attributes": {
-                          "creator": {
-                              "id": "20",
-                              "firstName": "First Name",
-                              "lastName": "Last Name",
-                              "email": "Email"
-                          },
-                          "createdDate": "2016-10-01T07:31:20Z",
-                          "references": [
-                              {
-                                  "description": "ref1 description",
-                                  "url": "http://www.ref1.com"
-                              },
-                              {
-                                  "description": "ref2 description",
-                                  "url": "http://www.ref2.com"
-                              }
-                          ],
-                          "lastModifiedDate": "2016-10-01T07:31:20Z",
-                          "tenantId": "job360-test",
-                          "name": "regression workstations",
-                          "lastModifier": {
-                              "id": "20",
-                              "firstName": "First Name",
-                              "lastName": "Last Name",
-                              "email": "Email"
-                          },
-                          "description": "regression workstations",
-                          "tags": [
-                              "test",
-                              "test01"
-                          ],
-                          "status": "Idle"
-                      },
-                      "relationships": {
-                          "documents": {
-                              "links": {
-                                  "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/3068/relationships/documents",
-                                  "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/3068/documents"
-                              },
-                              "data": []
-                          },
-                          "workcells": {
-                              "links": {
-                                  "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/3068/relationships/workcells",
-                                  "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/3068/workcells"
-                              },
-                              "data": null
-                          },
-                          "primaryImage": {
-                              "links": {
-                                  "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/3068/relationships/primaryImage",
-                                  "related": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/3068/primaryImage"
-                              },
-                              "data": null
-                          }
-                      },
-                      "links": {
-                          "self": "https://developer-stg.api.autodesk.com/factoryproduction-alpha/v1/workstations/3068"
-                      }
-                  }
-              ],
+              "included": [],
               "meta": {}
           }
 
