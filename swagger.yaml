@@ -7984,8 +7984,8 @@ paths:
                           "contractId": "7708de89-9ebb-471a-a24a-a0020977f79d",
                           "seatCount": 10,
                           "subscriptionInfo" : {
-                            	"startDate":"2018-01-01T00:00:00Z",
-                            	"endDate":"2018-12-31T00:00:00Z"
+                              "startDate":"2018-01-01T00:00:00Z",
+                              "endDate":"2018-12-31T00:00:00Z"
                           }
                       }
                   }
@@ -8041,8 +8041,8 @@ paths:
                           "contractId": "7708de89-9ebb-471a-a24a-a0020977f79d",
                           "seatCount": 10,
                           "subscriptionInfo" : {
-                            	"startDate":"2018-01-01T00:00:00Z",
-                            	"endDate":"2018-12-31T00:00:00Z"
+                              "startDate":"2018-01-01T00:00:00Z",
+                              "endDate":"2018-12-31T00:00:00Z"
                           }
                       }
                   }
