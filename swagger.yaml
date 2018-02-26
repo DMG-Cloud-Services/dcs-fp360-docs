@@ -16702,97 +16702,187 @@ responses:
           type: integer
     examples:
       application/vnd.api+json:
-                {
+                  {
                     "data": {
-                        "type": "workstations",
-                        "id": "4670",
-                        "attributes": {
-                            "creator": {
-                                "id": "5",
-                                "firstName": "First Name",
-                                "lastName": "Last Name",
-                                "email": "Email"
-                            },
-                            "createdDate": "2016-10-10T23:13:40Z",
-                            "references": [],
-                            "lastModifiedDate": "2016-10-11T17:02:39Z",
-                            "tenantId": "job360-test",
-                            "name": "DMG DMU 160P",
-                            "lastModifier": {
-                                "id": "5",
-                                "firstName": "First Name",
-                                "lastName": "Last Name",
-                                "email": "Email"
-                            },
-                            "description": "<p><span>Practical 5-axis machining for maximal productivity in all industries and workpieces up to 4.5t</span></p>\n",
-                            "tags": [
-                                "milling",
-                                "5-axis"
-                            ],
-                            "status": "Idle"
+                      "type": "workstations",
+                      "id": "195984",
+                      "attributes": {
+                        "creator": {
+                          "id": "535",
+                          "firstName": "John",
+                          "lastName": "Smith",
+                          "email": "john.smith@autodesk.com",
+                          "oxygenId": "WN9SJKUH923U",
+                          "superAdmin": false
                         },
-                        "relationships": {
-                            "primaryImage": {
-                                "links": {
-                                    "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/4670/relationships/primaryImage",
-                                    "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/4670/primaryImage"
-                                },
-                                "data": {
-                                    "type": "documents",
-                                    "id": "272"
-                                }
-                            },
-                            "documents": {
-                                "links": {
-                                    "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/4670/relationships/documents",
-                                    "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/4670/documents"
-                                },
-                                "data": []
-                            }
+                        "createdDate": "2017-06-14T12:37:20Z",
+                        "references": [],
+                        "lastModifiedDate": "2017-08-31T09:05:44Z",
+                        "tenantId": "job360-test",
+                        "name": "Press",
+                        "lastModifier": {
+                          "id": "18",
+                          "firstName": "Jack",
+                          "lastName": "Smith",
+                          "email": "jack.smith@autodesk.com",
+                          "oxygenId": "DTJSKVBVXSEL2",
+                          "superAdmin": false
                         },
-                        "links": {
-                            "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/4670"
+                        "description": "<p>Workstation details</p>",
+                        "applicationInfo": [],
+                        "tags": [],
+                        "status": "Operating"
+                      },
+                      "relationships": {
+                        "currentTaskExecution": {
+                          "links": {
+                            "self": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/relationships/currentTaskExecution",
+                            "related": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/currentTaskExecution"
+                          },
+                          "data": {
+                            "type": "taskexecutions",
+                            "id": "198848"
+                          }
+                        },
+                        "documents": {
+                          "links": {
+                            "self": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/relationships/documents",
+                            "related": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/documents"
+                          },
+                          "data": []
+                        },
+                        "workcell": {
+                          "links": {
+                            "self": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/relationships/workcell",
+                            "related": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/workcell"
+                          },
+                          "data": {
+                            "type": "workcells",
+                            "id": "182883"
+                          }
+                        },
+                        "primaryImage": {
+                          "links": {
+                            "self": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/relationships/primaryImage",
+                            "related": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/primaryImage"
+                          },
+                          "data": {
+                            "type": "documents",
+                            "id": "34583"
+                          }
                         }
+                      },
+                      "links": {
+                        "self": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984"
+                      }
                     },
                     "included": [
-                        {
-                            "type": "documents",
-                            "id": "272",
-                            "attributes": {
-                                "originalFileName": "dmu-160-p.jpg",
-                                "creator": {
-                                    "id": "5",
-                                    "firstName": "First Name",
-                                    "lastName": "Last Name",
-                                    "email": "Email"
-                                },
-                                "lastModifiedDate": "2016-10-11T17:02:42Z",
-                                "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/v1/files/b1f2c8c4-9160-4393-a526-a23b02ae7f8d.dmu-160-p.jpg",
-                                "lastModifier": {
-                                    "id": "5",
-                                    "firstName": "First Name",
-                                    "lastName": "Last Name",
-                                    "email": "Email"
-                                },
-                                "description": "",
-                                "entityId": "4670",
-                                "entityVersion": "1.0.0",
-                                "createdDate": "2016-10-11T17:02:42Z",
-                                "size": "21358",
-                                "objectKey": "b1f2c8c4-9160-4393-a526-a23b02ae7f8d.dmu-160-p.jpg",
-                                "tenantId": "job360-test",
-                                "checksum": "44f015575a7e3554b14a2dcd1d2442cc17cdb785",
-                                "contentType": "image/jpeg",
-                                "fileType": "SYSTEM_PRIMARY_IMAGE"
-                            },
-                            "relationships": {},
-                            "links": {
-                                "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/documents/272"
-                            }
+                      {
+                        "type": "documents",
+                        "id": "34583",
+                        "attributes": {
+                          "originalFileName": "Screen.jpg",
+                          "creator": {
+                            "id": "535",
+                            "firstName": "John",
+                            "lastName": "Smith",
+                            "email": "john.smith@yopmail.com",
+                            "oxygenId": "WN9SWLRH88QU",
+                            "superAdmin": false
+                          },
+                          "lastModifiedDate": "2017-06-14T12:37:21Z",
+                          "createdDuringDraft": false,
+                          "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/files/images/input/1f10fd0c-e4f4-46b0-a77a-e2f798cd8ad5.Screen.jpg?nonce=aTWugNNiYSOeP6wlBKitNzqcGncWzWK52xCNeZ8nEUMSA2wxCY7IUTciO6Yvh2WataMKW-Ee_L8eKauTBoRxLnn8_om4qCqKIjkATRRnexLzzyNO61szbEyth6uRbAEGgY0BCi-GpqnySmtMGe4VNgEsgNNjZsjpfSRdccy2kBUOkTIxcil7zbKfmI28ujk3K7xm6xuqISl0-i46nfCEhMD-DMsR6me4xKHb_Y8NXPTk9wq3A1Wo9hYVgW_e4x4n&seed=AAABYdPqQIAAAAFh07NSAA",
+                          "lastModifier": {
+                            "id": "535",
+                            "firstName": "John",
+                            "lastName": "Smith",
+                            "email": "john.smith@yopmail.com",
+                            "oxygenId": "WN9SWLRH88QU",
+                            "superAdmin": false
+                          },
+                          "description": "",
+                          "entityId": "195984",
+                          "generatedThumbnails": [
+                            "https://developer-stg.api.autodesk.com/factoryproduction/files/images/output/1f10fd0c-e4f4-46b0-a77a-e2f798cd8ad5.Screen_small.jpg?nonce=aTWugNNiYSOeP6wlBKitNzqcGncWzWK52xCNeZ8nEUMSA2wxCY7IUTciO6Yvh2WataMKW-Ee_L8eKauTBoRxLnn8_om4qCqKIjkATRRnexK0EOmTUcbhXfm3tIil__syOqh-l1xK6zNaN5ipgKbZ1McCg1kaDlmfu1Osr6ZLGycD0EOVhRNCTc5gFnGE9go-stQxY7SvZyuN6Vr5X68WRkvh8q5P5cqkYugqW-obNnj1kH8kx2WPHuVYerWSxQlc&seed=AAABYdPqQIAAAAFh07NSAA",
+                            "https://developer-stg.api.autodesk.com/factoryproduction/files/images/output/1f10fd0c-e4f4-46b0-a77a-e2f798cd8ad5.Screen_medium.jpg?nonce=aTWugNNiYSOeP6wlBKitNzqcGncWzWK52xCNeZ8nEUMSA2wxCY7IUTciO6Yvh2WataMKW-Ee_L8eKauTBoRxLnn8_om4qCqKIjkATRRnexK0EOmTUcbhXfm3tIil__syOqh-l1xK6zNaN5ipgKbZ1McCg1kaDlmfu1Osr6ZLGycD0EOVhRNCTc5gFnGE9go-P_43o0hZGz0uTKEhdApa5JZh2rCTSxMBzdCkI0vXEV_yXOgS0FRTj-v99iEszAoy&seed=AAABYdPqQIAAAAFh07NSAA",
+                            "https://developer-stg.api.autodesk.com/factoryproduction/files/images/output/1f10fd0c-e4f4-46b0-a77a-e2f798cd8ad5.Screen_large.jpg?nonce=aTWugNNiYSOeP6wlBKitNzqcGncWzWK52xCNeZ8nEUMSA2wxCY7IUTciO6Yvh2WataMKW-Ee_L8eKauTBoRxLnn8_om4qCqKIjkATRRnexK0EOmTUcbhXfm3tIil__syOqh-l1xK6zNaN5ipgKbZ1McCg1kaDlmfu1Osr6ZLGycD0EOVhRNCTc5gFnGE9go-ou-OjbkdzK-x5wmjRlF5z2eIq84PWr8aFjFBqi7lCrDJrEQ4ib5zdB-wZti4qXjp&seed=AAABYdPqQIAAAAFh07NSAA"
+                          ],
+                          "entityVersion": "1.0.0",
+                          "createdDate": "2017-06-14T12:37:21Z",
+                          "size": "4774",
+                          "objectKey": "images/input/1f10fd0c-e4f4-46b0-a77a-e2f798cd8ad5.Screen.jpg",
+                          "draft": false,
+                          "tenantId": "job360-test",
+                          "checksum": "wbM0i5AhxiAlNwxZF2Tqvg==",
+                          "storageType": "S3",
+                          "contentType": "image/jpeg",
+                          "fileType": "SYSTEM_PRIMARY_IMAGE"
+                        },
+                        "relationships": {},
+                        "links": {
+                          "self": "https://developer-stg.api.autodesk.com/factoryproduction/documents/34583"
                         }
+                      },
+                      {
+                        "type": "workcells",
+                        "id": "182883",
+                        "attributes": {
+                          "creator": {
+                            "id": "18",
+                            "firstName": "John",
+                            "lastName": "Smith",
+                            "email": "john.smith@yopmail.com",
+                            "oxygenId": "WN9SWLRH88QU",
+                            "superAdmin": false
+                          },
+                          "createdDate": "2017-06-08T06:03:17Z",
+                          "factoryDefault": false,
+                          "references": [],
+                          "lastModifiedDate": "2017-06-08T06:03:17Z",
+                          "tenantId": "job360-test",
+                          "name": "Test WC2",
+                          "lastModifier": {
+                            "id": "18",
+                            "firstName": "John",
+                            "lastName": "Smith",
+                            "email": "john.smith@yopmail.com",
+                            "oxygenId": "WN9SWLRH88QU",
+                            "superAdmin": false
+                          },
+                          "description": "",
+                          "applicationInfo": [],
+                          "tags": []
+                        },
+                        "relationships": {
+                          "documents": {
+                            "links": {
+                              "self": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883/relationships/documents",
+                              "related": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883/documents"
+                            },
+                            "data": []
+                          },
+                          "workstations": {
+                            "links": {
+                              "self": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883/relationships/workstations",
+                              "related": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883/workstations"
+                            }
+                          },
+                          "primaryImage": {
+                            "links": {
+                              "self": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883/relationships/primaryImage",
+                              "related": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883/primaryImage"
+                            },
+                            "data": null
+                          }
+                        },
+                        "links": {
+                          "self": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883"
+                        }
+                      }
                     ],
                     "meta": {}
-                }
+                  }
 
   workstations:
     description: Successful response
@@ -16813,186 +16903,200 @@ responses:
     examples:
       application/vnd.api+json:
                     {
-                      "data": {
-                        "type": "workstations",
-                        "id": "195984",
-                        "attributes": {
-                          "creator": {
-                            "id": "535",
-                            "firstName": "John",
-                            "lastName": "Smith",
-                            "email": "john.smith@autodesk.com",
-                            "oxygenId": "WN9SJKUH923U",
-                            "superAdmin": false
-                          },
-                          "createdDate": "2017-06-14T12:37:20Z",
-                          "references": [],
-                          "lastModifiedDate": "2017-08-31T09:05:44Z",
-                          "tenantId": "job360-test",
-                          "name": "Hard Press",
-                          "lastModifier": {
-                            "id": "18",
-                            "firstName": "Jack",
-                            "lastName": "Smith",
-                            "email": "jack.smith@autodesk.com",
-                            "oxygenId": "DTJSKVBVXSEL2",
-                            "superAdmin": false
-                          },
-                          "description": "<p>Workstation description</p>",
-                          "applicationInfo": [],
-                          "tags": [],
-                          "status": "Operating"
-                        },
-                        "relationships": {
-                          "currentTaskExecution": {
-                            "links": {
-                              "self": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/relationships/currentTaskExecution",
-                              "related": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/currentTaskExecution"
+                        "data": [
+                            {
+                                "type": "workstations",
+                                "id": "4670",
+                                "attributes": {
+                                    "creator": {
+                                        "id": "5",
+                                        "firstName": "First Name",
+                                        "lastName": "Last Name",
+                                        "email": "Email"
+                                    },
+                                    "createdDate": "2016-10-10T23:13:40Z",
+                                    "references": [],
+                                    "lastModifiedDate": "2016-10-11T17:02:39Z",
+                                    "tenantId": "job360-test",
+                                    "name": "DMG DMU 160P",
+                                    "lastModifier": {
+                                        "id": "5",
+                                        "firstName": "First Name",
+                                        "lastName": "Last Name",
+                                        "email": "Email"
+                                    },
+                                    "description": "<p><span>Practical 5-axis machining for maximal productivity in all industries and workpieces up to 4.5t</span></p>\n",
+                                    "tags": [
+                                        "milling",
+                                        "5-axis"
+                                    ],
+                                    "status": "Idle"
+                                },
+                                "relationships": {
+                                    "primaryImage": {
+                                        "links": {
+                                            "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/4670/relationships/primaryImage",
+                                            "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/4670/primaryImage"
+                                        },
+                                        "data": {
+                                            "type": "documents",
+                                            "id": "272"
+                                        }
+                                    },
+                                    "documents": {
+                                        "links": {
+                                            "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/4670/relationships/documents",
+                                            "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/4670/documents"
+                                        },
+                                        "data": []
+                                    }
+                                },
+                                "links": {
+                                    "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/4670"
+                                }
                             },
-                            "data": {
-                              "type": "taskexecutions",
-                              "id": "198848"
+                            {
+                                "type": "workstations",
+                                "id": "5334",
+                                "attributes": {
+                                    "creator": {
+                                        "id": "8",
+                                        "firstName": "First Name",
+                                        "lastName": "Last Name",
+                                        "email": "Email"
+                                    },
+                                    "createdDate": "2016-10-14T04:36:51Z",
+                                    "references": [
+                                        {
+                                            "description": "Supplier Website",
+                                            "url": "http://www.hermlemachine.com/cms/en/products/product_overview/bearbeitungszentrum_c52/"
+                                        }
+                                    ],
+                                    "lastModifiedDate": "2016-10-14T04:36:51Z",
+                                    "tenantId": "job360-test",
+                                    "name": "Hermle C50U",
+                                    "lastModifier": {
+                                        "id": "8",
+                                        "firstName": "First Name",
+                                        "lastName": "Last Name",
+                                        "email": "Email"
+                                    },
+                                    "description": "<p>5-axis machining center</p>\n",
+                                    "tags": [],
+                                    "status": "Idle"
+                                },
+                                "relationships": {
+                                    "primaryImage": {
+                                        "links": {
+                                            "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/5334/relationships/primaryImage",
+                                            "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/5334/primaryImage"
+                                        },
+                                        "data": {
+                                            "type": "documents",
+                                            "id": "277"
+                                        }
+                                    },
+                                    "documents": {
+                                        "links": {
+                                            "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/5334/relationships/documents",
+                                            "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/5334/documents"
+                                        },
+                                        "data": []
+                                    }
+                                },
+                                "links": {
+                                    "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations/5334"
+                                }
                             }
-                          },
-                          "documents": {
-                            "links": {
-                              "self": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/relationships/documents",
-                              "related": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/documents"
+                        ],
+                        "included": [
+                            {
+                                "type": "documents",
+                                "id": "277",
+                                "attributes": {
+                                    "originalFileName": "HermleC50U.jpg",
+                                    "creator": {
+                                        "id": "8",
+                                        "firstName": "First Name",
+                                        "lastName": "Last Name",
+                                        "email": "Email"
+                                    },
+                                    "lastModifiedDate": "2016-10-14T04:36:53Z",
+                                    "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/v1/files/a4333544-1040-4d7d-beab-a5d67c68fb74.HermleC50U.jpg",
+                                    "lastModifier": {
+                                        "id": "8",
+                                        "firstName": "First Name",
+                                        "lastName": "Last Name",
+                                        "email": "Email"
+                                    },
+                                    "description": "",
+                                    "entityId": "5334",
+                                    "entityVersion": "1.0.0",
+                                    "createdDate": "2016-10-14T04:36:53Z",
+                                    "size": "53304",
+                                    "objectKey": "a4333544-1040-4d7d-beab-a5d67c68fb74.HermleC50U.jpg",
+                                    "tenantId": "job360-test",
+                                    "checksum": "7bdaa9db7841f30e381345c2c275e02da7e3edde",
+                                    "contentType": "image/jpeg",
+                                    "fileType": "SYSTEM_PRIMARY_IMAGE"
+                                },
+                                "relationships": {},
+                                "links": {
+                                    "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/documents/277"
+                                }
                             },
-                            "data": []
-                          },
-                          "workcell": {
-                            "links": {
-                              "self": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/relationships/workcell",
-                              "related": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/workcell"
-                            },
-                            "data": {
-                              "type": "workcells",
-                              "id": "182883"
+                            {
+                                "type": "documents",
+                                "id": "272",
+                                "attributes": {
+                                    "originalFileName": "dmu-160-p.jpg",
+                                    "creator": {
+                                        "id": "5",
+                                        "firstName": "First Name",
+                                        "lastName": "Last Name",
+                                        "email": "Email"
+                                    },
+                                    "lastModifiedDate": "2016-10-11T17:02:42Z",
+                                    "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/v1/files/b1f2c8c4-9160-4393-a526-a23b02ae7f8d.dmu-160-p.jpg",
+                                    "lastModifier": {
+                                        "id": "5",
+                                        "firstName": "First Name",
+                                        "lastName": "Last Name",
+                                        "email": "Email"
+                                    },
+                                    "description": "",
+                                    "entityId": "4670",
+                                    "entityVersion": "1.0.0",
+                                    "createdDate": "2016-10-11T17:02:42Z",
+                                    "size": "21358",
+                                    "objectKey": "b1f2c8c4-9160-4393-a526-a23b02ae7f8d.dmu-160-p.jpg",
+                                    "tenantId": "job360-test",
+                                    "checksum": "44f015575a7e3554b14a2dcd1d2442cc17cdb785",
+                                    "contentType": "image/jpeg",
+                                    "fileType": "SYSTEM_PRIMARY_IMAGE"
+                                },
+                                "relationships": {},
+                                "links": {
+                                    "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/documents/272"
+                                }
                             }
-                          },
-                          "primaryImage": {
-                            "links": {
-                              "self": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/relationships/primaryImage",
-                              "related": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984/primaryImage"
-                            },
-                            "data": {
-                              "type": "documents",
-                              "id": "34583"
+                        ],
+                        "meta": {
+                            "paginationInfo": {
+                                "totalResults": 16,
+                                "pageNumber": 1,
+                                "totalPages": 8,
+                                "pageSize": 2
                             }
-                          }
                         },
                         "links": {
-                          "self": "https://developer-stg.api.autodesk.com/factoryproduction/workstations/195984"
+                            "prev": "",
+                            "next": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations?page[number]=2&page[size]=2",
+                            "first": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations?page[number]=1&page[size]=2",
+                            "last": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations?page[number]=8&page[size]=2"
                         }
-                      },
-                      "included": [
-                        {
-                          "type": "documents",
-                          "id": "34583",
-                          "attributes": {
-                            "originalFileName": "Screen.jpg",
-                            "creator": {
-                              "id": "535",
-                              "firstName": "John",
-                              "lastName": "Smith",
-                              "email": "john.smith@yopmail.com",
-                              "oxygenId": "WN9SWLRH88QU",
-                              "superAdmin": false
-                            },
-                            "lastModifiedDate": "2017-06-14T12:37:21Z",
-                            "createdDuringDraft": false,
-                            "downloadUrl": "https://developer-stg.api.autodesk.com/factoryproduction/files/images/input/1f10fd0c-e4f4-46b0-a77a-e2f798cd8ad5.Screen.jpg?nonce=aTWugNNiYSOeP6wlBKitNzqcGncWzWK52xCNeZ8nEUMSA2wxCY7IUTciO6Yvh2WataMKW-Ee_L8eKauTBoRxLnn8_om4qCqKIjkATRRnexLzzyNO61szbEyth6uRbAEGgY0BCi-GpqnySmtMGe4VNgEsgNNjZsjpfSRdccy2kBUOkTIxcil7zbKfmI28ujk3K7xm6xuqISl0-i46nfCEhMD-DMsR6me4xKHb_Y8NXPTk9wq3A1Wo9hYVgW_e4x4n&seed=AAABYdPqQIAAAAFh07NSAA",
-                            "lastModifier": {
-                              "id": "535",
-                              "firstName": "John",
-                              "lastName": "Smith",
-                              "email": "john.smith@yopmail.com",
-                              "oxygenId": "WN9SWLRH88QU",
-                              "superAdmin": false
-                            },
-                            "description": "",
-                            "entityId": "195984",
-                            "generatedThumbnails": [
-                              "https://developer-stg.api.autodesk.com/factoryproduction/files/images/output/1f10fd0c-e4f4-46b0-a77a-e2f798cd8ad5.Screen_small.jpg?nonce=aTWugNNiYSOeP6wlBKitNzqcGncWzWK52xCNeZ8nEUMSA2wxCY7IUTciO6Yvh2WataMKW-Ee_L8eKauTBoRxLnn8_om4qCqKIjkATRRnexK0EOmTUcbhXfm3tIil__syOqh-l1xK6zNaN5ipgKbZ1McCg1kaDlmfu1Osr6ZLGycD0EOVhRNCTc5gFnGE9go-stQxY7SvZyuN6Vr5X68WRkvh8q5P5cqkYugqW-obNnj1kH8kx2WPHuVYerWSxQlc&seed=AAABYdPqQIAAAAFh07NSAA",
-                              "https://developer-stg.api.autodesk.com/factoryproduction/files/images/output/1f10fd0c-e4f4-46b0-a77a-e2f798cd8ad5.Screen_medium.jpg?nonce=aTWugNNiYSOeP6wlBKitNzqcGncWzWK52xCNeZ8nEUMSA2wxCY7IUTciO6Yvh2WataMKW-Ee_L8eKauTBoRxLnn8_om4qCqKIjkATRRnexK0EOmTUcbhXfm3tIil__syOqh-l1xK6zNaN5ipgKbZ1McCg1kaDlmfu1Osr6ZLGycD0EOVhRNCTc5gFnGE9go-P_43o0hZGz0uTKEhdApa5JZh2rCTSxMBzdCkI0vXEV_yXOgS0FRTj-v99iEszAoy&seed=AAABYdPqQIAAAAFh07NSAA",
-                              "https://developer-stg.api.autodesk.com/factoryproduction/files/images/output/1f10fd0c-e4f4-46b0-a77a-e2f798cd8ad5.Screen_large.jpg?nonce=aTWugNNiYSOeP6wlBKitNzqcGncWzWK52xCNeZ8nEUMSA2wxCY7IUTciO6Yvh2WataMKW-Ee_L8eKauTBoRxLnn8_om4qCqKIjkATRRnexK0EOmTUcbhXfm3tIil__syOqh-l1xK6zNaN5ipgKbZ1McCg1kaDlmfu1Osr6ZLGycD0EOVhRNCTc5gFnGE9go-ou-OjbkdzK-x5wmjRlF5z2eIq84PWr8aFjFBqi7lCrDJrEQ4ib5zdB-wZti4qXjp&seed=AAABYdPqQIAAAAFh07NSAA"
-                            ],
-                            "entityVersion": "1.0.0",
-                            "createdDate": "2017-06-14T12:37:21Z",
-                            "size": "4774",
-                            "objectKey": "images/input/1f10fd0c-e4f4-46b0-a77a-e2f798cd8ad5.Screen.jpg",
-                            "draft": false,
-                            "tenantId": "job360-test",
-                            "checksum": "wbM0i5AhxiAlNwxZF2Tqvg==",
-                            "storageType": "S3",
-                            "contentType": "image/jpeg",
-                            "fileType": "SYSTEM_PRIMARY_IMAGE"
-                          },
-                          "relationships": {},
-                          "links": {
-                            "self": "https://developer-stg.api.autodesk.com/factoryproduction/documents/34583"
-                          }
-                        },
-                        {
-                          "type": "workcells",
-                          "id": "182883",
-                          "attributes": {
-                            "creator": {
-                              "id": "18",
-                              "firstName": "John",
-                              "lastName": "Smith",
-                              "email": "john.smith@yopmail.com",
-                              "oxygenId": "WN9SWLRH88QU",
-                              "superAdmin": false
-                            },
-                            "createdDate": "2017-06-08T06:03:17Z",
-                            "factoryDefault": false,
-                            "references": [],
-                            "lastModifiedDate": "2017-06-08T06:03:17Z",
-                            "tenantId": "job360-test",
-                            "name": "Test WC2",
-                            "lastModifier": {
-                              "id": "18",
-                              "firstName": "John",
-                              "lastName": "Smith",
-                              "email": "john.smith@yopmail.com",
-                              "oxygenId": "WN9SWLRH88QU",
-                              "superAdmin": false
-                            },
-                            "description": "",
-                            "applicationInfo": [],
-                            "tags": []
-                          },
-                          "relationships": {
-                            "documents": {
-                              "links": {
-                                "self": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883/relationships/documents",
-                                "related": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883/documents"
-                              },
-                              "data": []
-                            },
-                            "workstations": {
-                              "links": {
-                                "self": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883/relationships/workstations",
-                                "related": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883/workstations"
-                              }
-                            },
-                            "primaryImage": {
-                              "links": {
-                                "self": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883/relationships/primaryImage",
-                                "related": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883/primaryImage"
-                              },
-                              "data": null
-                            }
-                          },
-                          "links": {
-                            "self": "https://developer-stg.api.autodesk.com/factoryproduction/workcells/182883"
-                          }
-                        }
-                      ],
-                      "meta": {}
                     }
+
   workstationbulk:
     description: Successful response
     schema:
