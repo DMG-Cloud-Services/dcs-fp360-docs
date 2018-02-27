@@ -5023,6 +5023,34 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
+  /workstations/{id}/currentTaskExecution:
+    x-description: |
+        Get the current Task Execution for given workstation.
+    get:
+      tags: [ "Workstations" ]
+      description: |
+        Get the current Task Execution for given workstation.
+        
+        **Status codes**
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given Workstation doesn't exist|400| Bad Request|30001|
+        |Invalid document type.|400| Bad Request|30020|
+        
+      operationId: getWorkstationCurrentTaskExecution
+      parameters:
+        - name: id
+          in: path
+          description: id of Workstation
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/currentTaskExecution'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
+
   /workstations/{id}/primaryImage:
     x-description: |
         Get image for given workstation.
@@ -16351,6 +16379,146 @@ responses:
             },
             "included": []
         }
+
+  currentTaskExecution:
+    description: Successful response
+    schema:
+      title: schema versions
+      type: object
+      allOf:
+      - type: object
+    headers:
+        etag:
+          description: |
+            `etag` for the resource which can be used for cache optimization
+            and must be used for mutating operations on this resource
+          type: string
+        authorization:
+          description: Bearer Token
+          type: integer
+    examples:
+      application/vnd.api+json:
+                {
+                  "data": {
+                    "type": "taskexecutions",
+                    "id": "198848",
+                    "attributes": {
+                      "notes": "<p>erewrewre</p>\n\n<p>werewr</p>\n\n<p>ewr</p>\n\n<p>ewr</p>\n\n<p>ewr</p>\n",
+                      "references": [],
+                      "lastModifier": {
+                        "id": "343",
+                        "firstName": "John",
+                        "lastName": "Smith",
+                        "email": "john.smith@autodesk.com",
+                        "oxygenId": "G4UUNMA8L2WR",
+                        "superAdmin": false
+                      },
+                      "goodQuantity": 39,
+                      "scrapQuantity": 4,
+                      "consumedComponents": [],
+                      "executionTimePerQuantityInMins": 20,
+                      "jobSheetDraft": false,
+                      "defectQuantity": 0,
+                      "taskCompletionDocumentCount": 0,
+                      "creator": {
+                        "id": "535",
+                        "firstName": "John",
+                        "lastName": "Smith",
+                        "email": "john.smith@autodesk.com",
+                        "oxygenId": "G4UUNMA8L2WR",
+                        "superAdmin": false
+                      },
+                      "setupTimeInMins": 1200,
+                      "starter": {
+                        "id": "343",
+                        "firstName": "John",
+                        "lastName": "Smith",
+                        "email": "john.smith@autodesk.com"
+                      },
+                      "lastModifiedDate": "2017-08-28T07:23:53Z",
+                      "completedDate": "2017-08-28T07:23:40Z",
+                      "tags": [],
+                      "taskOrder": 2,
+                      "subTaskCompletionRequired": false,
+                      "createdDate": "2017-06-15T07:41:00Z",
+                      "taskCompletionNotes": "<p>erewrewre</p>\n\n<p>werewr</p>\n\n<p>ewr</p>\n\n<p>ewr</p>\n\n<p>ewr</p>\n",
+                      "tenantId": "job360-test",
+                      "name": "task2",
+                      "taskNumber": 20,
+                      "startDate": "2017-08-28T07:23:53Z",
+                      "status": "InProgress"
+                    },
+                    "relationships": {
+                      "workstation": {
+                        "links": {
+                          "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/relationships/workstation",
+                          "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/workstation"
+                        },
+                        "data": {
+                          "type": "workstations",
+                          "id": "195984"
+                        }
+                      },
+                      "taskInstruction": {
+                        "links": {
+                          "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/relationships/taskInstruction",
+                          "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/taskInstruction"
+                        },
+                        "data": {
+                          "type": "taskinstructions",
+                          "id": "198845"
+                        }
+                      },
+                      "workcell": {
+                        "links": {
+                          "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/relationships/workcell",
+                          "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/workcell"
+                        },
+                        "data": null
+                      },
+                      "taskCompletionDocuments": {
+                        "links": {
+                          "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/relationships/taskCompletionDocuments",
+                          "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/taskCompletionDocuments"
+                        }
+                      },
+                      "subTaskExecutions": {
+                        "links": {
+                          "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/relationships/subTaskExecutions",
+                          "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/subTaskExecutions"
+                        }
+                      },
+                      "documents": {
+                        "links": {
+                          "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/relationships/documents",
+                          "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/documents"
+                        }
+                      },
+                      "jobSheet": {
+                        "links": {
+                          "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/relationships/jobSheet",
+                          "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/jobSheet"
+                        },
+                        "data": {
+                          "type": "jobsheets",
+                          "id": "198846"
+                        }
+                      },
+                      "primaryImage": {
+                        "links": {
+                          "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/relationships/primaryImage",
+                          "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848/primaryImage"
+                        },
+                        "data": null
+                      }
+                    },
+                    "links": {
+                      "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/taskexecutions/198848"
+                    }
+                  },
+                  "included": [],
+                  "meta": {}
+                }
 
   component:
     description: Successful response
