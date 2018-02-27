@@ -520,6 +520,9 @@ info:
     
     ### [Create a Job Sheet](/en/docs/fp360/v1/tutorials/create-a-job-sheet)
     This tutorial explains how to create a job sheet for the operators.
+    
+    ### [update a Job Sheet](/en/docs/fp360/v1/tutorials/update-a-job-sheet)
+    This tutorial explains how to update jobsheets for supervisors.
       
     ### [Update a Work Queue](/en/docs/fp360/v1/tutorials/update-a-work-queue)
     This tutorial explains how to schedule and update the work queue for the workstations and workcells.
@@ -1329,6 +1332,83 @@ info:
       }' "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions"
     ```
     
+    The resource provides the following response:
+    
+    ```json
+    {
+      "data": {
+          "type": "jobinstructions",
+          "id": "428955",
+          "attributes": {
+              "creator": {
+                "id": "665",
+                "firstName": "First Name",
+                "lastName": "Last Name",
+                "email": "Email"
+              },
+              "references": [
+                {
+                    "description": "ref1 description",
+                    "url": "http://www.ref1.com"
+                },
+                {
+                    "description": "ref2 description",
+                    "url": "http://www.ref2.com"
+                }
+              ],
+              "lastModifiedDate": "2017-10-06T07:07:55Z",
+              "lastModifier": {
+                  "id": "665",
+                  "firstName": "First Name",
+                  "lastName": "Last Name",
+                  "email": "Email"
+              },
+              "description": "The Test Job Instuction 2",
+              "defaultQuantity": 5,
+              "versionCreatedDate": "2017-10-06T07:07:55Z",
+              "version": "1.0.0",
+              "tags": [
+                  "doors",
+                  "engine",
+                  "body"
+              ],
+              "archived": false,
+              "createdDate": "2017-10-06T07:07:55Z",
+              "tenantId": "job360-test",
+              "name": "Job Instruction2",
+              "applicationInfo": []
+          },
+          "relationships": {
+              "taskInstructions": {
+                "links": {
+                    "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/428955/relationships/taskInstructions",
+                    "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/428955/taskInstructions"
+                },
+                "data": []
+              },
+              "documents": {
+                "links": {
+                    "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/428955/relationships/documents",
+                    "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/428955/documents"
+                },
+                "data": []
+              },
+              "primaryImage": {
+                "links": {
+                    "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/428955/relationships/primaryImage",
+                    "related": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/428955/primaryImage"
+                },
+                "data": null
+              }
+          },
+          "links": {
+            "self": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobinstructions/428955"
+          }
+      },
+      "included": [],
+      "meta": {}
+    }
+    ```
     The resource provides the following response:
     
     ```json
@@ -6570,7 +6650,7 @@ paths:
   /batch/jobsheets:
     post:
       description: |
-          Create a multiple job sheets.
+          Create multiple job sheets.
           
           **Status codes**
           
@@ -6633,6 +6713,47 @@ paths:
         '201': {$ref: '#/responses/jobsheetsbulk'}
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
+        
+  '/jobsheets/{id}/draft':
+    x-description: |
+        puts jobsheet into editable moe.
+    post:
+      tags: [ "jobsheet draft" ]
+      description: |
+        mark the jobsheet as editable
+        
+        **Status codes**
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid status for this draft|400| Bad Request|30138|
+        
+      operationId: createJobSheetDraft
+      parameters:
+        - name: id
+          in: path
+          description: ID of jobsheet
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: body
+          description: draft body
+          required: true
+          schema:
+            $ref: '#/definitions/json_api_input_new_batch_job_sheet'
+            example:
+                       {
+                          "type": "drafts",
+                          "attributes": {
+                              "status": "InDraft"
+                          }
+                      }
+          
+      responses:
+        '200': {$ref: '#/responses/subTaskExecution'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]      
 
   /taskexecutions:
     x-description: |
