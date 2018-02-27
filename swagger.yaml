@@ -6421,6 +6421,16 @@ paths:
           description: Status(es) to filter by. Available statuses:```Staged, InProgress, Blocked, Completed, NeedsApproval, Cancelled, Waiting```
           required: false
           type: string
+        - name: filter[jobsheets][lastModifiedDate][lt/lte/gt/gte]
+          in: query
+          description: Last Modified Date Range. Example`:` `2016-10-26`
+          required: false
+          type: string
+        - name: filter[jobsheets][draftInfo]
+          in: query
+          description: Show draft information for given draftIds. Possible values`:` `*` OR `active`
+          required: false
+          type: string
         - name: sort[jobsheets][targetFieldName]
           in: query
           description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, status, name, email, creatorId, lastModifierId, createdDate, lastModifiedDate, deliveryDate, jobInstructionId``` Example:ASC
@@ -6518,6 +6528,16 @@ paths:
           in: path
           description: ID of job sheet
           required: true
+          type: string
+        - name: filter[jobsheets][draftInfo]
+          in: query
+          description: Show draft information for given draftIds. Possible values`:` `*` OR `active`
+          required: false
+          type: string
+        - name: filter[jobsheets][draft]
+          in: query
+          description: Search Query to return draft response. Required value`:` `active`
+          required: false
           type: string
       responses:
         '200': {$ref: '#/responses/jobSheet'}
