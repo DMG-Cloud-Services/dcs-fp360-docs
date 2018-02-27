@@ -4997,32 +4997,6 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
 
-  /workstations/{id}/documents:
-    x-description: |
-        Get all documents for given workstation.
-    get:
-      tags: [ "Workstations" ]
-      description: |
-        Get all documents for given workstation.
-        
-        **Status codes**
-        
-        |Message|HTTP Status Code|Error Code|Data|
-        |----|----|----|----|
-        |Invalid document type.|400| Bad Request|30020|
-        
-      operationId: getWorkstationDocuments
-      parameters:
-        - name: id
-          in: path
-          description: id of Workstation
-          required: true
-          type: string
-      responses:
-        '200': {$ref: '#/responses/documents'}
-      security:
-        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
-
   /workstations/{id}/currentTaskExecution:
     x-description: |
         Get the current Task Execution for given workstation.
@@ -5050,6 +5024,31 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
+  /workstations/{id}/documents:
+    x-description: |
+        Get all documents for given workstation.
+    get:
+      tags: [ "Workstations" ]
+      description: |
+        Get all documents for given workstation.
+        
+        **Status codes**
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid document type.|400| Bad Request|30020|
+        
+      operationId: getWorkstationDocuments
+      parameters:
+        - name: id
+          in: path
+          description: id of Workstation
+          required: true
+          type: string
+      responses:
+        '200': {$ref: '#/responses/documents'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
   /workstations/{id}/primaryImage:
     x-description: |
