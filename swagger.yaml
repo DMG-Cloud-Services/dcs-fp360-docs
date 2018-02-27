@@ -6734,13 +6734,17 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
 
-  '/jobsheets/{id}/draft':
+  '/jobsheets/{id}/drafts':
     x-description: |
-        puts jobsheet into editable moe.
+        These endpoints are used to edit a jobsheet.  Since a jobsheet has underlying children that may be updated, a draft mode is used to complete the whole Job Sheet edit in one transaction.
+        
+        First, a jobsheet draft is created for a Job Sheet.  Then either the draft is updated as `Completed`, or the draft is deleted.
+        
+        If a draft is not committed or deleted, and remains unchanged for 2 hours, the draft expires.
     post:
       tags: [ "Jobsheet Draft" ]
       description: |
-        Mark the jobsheet as editable which puts the jobsheet in a draft state.
+        Mark the jobsheet as editable which puts the jobsheet in a draft state, i.e. status = "InDraft".
         
         **Status codes**
         
@@ -6774,6 +6778,7 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]      
 
+  '/jobsheets/{id}/drafts/active':
     patch:
       tags: [ "Jobsheet Draft" ]
       description: |
@@ -6784,15 +6789,22 @@ paths:
         
         |Message|HTTP Status Code|Error Code|Data|
         |----|----|----|----|
+        |The calling member must match the draft author|400| Bad Request|30137|
         |Invalid status for this draft|400| Bad Request|30138|
+        |No draft found for the this entity|400| Bad Request|30139|
+        |Invalid input for draft|400| Bad Request|30140|
+        |Entity is not editable due to its status|400| Bad Request|30141|
+        |Draft has expired and is therefore cancelled|400| Bad Request|30142|
+        |Unsupported draft entity type|400| Bad Request|30143|
 
       operationId: updateTaskExecution
       parameters:
         - name: id
           in: path
-          description: ID of Task Execution
+          description: ID of jobsheet
           required: true
-          type: string
+          type: integer
+          format: int64
         - in: body
           name: body
           description: Input Task Execution attributes
@@ -6810,7 +6822,36 @@ paths:
         '200': {$ref: '#/responses/completeddraft'}
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+
+    delete:
+      tags: [ "Jobsheet Draft" ]
+      description: |
+        Abandon changes on the jobsheet (or delete the draft).  This does not delete the orginal jobsheet.
         
+        
+        **Status codes**
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |The calling member must match the draft author|400| Bad Request|30137|
+        |Invalid status for this draft|400| Bad Request|30138|
+        |No draft found for the this entity|400| Bad Request|30139|
+
+      operationId: updateTaskExecution
+      parameters:
+        - name: id
+          in: path
+          description: ID of jobsheet
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: Task Execution deleted
+      security:
+        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+
+
   /taskexecutions:
     x-description: |
       Contains relevant data to capture all the information about task that is executed on a given workstation.
