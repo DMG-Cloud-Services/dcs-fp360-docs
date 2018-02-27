@@ -6740,7 +6740,7 @@ paths:
     post:
       tags: [ "Jobsheet Draft" ]
       description: |
-        mark the jobsheet as editable
+        Mark the jobsheet as editable which puts the jobsheet in a draft state.
         
         **Status codes**
         
@@ -6774,6 +6774,43 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]      
 
+    patch:
+      tags: [ "Jobsheet Draft" ]
+      description: |
+        Commit changes to the jobsheet.  Use draft status `Completed` for this endpoint.
+        
+        
+        **Status codes**
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Invalid status for this draft|400| Bad Request|30138|
+
+      operationId: updateTaskExecution
+      parameters:
+        - name: id
+          in: path
+          description: ID of Task Execution
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Input Task Execution attributes
+          required: true
+          schema:
+            $ref: '#/definitions/json_api_input_new_batch_job_sheet'
+            example:
+              {
+                "type": "drafts",
+                "attributes": {
+                  "status": "Completed"
+                }
+              }
+      responses:
+        '200': {$ref: '#/responses/completeddraft'}
+      security:
+        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+        
   /taskexecutions:
     x-description: |
       Contains relevant data to capture all the information about task that is executed on a given workstation.
@@ -9577,6 +9614,49 @@ responses:
           "included": []
         }
 
+  completeddraft:
+    description: Successful response
+    schema:
+      title: schema versions
+      type: object
+      allOf:
+      - type: object
+    headers:
+        etag:
+          description: |
+            `etag` for the resource which can be used for cache optimization
+            and must be used for mutating operations on this resource
+          type: string
+        authorization:
+          description: Bearer Token
+          type: integer
+    examples:
+      application/vnd.api+json:
+        {
+            "data": {
+                "id": "6412",
+                "type": "drafts",
+                "attributes": {
+                    "id": "6412",
+                    "tenantId": "job360-test",
+                    "entityId": "408968",
+                    "entityType": "jobsheets",
+                    "status": "Completed",
+                    "author": {
+                        "id": "15",
+                        "firstName": "John",
+                        "lastName": "Smith",
+                        "email": "john.smith@autodesk.com"
+                    },
+                    "createdDate": "2018-02-27T22:06:26Z",
+                    "lastModifiedDate": "2018-02-27T22:08:53Z",
+                    "completedDate": "2018-02-27T22:08:53Z"
+                },
+                "relationships": {}
+            },
+            "included": []
+        }
+        
   jobInstructions:
     description: Successful response
     schema:
