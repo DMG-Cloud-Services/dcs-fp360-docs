@@ -6738,7 +6738,7 @@ paths:
     x-description: |
         puts jobsheet into editable moe.
     post:
-      tags: [ "jobsheet draft" ]
+      tags: [ "Jobsheet Draft" ]
       description: |
         mark the jobsheet as editable
         
@@ -6769,7 +6769,6 @@ paths:
                               "status": "InDraft"
                           }
                       }
-          
       responses:
         '200': {$ref: '#/responses/subTaskExecution'}
       security:
