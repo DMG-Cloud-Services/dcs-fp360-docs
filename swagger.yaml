@@ -6733,7 +6733,7 @@ paths:
         '201': {$ref: '#/responses/jobsheetsbulk'}
       security:
         [ { oauth2_access_code: [ 'data:create' ] }, { oauth2_implicit: [ 'data:create' ] },{ oauth2_application: [ 'data:create' ] } ]
-        
+
   '/jobsheets/{id}/draft':
     x-description: |
         puts jobsheet into editable moe.
@@ -6770,7 +6770,7 @@ paths:
                           }
                       }
       responses:
-        '200': {$ref: '#/responses/subTaskExecution'}
+        '200': {$ref: '#/responses/draft'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]      
 
@@ -9533,6 +9533,49 @@ responses:
                     "last": "https://developer-stg.api.autodesk.com/factoryproduction/v1/jobsheets?page[number]=2847&page[size]=1"
                   }
                 }
+
+  draft:
+    description: Successful response
+    schema:
+      title: schema versions
+      type: object
+      allOf:
+      - type: object
+    headers:
+        etag:
+          description: |
+            `etag` for the resource which can be used for cache optimization
+            and must be used for mutating operations on this resource
+          type: string
+        authorization:
+          description: Bearer Token
+          type: integer
+    examples:
+      application/vnd.api+json:
+        {
+          "data": {
+            "id": "6412",
+            "type": "drafts",
+            "attributes": {
+              "id": "6412",
+              "tenantId": "job360-test",
+              "entityId": "408968",
+              "entityType": "jobsheets",
+              "status": "InDraft",
+              "author": {
+                "id": "15",
+                "firstName": "John",
+                "lastName": "Smith",
+                "email": "john.smith@autodesk.com"
+              },
+              "createdDate": "2018-02-27T22:06:26Z",
+              "lastModifiedDate": "2018-02-27T22:06:26Z",
+              "expiryDate": "2018-02-28T00:06:26Z"
+            },
+            "relationships": {}
+          },
+          "included": []
+        }
 
   jobInstructions:
     description: Successful response
