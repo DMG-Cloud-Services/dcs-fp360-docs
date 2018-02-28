@@ -6601,6 +6601,63 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
 
+  /jobsheets/{id}/taskExecutions:
+    x-description: |
+        The TaskExecutions beloging to the given JobSheet.
+    get:
+      tags: [ "Job Sheets" ]
+      description: |
+        Get a Job Sheet's Task
+
+        **Status codes**
+
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |JobSheet not found.|400| Bad Request|30008|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
+
+        Filters:
+        This endpoint can filter to get workstation queues or workcell queues.  `jobsheetId` filter is optional for queue requests.
+
+        If no queue filter is present, then `jobsheetId` is required.
+
+      operationId: getJobSheetsTaskExecutions
+      parameters:
+        - name: id
+          in: path
+          description: ID of job sheet
+          required: true
+          type: string
+        - name: filter[taskexecutions][jobSheetId]
+          in: query
+          description: Parent Job Sheet id.  This is required if no queue filter is present.
+          required: false
+          type: string
+        - name: filter[jobsheets][draft]
+          in: query
+          description: Search Query to return draft response. Required value`:` `active`
+          required: false
+          type: string
+        - name: filter[taskexecutions][queueType]
+          in: query
+          description: Search Query to return Task Execution queue for given type. Possible values`:` `WORKSTATIONS`, `WORKCELLS`
+          required: false
+          type: string
+        - name: filter[workstations][id]
+          in: query
+          description: Workstation id for task queue. Required if queueType filter is present.
+          required: false
+          type: string
+        - name: filter[workcells][id]
+          in: query
+          description: Workcell id for task queue. Required if queueType filter is present.
+          required: false
+          type: string
+      responses:
+        '200': {$ref: '#/responses/taskExecutions'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
   /jobsheets/{ids}:
     x-description: |
         An instance of Job Instructions template which goes on Factory floor as instructions are executed in the process of making a component. Job sheet refers to the instruction template and contains any relevant notes added during execution of instructions.
