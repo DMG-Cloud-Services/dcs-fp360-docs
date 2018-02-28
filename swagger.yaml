@@ -7020,7 +7020,42 @@ paths:
           description: Task Execution deleted
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]        
+
+  /taskexecutions/{id}/subtaskexecutions:
+    x-description: |
+      Contains relevant data to capture all the information about task that is executed on a given workstation.
+    get:
+      tags: [ "Task Executions" ]
+      description: |
+        Get SubTask Executions for a given Task Execution.
+
+        Draft workflow:  If the parent Job Sheet is in draft mode, then the draft filter determines whether or not to return the SubTaskExecution included in that draft.
+
+        **Status codes**
         
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |TaskExecution not found.|400| Bad Request|30009|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
+        
+      operationId: getTaskExecutionSubtaskExecutions
+      parameters:
+        - name: id
+          in: path
+          description: id of Task Execution
+          required: true
+          type: string
+        - name: filter[jobsheets][draft]
+          in: query
+          description: Search Query to return draft response. Required value`:` `active`
+          required: false
+          type: string
+      responses:
+        '200': {$ref: '#/responses/subTaskExecutions'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
+
   '/subtaskexecutions/{id}':
     x-description: |
         checklist of a taskexecution.
@@ -7043,6 +7078,11 @@ paths:
           required: true
           type: integer
           format: int64
+        - name: filter[jobsheets][draft]
+          in: query
+          description: Search Query to return draft response. Required value`:` `active`
+          required: false
+          type: string
       responses:
         '200': {$ref: '#/responses/subTaskExecution'}
       security:
@@ -19307,66 +19347,66 @@ responses:
     examples:
       application/vnd.api+json:
         {
-    "data": {
-        "type": "subtaskinstructions",
-        "id": "460301",
-        "attributes": {
-            "subTaskOrder": 0,
-            "creator": {
-                "id": "17",
-                "firstName": "First Name",
-                "lastName": "Last Name",
-                "email": "Email"
-            },
-            "createdDate": "2017-10-18T12:02:17Z",
-            "references": [],
-            "lastModifiedDate": "2017-10-18T12:02:17Z",
-            "tenantId": "job360-test",
-            "name": "drilling subtask",
-            "lastModifier": {
-                "id": "17",
-                "firstName": "First Name",
-                "lastName": "Last Name",
-                "email": "Email"
-            },
-            "description": "drillers",
-            "tags": [
-                "milling",
-                "5-axis"
-            ]
-        },
-        "relationships": {
-            "documents": {
-                "links": {
-                    "self": "http://localhost:8080/api/v1/subtaskinstructions/460301/relationships/documents",
-                    "related": "http://localhost:8080/api/v1/subtaskinstructions/460301/documents"
-                },
-                "data": []
-            },
-            "primaryImage": {
-                "links": {
-                    "self": "http://localhost:8080/api/v1/subtaskinstructions/460301/relationships/primaryImage",
-                    "related": "http://localhost:8080/api/v1/subtaskinstructions/460301/primaryImage"
-                },
-                "data": null
-            },
-            "taskInstruction": {
-                "links": {
-                    "self": "http://localhost:8080/api/v1/subtaskinstructions/460301/relationships/taskInstruction",
-                    "related": "http://localhost:8080/api/v1/subtaskinstructions/460301/taskInstruction"
-                },
-                "data": {
-                    "type": "taskinstructions",
-                    "id": "410396"
-                }
-            }
-        },
-        "links": {
-            "self": "http://localhost:8080/api/v1/subtaskinstructions/460301"
-        }
-    },
-    "included": []
-} 
+          "data": {
+              "type": "subtaskinstructions",
+              "id": "460301",
+              "attributes": {
+                  "subTaskOrder": 0,
+                  "creator": {
+                      "id": "17",
+                      "firstName": "First Name",
+                      "lastName": "Last Name",
+                      "email": "Email"
+                  },
+                  "createdDate": "2017-10-18T12:02:17Z",
+                  "references": [],
+                  "lastModifiedDate": "2017-10-18T12:02:17Z",
+                  "tenantId": "job360-test",
+                  "name": "drilling subtask",
+                  "lastModifier": {
+                      "id": "17",
+                      "firstName": "First Name",
+                      "lastName": "Last Name",
+                      "email": "Email"
+                  },
+                  "description": "drillers",
+                  "tags": [
+                      "milling",
+                      "5-axis"
+                  ]
+              },
+              "relationships": {
+                  "documents": {
+                      "links": {
+                          "self": "http://localhost:8080/api/v1/subtaskinstructions/460301/relationships/documents",
+                          "related": "http://localhost:8080/api/v1/subtaskinstructions/460301/documents"
+                      },
+                      "data": []
+                  },
+                  "primaryImage": {
+                      "links": {
+                          "self": "http://localhost:8080/api/v1/subtaskinstructions/460301/relationships/primaryImage",
+                          "related": "http://localhost:8080/api/v1/subtaskinstructions/460301/primaryImage"
+                      },
+                      "data": null
+                  },
+                  "taskInstruction": {
+                      "links": {
+                          "self": "http://localhost:8080/api/v1/subtaskinstructions/460301/relationships/taskInstruction",
+                          "related": "http://localhost:8080/api/v1/subtaskinstructions/460301/taskInstruction"
+                      },
+                      "data": {
+                          "type": "taskinstructions",
+                          "id": "410396"
+                      }
+                  }
+              },
+              "links": {
+                  "self": "http://localhost:8080/api/v1/subtaskinstructions/460301"
+              }
+          },
+          "included": []
+      } 
 
   subTaskExecution:
     description: Successful response
