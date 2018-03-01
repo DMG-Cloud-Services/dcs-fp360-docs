@@ -6658,6 +6658,16 @@ paths:
           description: Workcell id for task queue. Required if queueType filter is present.
           required: false
           type: string
+        - name: filter[taskexecutions][status]
+          in: query
+          description: Status(es) to filter by. Available statuses:```Completed, InProgress, NotStarted, Paused, Staged```
+          required: false
+          type: string
+        - name: filter[taskexecutions][lastModifiedDate][lt/lte/gt/gte]
+          in: query
+          description: Last Modified Date Range. Example`:` `2016-10-26`
+          required: false
+          type: string  
       responses:
         '200': {$ref: '#/responses/taskExecutions'}
       security:
