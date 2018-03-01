@@ -4894,7 +4894,7 @@ paths:
           type: string  
         - name: filter[workstations][status]
           in: query
-          description: filter by one or more workstation status(es) (comma separated list).  Available statuses`:` `Idle, Operating, OfflineScheduleMaintenance, OfflineBroken`
+          description: filter by one or more workstation status(es) (comma separated list).  Available statuses`:` `Idle, Operating, OfflineScheduleMaintenance, OfflineBroken` Example:Idle
           required: false
           type: string  
         - name: sort[workstations][targetFieldName]
