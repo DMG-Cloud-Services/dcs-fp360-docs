@@ -4892,6 +4892,11 @@ paths:
           description: filter by workcell id
           required: false
           type: string  
+        - name: filter[workstations][status]
+          in: query
+          description: filter by one or more workstation status(es) (comma separated list).  Available statuses`:` `Idle, Operating, OfflineScheduleMaintenance, OfflineBroken`
+          required: false
+          type: string  
         - name: sort[workstations][targetFieldName]
           in: query
           description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, name, email, creatorId, lastModifierId, createdDate, lastModifiedDate, status, workcell``` Example:ASC
