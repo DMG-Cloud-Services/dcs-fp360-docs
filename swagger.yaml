@@ -7964,6 +7964,11 @@ paths:
           description: Search Query, which may include jobinstruction id
           required: false
           type: string
+        - name: toTimezone
+          in: query
+          description: To specify Timezone. Default - UTC 
+          required: false
+          type: string
       responses:
         '200': {$ref: '#/responses/jobinstructionQualityReportDownload'}
       security:
