@@ -8057,6 +8057,11 @@ paths:
           description: Search Query, which may include workstation id
           required: false
           type: string
+        - name: toTimezone
+          in: query
+          description: To specify Timezone. Default - UTC 
+          required: false
+          type: string  
       responses:
         '200': {$ref: '#/responses/workstationQualityReportDownload'}
       security:
@@ -8148,6 +8153,12 @@ paths:
           description: Search Query, which may include jobsheet id
           required: false
           type: string
+        - name: toTimezone
+          in: query
+          description: To specify Timezone. Default - UTC 
+          required: false
+          type: string  
+          
       responses:
         '200': {$ref: '#/responses/jobsheetQualityReportDownload'}
       security:
