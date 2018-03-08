@@ -4887,7 +4887,7 @@ paths:
           description: Tags to search against
           required: false
           type: string
-        - name: filter[workstations][workcell]
+        - name: filter[workstations][workcellId]
           in: query
           description: filter by workcell id
           required: false
