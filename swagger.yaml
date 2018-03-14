@@ -9584,6 +9584,14 @@ responses:
                         "hotJob": false,
                         "deliveryDate": "2017-12-23T23:59:59Z",
                         "status": "InProgress",
+                        "starter": {
+                            "id": "18",
+                            "firstName": "Dave",
+                            "lastName": "Smith",
+                            "email": "dave.smith@autodesk.com",
+                            "oxygenId": "DTJSKVQVXSJ4",
+                            "superAdmin": false
+                        },
                         "jobInstructionVersion": "1.6.0"
                       },
                       "relationships": {
