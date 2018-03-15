@@ -4907,6 +4907,11 @@ paths:
           description: Optional items to include:currentTaskExecution, documents
           required: false
           type: string
+        - name: include[taskexecutions]
+          in: query
+          description: Return count of Task Execution queue for the workstation`:` count
+          required: false
+          type: string
         - $ref: '#/parameters/pageSize'
         - $ref: '#/parameters/pageNumber'
       responses:
@@ -13710,6 +13715,7 @@ responses:
                           "oxygenId": "C6VREIK44AS6",
                           "superAdmin": false
                         },
+                        "workstationTaskExecutionQueueCount": 11,
                         "tags": [],
                         "status": "Idle"
                       },
