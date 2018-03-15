@@ -12128,60 +12128,140 @@ responses:
                           "start": "2017-06-15T07:41:00Z",
                           "end": "2017-06-16T09:25:44Z",
                           "status": "Staged",
+                          "operator": {
+                              "id": "438",
+                              "firstName": "Shripad",
+                              "lastName": "Gaikwad",
+                              "email": "shripad.gaikwad@autodesk.com",
+                              "oxygenId": "Z2ACMCS35RSP",
+                              "superAdmin": false
+                          },
                           "durationInMilliseconds": 92684000
                         },
                         {
                           "start": "2017-06-16T09:25:44Z",
                           "end": "2017-07-25T08:48:32Z",
                           "status": "InProgress",
+                          "operator": {
+                              "id": "438",
+                              "firstName": "Shripad",
+                              "lastName": "Gaikwad",
+                              "email": "shripad.gaikwad@autodesk.com",
+                              "oxygenId": "Z2ACMCS35RSP",
+                              "superAdmin": false
+                          },
                           "durationInMilliseconds": 3367368000
                         },
                         {
                           "start": "2017-07-25T08:48:32Z",
                           "end": "2017-07-26T06:26:45Z",
                           "status": "Paused",
+                          "operator": {
+                              "id": "438",
+                              "firstName": "Shripad",
+                              "lastName": "Gaikwad",
+                              "email": "shripad.gaikwad@autodesk.com",
+                              "oxygenId": "Z2ACMCS35RSP",
+                              "superAdmin": false
+                          },
                           "durationInMilliseconds": 77893000
                         },
                         {
                           "start": "2017-07-26T06:26:45Z",
                           "end": "2017-07-26T06:28:17Z",
                           "status": "InProgress",
+                          "operator": {
+                              "id": "438",
+                              "firstName": "Shripad",
+                              "lastName": "Gaikwad",
+                              "email": "shripad.gaikwad@autodesk.com",
+                              "oxygenId": "Z2ACMCS35RSP",
+                              "superAdmin": false
+                          },
                           "durationInMilliseconds": 92000
                         },
                         {
                           "start": "2017-07-26T06:28:17Z",
                           "end": "2017-07-26T06:28:30Z",
                           "status": "Paused",
+                          "operator": {
+                              "id": "438",
+                              "firstName": "Shripad",
+                              "lastName": "Gaikwad",
+                              "email": "shripad.gaikwad@autodesk.com",
+                              "oxygenId": "Z2ACMCS35RSP",
+                              "superAdmin": false
+                          },
                           "durationInMilliseconds": 13000
                         },
                         {
                           "start": "2017-07-26T06:28:30Z",
                           "end": "2017-07-26T06:37:11Z",
                           "status": "InProgress",
+                          "operator": {
+                              "id": "438",
+                              "firstName": "Shripad",
+                              "lastName": "Gaikwad",
+                              "email": "shripad.gaikwad@autodesk.com",
+                              "oxygenId": "Z2ACMCS35RSP",
+                              "superAdmin": false
+                          },
                           "durationInMilliseconds": 521000
                         },
                         {
                           "start": "2017-07-26T06:37:11Z",
                           "end": "2017-07-26T06:37:48Z",
                           "status": "Paused",
+                          "operator": {
+                              "id": "438",
+                              "firstName": "Shripad",
+                              "lastName": "Gaikwad",
+                              "email": "shripad.gaikwad@autodesk.com",
+                              "oxygenId": "Z2ACMCS35RSP",
+                              "superAdmin": false
+                          },
                           "durationInMilliseconds": 37000
                         },
                         {
                           "start": "2017-07-26T06:37:48Z",
                           "end": "2017-08-28T07:23:40Z",
                           "status": "InProgress",
+                          "operator": {
+                              "id": "438",
+                              "firstName": "Shripad",
+                              "lastName": "Gaikwad",
+                              "email": "shripad.gaikwad@autodesk.com",
+                              "oxygenId": "Z2ACMCS35RSP",
+                              "superAdmin": false
+                          },
                           "durationInMilliseconds": 2853952000
                         },
                         {
                           "start": "2017-08-28T07:23:40Z",
                           "end": "2017-08-28T07:23:53Z",
                           "status": "Completed",
+                          "operator": {
+                              "id": "438",
+                              "firstName": "Shripad",
+                              "lastName": "Gaikwad",
+                              "email": "shripad.gaikwad@autodesk.com",
+                              "oxygenId": "Z2ACMCS35RSP",
+                              "superAdmin": false
+                          },
                           "durationInMilliseconds": 13000
                         },
                         {
                           "start": "2017-08-28T07:23:53Z",
                           "end": "",
                           "status": "InProgress",
+                          "operator": {
+                              "id": "438",
+                              "firstName": "Shripad",
+                              "lastName": "Gaikwad",
+                              "email": "shripad.gaikwad@autodesk.com",
+                              "oxygenId": "Z2ACMCS35RSP",
+                              "superAdmin": false
+                          },
                           "durationInMilliseconds": 15787583443
                         }
                       ],
