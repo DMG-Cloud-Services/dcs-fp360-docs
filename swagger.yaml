@@ -5278,7 +5278,7 @@ paths:
           type: string
         - name: include[workstations]
           in: query
-          description: include workstations properties. available fields ```count`` EXAMPLE include[workstations]=count
+          description: include workstations properties. available fields ```count``` EXAMPLE include[workstations]=count
           required: false
           type: string
         - name: sort[workcells][targetFieldName]
