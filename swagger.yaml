@@ -5276,6 +5276,11 @@ paths:
           description: Tags to search against
           required: false
           type: string
+        - name: include[workstations]
+          in: query
+          description: include workstations properties. available fields"```count`` EXAMPLE include[workstations]=count
+          required: false
+          type: string
         - name: sort[workcells][targetFieldName]
           in: query
           description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, name, email, creatorId, lastModifierId, createdDate, lastModifiedDate, status``` Example:ASC
