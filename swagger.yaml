@@ -31,6 +31,7 @@ info:
     1. This API follows the `JSON API` specification 1.0. For more information, see [JSON API specification](http://jsonapi.org/format/)
     2. Entity names are always plural e.g. `Hubs`, `Projects`, `Folders`
     3. Element names are camelCase e.g. `rootFolder`
+    4. Page size limit for all API endpoints is 100. We throw `Invalid parameter` exception for `page[size]>100`
 
     ## API Headers
     
