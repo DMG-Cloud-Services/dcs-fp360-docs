@@ -5602,11 +5602,6 @@ paths:
         Get Workstation Summaries.
       operationId: getWorkstationsSummary
       parameters:
-        - name: version
-          in: query
-          description: Response version. Use `v2` for JSON API compliant response.
-          required: false
-          type: string
         - name: filter[workstationsummaries][searchTerm]
           in: query
           description: Search Query, which may include workstation id
@@ -5666,11 +5661,6 @@ paths:
           in: path
           description: id of a Workstation
           required: true
-          type: string
-        - name: version
-          in: query
-          description: Response version. Use `v2` for JSON API compliant response.
-          required: false
           type: string
       responses:
         '200': {$ref: '#/responses/workstationsummarybyid'}
@@ -7345,11 +7335,6 @@ paths:
         Search for any type of entity.
       operationId: getEntities
       parameters:
-        - name: version
-          in: query
-          description: Response version. Use `v2` for JSON API compliant response.
-          required: false
-          type: string
         - name: filter[entities][searchTerm]
           in: query
           description: Search Query, which may include entity id
