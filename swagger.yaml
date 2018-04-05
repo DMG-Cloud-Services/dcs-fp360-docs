@@ -6184,11 +6184,6 @@ paths:
           description: id of job instruction
           required: true
           type: string
-        - name: filter[jobinstructions][version]
-          in: query
-          description: Entity version  Example:1.2.0
-          required: false
-          type: string
       responses:
         '200': {$ref: '#/responses/jobInstruction'}
       security:
