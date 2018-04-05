@@ -7630,11 +7630,6 @@ paths:
           description: id for the document.
           required: true
           type: string
-        - name: filter[documents][version]
-          in: query
-          description: Entity version  Example:1.2.0
-          required: true
-          type: string  
       responses:
         '200': {$ref: '#/responses/document'}
       security:
