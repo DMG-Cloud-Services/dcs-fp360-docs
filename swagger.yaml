@@ -3836,7 +3836,6 @@ info:
     
     | Attribute                               | Description
     | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------
-    | **version**                             | Displays a list of entities in a specific format. Use **v2** to displays the entities in JSON API compliant format.
     | **filter[entities][searchTerm]**        | Displays the list of entities that matches with the specified search term. The search term can be entity name, entity ID, entity description, and entity tags. For example, ...entities?filter[entities][searchTerm]=fastener
     | **filter[entities][tags]**              | Displays the list of entities that matches with the tags specified for the entity. For example, ...entities?filter[entities][tags]=fastener
     | **filter[entities][type]**              | Displays the list of entities for the specified type. The entity type can be components, jobsheets, workstations, and so on. For example, ...entities?filter[entities][type]=components
