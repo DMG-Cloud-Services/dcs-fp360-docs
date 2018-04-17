@@ -9088,9 +9088,13 @@ definitions:
     description: 'json data'
     properties:
       data: { type: object, description: 'resource  data'}
-      included: { type: object, description: 'resource inclusions' }
+      included: { $ref: '#/definitions/json_api_response_data_included' }
       meta: { type: object, description: 'resource meta' }    
-	    
+
+  json_api_response_data_included: 
+    type: array
+    description: 'array of included relationships'
+    items: { type: object, description: 'resource inclusions' }
 
 ############################################################
 
