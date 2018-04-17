@@ -9096,7 +9096,7 @@ definitions:
     required: [ type, id, attributes ]
     description: 'main Data'
     properties:
-      type: { type: string, description: 'resouce type', enum: [ 'compoinents' ]}
+      type: { type: string, description: 'resouce type', enum: [ 'components' ]}
       id: { type: string, description: 'id of the component'  }
       attributes: { type: object, description: 'resource properties' }
 
