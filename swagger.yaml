@@ -13199,7 +13199,7 @@ responses:
   component:
     description: Successful response
     schema:
-      $ref: '#/definitions/json_api_input_new_component'
+      $ref: '#/definitions/json_api_response_data_get_component'
     headers:
         etag:
           description: |
