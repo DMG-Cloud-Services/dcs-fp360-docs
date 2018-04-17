@@ -9081,6 +9081,16 @@ definitions:
       jobInstruction: { $ref: '#/definitions/json_api_input_data_relationships_taskinstruction_jobinstruction' }
       recommendedWorkcell: { $ref: '#/definitions/json_api_input_data_relationships_taskinstruction_recommendedWorkcell' }
       recommendedWorkstation: { $ref: '#/definitions/json_api_input_data_relationships_taskinstruction_recommendedWorkstation' }
+      
+  json_api_response_data_get_component:
+    type: object
+    required: [ data, included, meta ]
+    description: 'json data'
+    properties:
+      data: { type: object, description: 'resource  data'}
+      included: { type: object, description: 'resource inclusions' }
+      meta: { type: object, description: 'resource meta' }    
+	    
 
 ############################################################
 
