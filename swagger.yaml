@@ -13189,10 +13189,7 @@ responses:
   component:
     description: Successful response
     schema:
-      title: schema versions
-      type: object
-      allOf:
-      - type: object
+      $ref: '#/definitions/json_api_input_new_component'
     headers:
         etag:
           description: |
