@@ -9087,9 +9087,18 @@ definitions:
     required: [ data, included, meta ]
     description: 'json data'
     properties:
-      data: { type: object, description: 'resource  data'}
+      data: { $ref: '#/definitions/json_api_response_data_get_component_data'}
       included: { $ref: '#/definitions/json_api_response_data_included' }
       meta: { type: object, description: 'resource meta' }    
+    
+  json_api_response_data_get_component_data:
+    type: object
+    required: [ type, id, attributes ]
+    description: 'main Data'
+    properties:
+      type: { type: string, description: 'resouce type', enum: [ 'compoinents' ]}
+      id: { type: string, description: 'id of the component'  }
+      attributes: { type: object, description: 'resource properties' }
 
   json_api_response_data_included: 
     type: array
