@@ -7054,6 +7054,13 @@ paths:
           description: Last Modified Date Range. Example`:` `2016-10-26`
           required: false
           type: string 
+        - name: sort[jobsheets][targetFieldName]
+          in: query
+          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, status, name, creatorId, lastModifierId, createdDate, lastModifiedDate``` Example:ASC
+          required: false
+          type: string
+        - $ref: '#/parameters/pageSize'
+        - $ref: '#/parameters/pageNumber'
       responses:
         '200': {$ref: '#/responses/taskExecutions'}
       security:
