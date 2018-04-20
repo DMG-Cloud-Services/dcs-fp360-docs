@@ -5283,7 +5283,7 @@ paths:
           type: string
         - name: sort[workcells][targetFieldName]
           in: query
-          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, name, email, creatorId, lastModifierId, createdDate, lastModifiedDate, status``` Example:ASC
+          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, name, email, creatorId, lastModifierId, createdDate, lastModifiedDate``` Example:ASC
           required: false
           type: string
         - $ref: '#/parameters/pageSize'
