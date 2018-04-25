@@ -6064,54 +6064,27 @@ paths:
           schema:
             $ref: '#/definitions/json_api_input_new_batch_task'
             example:
-                     {
-	"data": [{
-		"type": "subtaskinstructions",
-		"attributes": {
-			"name": "checklist",
-			"description": "Sub TI 1",
-			"tenantId": "job360-test"
-		},
-		"relationships": {
-			"taskInstruction": {
-				"data": {
-					"type": "taskinstructions",
-					"id": "897975"
-				}
-			}
-		}
-	}, {
-		"type": "subtaskinstructions",
-		"attributes": {
-			"name": "checklist",
-			"description": "Sub TI 2",
-			"tenantId": "job360-test"
-		},
-		"relationships": {
-			"taskInstruction": {
-				"data": {
-					"type": "taskinstructions",
-					"id": "897975"
-				}
-			}
-		}
-	}, {
-		"type": "subtaskinstructions",
-		"attributes": {
-			"name": "checklist",
-			"description": "Sub TI 3",
-			"tenantId": "job360-test"
-		},
-		"relationships": {
-			"taskInstruction": {
-				"data": {
-					"type": "taskinstructions",
-					"id": "897975"
-				}
-			}
-		}
-	}]
-}
+
+                      {
+                       "data":[
+                          {
+                             "type":"subtaskinstructions",
+                             "attributes":{
+                                "name":"checklist",
+                                "description":"Sub TI 1",
+                                "tenantId":"job360-test"
+                             },
+                             "relationships":{
+                                "taskInstruction":{
+                                   "data":{
+                                      "type":"taskinstructions",
+                                      "id":"897975"
+                                   }
+                                }
+                             }
+                          }
+                       ]
+                    }
       responses:
         '201': {$ref: '#/responses/subtaskinstructionsbulk'}
       security:
@@ -8232,6 +8205,47 @@ paths:
         '200': {$ref: '#/responses/jobsheetQualityReportDownload'}
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
+
+  /reports/downloads/taskexecutions:
+    x-description: |
+        Report download in CSV format containing completed task.
+
+        Date range parameters:
+        |Verb         | Description
+        | ------      | -------------------------------------------------------------------------------------------------------
+        | `lt`        |  'Less Than': Include dates less than (but not equal to) this date.
+        | `lte`        |  'Less Equal': Include dates less than or equal to this date.
+        | `gt`        |  'Greater Than': Include dates greater than (but not equal to) this date.
+        | `gte`        |  'Greater Equal': Include dates greater than or equal to this date.
+
+        Date Range Example:
+        To view report with task completed from 10-15-2016 to 10-26-2016, not inlcluding 10-15-16 but including 10-26-16, add the following:
+
+        .../reports/downloads/taskexecutions?filter[taskexecutions][lastModifiedDate][gt]=2016-10-15&filter[taskexecutions][lastModifiedDate][lte]=2016-10-26
+
+    get:
+      tags: [ "Reports" ]
+      produces:
+        - text/csv
+      description: |
+        Get Report: Task Completed Report Download
+      operationId: getTaskCompletedReportDownload
+      parameters:
+        - name: filter[taskexecutions][lastModifiedDate][lt/lte/gt/gte]
+          in: query
+          description: To specify date or date range endpoint.  Available date operators:```lt, lte, gt, gte``` Example:2016-10-16
+          required: false
+          type: string
+        - name: toTimezone
+          in: query
+          description: To specify Timezone. Default - UTC 
+          required: false
+          type: string  
+          
+      responses:
+        '200': {$ref: '#/responses/completedTaskReportDownload'}
+      security:
+        [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]        
 
   /invites:
     x-description: Member Invitation API
@@ -16143,6 +16157,29 @@ responses:
         2016-10-13 07:00:00,2016-10-14 06:59:59,1,4,5,80.0
         2016-10-14 07:00:00,2016-10-15 06:59:59,0,19,19,100.0
         
+  completedTaskReportDownload:
+    description: Successful response
+    headers:
+        etag:
+          description: |
+            `etag` for the resource which can be used for cache optimization
+            and must be used for mutating operations on this resource
+          type: string
+        authorization:
+          description: Bearer Token
+          type: integer
+    examples:
+      text/csv: |
+              Job sheet name,Job sheet ID,Job sheet status,Job sheet started by (Name),Job sheet started by (Email),Job sheet start date and time,Job sheet completed by (Name),Job sheet completed by (Email),Job Sheet completion date and time,Job sheet canceled by (Name),Job sheet canceled by (Email),Job sheet cancelation date and time,Estimated job sheet duration (sec),Actual job sheet duration (sec),Task name,Task order,Task started by (Name),Task started by (Email),Task start date and time,Task completed by (Name),Task completed by (Email),Task completion date and time,Workstation,Estimated task duration (sec),Actual task duration (sec),Good Quantity,Scrap Quantity
+              Making a footware,123,NeedsApproval,"     -     ","     -     ","     -     ",Rahul Chandwani,rahul.itbhu05@gmail.com,"     -     ","     -     ","     -     ","     -     ",0,"     -     ",Top part,1,Rahul Chandwani,rahul.itbhu05@gmail.com,2018-02-12T12:15:23Z,Rahul Chandwani,rahul.itbhu05@gmail.com,2018-02-12T12:15:38Z,Footware machine,0,15,0,0
+              Amit JI Plz DND changerd 1,XXX222,InProgress,"     -     ","     -     ","     -     ",Alpha Manager,job360-alpha-manager@yopmail.com,"     -     ","     -     ","     -     ","     -     ",121560,"     -     ",Task 1 DND changed 1,1,Shripad Gaikwad,shripad.gaikwad@autodesk.com,2018-01-17T09:46:49Z,Shripad Gaikwad,shripad.gaikwad@autodesk.com,2018-01-17T09:46:58Z,regression workstations,120900,9,10,2
+              Print Greeting card,SOMI-JS,Waiting,"     -     ","     -     ","     -     ",Sominath Pathare,sominath.pathare@autodesk.com,"     -     ","     -     ","     -     ","     -     ",24903000,"     -     ",Print second color,4,TestTenant Abhijeet,abhijeet.bhattacharjee@autodesk.com,2018-02-14T11:45:56Z,TestTenant Abhijeet,abhijeet.bhattacharjee@autodesk.com,2018-02-14T11:46:19Z,ABC_Workstation1,600600,23,111,222
+              tejitestJI2410,monday1,Waiting,"     -     ","     -     ","     -     ",Teji Masute,tejinder.masute@autodesk.com,"     -     ","     -     ","     -     ","     -     ",865260,"     -     ",tejitestTI2410,1,Teji Masute,tejinder.masute@autodesk.com,2017-11-27T17:46:08Z,Sean Ormbrek,sean.ormbrek@autodesk.com,2018-01-26T02:36:50Z,workstations Regression test 0002,4440,5129442,0,0
+              blochec - updated,"#5",Completed,"     -     ","     -     ","     -     ",Mrinal Purohit,mrinal.purohit@autodesk.com,2018-03-29T06:33:38Z,"     -     ","     -     ","     -     ",0,"     -     ",Trying to duplicate a job instruction title,1,TestTenant Abhijeet,abhijeet.bhattacharjee@autodesk.com,2018-02-14T12:09:54Z,TestTenant Abhijeet,abhijeet.bhattacharjee@autodesk.com,2018-02-14T12:10:13Z,regression workstations,0,19,1,999
+              blochec,10,Completed,"     -     ","     -     ","     -     ",Shripad Gaikwad,shripad.gaikwad@autodesk.com,2018-02-19T09:11:28Z,"     -     ","     -     ","     -     ",0,"     -     ",Trying to duplicate a job instruction title,1,TestTenant Abhijeet,abhijeet.bhattacharjee@autodesk.com,2018-02-14T11:25:16Z,TestTenant Abhijeet,abhijeet.bhattacharjee@autodesk.com,2018-02-14T11:26:03Z,regression workstations,0,47,123,456
+              Ghevun Takk Job Instruction. takaa tukkk,343,Waiting,"     -     ","     -     ","     -     ",Shripad Gaikwad,shripad.gaikwad@autodesk.com,"     -     ","     -     ","     -     ","     -     ",1680,"     -     ",2,1,Amit Parrikar,amit.prabhu.parrikar@autodesk.com,2018-02-06T05:15:22Z,Amit Parrikar,amit.prabhu.parrikar@autodesk.com,2018-02-06T05:17:09Z,regression workstations,0,107,0,0
+              JI AMIT DND 13-02,XXX0XX,Completed,"     -     ","     -     ","     -     ",Sominath Pathare,sominath.pathare@autodesk.com,2018-02-21T05:28:31Z,"     -     ","     -     ","     -     ",37800,"     -     ",T1,1,Viresh Shah,viresh.shah@autodesk.com,2018-02-14T08:59:17Z,Amit Parrikar,amit.prabhu.parrikar@autodesk.com,2018-02-14T15:20:38Z,regression workstations,6600,22881,10,90
+              JI AMIT DND 13-02,XXX0XX,Completed,"     -     ","     -     ","     -     ",Sominath Pathare,sominath.pathare@autodesk.com,2018-02-21T05:28:31Z,"     -     ","     -     ","     -     ",37800,"     -     ",T2,2,Amit Parrikar,amit.prabhu.parrikar@autodesk.com,2018-02-13T12:04:10Z,Amit Parrikar,amit.prabhu.parrikar@autodesk.com,2018-02-13T15:56:03Z,ABC6,31200,13913,5,95
 
   workstationsummaries:
     description: Successful response
