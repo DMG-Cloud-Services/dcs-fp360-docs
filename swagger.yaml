@@ -1,28 +1,28 @@
 swagger: "2.0"
 info:
   version: 1.0.0
-  title: Fusion 360 Production
+  title: Fusion Production
   description: |
     
     [@overview]: (title)
     
-    Fusion 360 Production is a job sheet management service for the factory operators to efficiently perform the assigned jobs. The job sheets can be for any part that goes through the manufacturing process on a factory shop floor.
+    Fusion Production is a job sheet management service for the factory operators to efficiently perform the assigned jobs. The job sheets can be for any part that goes through the manufacturing process on a factory shop floor.
 
-    With Fusion 360 Production, customers can build a fully paperless factory production monitoring system in a cloud. Customers can empower their operators on the shop floor to manage their jobs without any paper work. The supervisors can get the detailed reports about the daily tasks that various operators perform in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
+    With Fusion Production, customers can build a fully paperless factory production monitoring system in a cloud. Customers can empower their operators on the shop floor to manage their jobs without any paper work. The supervisors can get the detailed reports about the daily tasks that various operators perform in the factory and also know the current status of the components stock, work stations condition, and overall performance of the factory.
     
-    Fusion 360 Production provides APIs to develop a fully functional monitoring system for factory production, an App Framework to create applications that integrates with Fusion 360 Production to provide additional functionality, and reports to view the detailed analytics of the factory production.
+    Fusion Production provides APIs to develop a fully functional monitoring system for factory production, an App Framework to create applications that integrates with Fusion Production to provide additional functionality, and reports to view the detailed analytics of the factory production.
 
     ## Getting Started
     
     Go through the following sections to understand the process of getting started with and know the concepts and functionality:
     
     * [API Basics](/en/docs/fp360/v1/overview/basics)
-    * [Fusion 360 Production App Framework](/en/docs/fp360/v1/overview/app-framework)
+    * [Fusion Production App Framework](/en/docs/fp360/v1/overview/app-framework)
     
     [@overview/basics]: <>
     # API Basics
     
-    Fusion 360 Production provides a set of APIs that allows you to automate the process of creating and managing the job sheets, the real-time tracking of the jobs by various operators on the factory shop floor. 
+    Fusion Production provides a set of APIs that allows you to automate the process of creating and managing the job sheets, the real-time tracking of the jobs by various operators on the factory shop floor. 
     
     The APIs provides various endpoints to create, edit, and delete the entities of various components involved in factory production.
 
@@ -35,7 +35,7 @@ info:
 
     ## API Headers
     
-    For all Fusion 360 Production API requests, you must set the following headers:
+    For all Fusion Production API requests, you must set the following headers:
     
     |Header               | Value
     | ------------------  | -------------------------------------------------------
@@ -55,7 +55,7 @@ info:
 
     ## Status Codes
     
-    Fusion 360 Production API endpoints responds with any one of the following status codes.
+    Fusion Production API endpoints responds with any one of the following status codes.
     
     |Code         | Description
     | ------      |---------
@@ -86,15 +86,15 @@ info:
              ]
           }
     
-    ## Fusion 360 Production Access URLs 
+    ## Fusion Production Access URLs 
     
     * Beta URL: https://developer-stg.api.autodesk.com
     * Production URL: https://developer.api.autodesk.com
     
     [@overview/modules-of-fusion-360-production]: <>
-    # Modules of Fusion 360 Production
+    # Modules of Fusion Production
     
-    Fusion 360 Production comprises of the following modules:
+    Fusion Production comprises of the following modules:
     
     * [APIs](/en/docs/fp360/v1/overview/apis)
     * [App Framework](/en/docs/fp360/v1/overview/app-framework)
@@ -103,7 +103,7 @@ info:
     [@overview/apis]: <>
     # APIs
     
-    Fusion 360 Production provides a set of APIs to create and manage all entities related to factory production.
+    Fusion Production provides a set of APIs to create and manage all entities related to factory production.
     
     ##<a name="entities">Factory Production Entities
     
@@ -189,7 +189,7 @@ info:
     
     ## Roles and Permissions
     
-    Fusion 360 Production supports the following roles and permissions:
+    Fusion Production supports the following roles and permissions:
     
     * **Administrator**: A user with Administrator role can do everything, which includes adding, editing, removing people, and also assigning different roles to users.
     * **Manager**: A user with Manager role can do everything, except adding, updating, removing people, and assigning different roles to users. 
@@ -226,17 +226,17 @@ info:
     ![Workstation Status Workflow](https://raw.githubusercontent.com/DMG-Cloud-Services/dcs_doc_images/master/fp360/workstation_status_workflow.png "Workstation Status Workflow")  
     
     [@overview/app-framework]: <>
-    # Fusion 360 Production App Framework
+    # Fusion Production App Framework
     
-    Fusion 360 Production provides an App Framework to build custom applications that can add more functionality to Fusion 360 Production. 
+    Fusion Production provides an App Framework to build custom applications that can add more functionality to Fusion Production. 
     
-    Using the App Framework, customers and third-party companies can build different custom applications as per their requirements and integrate these applications with Fusion 360 Production.
+    Using the App Framework, customers and third-party companies can build different custom applications as per their requirements and integrate these applications with Fusion Production.
     
     In addition to the App framework, Autodesk also provides a marketplace for customers to publish their custom applications. So, after developing the applications, customers can contact the Autodesk support team and ask them to publish their applications to the marketplace. 
     
-    From the marketplace, end users can directly use the published applications that meets their requirements and integrate them with their Fusion 360 Production application.
+    From the marketplace, end users can directly use the published applications that meets their requirements and integrate them with their Fusion Production application.
     
-    **Note**: The applications developed using Fusion 360 Production App Framework are not the Mobile Apps.
+    **Note**: The applications developed using Fusion Production App Framework are not the Mobile Apps.
     
     With the App framework, customers can develop applications to add the functionalities, such as: 
     
@@ -255,7 +255,7 @@ info:
     
     ##<a name="app_package_structure"></a>Custom App Package Structure
     
-    The App framework in Fusion 360 Production requires a package of custom application files and folders created in a specific format and structure. 
+    The App framework in Fusion Production requires a package of custom application files and folders created in a specific format and structure. 
     
     You must build your application as per the following structure:
     
@@ -363,7 +363,7 @@ info:
     
     Use the **entitySchemas** attribute to specify the settings. The **entitySchemas** attribute contains a list of JSON objects.
     
-    The fields that you specify in the **entitySchemas** attribute are rendered on the entity form on the Fusion 360 Production website. Also, the data that users enter will be available to the App when the App is rendered at the specified location.
+    The fields that you specify in the **entitySchemas** attribute are rendered on the entity form on the Fusion Production website. Also, the data that users enter will be available to the App when the App is rendered at the specified location.
     
     **Example**:
     
@@ -385,13 +385,13 @@ info:
     ```
     In above example, it is mandatory for a user to specify the **deviceUuid** field for the **workstation**.
     
-    When the App is rendered at a specified location, the **deviceUuid** value is passed from Fusion 360 Production to the App.
+    When the App is rendered at a specified location, the **deviceUuid** value is passed from Fusion Production to the App.
     
     ### Location¶
 
-    Use the **locations** attribute to specify the location where you want the App to appear on the Fusion 360 Production website. You can specify multiple locations. 
+    Use the **locations** attribute to specify the location where you want the App to appear on the Fusion Production website. You can specify multiple locations. 
     
-    Some App framework APIs are available only for the apps appearing at certain locations on the Fusion 360 Production website. For example, the Apps appearing on the workstation detail page requires the workstation properties. 
+    Some App framework APIs are available only for the apps appearing at certain locations on the Fusion Production website. For example, the Apps appearing on the workstation detail page requires the workstation properties. 
     
     **Example**:
     
@@ -402,7 +402,7 @@ info:
       }
     ]
     ```
-    Following are the available locations for the App to appear on the Fusion 360 Production website:
+    Following are the available locations for the App to appear on the Fusion Production website:
     
     * workstation_detail: The workstation details page.
     * workstation_list: The workstations list page.
@@ -441,7 +441,7 @@ info:
     
     ##<a name="app_deployment_workflow"></a>App Deployment Workflow
     
-    This section provides the steps that you need to follow to successfully deploy the application to the tenant of Fusion 360 Production:
+    This section provides the steps that you need to follow to successfully deploy the application to the tenant of Fusion Production:
     
     ### Step 1
     
@@ -460,7 +460,7 @@ info:
     
     ### Step 3
     
-    Clients calls the Fusion 360 Production app-management service with objectKey received from the upload service.
+    Clients calls the Fusion Production app-management service with objectKey received from the upload service.
     
     ### Step 4
     
@@ -486,11 +486,11 @@ info:
     [@overview/reports]: <>
     #Reports
     
-    Fusion 360 Production provides various reports to view the detailed insights of the factory entities and machine data.
+    Fusion Production provides various reports to view the detailed insights of the factory entities and machine data.
     
     ## Supported Reports
     
-    Fusion 360 Production supports the Jasper reports. You can get the following reports:
+    Fusion Production supports the Jasper reports. You can get the following reports:
     
     | Reports                         | Description
     |-------------------------------- | ---------------------------------------------------------------
@@ -503,15 +503,15 @@ info:
     [@tutorials]: <>
     #Step-by-Step Tutorials
     
-    The Fusion 360 Production service provides a set of APIs, an App Framework, and reports for developers to create, access, and manage the factory production data. 
+    The Fusion Production service provides a set of APIs, an App Framework, and reports for developers to create, access, and manage the factory production data. 
     
-    In this section, we provide some step-by-step tutorials demonstrating how the Fusion 360 Production service APIs work, how to use the App Framework, and how to access the reports. 
+    In this section, we provide some step-by-step tutorials demonstrating how the Fusion Production service APIs work, how to use the App Framework, and how to access the reports. 
     
     ## [Before You Begin](/en/docs/fp360/v1/tutorials/before-you-begin)
     Before you start performing the steps given in the tutorials, read the information given in this topic and ensure that you have required access and scope to run the endpoint requests.
     
     ## API Tutorials
-    This section provides the tutorials that explains how you can use the APIs that Fusion 360 Production provides.
+    This section provides the tutorials that explains how you can use the APIs that Fusion Production provides.
     
     ### [Setup Factory](/en/docs/fp360/v1/tutorials/setup-a-factory)
     This tutorial explains how to setup the factory.
@@ -532,33 +532,33 @@ info:
     This tutorial explains how an operator can start the task and supervisor can track the task execution.
       
     ### [Import Entities in a Batch](/en/docs/fp360/v1/tutorials/import-entities-in-a-batch)
-    This tutorial explains how you can import various Fusion 360 Production entities in a batch.
+    This tutorial explains how you can import various Fusion Production entities in a batch.
     
     ### [Search Entities](/en/docs/fp360/v1/tutorials/search-entities)
-    This tutorial explains how to search for various entities of Fusion 360 Production.
+    This tutorial explains how to search for various entities of Fusion Production.
       
     ## App Framework Tutorials
-    This section provides the tutorials that explains how to use the Fusion 360 Production App Framework.
+    This section provides the tutorials that explains how to use the Fusion Production App Framework.
     
     ### [Create an App](/en/docs/fp360/v1/tutorials/create-an-app)
-    This tutorial explains how to create an App using Fusion 360 Production App framework.
+    This tutorial explains how to create an App using Fusion Production App framework.
     
     ### [Publish an App](/en/docs/fp360/v1/tutorials/publish-an-app)
     This tutorial explains how to publish an App.
     
     ### [Install an App](/en/docs/fp360/v1/tutorials/install-an-app)
-    This tutorial explains how to install an App for a tenant of Fusion 360 Production.
+    This tutorial explains how to install an App for a tenant of Fusion Production.
     
     ### [Search an App](/en/docs/fp360/v1/tutorials/search-an-app)
     This tutorial explains how to search a particular App.
 
     ## Reports Tutorials
-    This section provides the tutorials that explains how to use the Fusion 360 Production reports.
+    This section provides the tutorials that explains how to use the Fusion Production reports.
 
     [@tutorials/before-you-begin]: <>
     # Before you begin
     
-    Before you start using Fusion 360 Production APIs, ensure that you have [registered an app](https://developer.autodesk.com/en/docs/oauth/v2/tutorials/create-an-app) and successfully [acquired an OAuth token](https://developer.autodesk.com/en/docs/oauth/v2/tutorials).
+    Before you start using Fusion Production APIs, ensure that you have [registered an app](https://developer.autodesk.com/en/docs/oauth/v2/tutorials/create-an-app) and successfully [acquired an OAuth token](https://developer.autodesk.com/en/docs/oauth/v2/tutorials).
         
     See the Authentication and Scopes section in the [API Basics](/en/docs/fp360/v1/overview/basics) for the appropriate token based on the data you are accessing.
     
@@ -571,7 +571,7 @@ info:
     [@tutorials/setup-a-factory]: <>
     # Setup a Factory
     
-    This tutorial explains how you can setup the entities in the factory so that you can start using Fusion 360 production for your daily manufacturing process. For more information about entities, see.[Entities](/en/docs/fp360/v1/overview/apis#entities)
+    This tutorial explains how you can setup the entities in the factory so that you can start using Fusion production for your daily manufacturing process. For more information about entities, see.[Entities](/en/docs/fp360/v1/overview/apis#entities)
     
     Perform the steps in the given sequence to successfully setup the entities in your factory.
     
@@ -579,10 +579,10 @@ info:
     
     **Important**: Before inviting members, ensure that the tenant for the factory exists. For more information, contact administrator.
 
-    In this step, you invite the users who will be working in the factory and wants to access Fusion 360 Production to manage their work. The invitation email is sent to the email address specified in the request.
+    In this step, you invite the users who will be working in the factory and wants to access Fusion Production to manage their work. The invitation email is sent to the email address specified in the request.
     For more information, see [Entities](/en/docs/fp360/v1/overview/apis#entities).
     
-    The Fusion 360 Production API provides the `POST invites` endpoint that allows you to send an invite to the required members. In the `POST` request, you can include multiple members.
+    The Fusion Production API provides the `POST invites` endpoint that allows you to send an invite to the required members. In the `POST` request, you can include multiple members.
     
     **Note**: In the API request, you must specify the **tenant ID** and **group ID**. The group ID indicates the role that you want to assign to the member.
 
@@ -625,7 +625,7 @@ info:
     
     In this step, you can create a component entity. For more information about component, see [Entities](/en/docs/fp360/v1/overview/apis#entities).
     
-    The Fusion 360 Production API provides the `POST components` endpoint that allows you to create a component. 
+    The Fusion Production API provides the `POST components` endpoint that allows you to create a component. 
     
     In the `POST` request, you can specify the component name, description, tags, and also the links that you want to add in the description. Additionally, you can attach a thumbnail and documents to the component. For more information about attaching documents, see [Attach Thumbnail and Documents to an Entity](/en/docs/fusion360production/v1/tutorials/attach-thumbnail-and-documents-to-an-entity) 
     
@@ -735,7 +735,7 @@ info:
     
     In this step, you can create a work cell. Work cell is a group of work stations. So, you can use work cell to categorize your work stations. For more information about work cell, see [Entities](/en/docs/fp360/v1/overview/apis#entities).
     
-    The Fusion 360 Production API provides the `POST workcells` endpoint that allows you to create a work cell. 
+    The Fusion Production API provides the `POST workcells` endpoint that allows you to create a work cell. 
     
     In the `POST` request, you can specify the work cell name, description, and tags. 
     
@@ -836,7 +836,7 @@ info:
     
     In this step, you create a work stations. Work station an entity that indicates any machine where the operator performs the tasks. For more information about work station, see [Entities](/en/docs/fp360/v1/overview/apis#entities). 
     
-    The Fusion 360 Production API provides the `POST workstations` endpoint that allows you to create a work station. 
+    The Fusion Production API provides the `POST workstations` endpoint that allows you to create a work station. 
     
     In the `POST` request, you can specify the work cell name, description, and tags. Additionally, you can create the relationship of the work station with a work cell. You can specify the work cell ID in which you want to include the work station.
     
@@ -1027,7 +1027,7 @@ info:
     
     In this step, you will get the URL of the server to which you will upload the files.
     
-    The Fusion 360 Production API provides the `GET uploadserver` endpoint to get the URL.
+    The Fusion Production API provides the `GET uploadserver` endpoint to get the URL.
     
     ### Example
     
@@ -1059,7 +1059,7 @@ info:
     
     In this step, you actually upload the file to the URL that you received in the Step 1.
     
-    The Fusion 360 Production API provides the `Put uploadUrl` endpoint to upload the file. In the PUT request, along with the upload URL, you need to specify the parameter named `objectKey' and the value as the file name. This file name can be different from the actual file name. In the request, you also need to specify the actual file that you want to upload.
+    The Fusion Production API provides the `Put uploadUrl` endpoint to upload the file. In the PUT request, along with the upload URL, you need to specify the parameter named `objectKey' and the value as the file name. This file name can be different from the actual file name. In the request, you also need to specify the actual file that you want to upload.
     
     Note: You must perform this step for each file that you want to attach with the entity.
     
@@ -1095,7 +1095,7 @@ info:
     
     In this step, you actually attach the uploaded files with the entities.
     
-    The Fusion 360 Production API provides the 'POST / PATCH files' endpoint that allows you to attach the files with the entity. If the entity already contains any files, the API deletes all the existing files and then add the new files. However, if you want to retain the existing files and add new files to it, then you must use the PATCH request instead of POST.
+    The Fusion Production API provides the 'POST / PATCH files' endpoint that allows you to attach the files with the entity. If the entity already contains any files, the API deletes all the existing files and then add the new files. However, if you want to retain the existing files and add new files to it, then you must use the PATCH request instead of POST.
     
     In the POST or PATCH request, you need to specify the Id of the entity with which you want to attach the file.
     
@@ -1292,7 +1292,7 @@ info:
     
     In this step, you create a job instruction for a job sheet. The job instruction contains the name, description, tags, the quantity of the parts required, image, and reference documents. Along with this information, the job instructions can contain one or more tasks that the operator needs to perform to complete a particular job instruction.
     
-    The Fusion 360 Production API provides the `POST jobinstructions` endpoint to create a job instruction. 
+    The Fusion Production API provides the `POST jobinstructions` endpoint to create a job instruction. 
     
     ### Example
     
@@ -1496,7 +1496,7 @@ info:
     
     The task instruction contains the name, description, tags, setup time, the quantity of the components required. Along with this information, the task instruction can also contain the references to the job instruction that requires the operator to perform this task and the recommended work station where the operator executes that task.
     
-    The Fusion 360 Production API provides the `POST taskinstructions` endpoint to create a task instruction. 
+    The Fusion Production API provides the `POST taskinstructions` endpoint to create a task instruction. 
     
     ### Example
     
@@ -1816,9 +1816,9 @@ info:
     
     In this step, you modify the job instruction for a job sheet. While modifying the job instruction, you either rearrange the existing task instructions, add the new task instructions, or delete any unwanted task instructions. 
     
-    When you modify the job instruction, Fusion 360 Production creates a new viersion of the job instruction. The job sheets that are containing the corresponding job instruction still refers the ealier version. You need to dispatch a new job sheet for the changed job instruction. 
+    When you modify the job instruction, Fusion Production creates a new viersion of the job instruction. The job sheets that are containing the corresponding job instruction still refers the ealier version. You need to dispatch a new job sheet for the changed job instruction. 
     
-    The Fusion 360 Production API provides the `PATCH taskinstructions` endpoint to modify the job instruction.
+    The Fusion Production API provides the `PATCH taskinstructions` endpoint to modify the job instruction.
     
     ### Example
     
@@ -2425,7 +2425,7 @@ info:
     | **Canceled**      | The job sheet is cancelled because there is no any business need to continue performing the specified tasks. Cancelled job sheets leave the partially completed tasks orphaned.
     | **Waiting**       | 
 
-    The Fusion 360 Production API provides the `POST jobsheets` endpoint to create a job sheet. In the request, you need to specify the job sheet details along with the job instruction that you want to include in the job sheet.
+    The Fusion Production API provides the `POST jobsheets` endpoint to create a job sheet. In the request, you need to specify the job sheet details along with the job instruction that you want to include in the job sheet.
     
     ### Example
     
@@ -2980,7 +2980,7 @@ info:
     
     You can update the work queue either by rearranging the task executions in the same workstation or work cell, or by moving the task execution from one work cell or workstation queue to another workstation or work cell. In this case, the task execution is reassigned to that new work cell or workstation.
     
-    The Fusion 360 Production API provides the `PATCH workqueues` endpoint to update the work queue.
+    The Fusion Production API provides the `PATCH workqueues` endpoint to update the work queue.
     
     ### Example
     
@@ -3239,7 +3239,7 @@ info:
     
     This tutorial explains how an operator can start and execute the task on a work status. During the task execution, the task can undergo different stages. An operator can assign a valid status to the task throughout the task execution.
     
-    The Fusion 360 Production API provides the `PATCH taskexecutions` endpoint to manage the status for the tasks execution. In the request, you need to specify the ID of the task that you want to start and execute and the status attribute with appropriate status value. 
+    The Fusion Production API provides the `PATCH taskexecutions` endpoint to manage the status for the tasks execution. In the request, you need to specify the ID of the task that you want to start and execute and the status attribute with appropriate status value. 
     
     Following are the status for a task:
     
@@ -3747,9 +3747,9 @@ info:
     [@tutorials/import-entities-in-a-batch]: <>
     # Import Entities in a Batch
     
-    This tutorial explains how you can import the details of multiples entities in a batch. Fusion 360 Production allows batch import for entities, like components, workstations, and job instructions.
+    This tutorial explains how you can import the details of multiples entities in a batch. Fusion Production allows batch import for entities, like components, workstations, and job instructions.
     
-    Fusion 360 Production supports batch import through a `CSV` file. Ensure that the CSV file contains the following columns with appropriate values.
+    Fusion Production supports batch import through a `CSV` file. Ensure that the CSV file contains the following columns with appropriate values.
     
     | Column        | Description
     | ------------  | ------------------------------------------------------------------------
@@ -3761,7 +3761,7 @@ info:
     
     ## Import Components
   
-    The Fusion 360 Production API provides the `POST batchimport/components` endpoint to batch import the components. In the API request, you need to specify the CSV file that contains the components details that you want to import.
+    The Fusion Production API provides the `POST batchimport/components` endpoint to batch import the components. In the API request, you need to specify the CSV file that contains the components details that you want to import.
    
     ### Example
     
@@ -3779,7 +3779,7 @@ info:
     
     ## Import Workstations
 
-    The Fusion 360 Production API provides the `POST batchimport/workstations` endpoint to batch import the workstations. In the API request, you need to specify the CSV file that contains the work stations details that you want to import.
+    The Fusion Production API provides the `POST batchimport/workstations` endpoint to batch import the workstations. In the API request, you need to specify the CSV file that contains the work stations details that you want to import.
     
     ### Example
     
@@ -3797,7 +3797,7 @@ info:
     
     ## Import Job instructions
     
-    The Fusion 360 Production API provides the `POST batchimport/jobinstructions` endpoint to batch import the job instructions. In the API request, you need to specify the CSV file that contains the job instructions details that you want to import.
+    The Fusion Production API provides the `POST batchimport/jobinstructions` endpoint to batch import the job instructions. In the API request, you need to specify the CSV file that contains the job instructions details that you want to import.
     
     ### Example
     
@@ -3828,9 +3828,9 @@ info:
     [@tutorials/search-entities]: <>
     # Search Entities
     
-    This tutorial explains how you can search for any type of entities in Fusion 360 Production. In the search request, you can use different filters to easily get the specific entity that you are looking for.
+    This tutorial explains how you can search for any type of entities in Fusion Production. In the search request, you can use different filters to easily get the specific entity that you are looking for.
     
-    The Fusion 360 Production API provides the `GET entities` endpoint to search for an entity. In the GET request, you need to specify the filter conditions based on which you want to search the entities. You can specify multiple filter conditions together.
+    The Fusion Production API provides the `GET entities` endpoint to search for an entity. In the GET request, you need to specify the filter conditions based on which you want to search the entities. You can specify multiple filter conditions together.
     
     ### Filters
     
@@ -3943,7 +3943,7 @@ info:
     
     In this tutorial, we explain how you can create an APP.
     
-    The Fusion 360 Production API provides the `POST applications` endpoint to create a new App. In the API request, you need to specify the public and private app keys, configuration details, schema details, and domain whitelist.
+    The Fusion Production API provides the `POST applications` endpoint to create a new App. In the API request, you need to specify the public and private app keys, configuration details, schema details, and domain whitelist.
     
     Only administrator can access this API and create a new application. The application is created with default status as `Unpublished`.
     
@@ -4109,7 +4109,7 @@ info:
     
     This tutorial explains how to publish the App. Publishing the App requires that you change the **active** attribute value to **true**". After publishing the App, you can install it to the tenant of Fusion 360.
     
-    Fusion 360 Production provides the `PATCH applications/{applicationId}` endpoint to update the Application including the status for publishing the App. In the API request, you need to specify the App Id that you want to publish.
+    Fusion Production provides the `PATCH applications/{applicationId}` endpoint to update the Application including the status for publishing the App. In the API request, you need to specify the App Id that you want to publish.
     
     ### Example
     
@@ -4218,9 +4218,9 @@ info:
     [@tutorials/install-an-app]: <>
     # Install an App
     
-    This tutorial explains how you can install your App to the Fusion 360 Production tenant.
+    This tutorial explains how you can install your App to the Fusion Production tenant.
     
-    Fusion 360 Production provides the `POST /tenants/{tenantId}/applications` endpoint to install the App for the given tenant. In the API request, you need to specify the tenant Id, application Id, and the application version that you want to install.
+    Fusion Production provides the `POST /tenants/{tenantId}/applications` endpoint to install the App for the given tenant. In the API request, you need to specify the tenant Id, application Id, and the application version that you want to install.
     
     **Note**: If you do not specify the application version, the endpoint installs the current version of the application.
     
@@ -4297,7 +4297,7 @@ info:
     
     This tutorial explains how to search the App. You can either get the list of all applications or you can specify the Id of the application that you want to search.
     
-    Fusion 360 Production provides the `GET applications` and `GET application/id` endpoints to search for the required app. In the request, you can also specify the version of the application that you want to search.
+    Fusion Production provides the `GET applications` and `GET application/id` endpoints to search for the required app. In the request, you can also specify the version of the application that you want to search.
     
     ### Example
     
@@ -17007,12 +17007,12 @@ responses:
     examples:
       application/vnd.api+json:
                       {
-	                      "data":[
-	                        {
-	                          "type": "subtaskinstructions",
-	                          "id": "897976",
-	                          "attributes": {
-	                            "id": "897976",
+                          "data":[
+                          {
+                            "type": "subtaskinstructions",
+                            "id": "897976",
+                            "attributes": {
+                            "id": "897976",
 			                        "tenantId": "job360-test",
 			                        "tags": [],
 			                        "creator": {
