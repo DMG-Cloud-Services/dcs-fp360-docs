@@ -8236,6 +8236,11 @@ paths:
           description: To specify date or date range endpoint.  Available date operators:```lt, lte, gt, gte``` Example:2016-10-16
           required: false
           type: string
+        - name: filter[taskexecutions][status]
+          in: query
+          description: Status(es) to filter by. Available statuses:```Completed, InProgress, NotStarted, Paused, Staged```
+          required: false
+          type: string
         - name: toTimezone
           in: query
           description: To specify Timezone. Default - UTC 
