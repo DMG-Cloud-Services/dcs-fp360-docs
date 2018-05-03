@@ -8150,12 +8150,12 @@ paths:
         - name: filter[taskexecutions][lastModifiedDate][lt/lte/gt/gte]
           in: query
           description: To specify date or date range endpoint.  Available date operators:```lt, lte, gt, gte``` Example:2016-10-16
-          required: false
+          required: true
           type: string
         - name: filter[taskexecutions][status]
           in: query
           description: Status(es) to filter by. Available statuses:```Completed, InProgress, NotStarted, Paused, Staged```
-          required: false
+          required: true
           type: string
         - name: toTimezone
           in: query
