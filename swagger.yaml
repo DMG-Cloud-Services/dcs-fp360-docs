@@ -9067,9 +9067,10 @@ definitions:
 
   json_api_input_data_attributes_tenant:
     type: object
-    required: [ name]
+    required: [name]
     properties:
       name: { type: string, description: 'name of tenant' }
+      displayName: { type: string, description: 'name of tenant, for display purposes only' }
       description: { type: string, description: 'description of tenant' }
 
   json_api_input_data_attributes_patch_tenant:
