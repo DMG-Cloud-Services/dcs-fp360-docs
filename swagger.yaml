@@ -8412,7 +8412,8 @@ paths:
                   "data": {
                       "type": "tenants",
                       "attributes": {
-                          "name": "New Tenant",
+                          "name": "test-tenant",
+                          "displayName": "New Test Tenant",
                           "description": "test",
                           "contractId": "7708de89-9ebb-471a-a24a-a0020977f79d",
                           "seatCount": 10,
@@ -8469,7 +8470,8 @@ paths:
                       "type": "tenants",
                       "id": "tenantId12",
                       "attributes": {
-                          "name": "Tenant 2",
+                          "name": "test-tenant-2",
+                          "displayName": "Tenant 2",
                           "description": "Updated description",
                           "contractId": "7708de89-9ebb-471a-a24a-a0020977f79d",
                           "seatCount": 10,
