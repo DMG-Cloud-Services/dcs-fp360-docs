@@ -4899,7 +4899,7 @@ paths:
           type: string  
         - name: sort[workstations][targetFieldName]
           in: query
-          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, name, email, creatorId, lastModifierId, createdDate, lastModifiedDate, status, workcell``` Example:ASC
+          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, name, email, creatorId, lastModifierId, createdDate, lastModifiedDate, status, workcell, workstationTaskExecutionQueueCount``` Example:ASC
           required: false
           type: string
         - name: include[workstations]
