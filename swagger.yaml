@@ -6904,7 +6904,7 @@ paths:
 
         If no queue filter is present, then `jobsheetId` is required.
 
-      operationId: getTaskExecution
+      operationId: getTaskExecutions
       parameters:
         - name: filter[taskexecutions][jobSheetId]
           in: query
