@@ -6943,7 +6943,7 @@ paths:
           type: string 
         - name: sort[taskexecutions][targetFieldName]
           in: query
-          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, status, name, creatorId, lastModifierId, createdDate, lastModifiedDate``` Example:ASC
+          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, status, name, creatorId, lastModifierId, createdDate, lastModifiedDate, jobSheetExternalId``` Example:ASC
           required: false
           type: string
         - $ref: '#/parameters/pageSize'
