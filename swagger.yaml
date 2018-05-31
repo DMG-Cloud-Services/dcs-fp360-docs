@@ -6992,6 +6992,11 @@ paths:
           description: Search Query to return draft response. Required value`:` `active`
           required: false
           type: string
+        - name: include[estimatedCompletionDate]
+          in: query
+          description: Include estimated completion date attribute  Example:true
+          required: false
+          type: string
       responses:
         '200': {$ref: '#/responses/taskExecution'}
       security:
