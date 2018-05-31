@@ -6946,6 +6946,11 @@ paths:
           description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, status, name, creatorId, lastModifierId, createdDate, lastModifiedDate, jobSheetExternalId``` Example:ASC
           required: false
           type: string
+        - name: include[estimatedCompletionDate]
+          in: query
+          description: Include estimated completion date attribute  Example:true
+          required: false
+          type: string
         - $ref: '#/parameters/pageSize'
         - $ref: '#/parameters/pageNumber'
       responses:
