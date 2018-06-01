@@ -12471,7 +12471,8 @@ responses:
                       "tenantId": "regression-test-tenant",
                       "name": "task name",
                       "taskNumber": 10,
-                      "status": "NotStarted"
+                      "status": "NotStarted",
+                      "estimatedCompletionDate": "2018-02-06T14:26:48Z"
                     },
                     "relationships": {
                       "workstation": {
