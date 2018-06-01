@@ -12338,7 +12338,8 @@ responses:
                       "taskNumber": 20,
                       "applicationInfo": [],
                       "startDate": "2017-08-28T07:23:53Z",
-                      "status": "InProgress"
+                      "status": "InProgress",
+                      "estimatedCompletionDate": "2017-08-28T10:34:53Z"
                     },
                     "relationships": {
                       "workstation": {
