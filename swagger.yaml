@@ -13173,7 +13173,8 @@ responses:
                       "name": "task2",
                       "taskNumber": 20,
                       "startDate": "2017-08-28T07:23:53Z",
-                      "status": "InProgress"
+                      "status": "InProgress",
+                      "estimatedCompletionDate": "2017-08-28T07:43:53Z"
                     },
                     "relationships": {
                       "workstation": {
