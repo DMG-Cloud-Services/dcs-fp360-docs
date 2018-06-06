@@ -8172,6 +8172,11 @@ paths:
           description: Status(es) to filter by. Available statuses:```Completed, InProgress, NotStarted, Paused, Staged```
           required: true
           type: string
+        - name: include[taskexecutions]
+          in: query
+          description: other entities to be included in report. current supported values :```subTaskExecutions```
+          required: false
+          type: string
         - name: toTimezone
           in: query
           description: To specify Timezone. Default - UTC 
