@@ -6903,6 +6903,9 @@ paths:
         This endpoint can filter to get workstation queues or workcell queues.  `jobsheetId` filter is optional for queue requests.
 
         If no queue filter is present, then `jobsheetId` is required.
+        
+        Optional `estimatedCompletionDate` calculation:
+        estimatedCompletionDate = setupTimeInMins + (jobSheetQuantity x executionTimePerQuantityInMins)
 
       operationId: getTaskExecutions
       parameters:
