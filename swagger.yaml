@@ -6899,13 +6899,22 @@ paths:
         |----|----|----|----|
         |Invalid parameter|400| Bad Request|122|
 
-        Filters:
+        **Filters:**
+        
         This endpoint can filter to get workstation queues or workcell queues.  `jobsheetId` filter is optional for queue requests.
 
         If no queue filter is present, then `jobsheetId` is required.
         
-        Optional `estimatedCompletionDate` calculation:
+        
+        **Optional `estimatedCompletionDate`:**
+        
+        The current task, or a task in queue is calculated as follows:
         estimatedCompletionDate = setupTimeInMins + (jobSheetQuantity x executionTimePerQuantityInMins)
+        
+        If current executing task on a workstation is running overtime, estimatedCompletionDate = NOW.
+        
+        Also note that previously paused time of the current execution task on a workstation is subtracted from the estimatedCompletionDate.
+
 
       operationId: getTaskExecutions
       parameters:
