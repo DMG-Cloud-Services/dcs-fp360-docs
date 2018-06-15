@@ -6925,7 +6925,7 @@ paths:
           type: string
         - name: filter[jobsheets][draft]
           in: query
-          description: Search Query to return draft response. Required value`:` `active`
+          description: Search Query to return JobSheet draft response. Required value`:` `active`
           required: false
           type: string
         - name: filter[taskexecutions][queueType]
@@ -6956,6 +6956,11 @@ paths:
         - name: sort[taskexecutions][targetFieldName]
           in: query
           description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, status, name, creatorId, lastModifierId, createdDate, lastModifiedDate, jobSheetExternalId``` Example:ASC
+          required: false
+          type: string
+        - name: filter[workqueues][draft]
+          in: query
+          description: Search Query to return WorkQueues draft response. Required value`:` `active`
           required: false
           type: string
         - name: include[estimatedCompletionDate]
