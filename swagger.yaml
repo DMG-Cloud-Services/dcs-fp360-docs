@@ -5478,7 +5478,7 @@ paths:
     x-description: |
         A scheduling API for supervisors to view, re-order, and move TaskExecutions for given workstations or workcells, known as a work queues.
     get:
-      tags: [ "Work Queues" ]
+      tags: [ "Work Queues [deprecated]" ]
       description: |
         Search for all Work Queues, each of which represents either a workstation or workcell and the corresponding queue of task executions.
         
