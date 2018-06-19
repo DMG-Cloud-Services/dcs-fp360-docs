@@ -5476,10 +5476,14 @@ paths:
 
   /workqueues:
     x-description: |
+        [DEPRECATED]
+        
         A scheduling API for supervisors to view, re-order, and move TaskExecutions for given workstations or workcells, known as a work queues.
     get:
       tags: [ "Work Queues [deprecated]" ]
       description: |
+        [DEPRECATED]
+        
         Search for all Work Queues, each of which represents either a workstation or workcell and the corresponding queue of task executions.
         
         **Status codes**
@@ -5496,6 +5500,8 @@ paths:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
     patch:
       description: |
+      
+        [DEPRECATED]
         A supervisor updates a Work Queue's Task Executions.  Updates the order given in the request body of Task Executions for given workstations or workcells.  
         
         Also, if a Task Execution moves from a workcell or workstation task queue to another workstation or workcell, then the Task Execution is reassigned to that new workstation/workcell.
