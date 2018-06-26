@@ -5177,12 +5177,12 @@ paths:
         Only one operation per request is supported.
 
 
-        ***Operation attributes***
+        ***Operation Attributes***
         
         |Attribute    | Description
         | ------      | -------------------------------------------------------------------------------------------------------
-        | `op`        |  specifies the operation type, currently only "add" is supported.  "add" will insert the taskId(s) into the desired insertion point for this workstation.
-        | `path`      |  Must begin with "/taskexecutions/" followed by a comma separated list of task execution ids that need to be insert3ed in this workstation queue.  Examples: single task insertion: "/taskexecutions/1088496" or multiple task insertion: "/taskexecutions/1088496,1088446,1088422"
+        | `op`        |  Specifies the operation type, currently only "add" is supported.  "add" will insert the taskId(s) into the desired insertion point for this workstation.
+        | `path`      |  Must begin with "/taskexecutions/" followed by a comma separated list of task execution ids that need to be inserted in this workstation queue.  Examples: single task insertion: "/taskexecutions/1088496" or multiple task insertion: "/taskexecutions/1088496,1088446,1088422"
         | `value`     |  Only one Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workstation.
 
 
@@ -5197,7 +5197,7 @@ paths:
         |A new taskExecution must be in NotStarted status|400|Bad Request|30131|
         |Tenant not associated for given member.|401|Unauthorized Request|30028|
         
-      operationId: updateWorkstation
+      operationId: updateWorkstationQueue
       parameters:
         - name: id
           in: path
@@ -5527,6 +5527,59 @@ paths:
           description: Workstation deleted from Workstation
       security:
         [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+        
+  /workcells/{id}/queues:
+    patch:
+      tags: [ "Work Queues" ]
+      description: |
+        Change positions of one or more taskExecutions in the work queue.
+        This follows the API spec defined at http://jsonpatch.com
+        
+        Only one operation per request is supported.
+
+
+        ***Operation Attributes***
+        
+        |Attribute    | Description
+        | ------      | -------------------------------------------------------------------------------------------------------
+        | `op`        |  Specifies the operation type, currently only "add" is supported.  "add" will insert the taskId(s) into the desired insertion point for this workcell.
+        | `path`      |  Must begin with "/taskexecutions/" followed by a comma separated list of task execution ids that need to be inserted in this workcell queue.  Examples: single task insertion: "/taskexecutions/1088496" or multiple task insertion: "/taskexecutions/1088496,1088446,1088422"
+        | `value`     |  Only one Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workcell.
+
+
+        **Status codes**
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400|Bad Request|105|
+        |Invalid or empty payload. A valid JSON is expected|400|Bad Request|139|
+        |Workcell does not exist.|400|Bad Request|30104|
+        |TaskExecution not found.|400|Bad Request|30009|
+        |A new taskExecution must be in NotStarted status|400|Bad Request|30131|
+        |Tenant not associated for given member.|401|Unauthorized Request|30028|
+        
+      operationId: updateWorkcellQueue
+      parameters:
+        - name: id
+          in: path
+          description: ID of Workcell
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Input WorkQueue Operations
+          required: true
+          schema:
+            $ref: '#/definitions/json_api_input_workqueue_operations'
+            example:
+              [
+                { "op": "add", "path": "/taskexecutions/1088496", "value": {"before": "1088497"} }
+              ]
+      responses:
+        '200': {$ref: '#/responses/workqueues-patch'}
+      security:
+        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+
 
   /workqueues:
     x-description: |
