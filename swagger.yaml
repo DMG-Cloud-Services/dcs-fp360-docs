@@ -5167,8 +5167,45 @@ paths:
       security:
         [ { oauth2_access_code: [ 'data:read' ] }, { oauth2_implicit: [ 'data:read' ] },{ oauth2_application: [ 'data:read' ] } ]
 
+  /workstations/{id}/queues:
+    patch:
+      tags: [ "Work Queues" ]
+      description: |
+        Change positions of one or more taskExecutions in the work queue.
+
+        **Status codes**
+        
+        |Message|HTTP Status Code|Error Code|Data|
+        |----|----|----|----|
+        |Given member id does not exist|400| Bad Request|105|
+        |Tenant not associated for given member.|401| Unauthorized Request|30028|
+        |Invalid workstation status|400| Bad Request|30062|
+        
+      operationId: updateWorkstation
+      parameters:
+        - name: id
+          in: path
+          description: ID of Workstation
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Input WorkQueue Operations
+          required: true
+          schema:
+            $ref: '#/definitions/json_api_input_workqueue_operations'
+            example:
+              [
+                { "op": "add", "path": "/taskexecutions/1088496", "value": {"before": "1088497"} }
+              ]
+      responses:
+        '200': {$ref: '#/responses/workqueues-patch'}
+      security:
+        [ { oauth2_access_code: [ 'data:write' ] }, { oauth2_implicit: [ 'data:write' ] } ]
+
   /batch/workstations:
     post:
+      tags: [ "Workstations" ]
       description: | 
             Create multiple workstations.
             
@@ -5224,6 +5261,7 @@ paths:
 
   /batchimport/workstations:
     post:
+      tags: [ "Workstations" ]
       description: |
         Create multiple workstations by batch import using file. Currenlty only CSV file format is supported. 
         
@@ -8692,6 +8730,12 @@ definitions:
     properties:
       data: { $ref: '#/definitions/json_api_input_new_batch_workstation_data' }
 
+  json_api_input_workqueue_operations:
+    type: array
+    items: { $ref: '#/definitions/json_api_input_workqueue_operation' }
+    minItems: 1
+    maxItems: 1
+
   json_api_input_new_batch_workstation_data:
     type: array
     items: { $ref: '#/definitions/json_api_input_data_workstation' }
@@ -8910,6 +8954,23 @@ definitions:
       type: { type: string, description: 'resource type', enum: [ 'workstations' ] }
       attributes: { $ref: '#/definitions/json_api_input_data_attributes_workstation' }
 
+  json_api_input_workqueue_operation:
+    type: object
+    required: [ op, path, value ]
+    description: 'workqueue operation'
+    properties:
+      op: { type: string, description: 'operation', enum: [ 'add' ] }
+      path: { type: string, description: 'target path' }
+      value:
+        # The value of this property is an object
+        type: object
+        minProperties: 1
+        maxProperties: 1
+        properties:
+          before:
+            type: integer
+          after:
+            type: integer
   json_api_input_data_patch_workstation:
     type: object
     required: [ type ]
@@ -14012,6 +14073,31 @@ responses:
                     "last": "https://developer-stg.api.autodesk.com/factoryproduction/v1/workstations?page[number]=25&page[size]=1"
                   }
                 }
+
+  workqueues-patch:
+    description: Successful response
+    schema:
+      title: schema versions
+      type: array
+      allOf:
+      - type: string
+    headers:
+        etag:
+          description: |
+            `etag` for the resource which can be used for cache optimization
+            and must be used for mutating operations on this resource
+          type: string
+        authorization:
+          description: Bearer Token
+          type: integer
+    examples:
+      application/vnd.api+json:
+        [
+            "1088495",
+            "1088496",
+            "1088497",
+            "1088498"
+        ]
 
   workstationbulk:
     description: Successful response
