@@ -5172,14 +5172,20 @@ paths:
       tags: [ "Work Queues" ]
       description: |
         Change positions of one or more taskExecutions in the work queue.
+        This follows the API spec defined at http://jsonpatch.com
+        Only one operation per request is supported.
+        All 
 
         **Status codes**
         
         |Message|HTTP Status Code|Error Code|Data|
         |----|----|----|----|
-        |Given member id does not exist|400| Bad Request|105|
-        |Tenant not associated for given member.|401| Unauthorized Request|30028|
-        |Invalid workstation status|400| Bad Request|30062|
+        |Given member id does not exist|400|Bad Request|105|
+        |Invalid or empty payload. A valid JSON is expected|400|Bad Request|139|
+        |Given Workstation doesn't exist|400|Bad Request|30001|
+        |TaskExecution not found.|400|Bad Request|30009|
+        |A new taskExecution must be in NotStarted status|400|Bad Request|30131|
+        |Tenant not associated for given member.|401|Unauthorized Request|30028|
         
       operationId: updateWorkstation
       parameters:
@@ -8960,10 +8966,11 @@ definitions:
     description: 'workqueue operation'
     properties:
       op: { type: string, description: 'operation', enum: [ 'add' ] }
-      path: { type: string, description: 'target path' }
+      path: { type: string, description: 'task execution ids to insert' }
       value:
         # The value of this property is an object
         type: object
+        description: Specifies either the task id that is before or after the desired insertion point. 
         minProperties: 1
         maxProperties: 1
         properties:
