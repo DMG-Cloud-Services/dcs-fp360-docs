@@ -5173,8 +5173,18 @@ paths:
       description: |
         Change positions of one or more taskExecutions in the work queue.
         This follows the API spec defined at http://jsonpatch.com
+        
         Only one operation per request is supported.
-        All 
+
+
+        ***Operation attributes***
+        
+        |Attribute    | Description
+        | ------      | -------------------------------------------------------------------------------------------------------
+        | `op`        |  specifies the operation type, currently only "add" is supported.  "add" will insert the taskId(s) into the desired insertion point for this workstation.
+        | `path`      |  Must begin with "/taskexecutions/" followed by a comma separated list of task execution ids that need to be insert3ed in this workstation queue.  Examples: single task insertion: "/taskexecutions/1088496" or multiple task insertion: "/taskexecutions/1088496,1088446,1088422"
+        | `value`     |  Only one Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workstation.
+
 
         **Status codes**
         
