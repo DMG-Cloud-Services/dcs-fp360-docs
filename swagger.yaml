@@ -5182,7 +5182,7 @@ paths:
         |Attribute    | Description
         | ------      | -------------------------------------------------------------------------------------------------------
         | `op`        |  Specifies the operation type, currently only "add" is supported.  "add" will insert the taskId(s) into the desired insertion point for this workstation.
-        | `path`      |  Must begin with "/taskexecutions/" followed by a comma separated list of task execution ids that need to be inserted in this workstation queue.  Examples: single task insertion: "/taskexecutions/1088496" or multiple task insertion: "/taskexecutions/1088496,1088446,1088422"
+        | `path`      |  Must begin with "/taskexecutions/" followed by a comma separated list of task execution ids that need to be inserted in this workstation queue.  Examples: single task insertion: "/taskexecutions/1099999" or multiple task insertion: "/taskexecutions/1099999,1088446,1088422"
         | `value`     |  Only one Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workstation.
 
 
@@ -5212,7 +5212,7 @@ paths:
             $ref: '#/definitions/json_api_input_workqueue_operations'
             example:
               [
-                { "op": "add", "path": "/taskexecutions/1088496", "value": {"before": "1088497"} }
+                { "op": "add", "path": "/taskexecutions/1099999", "value": {"before": "1088497"} }
               ]
       responses:
         '200': {$ref: '#/responses/workqueues-patch'}
@@ -5543,7 +5543,7 @@ paths:
         |Attribute    | Description
         | ------      | -------------------------------------------------------------------------------------------------------
         | `op`        |  Specifies the operation type, currently only "add" is supported.  "add" will insert the taskId(s) into the desired insertion point for this workcell.
-        | `path`      |  Must begin with "/taskexecutions/" followed by a comma separated list of task execution ids that need to be inserted in this workcell queue.  Examples: single task insertion: "/taskexecutions/1088496" or multiple task insertion: "/taskexecutions/1088496,1088446,1088422"
+        | `path`      |  Must begin with "/taskexecutions/" followed by a comma separated list of task execution ids that need to be inserted in this workcell queue.  Examples: single task insertion: "/taskexecutions/1099999" or multiple task insertion: "/taskexecutions/1099999,1088446,1088422"
         | `value`     |  Only one Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workcell.
 
 
@@ -5573,7 +5573,7 @@ paths:
             $ref: '#/definitions/json_api_input_workqueue_operations'
             example:
               [
-                { "op": "add", "path": "/taskexecutions/1088496", "value": {"before": "1088497"} }
+                { "op": "add", "path": "/taskexecutions/1099999", "value": {"before": "1088497"} }
               ]
       responses:
         '200': {$ref: '#/responses/workqueues-patch'}
@@ -14163,8 +14163,8 @@ responses:
     examples:
       application/vnd.api+json:
         [
-            "1088495",
             "1088496",
+            "1099999",
             "1088497",
             "1088498"
         ]
