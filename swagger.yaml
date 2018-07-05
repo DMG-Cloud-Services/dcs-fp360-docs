@@ -9205,6 +9205,7 @@ definitions:
 
   json_api_input_data_attributes_patch_component:
     type: object
+    required: [ name ]
     properties:
       name: { type: string, description: 'name of component' }
       description: { type: string, description: 'description of component' }
