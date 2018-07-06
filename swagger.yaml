@@ -5183,7 +5183,7 @@ paths:
         | ------      | -------------------------------------------------------------------------------------------------------
         | `op`        |  Specifies the operation type, currently only "add" is supported.  "add" will insert the taskId(s) into the desired insertion point for this workstation.
         | `path`      |  Must begin with "/taskexecutions/" followed by a comma separated list of task execution ids that need to be inserted in this workstation queue.  Examples: single task insertion: "/taskexecutions/1099999" or multiple task insertion: "/taskexecutions/1099999,1088446,1088422"
-        | `value`     |  Only one Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workstation.
+        | `value`     |  Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workstation.If None provided task will be inserted at end of the queue.
 
 
         **Status codes**
@@ -5544,7 +5544,7 @@ paths:
         | ------      | -------------------------------------------------------------------------------------------------------
         | `op`        |  Specifies the operation type, currently only "add" is supported.  "add" will insert the taskId(s) into the desired insertion point for this workcell.
         | `path`      |  Must begin with "/taskexecutions/" followed by a comma separated list of task execution ids that need to be inserted in this workcell queue.  Examples: single task insertion: "/taskexecutions/1099999" or multiple task insertion: "/taskexecutions/1099999,1088446,1088422"
-        | `value`     |  Only one Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workcell.
+        | `value`     |  Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workcell.If None provided task will be inserted at end of the queue.
 
 
         **Status codes**
