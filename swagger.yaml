@@ -7088,14 +7088,16 @@ paths:
           type: string
         - name: filter[taskexecutions][includeOverlappedEstimatedStartDate]
           in: query
-          description: Flag to indicate whether to include task with only start date is inside Date Range.
+          description: Flag to indicate whether to include task with only start date is inside Date Range. Possible values either true or false. Default is false
           required: false
           type: boolean 
+          default: false
         - name: filter[taskexecutions][includeOverlappedEstimatedCompletionDate]
           in: query
-          description: Flag to indicate whether to include task with only estimated completion date is inside Date Range.
+          description: Flag to indicate whether to include task with only estimated completion date is inside Date Range. Possible values either true or false. Default is false 
           required: false
           type: boolean
+          default: false
         - $ref: '#/parameters/pageSize'
         - $ref: '#/parameters/pageNumber'
       responses:
