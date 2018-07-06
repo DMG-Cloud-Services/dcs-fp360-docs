@@ -7065,7 +7065,7 @@ paths:
           in: query
           description: Last Modified Date Range. Example`:` `2016-10-26`
           required: false
-          type: string 
+          type: string
         - name: sort[taskexecutions][targetFieldName]
           in: query
           description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, status, name, creatorId, lastModifierId, createdDate, lastModifiedDate, jobSheetExternalId``` Example:ASC
@@ -7085,7 +7085,17 @@ paths:
           in: query
           description: Estimated completion date Range. Example`:` `2016-10-26`
           required: false
-          type: string 
+          type: string
+        - name: filter[taskexecutions][includeOverlappedEstimatedStartDate]
+          in: query
+          description: Flag to indicate whether to include task with only start date is inside Date Range.
+          required: false
+          type: boolean 
+        - name: filter[taskexecutions][includeOverlappedEstimatedCompletionDate]
+          in: query
+          description: Flag to indicate whether to include task with only estimated completion date is inside Date Range.
+          required: false
+          type: boolean
         - $ref: '#/parameters/pageSize'
         - $ref: '#/parameters/pageNumber'
       responses:
