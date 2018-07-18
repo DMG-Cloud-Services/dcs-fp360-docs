@@ -5183,7 +5183,7 @@ paths:
         | ------      | -------------------------------------------------------------------------------------------------------
         | `op`        |  Specifies the operation type, currently only "add" is supported.  "add" will insert the taskId(s) into the desired insertion point for this workstation.
         | `path`      |  Must begin with "/taskexecutions/" followed by a comma separated list of task execution ids that need to be inserted in this workstation queue.  Examples: single task insertion: "/taskexecutions/1099999" or multiple task insertion: "/taskexecutions/1099999,1088446,1088422"
-        | `value`     |  Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workstation.If None provided task will be inserted at end of the queue.
+        | `value`     |  Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workstation.If No `before` or `after` is provided task will be inserted at end of the queue.
 
 
         **Status codes**
@@ -5544,7 +5544,7 @@ paths:
         | ------      | -------------------------------------------------------------------------------------------------------
         | `op`        |  Specifies the operation type, currently only "add" is supported.  "add" will insert the taskId(s) into the desired insertion point for this workcell.
         | `path`      |  Must begin with "/taskexecutions/" followed by a comma separated list of task execution ids that need to be inserted in this workcell queue.  Examples: single task insertion: "/taskexecutions/1099999" or multiple task insertion: "/taskexecutions/1099999,1088446,1088422"
-        | `value`     |  Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workcell.If None provided task will be inserted at end of the queue.
+        | `value`     |  Task Execution Id value for either `before` or `after` is allowed, used to determine where the tasks are to be inserted in the work queue for this endpoint's workcell.If No `before` or `after` is provided task will be inserted at end of the queue.
 
 
         **Status codes**
@@ -7086,13 +7086,13 @@ paths:
           description: Estimated completion date Range. Example`:` `2016-10-26`
           required: false
           type: string
-        - name: filter[taskexecutions][includeOverlappedEstimatedStartDate]
+        - name: filter[taskexecutions][startingTasks]
           in: query
           description: Flag to indicate whether to include task with only start date is inside Date Range. Possible values either true or false. Default is false
           required: false
           type: boolean 
           default: false
-        - name: filter[taskexecutions][includeOverlappedEstimatedCompletionDate]
+        - name: filter[taskexecutions][endingTasks]
           in: query
           description: Flag to indicate whether to include task with only estimated completion date is inside Date Range. Possible values either true or false. Default is false 
           required: false
