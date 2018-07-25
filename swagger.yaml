@@ -4584,6 +4584,7 @@ paths:
         |Given member id does not exist|400| Bad Request|105|
         |Tenant not associated for given member.|401| Unauthorized Request|30028|
         |Missing required attribute tenantId in object|400| Bad Request|30051|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
                    
       operationId: createComponent
       parameters:
@@ -4652,6 +4653,7 @@ paths:
          |----|----|----|----|
          |Given member id does not exist|400| Bad Request|105|
          |Tenant not associated for given member.|401| Unauthorized Request|30028|
+         |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
 
       operationId: updateComponent
       parameters:
@@ -4784,6 +4786,7 @@ paths:
         |Invalid input for batch components|400| Bad Request|30063|
         |Invalid name for component.|400| Bad Request|30068|
         |Invalid parameter|400| Bad Request|122|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
             
       operationId: createComponents
       parameters:
@@ -4928,6 +4931,7 @@ paths:
             |----|----|----|----|
             |Given member id does not exist|400| Bad Request|105|
             |Tenant not associated for given member.|401| Unauthorized Request|30028|
+            |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
             
       operationId: createWorkstation
       parameters:
@@ -5019,6 +5023,7 @@ paths:
         |Given member id does not exist|400| Bad Request|105|
         |Tenant not associated for given member.|401| Unauthorized Request|30028|
         |Invalid workstation status|400| Bad Request|30062|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
         
       operationId: updateWorkstation
       parameters:
@@ -5232,6 +5237,7 @@ paths:
             |Invalid parameter|400| Bad Request|122|
             |Invalid name for workstation.|400| Bad Request|30042|
             |Invalid input for batch workstations|400| Bad Request|30061|
+            |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
 
       operationId: createWorkstations
       parameters:
@@ -5291,6 +5297,7 @@ paths:
         |The file format is not supported.|400| Bad Request|30039|
         |Invalid name for workstation.|400| Bad Request|30042|
         |The file is empty!|400| Bad Request|30043|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
                    
       operationId: createWorkstations
       responses:
@@ -5356,6 +5363,7 @@ paths:
         |----|----|----|----|
         |Given member id does not exist|400| Bad Request|105|
         |Tenant not associated for given member.|401| Unauthorized Request|30028|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
             
       operationId: createWorkcell
       parameters:
@@ -5423,6 +5431,7 @@ paths:
         |Given member id does not exist|400| Bad Request|105|
         |Tenant not associated for given member.|401| Unauthorized Request|30028|
         |Invalid workcell status|400| Bad Request|30103|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
         
       operationId: updateWorkcell
       parameters:
@@ -5735,6 +5744,7 @@ paths:
         |Tenant not associated for given member.|401| Unauthorized |30028|tenantId|
         |Both workstation and workcell assigned.  Only one is allowed. |400| Bad Request|30109|
         |Given component doesn't exist|400| Bad Request|30064|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
         
       operationId: createTaskInstruction
       parameters:
@@ -5823,6 +5833,7 @@ paths:
         |Task Instruction not found.|400| Bad Request|30003|
         |Missing required relationship|400| Bad Request|30004|
         |Given component doesn't exist|400| Bad Request|30064|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
         
       operationId: udpateTaskInstruction
       parameters:
@@ -5952,6 +5963,7 @@ paths:
         |valid job instruction is required to create taskInstruction|400| Bad Request|30059|
         |Given component doesn't exist|400| Bad Request|30064|
         |Invalid tenant id|400| Bad Request|30016|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
                 
       operationId: createTaskInstruction
       parameters:
@@ -6081,6 +6093,7 @@ paths:
         |Missing required attribute in Sub Task Instructions|400| Bad Request|30135|
         |valid Task instruction is required to create subTaskInstruction|400| Bad Request|30003|
         |Invalid tenant id|400| Bad Request|30016|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
                 
       operationId: createSubTaskInstruction
       parameters:
@@ -6187,6 +6200,7 @@ paths:
         |Invalid tenant id|401| Unauthorized |30032|
         |Application not installed for this tenant|400| Bad Request|40003|
         |Application with given version does not exist.|400| Bad Request|30099|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
             
       operationId: createJobInstruction
       parameters:
@@ -6268,6 +6282,7 @@ paths:
         |JobInstruction not found.|400| Bad Request|30007|
         |dispatched jobsheets are pending. Cannot archive jobinstruction|400| Bad Request|30124|
         |Cannot update archived jobinstruction.|400| Bad Request|30125|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
 
       operationId: updateJobInstruction
       parameters:
@@ -6442,6 +6457,7 @@ paths:
         |The file is empty!|400| Bad Request|30043|
         |Invalid name for job instruction.|400| Bad Request|30044|
         |Error while parsing the job instructions payload/file to fetch job instructions data.|400 |Bad Request|30073|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
                    
       operationId: createJobinstructions
       responses:
@@ -6535,6 +6551,7 @@ paths:
         |job instruction is required to create job sheet|400| Bad Request|30054|
         |Job instruction should have at-least one task to create job sheet|400| Bad Request|30088|
         |Invalid Input Payload. Not able to deserialize|400| Bad Request|173|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
         
       operationId: createJobSheet
       parameters:
@@ -6646,6 +6663,7 @@ paths:
         |Invalid status update|400| Bad Request|30087|
         |Cannnot update cancelled jobsheet.|400| Bad Request|30082|
         |Cannot cancel. jobsheet in completed/needs_approval state|400| Bad Request|30083|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
         
       operationId: udpateJobSheet
       parameters:
@@ -6828,6 +6846,7 @@ paths:
           |Invalid input for batch job sheets|400| Bad Request|30055|
           |Missing required attribute to create Jobsheet/quantity should be greater than 0|400| Bad Request|30070|
           |Job instruction should have at-least one task to create job sheet|400| Bad Request|30088|
+          |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
           
       operationId: createJobsheets
       parameters:
@@ -7171,6 +7190,7 @@ paths:
         |Task is blocked|400| Bad Request|30085|
         |cannot reopen task|400| Bad Request|30069|
         |task execution is complete|400| Bad Request|30012|
+        |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
 
       operationId: updateTaskExecution
       parameters:
@@ -7311,6 +7331,7 @@ paths:
           |TaskExecution has to be Not Started for creating SubTaskExecution in draft mode|400| Bad Request|30154|
           |The calling member must match the draft author|400| Bad Request|30137|
           |Draft has expired and is therefore cancelled|400| Bad Request|30142|
+          |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
           
       operationId: createsubtaskexecutions
       parameters:
@@ -7378,6 +7399,7 @@ paths:
           |TaskExecution has to be Not Started for creating SubTaskExecution in draft mode|400| Bad Request|30154|
           |The calling member must match the draft author|400| Bad Request|30137|
           |Draft has expired and is therefore cancelled|400| Bad Request|30142|
+          |Name is invalid. size should be between 1 and 60 characters|400| Bad Request|30149|
           
       operationId: updatesubtaskexecutions
       parameters:
