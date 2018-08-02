@@ -7119,7 +7119,7 @@ paths:
           default: false
         - name: filter[taskexecutions][estimatedStartTimeReference]
           in: query
-          description: reference time for TaskQueue to start. Example`:` `2016-10-26`
+          description: reference time for TaskQueue to start. This time will be used as start point for estimated start time of First task. Example`:` `2016-10-26`
           required: false
           type: string 
         - $ref: '#/parameters/pageSize'
