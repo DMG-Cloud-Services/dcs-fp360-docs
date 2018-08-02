@@ -6757,12 +6757,7 @@ paths:
           in: query
           description: Last Modified Date Range. Example`:` `2016-10-26`
           required: false
-          type: string  
-        - name: filter[taskexecutions][estimatedStartTimeReference]
-          in: query
-          description: reference time for TaskQueue to start. Example`:` `2016-10-26`
-          required: false
-          type: string  
+          type: string
       responses:
         '200': {$ref: '#/responses/taskExecutions'}
       security:
@@ -7122,6 +7117,11 @@ paths:
           required: false
           type: boolean
           default: false
+        - name: filter[taskexecutions][estimatedStartTimeReference]
+          in: query
+          description: reference time for TaskQueue to start. Example`:` `2016-10-26`
+          required: false
+          type: string 
         - $ref: '#/parameters/pageSize'
         - $ref: '#/parameters/pageNumber'
       responses:
