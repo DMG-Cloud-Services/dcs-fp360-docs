@@ -7085,9 +7085,14 @@ paths:
           description: Last Modified Date Range. Example`:` `2016-10-26`
           required: false
           type: string
+        - name: filter[taskexecutions][completedDate][lt/lte/gt/gte]
+          in: query
+          description: Completed DateRange. Example`:` `2016-10-26`
+          required: false
+          type: string
         - name: sort[taskexecutions][targetFieldName]
           in: query
-          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, status, name, creatorId, lastModifierId, createdDate, lastModifiedDate, jobSheetExternalId``` Example:ASC
+          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, status, name, creatorId, lastModifierId, createdDate, lastModifiedDate, jobSheetExternalId,completeddate``` Example:ASC
           required: false
           type: string
         - name: filter[workqueues][draft]
