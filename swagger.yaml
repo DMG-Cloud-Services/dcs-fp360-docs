@@ -4902,7 +4902,7 @@ paths:
           type: string  
         - name: sort[workstations][targetFieldName]
           in: query
-          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, name, email, creatorId, lastModifierId, createdDate, lastModifiedDate, status, workcell, workstationTaskExecutionQueueCount``` Example:ASC
+          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, name, email, creatorId, lastModifierId, createdDate, lastModifiedDate, status, workcell, workstationTaskExecutionQueueCount,workstationTaskExecutionCompletedCount``` Example:ASC
           required: false
           type: string
         - name: include[workstations]
@@ -4912,7 +4912,7 @@ paths:
           type: string
         - name: include[taskexecutions]
           in: query
-          description: Return count of Task Execution queue for the workstation`:` count
+          description: use this to get some more info about taskexecutions for the workstation. available options are`:` queuecount,completedcount
           required: false
           type: string
         - $ref: '#/parameters/pageSize'
@@ -5342,9 +5342,14 @@ paths:
           description: include workstations properties. available fields ```count``` EXAMPLE include[workstations]=count
           required: false
           type: string
+        - name: include[taskexecutions]
+          in: query
+          description: use this to get some more info about taskexecutions for the workcell. available options are`:` queuecount
+          required: false
+          type: string  
         - name: sort[workcells][targetFieldName]
           in: query
-          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, name, creatorId, lastModifierId, createdDate, lastModifiedDate``` Example:ASC
+          description: case-insensitive field to sort by, specified by ASC or DESC. Available sort fields:```id, name, creatorId, lastModifierId, createdDate, lastModifiedDate,workstationTaskExecutionQueueCount``` Example:ASC
           required: false
           type: string
         - $ref: '#/parameters/pageSize'
