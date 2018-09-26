@@ -1076,19 +1076,19 @@ info:
     
     ```shell
     curl -X PUT
-      -H 'content-type: application/x-www-form-urlencoded'
+      -H 'content-type: application/pdf'
       -d '{uploadUrl Received in the Step 1}&objectKey={filename}'
-      -F file=@TestFile.docx
+      -F file=@TestFile.pdf
     ```
     The resource provides the following response:
     
     ```json
     {
       "bucketKey": null,
-      "objectKey": "d5c5cf61-e8f7-432e-89bb-77688db047eb.abc.doc",
+      "objectKey": "d5c5cf61-e8f7-432e-89bb-77688db047eb.abc.pdf",
       "size": 79161,
       "checksum": "Nd4UAOxMF9EAdC4NwAsZeg==",
-      "contentType": "application/x-www-form-urlencoded",
+      "contentType": "application/pdf",
       "storageType": null
     }
     ```
