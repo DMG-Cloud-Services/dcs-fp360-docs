@@ -1061,10 +1061,12 @@ info:
     
     The Fusion Production API provides the `Put uploadUrl` endpoint to upload the file. In the PUT request, along with the upload URL, you need to specify the parameter named `objectKey' and the value as the file name. This file name can be different from the actual file name. In the request, you also need to specify the actual file that you want to upload.
     
-    You need to pass correct content type while uploading
-    For imgages, content type should be in the form of image/*
-    For example jpg images, content type will be image/jpg and content-type for png files will be image/png
+    You need to pass correct content-type header while uploading.
+    
+    For imgages, content type should be in the form of image/*. For example, jpg images content-type will be image/jpg and for png files, the content-type will be image/png.
+    
     For vidoes, content-type should be in the form of video/*
+    
     For PDF documents, the content-type should be "application/pdf"
     
     
